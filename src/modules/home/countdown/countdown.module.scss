@@ -1,0 +1,22 @@
+@import '../../../resources/styles/index.scss';
+
+.Countdown{
+    @include flex-center;
+    justify-content: space-between;
+
+    .Element{
+        @include flex-center;
+        flex-direction: column;
+
+        h2{
+            font-family: 'Orbitron';
+            color: $blue;
+            font-size: 10rem;
+        }
+
+        h4{
+            color: $fontPrimary;
+            font-weight: 100;
+        }
+    }
+}
