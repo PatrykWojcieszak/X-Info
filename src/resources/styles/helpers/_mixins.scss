@@ -1,0 +1,61 @@
+//GENERAL
+@mixin box($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+@mixin cover-background {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+//FLEXBOX
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+  
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+@mixin flex-center-column {
+    @include flex-center;
+    flex-direction: column;
+}
+  
+@mixin flex-center-vert {
+    display: flex;
+    align-items: center;
+}
+  
+@mixin flex-center-horiz {
+    display: flex;
+    justify-content: center;
+}
+
+//MEDIA QUERIES
+$tablet: 768;
+$large: 1024;
+$desktop: 1280;
+
+@mixin tablet {
+  @media only screen and (min-width: $tablet * 1px) {
+    @content;
+  }
+}
+
+@mixin large {
+  @media only screen and (min-width: $large * 1px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width: $desktop * 1px) {
+    @content;
+  }
+}
