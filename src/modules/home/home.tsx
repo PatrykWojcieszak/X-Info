@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Nav from "../shared/nav/nav";
 import Countdown from "./countdown/countdown";
+import RecentLaunches from './recentLaunches/recentLaunches';
 
 import styles from "./home.module.scss";
 
@@ -24,6 +25,7 @@ const home = () => {
         </div>
       </div>
       <div className={styles.Home__Content}>
+        <RecentLaunches/>
       </div>
     </div>
   );
