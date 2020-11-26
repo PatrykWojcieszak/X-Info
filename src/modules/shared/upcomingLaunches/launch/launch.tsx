@@ -18,14 +18,21 @@ const launch = () => {
       </div>
       <div className={styles.Content}>
         <div className={styles.Content__Element}>
-          <h4>LAUNCH SITE: </h4>
-          <h3>Kennedy Space Center Historic Launch Complex 39A</h3>
+          <h4 className={styles.Title}>LAUNCH SITE: </h4>
+          <h4 className={styles.Title}>CUSTOMER: </h4>
         </div>
         <div className={styles.Content__Element}>
-          <h4>CUSTOMER: </h4>
-          <h3>Nasa (CCtCAP)</h3>
+          <h4 className={styles.Value}>
+            Kennedy Space Center Historic Launch Complex 39A
+          </h4>
+          <h4 className={styles.Value}>Nasa (CCtCAP)</h4>
         </div>
       </div>
+      <img
+        className={styles.Flag}
+        src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg"
+        alt="flag"
+      />
     </div>
   );
 };

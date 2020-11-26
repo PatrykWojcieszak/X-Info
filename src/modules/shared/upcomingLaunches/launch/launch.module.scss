@@ -6,6 +6,7 @@
   width: 100%;
   margin-top: 2rem;
   padding: 0.5rem;
+  position: relative;
 
   .Top {
     @include flex-center;
@@ -51,24 +52,34 @@
   }
 
   .Content {
-    @include flex-column;
+    display: flex;
     margin-top: 1rem;
 
     &__Element {
-      display: flex;
-      align-items: center;
-      margin-top: 0.5rem;
+      @include flex-column;
+      margin-right: 1rem;
 
-      h4 {
+      .Title,
+      .Value {
+        margin-top: 0.5rem;
         font-weight: 100;
+      }
+
+      .Title {
         color: $fontSecondary;
       }
 
-      h3 {
-        font-weight: 300;
-        margin-left: 0.6rem;
+      .Value {
         color: $fontPrimary;
       }
     }
+  }
+
+  .Flag {
+    width: 80px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border-bottom-right-radius: 0.6rem;
   }
 }

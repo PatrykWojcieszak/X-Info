@@ -3,16 +3,17 @@
 .Footer {
   @include flex-center;
   margin-bottom: 1rem;
+  font-size: 0.8rem;
 
-  h3 {
-    color: $fontSecondary;
+  .Title {
     font-weight: 100;
+    color: $fontSecondary;
   }
 
-  h2 {
+  .Value {
+    font-weight: 300;
     color: $blue;
-    font-weight: 100;
-    margin: 0 1rem;
+    margin: 0 0.5rem;
     cursor: pointer;
   }
 }
