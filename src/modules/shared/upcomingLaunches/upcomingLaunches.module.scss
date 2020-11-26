@@ -1,0 +1,16 @@
+@import "../../../resources/styles/index.scss";
+
+.UpcomingLaunches {
+  margin: 4rem 0;
+
+  h2 {
+    color: $fontPrimary;
+    font-weight: 100;
+    font-size: 2.5rem;
+  }
+
+  .ButtonWrapper {
+    @include flex-center;
+    margin-top: 2rem;
+  }
+}

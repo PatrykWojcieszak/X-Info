@@ -1,0 +1,74 @@
+@import "../../../../resources/styles/index.scss";
+
+.Launch {
+  background-color: $foreground;
+  border-radius: 0.6rem;
+  width: 100%;
+  margin-top: 2rem;
+  padding: 0.5rem;
+
+  .Top {
+    @include flex-center;
+    justify-content: space-between;
+
+    .Name_Date {
+      @include flex-column;
+      align-items: flex-start;
+
+      h2 {
+        color: $blue;
+        font-weight: 100;
+        font-size: 2.8rem;
+      }
+
+      h4 {
+        margin-top: 0.3rem;
+        color: $fontSecondary;
+        font-weight: 100;
+      }
+    }
+
+    .RocketType {
+      @include flex-center;
+      font-size: 1.3rem;
+
+      h4 {
+        font-weight: 100;
+        color: $fontSecondary;
+      }
+
+      h3 {
+        margin-left: 0.6rem;
+        color: $fontPrimary;
+      }
+    }
+
+    .LaunchNumber {
+      color: $fontSecondary;
+      font-weight: 100;
+      font-size: 2rem;
+    }
+  }
+
+  .Content {
+    @include flex-column;
+    margin-top: 1rem;
+
+    &__Element {
+      display: flex;
+      align-items: center;
+      margin-top: 0.5rem;
+
+      h4 {
+        font-weight: 100;
+        color: $fontSecondary;
+      }
+
+      h3 {
+        font-weight: 300;
+        margin-left: 0.6rem;
+        color: $fontPrimary;
+      }
+    }
+  }
+}

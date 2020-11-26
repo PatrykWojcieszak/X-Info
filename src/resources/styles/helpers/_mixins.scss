@@ -1,40 +1,40 @@
 //GENERAL
 @mixin box($width, $height: $width) {
-    width: $width;
-    height: $height;
+  width: $width;
+  height: $height;
 }
 
 @mixin cover-background {
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 //FLEXBOX
 @mixin flex-column {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
-  
+
 @mixin flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-  
+
 @mixin flex-center-column {
-    @include flex-center;
-    flex-direction: column;
+  @include flex-center;
+  flex-direction: column;
 }
-  
+
 @mixin flex-center-vert {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
-  
+
 @mixin flex-center-horiz {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 //MEDIA QUERIES

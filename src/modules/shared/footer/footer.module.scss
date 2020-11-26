@@ -1,0 +1,18 @@
+@import "../../../resources/styles/index.scss";
+
+.Footer {
+  @include flex-center;
+  margin-bottom: 1rem;
+
+  h3 {
+    color: $fontSecondary;
+    font-weight: 100;
+  }
+
+  h2 {
+    color: $blue;
+    font-weight: 100;
+    margin: 0 1rem;
+    cursor: pointer;
+  }
+}
