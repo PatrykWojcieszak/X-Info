@@ -1,10 +1,25 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 import styles from "./launchDetails.module.scss";
 
 const launchDetails = () => {
+  const launchDetailsAnim = {
+    hidden: {
+      opacity: 0,
+    },
+    show: {
+      opacity: 1,
+      transition: { duration: 1 },
+    },
+  };
+
   return (
-    <div className={styles.LaunchDetails}>
+    <motion.div
+      variants={launchDetailsAnim}
+      initial="hidden"
+      animate="show"
+      className={styles.LaunchDetails}>
       <div className={styles.TitleContainer}>
         <h3>FLIGHT:</h3>
         <h3>LAUNCH DATE:</h3>
@@ -30,7 +45,7 @@ const launchDetails = () => {
           the Dragon capsule and down cargo.
         </h3>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
