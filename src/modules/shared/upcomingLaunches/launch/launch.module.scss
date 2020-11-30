@@ -83,3 +83,69 @@
     border-bottom-right-radius: 0.6rem;
   }
 }
+
+@include large {
+  .Launch {
+    .Top {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .Name_Date {
+        margin-bottom: 0.7rem;
+      }
+
+      .RocketType {
+        font-size: 1rem;
+      }
+
+      .LaunchNumber {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+@include tablet {
+  .Launch {
+    .Top {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .Name_Date {
+        align-items: flex-start;
+        margin-bottom: 0.7rem;
+
+        h2 {
+          font-size: 1.8rem;
+        }
+
+        h4 {
+          font-size: 0.7rem;
+        }
+      }
+
+      .RocketType {
+        font-size: 0.8rem;
+      }
+
+      .LaunchNumber {
+        font-size: 0.8rem;
+      }
+    }
+
+    .Content {
+      margin-top: 1rem;
+
+      &__Element {
+        .Title,
+        .Value {
+          font-size: 0.7rem;
+        }
+      }
+    }
+
+    .Flag {
+      width: 40px;
+    }
+  }
+}

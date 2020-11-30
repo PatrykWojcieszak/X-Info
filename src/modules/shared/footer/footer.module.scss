@@ -17,3 +17,9 @@
     cursor: pointer;
   }
 }
+
+@include tablet {
+  .Footer {
+    font-size: 0.5rem;
+  }
+}

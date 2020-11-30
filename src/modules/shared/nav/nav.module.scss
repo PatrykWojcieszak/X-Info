@@ -5,3 +5,9 @@
   justify-content: flex-end;
   width: 100%;
 }
+
+@include tablet {
+  .Nav {
+    justify-content: center;
+  }
+}

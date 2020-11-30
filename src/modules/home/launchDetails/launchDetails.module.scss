@@ -18,3 +18,18 @@
     min-width: 130px;
   }
 }
+
+@include tablet {
+  .LaunchDetails {
+    margin-top: 1rem;
+
+    h3 {
+      font-size: 0.8rem;
+    }
+
+    .TitleContainer {
+      margin-right: 0.5rem;
+      min-width: 100px;
+    }
+  }
+}

@@ -43,19 +43,19 @@ $large: 1024;
 $desktop: 1280;
 
 @mixin tablet {
-  @media only screen and (min-width: $tablet * 1px) {
+  @media only screen and (max-width: $tablet * 1px) {
     @content;
   }
 }
 
 @mixin large {
-  @media only screen and (min-width: $large * 1px) {
+  @media only screen and (max-width: $large * 1px) {
     @content;
   }
 }
 
 @mixin desktop {
-  @media only screen and (min-width: $desktop * 1px) {
+  @media only screen and (max-width: $desktop * 1px) {
     @content;
   }
 }
