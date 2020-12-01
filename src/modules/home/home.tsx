@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import Countdown from "./Countdown/Countdown";
 import RecentLaunches from "./RecentLaunches/RecentLaunches";
 import Footer from "../shared/Footer/Footer";
-import Nav from "../shared/Nav/Nav";
 import UpcomingLaunches from "../shared/UpcomingLaunches/UpcomingLaunches";
 import LaunchDetails from "./LaunchDetails/LaunchDetails";
 
@@ -29,7 +28,6 @@ const Home = () => {
   return (
     <div className={styles.Home}>
       <div className={styles.Top}>
-        <Nav></Nav>
         <motion.div
           variants={topContentAnim}
           initial="hidden"
