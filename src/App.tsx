@@ -1,9 +1,10 @@
 import React, { Suspense } from "react";
-import { Route, Switch, withRouter, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import Home from "./modules/Home/Home";
 import Launches from "./modules/Launches/Launches";
 import Nav from "./modules/shared/Nav/Nav";
+import Footer from "./modules/shared/Footer/Footer";
 
 import "./App.scss";
 
@@ -20,6 +21,7 @@ function App() {
     <div className="App">
       <Nav />
       <Suspense fallback={<p>Loading...</p>}>{routes}</Suspense>
+      <Footer />
     </div>
   );
 }

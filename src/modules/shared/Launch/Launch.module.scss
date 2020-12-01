@@ -1,4 +1,4 @@
-@import "../../../../resources/styles/index.scss";
+@import "../../../resources/styles/index.scss";
 
 .Launch {
   background-color: $foreground;
@@ -7,6 +7,7 @@
   margin-top: 2rem;
   padding: 0.5rem;
   position: relative;
+  box-sizing: border-box;
 
   .Top {
     @include flex-center;

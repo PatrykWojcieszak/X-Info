@@ -18,6 +18,11 @@
   }
 }
 
+.Selected {
+  background-color: $blue;
+  color: $background;
+}
+
 @include tablet {
   .Button {
     font-size: 1rem;

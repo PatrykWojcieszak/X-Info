@@ -1,4 +1,21 @@
 @import "../../resources/styles/index.scss";
 
 .Launches {
+  margin-top: 8rem;
+  padding: 0 4rem;
+
+  .Content {
+    @include flex-center-column;
+    margin-bottom: 4rem;
+
+    .ButtonsWrapper {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .ButtonsWrapper > * {
+      margin-right: 3rem;
+    }
+  }
 }

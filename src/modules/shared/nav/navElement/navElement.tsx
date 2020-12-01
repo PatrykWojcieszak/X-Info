@@ -5,16 +5,13 @@ import styles from "./NavElement.module.scss";
 
 const NavElement = ({ name, link, exact }: navElementProps) => {
   return (
-    // <div className={styles.NavElement}>
     <NavLink
       to={link}
       exact={exact}
       className={styles.NavElement}
-      // activeStyle={{ borderBottom: "1px solid blue" }}
       activeClassName={styles.NavElement__Active}>
       {name}
     </NavLink>
-    // </div>
   );
 };
 
