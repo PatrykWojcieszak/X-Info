@@ -1,7 +1,7 @@
 import React from "react";
 
-import Button from "../../Shared/Button/Button";
 import Launch from "./Launch/Launch";
+import Button from "../../shared/Button/Button";
 
 import styles from "./RecentLaunches.module.scss";
 

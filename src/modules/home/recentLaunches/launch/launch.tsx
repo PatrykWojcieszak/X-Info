@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Button from "../../../Shared/Button/Button";
+import Button from "../../../shared/Button/Button";
 
 import styles from "./Launch.module.scss";
 import patch from "../../../../resources/images/patch.png";

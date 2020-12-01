@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion, AnimatePresence } from "framer-motion";
 
-import Nav from "../Shared/Nav/Nav";
-import UpcomingLaunches from "../Shared/upcomingLaunches/UpcomingLaunches";
-import Footer from "../Shared/Footer/Footer";
 import Countdown from "./Countdown/Countdown";
 import RecentLaunches from "./RecentLaunches/RecentLaunches";
+import Footer from "../shared/Footer/Footer";
+import Nav from "../shared/Nav/Nav";
+import UpcomingLaunches from "../shared/UpcomingLaunches/UpcomingLaunches";
 import LaunchDetails from "./LaunchDetails/LaunchDetails";
 
 import styles from "./Home.module.scss";
