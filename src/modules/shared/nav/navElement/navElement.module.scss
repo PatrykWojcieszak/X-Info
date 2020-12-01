@@ -1,0 +1,63 @@
+@import "../../../../resources/styles/index.scss";
+
+.NavElement {
+  color: $fontSecondary;
+  margin: 1.5rem;
+  padding: 0.6rem 0.2rem;
+  font-size: 1.6rem;
+  position: relative;
+  overflow: hidden;
+
+  will-change: color;
+  transition: color 0.25s ease-out;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  h4 {
+    font-weight: 100;
+  }
+
+  &::before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &::after {
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  &:hover::before,
+  &:hover::after {
+    width: 100%;
+    transition-duration: 0.2s;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    width: 0;
+    height: 2px;
+    background-color: $blue;
+
+    will-change: width;
+    transition: width 0.15s ease-out;
+
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+.Active {
+  border-bottom: 1px solid $blue;
+}
+
+@include tablet {
+  .NavElement {
+    font-size: 1.1rem;
+    margin: 0.5rem;
+    padding: 0.6rem 0.1rem;
+  }
+}

@@ -1,11 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.scss';
+import React from "react";
+import "./App.scss";
+
+import Home from "./modules/Home/Home";
 
 function App() {
   return (
     <div className="App">
-
+      <Home />
     </div>
   );
 }

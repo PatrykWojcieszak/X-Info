@@ -1,0 +1,25 @@
+@import "../../../resources/styles/index.scss";
+
+.Footer {
+  @include flex-center;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+
+  .Title {
+    font-weight: 100;
+    color: $fontSecondary;
+  }
+
+  .Value {
+    font-weight: 300;
+    color: $blue;
+    margin: 0 0.5rem;
+    cursor: pointer;
+  }
+}
+
+@include tablet {
+  .Footer {
+    font-size: 0.5rem;
+  }
+}

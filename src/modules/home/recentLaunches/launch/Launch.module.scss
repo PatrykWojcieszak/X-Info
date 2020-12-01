@@ -1,0 +1,58 @@
+@import "../../../../resources/styles/index.scss";
+
+.Launch {
+  @include flex-center-column;
+  width: 200px;
+  margin: 1.5rem;
+  flex-wrap: wrap;
+
+  img {
+    width: 100%;
+  }
+
+  .Title {
+    @include flex-center;
+
+    h3 {
+      margin: 1rem 0 0.5rem 0;
+      color: $blue;
+      font-size: 2rem;
+      font-weight: 100;
+    }
+
+    svg {
+      color: $green;
+      font-size: 1.3rem;
+      margin-left: 0.8rem;
+    }
+  }
+
+  h4 {
+    color: $fontSecondary;
+    font-weight: 100;
+    margin-bottom: 1.2rem;
+  }
+}
+
+@include tablet {
+  .Launch {
+    margin: 1rem 0;
+    width: 150px;
+
+    .Title {
+      h3 {
+        font-size: 1.5rem;
+      }
+
+      svg {
+        color: $green;
+        font-size: 1rem;
+        margin-left: 0.8rem;
+      }
+    }
+
+    h4 {
+      font-size: 0.7rem;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+@import "../../../resources/styles/index.scss";
+
+.UpcomingLaunches {
+  margin: 4rem 0;
+  width: 100%;
+
+  .Top {
+    margin-bottom: 2rem;
+
+    h2 {
+      color: $fontPrimary;
+      font-weight: 100;
+      font-size: 2.5rem;
+    }
+  }
+
+  .ButtonWrapper {
+    @include flex-center;
+    margin-top: 2rem;
+  }
+}
+
+@include tablet {
+  .UpcomingLaunches {
+    .Top {
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
