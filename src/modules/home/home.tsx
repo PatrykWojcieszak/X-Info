@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion, AnimatePresence } from "framer-motion";
 
-import Nav from "../shared/nav/nav";
-import Countdown from "./countdown/countdown";
-import RecentLaunches from "./recentLaunches/recentLaunches";
-import UpcomingLaunches from "../shared/upcomingLaunches/upcomingLaunches";
-import Footer from "../shared/footer/footer";
-import LaunchDetails from "./launchDetails/launchDetails";
+import Nav from "../Shared/Nav/Nav";
+import UpcomingLaunches from "../Shared/upcomingLaunches/UpcomingLaunches";
+import Footer from "../Shared/Footer/Footer";
+import Countdown from "./Countdown/Countdown";
+import RecentLaunches from "./RecentLaunches/RecentLaunches";
+import LaunchDetails from "./LaunchDetails/LaunchDetails";
 
-import styles from "./home.module.scss";
+import styles from "./Home.module.scss";
 
 const Home = () => {
   const [showLaunchDetails, setShowLaunchDetails] = useState(false);

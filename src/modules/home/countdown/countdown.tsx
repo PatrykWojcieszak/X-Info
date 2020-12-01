@@ -1,8 +1,8 @@
 import React from "react";
 
-import styles from "./countdown.module.scss";
+import styles from "./Countdown.module.scss";
 
-const countdown = () => {
+const Countdown = () => {
   const clockStyles = [styles.ClockSeconds, styles.ClockTimer];
 
   return (
@@ -36,4 +36,4 @@ const countdown = () => {
   );
 };
 
-export default countdown;
+export default Countdown;

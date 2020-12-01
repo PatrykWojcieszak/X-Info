@@ -1,7 +1,7 @@
-import React from 'react';
-import './App.scss';
+import React from "react";
+import "./App.scss";
 
-import Home from "./modules/home/home";
+import Home from "./modules/Home/Home";
 
 function App() {
   return (

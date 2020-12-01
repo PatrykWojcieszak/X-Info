@@ -1,10 +1,10 @@
 import React from "react";
 
-import NavElement from "./navElement/navElement";
+import NavElement from "./NavElement/NavElement";
 
-import styles from './nav.module.scss';
+import styles from "./Nav.module.scss";
 
-const nav = () => {
+const Nav = () => {
   return (
     <div className={styles.Nav}>
       <NavElement name="HOME"></NavElement>
@@ -15,4 +15,4 @@ const nav = () => {
   );
 };
 
-export default nav;
+export default Nav;

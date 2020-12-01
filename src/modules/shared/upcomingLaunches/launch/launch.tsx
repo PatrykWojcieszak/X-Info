@@ -1,8 +1,8 @@
 import React from "react";
 
-import styles from "./launch.module.scss";
+import styles from "./Launch.module.scss";
 
-const launch = () => {
+const Launch = () => {
   return (
     <div className={styles.Launch}>
       <div className={styles.Top}>
@@ -37,4 +37,4 @@ const launch = () => {
   );
 };
 
-export default launch;
+export default Launch;

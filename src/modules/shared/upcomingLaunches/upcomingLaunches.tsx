@@ -1,11 +1,11 @@
 import React from "react";
 
-import Launch from "./launch/launch";
-import Button from "../button/button";
+import Button from "../Button/Button";
+import Launch from "./Launch/Launch";
 
-import styles from "./upcomingLaunches.module.scss";
+import styles from "./UpcomingLaunches.module.scss";
 
-const upcomingLaunches = () => {
+const UpcomingLaunches = () => {
   return (
     <div className={styles.UpcomingLaunches}>
       <div className={styles.Top}>
@@ -24,4 +24,4 @@ const upcomingLaunches = () => {
   );
 };
 
-export default upcomingLaunches;
+export default UpcomingLaunches;

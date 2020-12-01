@@ -1,9 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-import styles from "./launchDetails.module.scss";
+import styles from "./LaunchDetails.module.scss";
 
-const launchDetails = () => {
+const LaunchDetails = () => {
   const launchDetailsAnim = {
     hidden: {
       opacity: 0,
@@ -49,4 +49,4 @@ const launchDetails = () => {
   );
 };
 
-export default launchDetails;
+export default LaunchDetails;

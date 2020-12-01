@@ -1,11 +1,11 @@
 import React from "react";
 
-import Launch from "./launch/launch";
-import Button from "../../shared/button/button";
+import Button from "../../Shared/Button/Button";
+import Launch from "./Launch/Launch";
 
-import styles from "./recentLaunches.module.scss";
+import styles from "./RecentLaunches.module.scss";
 
-const recentLaunches = () => {
+const RecentLaunches = () => {
   return (
     <div className={styles.RecentLaunches}>
       <div className={styles.Top}>
@@ -23,4 +23,4 @@ const recentLaunches = () => {
   );
 };
 
-export default recentLaunches;
+export default RecentLaunches;

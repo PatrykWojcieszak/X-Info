@@ -1,15 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import styles from './button.module.scss';
+import styles from "./Button.module.scss";
 
-const button = ({name}: buttonProps) => {
-    return (
-        <button className={styles.Button}>{name}</button>
-    );
+const Button = ({ name }: buttonProps) => {
+  return <button className={styles.Button}>{name}</button>;
 };
 
 type buttonProps = {
-    name: string,
-}
+  name: string;
+};
 
-export default button;
+export default Button;
