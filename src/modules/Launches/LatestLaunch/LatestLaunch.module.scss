@@ -1,0 +1,165 @@
+@import "../../../resources/styles/index.scss";
+
+.LatestLaunch {
+  display: flex;
+
+  .LeftContainer {
+    @include flex-center-column;
+    margin-right: 1.5rem;
+    justify-content: flex-start;
+  }
+
+  .LeftContainer > img {
+    margin-bottom: 1.5rem;
+  }
+
+  .RightContainer {
+    @include flex-center-column;
+    box-sizing: border-box;
+
+    .MainInfoContainer {
+      background-color: $foreground;
+      border-radius: 0.8rem;
+      padding: 1rem;
+      position: relative;
+
+      .LaunchNumber {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        color: $fontSecondary;
+        font-weight: 100;
+        font-size: 2rem;
+      }
+
+      h2,
+      h4,
+      p {
+        font-weight: 100;
+      }
+
+      p {
+        max-width: 80%;
+        color: $fontSecondary;
+        font-size: 1.1rem;
+      }
+
+      h2 {
+        color: $blue;
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      .DetailsWrapper {
+        display: flex;
+        margin-top: 1rem;
+
+        .TitlesContainer {
+          margin-right: 1rem;
+
+          h4 {
+            color: $fontSecondary;
+            margin-top: 0.5rem;
+          }
+        }
+
+        .ValuesContainer {
+          h4 {
+            color: $fontPrimary;
+            font-weight: 300;
+            margin-top: 0.5rem;
+          }
+        }
+      }
+    }
+
+    .FailureContainer {
+      background-color: $foreground;
+      margin-top: 1.5rem;
+      border-radius: 0.8rem;
+      padding: 1rem;
+
+      p,
+      h4 {
+        width: 80%;
+        color: $fontPrimary;
+        font-weight: 100;
+      }
+
+      p {
+        margin-bottom: 1.5rem;
+      }
+
+      ul {
+        width: 80%;
+        margin-top: 0.5rem;
+        list-style: none;
+        color: $fontSecondary;
+        font-weight: 100;
+      }
+
+      ul li::before {
+        content: "\2022";
+        color: $blue;
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        font-size: 1rem;
+        margin-left: -1em;
+      }
+    }
+  }
+}
+
+@include tablet {
+  .LatestLaunch {
+    @include flex-center-column;
+
+    .LeftContainer {
+      margin-bottom: 2rem;
+    }
+
+    .RightContainer {
+      .MainInfoContainer {
+        .LaunchNumber {
+          font-size: 1.2rem;
+        }
+
+        p {
+          max-width: 90%;
+          font-size: 0.8rem;
+        }
+
+        h2 {
+          font-size: 2rem;
+        }
+
+        .DetailsWrapper {
+          .TitlesContainer {
+            h4 {
+              font-size: 0.8rem;
+            }
+          }
+
+          .ValuesContainer {
+            h4 {
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+
+      .FailureContainer {
+        p,
+        h4 {
+          font-size: 0.8rem;
+        }
+
+        ul {
+          width: 90%;
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}

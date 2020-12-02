@@ -1,22 +1,25 @@
 @import "../../../../resources/styles/index.scss";
 
 .NavElement {
-  color: $fontSecondary;
   margin: 1.5rem;
   padding: 0.6rem 0.2rem;
   font-size: 1.6rem;
   position: relative;
   overflow: hidden;
-
   will-change: color;
   transition: color 0.25s ease-out;
+  color: $fontSecondary;
+  font-weight: 100;
+  border: none;
+  outline: none;
+  text-decoration: none;
 
   &:hover {
     cursor: pointer;
   }
 
-  h4 {
-    font-weight: 100;
+  &__Active {
+    border-bottom: 2px solid $blue;
   }
 
   &::before {
@@ -48,10 +51,6 @@
     position: absolute;
     bottom: 0;
   }
-}
-
-.Active {
-  border-bottom: 1px solid $blue;
 }
 
 @include tablet {
