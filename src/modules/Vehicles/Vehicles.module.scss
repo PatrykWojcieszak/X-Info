@@ -1,4 +1,31 @@
 @import "../../resources/styles/index.scss";
 
 .Vehicles {
+  display: flex;
+  margin: 6rem 0 4rem 0;
+  align-items: flex-end;
+  justify-content: space-evenly;
+
+  .InfoContainer {
+    position: absolute;
+    left: 5rem;
+    top: 6rem;
+    width: 450px;
+
+    h2 {
+      font-size: 3rem;
+      color: $fontPrimary;
+      margin-bottom: 1rem;
+    }
+
+    h4 {
+      font-size: 1.2rem;
+      color: $fontSecondary;
+    }
+
+    h2,
+    h4 {
+      font-weight: 100;
+    }
+  }
 }
