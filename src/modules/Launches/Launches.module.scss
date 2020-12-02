@@ -2,11 +2,22 @@
 
 .Launches {
   margin-top: 8rem;
-  padding: 0 4rem;
+  padding: 0 14rem;
+
+  .Latest {
+    margin-bottom: 3rem;
+
+    h2 {
+      font-weight: 100;
+      color: $fontPrimary;
+      font-size: 3rem;
+      margin-bottom: 2rem;
+    }
+  }
 
   .Content {
     @include flex-center-column;
-    margin-bottom: 4rem;
+    margin: 7rem 0;
 
     .ButtonsWrapper {
       width: 100%;

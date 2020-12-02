@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "../shared/Button/Button";
 
 import Launch from "../shared/Launch/Launch";
+import LatestLaunch from "./LatestLaunch/LatestLaunch";
 
 import styles from "./Launches.module.scss";
 
@@ -21,7 +22,10 @@ const Launches = () => {
 
   return (
     <div className={styles.Launches}>
-      <div className={styles.Latest}></div>
+      <div className={styles.Latest}>
+        <h2>LATEST LAUNCH</h2>
+        <LatestLaunch showMoreDetailsButton />
+      </div>
       <div className={styles.Content}>
         <div className={styles.ButtonsWrapper}>
           <Button
