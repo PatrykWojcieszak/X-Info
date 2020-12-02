@@ -5,16 +5,16 @@
   margin-bottom: 1rem;
   font-size: 0.8rem;
 
-  .Title {
+  h3 {
     font-weight: 100;
     color: $fontSecondary;
   }
 
-  .Value {
-    font-weight: 300;
+  h3 > a {
+    text-decoration: none;
     color: $blue;
-    margin: 0 0.5rem;
     cursor: pointer;
+    font-weight: 300;
   }
 }
 

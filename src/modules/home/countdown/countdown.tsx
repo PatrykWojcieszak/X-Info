@@ -3,8 +3,6 @@ import React from "react";
 import styles from "./Countdown.module.scss";
 
 const Countdown = () => {
-  const clockStyles = [styles.ClockSeconds, styles.ClockTimer];
-
   return (
     <div className={styles.Countdown}>
       <div className={styles.Element}>
