@@ -30,3 +30,22 @@
     }
   }
 }
+
+@include desktop {
+  .Launches {
+    padding: 0 7rem;
+  }
+}
+
+@include large {
+  .Launches {
+    padding: 0 3rem;
+  }
+}
+
+@include tablet {
+  .Launches {
+    padding: 0 1rem;
+    @include flex-center-column;
+  }
+}
