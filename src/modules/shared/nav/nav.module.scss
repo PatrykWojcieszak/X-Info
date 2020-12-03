@@ -7,6 +7,7 @@
   display: flex;
   justify-content: flex-end;
   width: 100%;
+  z-index: 999;
 }
 
 @include tablet {
