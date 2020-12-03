@@ -5,10 +5,23 @@ import styles from "./Footer.module.scss";
 const Footer = () => {
   return (
     <div className={styles.Footer}>
-      <h3 className={styles.Title}>Created by: </h3>
-      <h3 className={styles.Value}>Patryk Wojcieszak</h3>
-      <h3 className={styles.Title}> using </h3>
-      <h3 className={styles.Value}>SpaceX-Api</h3>
+      <h3>
+        Created by:{" "}
+        <a
+          href="https://github.com/PatrykWojcieszak"
+          target="_blank"
+          rel="noopener noreferrer">
+          {" "}
+          Patryk Wojcieszak
+        </a>{" "}
+        using{" "}
+        <a
+          href="https://github.com/r-spacex/SpaceX-API"
+          target="_blank"
+          rel="noopener noreferrer">
+          Spacex-Api
+        </a>
+      </h3>
     </div>
   );
 };

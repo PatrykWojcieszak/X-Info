@@ -4,6 +4,7 @@
   background: transparent;
   border: 1px solid $blue;
   padding: 1rem;
+  box-sizing: border-box;
   outline: none;
   color: $blue;
   border-radius: 0.4rem;
@@ -26,5 +27,6 @@
 @include tablet {
   .Button {
     font-size: 1rem;
+    font-weight: 300;
   }
 }

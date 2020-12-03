@@ -1,0 +1,169 @@
+@import "../../resources/styles/index.scss";
+
+.Rocket {
+  .Top {
+    background: rgba(0, 0, 0, 0.6) url("../../resources/images/fheavy_bg2.jpg");
+    background-blend-mode: darken;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+    position: relative;
+
+    // img {
+    //   height: 100%;
+    //   width: 100%;
+    //   object-fit: cover;
+    // }
+
+    .HeroText {
+      // background-color: rgba($color: #000000, $alpha: 0.4);
+      @include flex-center-column;
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+
+      h2 {
+        font-size: 5rem;
+      }
+
+      h2,
+      h4 {
+        color: $fontPrimary;
+      }
+
+      h4 {
+        font-size: 1.2rem;
+
+        span {
+          color: $blue;
+        }
+      }
+    }
+  }
+
+  .Content {
+    @include flex-center;
+    margin-top: 2rem;
+    padding: 0 25rem;
+    align-items: flex-start;
+
+    .Rocket {
+      height: 60%;
+
+      img {
+        height: 900px;
+      }
+    }
+
+    .InfoContainer {
+      margin-left: 10rem;
+      @include flex-column;
+      align-items: flex-start;
+
+      p {
+        color: $fontPrimary;
+        margin-bottom: 1.2rem;
+      }
+
+      h3 {
+        color: $fontSecondary;
+      }
+
+      .RocketDetails {
+        @include flex-center-column;
+        margin-top: 2rem;
+        width: 100%;
+
+        .BtnContainer {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 1.5rem;
+        }
+
+        .Details {
+          @include flex-center-column;
+          justify-content: flex-start;
+          width: 100%;
+
+          .Line {
+            margin: 0.7rem 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            box-sizing: border-box;
+            border-bottom: 1px solid $fontPrimary;
+
+            .Title {
+              color: $fontPrimary;
+            }
+
+            .Value {
+              color: $fontSecondary;
+            }
+
+            .Title,
+            .Value {
+              font-weight: 100;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include tablet {
+  .Rocket {
+    .Top {
+      .HeroText {
+        h2 {
+          font-size: 3rem;
+        }
+        h4 {
+          font-size: 0.7rem;
+        }
+      }
+    }
+
+    .Content {
+      padding: 0 1rem;
+
+      .Rocket {
+        height: 40%;
+
+        img {
+          height: 350px;
+        }
+      }
+
+      .InfoContainer {
+        margin-left: 2rem;
+
+        p,
+        h3 {
+          font-size: 0.8rem;
+        }
+
+        .RocketDetails {
+          .BtnContainer {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+          }
+
+          .BtnContainer > * {
+            margin: 0.8rem 0;
+          }
+        }
+      }
+    }
+  }
+}

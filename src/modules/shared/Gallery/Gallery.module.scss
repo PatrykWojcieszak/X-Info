@@ -1,0 +1,67 @@
+@import "../../../resources/styles/index.scss";
+
+.Gallery {
+  position: relative;
+  @include flex-center;
+  height: 100vh;
+  overflow-x: hidden;
+
+  h2 {
+    color: $fontPrimary;
+    font-size: 3rem;
+    font-weight: 100;
+    z-index: 999;
+    top: 6rem;
+    left: 6rem;
+    position: absolute;
+  }
+
+  svg {
+    color: $blue;
+  }
+
+  .Next,
+  .Prev {
+    @include flex-center;
+    position: absolute;
+    background: #fff;
+    border-radius: 30px;
+    width: 40px;
+    height: 40px;
+    user-select: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    z-index: 2;
+  }
+
+  img {
+    position: absolute;
+    border-radius: 1rem;
+    width: 100vh;
+    object-fit: cover;
+  }
+
+  .Next {
+    right: 10px;
+  }
+
+  .Prev {
+    left: 10px;
+  }
+}
+
+@include tablet {
+  .Gallery {
+    h2 {
+      font-size: 3rem;
+      display: flex;
+      justify-content: center;
+      position: absolute;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+}

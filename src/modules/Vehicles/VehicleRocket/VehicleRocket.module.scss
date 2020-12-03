@@ -1,0 +1,26 @@
+@import "../../../resources/styles/index.scss";
+
+.Rocket {
+  @include flex-column;
+  margin: 0 2rem;
+  cursor: pointer;
+
+  h4 {
+    font-weight: 100;
+    color: $fontPrimary;
+    font-size: 1.5rem;
+    margin-bottom: 0.6rem;
+  }
+
+  img {
+    border-left: 1px solid $fontSecondary;
+    border-top: 1px solid $fontSecondary;
+    border-top-left-radius: 0.5rem;
+  }
+}
+
+@include tablet {
+  .Rocket {
+    margin: 2rem 0;
+  }
+}
