@@ -53,8 +53,15 @@
 
 @include tablet {
   .Gallery {
+    h2 {
+      font-size: 3rem;
+      display: flex;
+      justify-content: center;
+      position: absolute;
+    }
+
     img {
-      width: 35vh;
+      width: 100%;
     }
   }
 }
