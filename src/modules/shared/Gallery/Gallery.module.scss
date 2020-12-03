@@ -6,17 +6,28 @@
   height: 100vh;
   overflow-x: hidden;
 
+  h2 {
+    color: $fontPrimary;
+    font-size: 3rem;
+    font-weight: 100;
+    z-index: 999;
+    top: 6rem;
+    left: 6rem;
+    position: absolute;
+  }
+
+  svg {
+    color: $blue;
+  }
+
   .Next,
   .Prev {
-    top: calc(50% - 20px);
+    @include flex-center;
     position: absolute;
-    background: white;
+    background: #fff;
     border-radius: 30px;
     width: 40px;
     height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     user-select: none;
     cursor: pointer;
     font-weight: bold;
@@ -26,9 +37,9 @@
 
   img {
     position: absolute;
-    width: 100vh;
     border-radius: 1rem;
-    object-fit: contain;
+    width: 100vh;
+    object-fit: cover;
   }
 
   .Next {
@@ -37,6 +48,13 @@
 
   .Prev {
     left: 10px;
-    transform: scale(-1);
+  }
+}
+
+@include tablet {
+  .Gallery {
+    img {
+      width: 35vh;
+    }
   }
 }

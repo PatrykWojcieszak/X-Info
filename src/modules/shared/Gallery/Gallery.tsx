@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { wrap } from "popmotion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import styles from "./Gallery.module.scss";
 
@@ -40,41 +41,44 @@ const Gallery = ({ images }: galleryProps) => {
   };
 
   return (
-    <div className={styles.Gallery}>
-      <AnimatePresence initial={false} custom={direction}>
-        <motion.img
-          key={page}
-          src={images[imageIndex]}
-          custom={direction}
-          variants={variants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{
-            x: { type: "spring", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.2 },
-          }}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={1}
-          onDragEnd={(e, { offset, velocity }) => {
-            const swipe = swipePower(offset.x, velocity.x);
+    <>
+      <div className={styles.Gallery}>
+        <h2>GALLERY</h2>
+        <AnimatePresence initial={false} custom={direction}>
+          <motion.img
+            key={page}
+            src={images[imageIndex]}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 },
+            }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1}
+            onDragEnd={(e, { offset, velocity }) => {
+              const swipe = swipePower(offset.x, velocity.x);
 
-            if (swipe < -swipeConfidenceThreshold) {
-              paginate(1);
-            } else if (swipe > swipeConfidenceThreshold) {
-              paginate(-1);
-            }
-          }}
-        />
-      </AnimatePresence>
-      <div className={styles.Next} onClick={() => paginate(1)}>
-        {"‣"}
+              if (swipe < -swipeConfidenceThreshold) {
+                paginate(1);
+              } else if (swipe > swipeConfidenceThreshold) {
+                paginate(-1);
+              }
+            }}
+          />
+        </AnimatePresence>
+        <div className={styles.Next} onClick={() => paginate(1)}>
+          <FontAwesomeIcon icon="arrow-right" />
+        </div>
+        <div className={styles.Prev} onClick={() => paginate(-1)}>
+          <FontAwesomeIcon icon="arrow-left" />
+        </div>
       </div>
-      <div className={styles.Prev} onClick={() => paginate(-1)}>
-        {"‣"}
-      </div>
-    </div>
+    </>
   );
 };
 

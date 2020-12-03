@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { wrap } from "popmotion";
+import React from "react";
 
 import Button from "../shared/Button/Button";
 
@@ -15,13 +13,14 @@ const images = [
   "https://mk0spaceflightnoa02a.kinstacdn.com/wp-content/uploads/2020/01/49399916862_cd676f67f6_o-copy.jpg",
   "https://e3.365dm.com/20/11/768x432/skynews-spacex-falcon-9-rocket_5173738.jpg?20201116003945",
   "https://highxtar.com/wp-content/uploads/2020/05/highxtar-spacex-elon-musk-occupy-mars2.jpg",
+  "https://www.nasa.gov/sites/default/files/thumbnails/image/crew-1_certification_feature_main.jpg",
 ];
 
 const Rocket = () => {
   return (
     <div className={styles.Rocket}>
       <div className={styles.Top}>
-        <img src={falconHeavy_bg} alt="falcon heavy" />
+        {/* <img src={falconHeavy_bg} alt="falcon heavy" /> */}
         <div className={styles.HeroText}>
           <h2>FALCON HEAVY</h2>
           <h4>
@@ -54,19 +53,19 @@ const Rocket = () => {
             </div>
             <div className={styles.Details}>
               <div className={styles.Line}>
-                <h3 className={styles.TItle}>HEIGHT</h3>
+                <h3 className={styles.Title}>HEIGHT</h3>
                 <h3 className={styles.Value}>70m | 229,6 feet</h3>
               </div>
               <div className={styles.Line}>
-                <h3 className={styles.TItle}>HEIGHT</h3>
+                <h3 className={styles.Title}>HEIGHT</h3>
                 <h3 className={styles.Value}>70m | 229,6 feet</h3>
               </div>
               <div className={styles.Line}>
-                <h3 className={styles.TItle}>HEIGHT</h3>
+                <h3 className={styles.Title}>HEIGHT</h3>
                 <h3 className={styles.Value}>70m | 229,6 feet</h3>
               </div>
               <div className={styles.Line}>
-                <h3 className={styles.TItle}>HEIGHT</h3>
+                <h3 className={styles.Title}>HEIGHT</h3>
                 <h3 className={styles.Value}>70m | 229,6 feet</h3>
               </div>
             </div>
