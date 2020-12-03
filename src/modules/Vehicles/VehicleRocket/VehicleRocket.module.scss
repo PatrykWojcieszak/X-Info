@@ -15,5 +15,12 @@
   img {
     border-left: 1px solid $fontSecondary;
     border-top: 1px solid $fontSecondary;
+    border-top-left-radius: 0.5rem;
+  }
+}
+
+@include tablet {
+  .Rocket {
+    margin: 2rem 0;
   }
 }

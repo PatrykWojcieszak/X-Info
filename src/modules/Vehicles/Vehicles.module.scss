@@ -29,3 +29,17 @@
     }
   }
 }
+
+@include tablet {
+  .Vehicles {
+    @include flex-center-column;
+
+    .InfoContainer {
+      position: relative;
+      top: 0;
+      left: 0;
+      margin-bottom: 3rem;
+      width: 350px;
+    }
+  }
+}
