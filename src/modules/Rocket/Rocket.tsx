@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { wrap } from "popmotion";
 
 import Button from "../shared/Button/Button";
 
@@ -6,6 +8,40 @@ import styles from "./Rocket.module.scss";
 
 import falconHeavy_bg from "../../resources/images/fheavy_bg2.jpg";
 import falconheavy from "../../resources/images/falconHeavy.png";
+import Gallery from "../shared/Gallery/Gallery";
+
+const variants = {
+  enter: (direction: number) => {
+    return {
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0,
+    };
+  },
+  center: {
+    zIndex: 1,
+    x: 0,
+    opacity: 1,
+  },
+  exit: (direction: number) => {
+    return {
+      zIndex: 0,
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0,
+    };
+  },
+};
+
+const swipeConfidenceThreshold = 10000;
+const swipePower = (offset: number, velocity: number) => {
+  return Math.abs(offset) * velocity;
+};
+
+const images = [
+  "https://cdni0.trtworld.com/w960/h540/q75/76923_USASpaceX_1587156063102.jpeg",
+  "https://mk0spaceflightnoa02a.kinstacdn.com/wp-content/uploads/2020/01/49399916862_cd676f67f6_o-copy.jpg",
+  "https://e3.365dm.com/20/11/768x432/skynews-spacex-falcon-9-rocket_5173738.jpg?20201116003945",
+  "https://highxtar.com/wp-content/uploads/2020/05/highxtar-spacex-elon-musk-occupy-mars2.jpg",
+];
 
 const Rocket = () => {
   return (
@@ -63,6 +99,7 @@ const Rocket = () => {
           </div>
         </div>
       </div>
+      <Gallery images={images} />
     </div>
   );
 };
