@@ -43,6 +43,16 @@ const Launch = () => {
           </div>
         </div>
       </div>
+      <div className={styles.YoutubeContainer}>
+        <iframe
+          title="spacex video"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/J442-ti-Dhg"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen></iframe>
+      </div>
       <Gallery images={images} />
       <div className={styles.SocialsContainer}>
         <div className={styles.Icon}>
