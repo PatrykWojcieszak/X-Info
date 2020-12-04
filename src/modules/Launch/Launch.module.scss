@@ -81,7 +81,7 @@
   .SocialsContainer {
     @include flex-center;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin-bottom: 3rem;
 
     .Icon {
@@ -122,6 +122,63 @@
       width: 100%;
       height: 800px;
       border-radius: 1rem;
+    }
+  }
+}
+
+@include desktop {
+  .Launch {
+    padding: 0 10rem;
+  }
+}
+
+@include large {
+  .Launch {
+    padding: 0 4rem;
+  }
+}
+
+@include tablet {
+  .Launch {
+    padding: 0 1rem;
+
+    .Row {
+      .Rocket {
+        text-align: center;
+
+        &:hover {
+          border: 1px solid $fontSecondary;
+        }
+        img {
+          height: 400px;
+        }
+      }
+
+      .InfoContainer {
+        margin-left: 2rem;
+
+        .InfoWrapper {
+          h2 {
+            font-size: 1.5rem;
+          }
+        }
+      }
+    }
+
+    .AdditionalInfo {
+      align-items: center;
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      &__Content {
+        justify-content: center;
+      }
+
+      &__Content > * {
+        margin: 1rem;
+      }
     }
   }
 }

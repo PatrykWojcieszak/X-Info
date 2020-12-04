@@ -23,3 +23,9 @@
     font-weight: 100;
   }
 }
+
+@include tablet {
+  .InfoLine {
+    font-size: 0.8rem;
+  }
+}
