@@ -11,10 +11,20 @@
 
     .Rocket {
       @include flex-center-column;
+      cursor: pointer;
+      padding: 0.6rem;
+      box-sizing: border-box;
+      transition: all 0.4s ease-in-out;
+      border: 1px solid transparent;
+      border-radius: 0.8rem;
+
+      &:hover {
+        border: 1px solid $fontSecondary;
+      }
 
       h3 {
         font-weight: 100;
-        font-size: 2rem;
+        font-size: 1.2rem;
         color: $fontPrimary;
         margin-bottom: 1rem;
       }
@@ -26,7 +36,7 @@
 
     .InfoContainer {
       @include flex-center-column;
-      margin-left: 2rem;
+      margin-left: 4rem;
       width: 100%;
 
       .InfoWrapper {
@@ -38,8 +48,31 @@
         h2 {
           font-weight: 100;
           color: $fontPrimary;
-          font-size: 3rem;
+          font-size: 2rem;
         }
+      }
+    }
+  }
+
+  .SocialsContainer {
+    @include flex-center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+
+    .Icon {
+      @include flex-center-column;
+      cursor: pointer;
+
+      svg {
+        color: $blue;
+        font-size: 3rem;
+      }
+
+      h4 {
+        margin-top: 1.2rem;
+        font-weight: 100;
+        color: $fontSecondary;
       }
     }
   }
