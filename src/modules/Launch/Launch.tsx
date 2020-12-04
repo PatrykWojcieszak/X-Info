@@ -5,6 +5,7 @@ import LaunchExtendedInfo from "../shared/LaunchExtendedInfo/LaunchExtendedInfo"
 import InfoLine from "../shared/InfoLine/InfoLine";
 import Gallery from "../shared/Gallery/Gallery";
 import CrewPerson from "./CrewPerson/CrewPerson";
+import Ship from "./Ship/Ship";
 
 import fhheavy from "../../resources/images/falconHeavy.png";
 import styles from "./Launch.module.scss";
@@ -66,7 +67,11 @@ const Launch = () => {
       </div>
       <div className={styles.AdditionalInfo}>
         <h2>USED SHIPS</h2>
-        <div className={styles.AdditionalInfo__Content}></div>
+        <div className={styles.AdditionalInfo__Content}>
+          <Ship />
+          <Ship />
+          <Ship />
+        </div>
       </div>
       <Gallery images={images} />
       <div className={styles.SocialsContainer}>
