@@ -1,10 +1,12 @@
 import React from "react";
 
-import styles from "./LatestLaunch.module.scss";
+import styles from "./LaunchExtendedInfo.module.scss";
 import patch from "../../../resources/images/patch.png";
-import Button from "../../shared/Button/Button";
+import Button from "../Button/Button";
 
-const LatestLaunch = ({ showMoreDetailsButton }: latestLaunchProps) => {
+const LaunchExtendedInfo = ({
+  showMoreDetailsButton,
+}: LaunchExtendedInfoProps) => {
   return (
     <div className={styles.LatestLaunch}>
       <div className={styles.LeftContainer}>
@@ -60,8 +62,8 @@ const LatestLaunch = ({ showMoreDetailsButton }: latestLaunchProps) => {
   );
 };
 
-type latestLaunchProps = {
+type LaunchExtendedInfoProps = {
   showMoreDetailsButton: boolean;
 };
 
-export default LatestLaunch;
+export default LaunchExtendedInfo;

@@ -8,6 +8,7 @@ import Footer from "./modules/shared/Footer/Footer";
 import About from "./modules/About/About";
 import Vehicles from "./modules/Vehicles/Vehicles";
 import Rocket from "./modules/Rocket/Rocket";
+import Launch from "./modules/Launch/Launch";
 
 import "./App.scss";
 
@@ -15,6 +16,7 @@ const routes = (
   <Switch>
     <Route path="/home" exact render={() => <Home />} />
     <Route path="/launches" exact render={() => <Launches />} />
+    <Route path="/launches/launch" exact render={() => <Launch />} />
     <Route path="/vehicles" exact render={() => <Vehicles />} />
     <Route path="/vehicles/falcon-heavy" exact render={() => <Rocket />} />
     <Route path="/about" exact render={() => <About />} />

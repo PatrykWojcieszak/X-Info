@@ -1,8 +1,8 @@
 import React from "react";
 
-import styles from "./Launch.module.scss";
+import styles from "./LaunchShortInfo.module.scss";
 
-const Launch = () => {
+const LaunchShortInfo = () => {
   return (
     <div className={styles.Launch}>
       <div className={styles.Top}>
@@ -37,4 +37,4 @@ const Launch = () => {
   );
 };
 
-export default Launch;
+export default LaunchShortInfo;
