@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Button from "../shared/Button/Button";
 
-import Launch from "../shared/Launch/Launch";
-import LatestLaunch from "./LatestLaunch/LatestLaunch";
+import Launch from "../shared/LaunchShortInfo/LaunchShortInfo";
+import LatestLaunch from "../shared/LaunchExtendedInfo/LaunchExtendedInfo";
 
 import styles from "./Launches.module.scss";
 

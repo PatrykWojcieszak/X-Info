@@ -1,0 +1,46 @@
+@import "../../resources/styles/index.scss";
+
+.Launch {
+  margin-top: 8rem;
+  padding: 0 24rem;
+
+  .Row {
+    @include flex-center;
+    margin-top: 4rem;
+    align-items: flex-start;
+
+    .Rocket {
+      @include flex-center-column;
+
+      h3 {
+        font-weight: 100;
+        font-size: 2rem;
+        color: $fontPrimary;
+        margin-bottom: 1rem;
+      }
+
+      img {
+        height: 800px;
+      }
+    }
+
+    .InfoContainer {
+      @include flex-center-column;
+      margin-left: 2rem;
+      width: 100%;
+
+      .InfoWrapper {
+        width: 100%;
+        @include flex-column;
+
+        margin-bottom: 2rem;
+
+        h2 {
+          font-weight: 100;
+          color: $fontPrimary;
+          font-size: 3rem;
+        }
+      }
+    }
+  }
+}

@@ -7,6 +7,7 @@ import styles from "./Rocket.module.scss";
 import falconHeavy_bg from "../../resources/images/fheavy_bg2.jpg";
 import falconheavy from "../../resources/images/falconHeavy.png";
 import Gallery from "../shared/Gallery/Gallery";
+import InfoLine from "../shared/InfoLine/InfoLine";
 
 const images = [
   "https://cdni0.trtworld.com/w960/h540/q75/76923_USASpaceX_1587156063102.jpeg",
@@ -52,22 +53,10 @@ const Rocket = () => {
               <Button name="LANDING LEGS" />
             </div>
             <div className={styles.Details}>
-              <div className={styles.Line}>
-                <h3 className={styles.Title}>HEIGHT</h3>
-                <h3 className={styles.Value}>70m | 229,6 feet</h3>
-              </div>
-              <div className={styles.Line}>
-                <h3 className={styles.Title}>HEIGHT</h3>
-                <h3 className={styles.Value}>70m | 229,6 feet</h3>
-              </div>
-              <div className={styles.Line}>
-                <h3 className={styles.Title}>HEIGHT</h3>
-                <h3 className={styles.Value}>70m | 229,6 feet</h3>
-              </div>
-              <div className={styles.Line}>
-                <h3 className={styles.Title}>HEIGHT</h3>
-                <h3 className={styles.Value}>70m | 229,6 feet</h3>
-              </div>
+              <InfoLine title="HEIGHT" value="70 m | 229,6 feet" />
+              <InfoLine title="HEIGHT" value="70 m | 229,6 feet" />
+              <InfoLine title="HEIGHT" value="70 m | 229,6 feet" />
+              <InfoLine title="HEIGHT" value="70 m | 229,6 feet" />
             </div>
           </div>
         </div>
