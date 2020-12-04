@@ -2,10 +2,12 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LaunchExtendedInfo from "../shared/LaunchExtendedInfo/LaunchExtendedInfo";
 
-import fhheavy from "../../resources/images/falconHeavy.png";
-import styles from "./Launch.module.scss";
 import InfoLine from "../shared/InfoLine/InfoLine";
 import Gallery from "../shared/Gallery/Gallery";
+import CrewPerson from "./CrewPerson/CrewPerson";
+
+import fhheavy from "../../resources/images/falconHeavy.png";
+import styles from "./Launch.module.scss";
 
 const images = [
   "https://cdni0.trtworld.com/w960/h540/q75/76923_USASpaceX_1587156063102.jpeg",
@@ -52,6 +54,19 @@ const Launch = () => {
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen></iframe>
+      </div>
+      <div className={styles.AdditionalInfo}>
+        <h2>CREW</h2>
+        <div className={styles.AdditionalInfo__Content}>
+          <CrewPerson />
+          <CrewPerson />
+          <CrewPerson />
+          <CrewPerson />
+        </div>
+      </div>
+      <div className={styles.AdditionalInfo}>
+        <h2>USED SHIPS</h2>
+        <div className={styles.AdditionalInfo__Content}></div>
       </div>
       <Gallery images={images} />
       <div className={styles.SocialsContainer}>

@@ -54,6 +54,30 @@
     }
   }
 
+  .AdditionalInfo {
+    @include flex-column;
+    align-items: flex-start;
+    margin: 2rem 0;
+
+    h2 {
+      font-weight: 100;
+      color: $fontPrimary;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    &__Content {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    &__Content > * {
+      margin: 1rem 0;
+    }
+  }
+
   .SocialsContainer {
     @include flex-center;
     flex-wrap: wrap;
