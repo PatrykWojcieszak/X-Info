@@ -64,7 +64,13 @@ const Home = () => {
                 </div>
               )}
               <AnimatePresence>
-                {showLaunchDetails ? <LaunchDetails /> : null}
+                {showLaunchDetails ? (
+                  <LaunchDetails
+                    flightNumber={nextLaunch.flight_number}
+                    dateLocal={nextLaunch.date_local}
+                    details={nextLaunch.details}
+                  />
+                ) : null}
               </AnimatePresence>
             </motion.div>
           </div>

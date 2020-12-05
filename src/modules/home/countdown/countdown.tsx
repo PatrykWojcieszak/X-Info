@@ -10,12 +10,20 @@ interface Time {
   minutes: Number;
   months: Number;
   seconds: Number;
-  years;
-  Number;
+  years: Number;
 }
 
 const Countdown = ({ dateLocal }: countdownProps) => {
-  const [timer, setTimer] = useState<Time | undefined>(undefined);
+  const [timer, setTimer] = useState<Time>({
+    days: 0,
+    firstDateWasLater: true,
+    hours: 0,
+    minutes: 0,
+    months: 0,
+    seconds: 0,
+    years: 0,
+  });
+
   const moment = require("moment");
 
   const timeDiff = useCallback(() => {

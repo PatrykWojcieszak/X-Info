@@ -6,6 +6,7 @@ interface Launch_model {
   date_utc: string;
   date_unix: Number;
   date_local: string;
+  flight_number: Number;
   date_precision: string;
   static_fire_date_utc: string;
   static_fire_date_unix: string;
