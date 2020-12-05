@@ -41,23 +41,17 @@ const Countdown = ({ dateLocal }: countdownProps) => {
             <h2>{timer.days}</h2>
             <h4>DAYS</h4>
           </div>
-          <div className={styles.Colon}>
-            <h2>:</h2>
-          </div>
+          <h2 className={styles.Colon}>:</h2>
           <div className={styles.Element}>
             <h2>{timer.hours}</h2>
             <h4>HOURS</h4>
           </div>
-          <div className={styles.Colon}>
-            <h2>:</h2>
-          </div>
+          <h2 className={styles.Colon}>:</h2>
           <div className={styles.Element}>
             <h2>{timer.minutes}</h2>
             <h4>MINUTES</h4>
           </div>
-          <div className={styles.Colon}>
-            <h2>:</h2>
-          </div>
+          <h2 className={styles.Colon}>:</h2>
           <div className={styles.Element}>
             <h2>{timer.seconds}</h2>
             <h4>SECONDS</h4>
