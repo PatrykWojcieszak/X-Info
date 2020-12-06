@@ -17,7 +17,7 @@ const LaunchShortInfo = ({
       <div className={styles.Top}>
         <div className={styles.Name_Date}>
           <h2>{launchName}</h2>
-          <h4>{dateParsed.toDateString}</h4>
+          <h4>{dateParsed.toDateString()}</h4>
         </div>
         <div className={styles.RocketType}>
           <h4>ROCKET: </h4>
