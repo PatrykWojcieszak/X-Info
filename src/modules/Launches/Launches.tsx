@@ -39,9 +39,9 @@ const Launches = () => {
             name="PAST LAUNCHES"
           />
         </div>
+        {/* <Launch />
         <Launch />
-        <Launch />
-        <Launch />
+        <Launch /> */}
       </div>
     </div>
   );

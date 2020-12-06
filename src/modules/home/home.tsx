@@ -22,6 +22,9 @@ const Home = () => {
   const [recentLaunches, setRecentLaunches] = useState<
     QueryResult_model<Launch_model> | undefined
   >(undefined);
+  const [upcomingLaunches, setUpcomingLaunches] = useState<
+    QueryResult_model<Launch_model> | undefined
+  >(undefined);
 
   const topContentAnim = {
     hidden: {
@@ -35,12 +38,12 @@ const Home = () => {
     },
   };
 
-  const queryModel = {
+  const nextLaunchQuery = {
     query: {
       upcoming: true,
     },
     options: {
-      limit: 1,
+      limit: 5,
       select: {
         name: 1,
         date_local: 1,
@@ -55,6 +58,7 @@ const Home = () => {
           path: "launchpad",
           select: {
             name: 1,
+            full_name: 1,
           },
         },
         {
@@ -89,10 +93,48 @@ const Home = () => {
     },
   };
 
+  const upcomingLaunchesQuery = {
+    query: {
+      upcoming: true,
+    },
+    options: {
+      select: {
+        name: 1,
+        date_local: 1,
+        date_utc: 1,
+        flight_number: 1,
+      },
+      sort: {
+        flight_number: "asc",
+      },
+      populate: [
+        {
+          path: "launchpad",
+          select: {
+            name: 1,
+            full_name: 1,
+          },
+        },
+        {
+          path: "rocket",
+          select: {
+            name: 1,
+          },
+        },
+        {
+          path: "payloads",
+          select: {
+            customers: 1,
+          },
+        },
+      ],
+    },
+  };
+
   useEffect(() => {
     Axios.post<QueryResult_model<Launch_model>>(
       "https://api.spacexdata.com/v4/launches/query",
-      queryModel
+      nextLaunchQuery
     )
       .then((res) => {
         setNextLaunch(res.data);
@@ -104,8 +146,17 @@ const Home = () => {
       recentLaunchesQuery
     )
       .then((res) => {
-        console.log(res.data);
         setRecentLaunches(res.data);
+      })
+      .catch((err) => {});
+
+    Axios.post<QueryResult_model<Launch_model>>(
+      "https://api.spacexdata.com/v4/launches/query",
+      upcomingLaunchesQuery
+    )
+      .then((res) => {
+        console.log(res.data);
+        setUpcomingLaunches(res.data);
       })
       .catch((err) => {});
   }, []);
@@ -151,7 +202,9 @@ const Home = () => {
             {recentLaunches !== undefined ? (
               <RecentLaunches launches={recentLaunches.docs} />
             ) : null}
-            <UpcomingLaunches />
+            {upcomingLaunches !== undefined ? (
+              <UpcomingLaunches launches={upcomingLaunches.docs} />
+            ) : null}
           </div>
         </div>
       ) : (

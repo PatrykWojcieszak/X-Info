@@ -1,7 +1,6 @@
 import Launchpad_model from "../Launchpad/Launchpad_model";
+import Payload_model from "../Payload/Payload_model";
 import Rocket_model from "../Rocket/Rocket_model";
-import Fairings_model from "./Fairings_model";
-
 interface Launch_model {
   flight: Number;
   name: string;
@@ -20,11 +19,16 @@ interface Launch_model {
   failures: [{ time: Number; altitude: Number; reason: string }];
   upcoming: boolean;
   details: string;
-  fairings: Fairings_model;
+  fairings: {
+    reused: boolean;
+    recovery_attempt: boolean;
+    recovered: boolean;
+    ships: [];
+  };
   crew: [];
   ships: [];
   capsules: [];
-  payloads: [];
+  payloads: Payload_model[];
   launchpad: Launchpad_model;
   cores: [
     {
