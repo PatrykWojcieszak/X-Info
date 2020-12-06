@@ -21,7 +21,7 @@ const images = [
 const Launch = () => {
   return (
     <div className={styles.Launch}>
-      <LaunchExtendedInfo showMoreDetailsButton={false} />
+      {/* <LaunchExtendedInfo showMoreDetailsButton={false} /> */}
       <div className={styles.Row}>
         <div className={styles.Rocket}>
           <h3>FALCON HEAVY</h3>

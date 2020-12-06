@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //COMPONENTS
@@ -8,7 +9,7 @@ import Button from "../../../shared/Button/Button";
 import styles from "./Launch.module.scss";
 import noImage from "../../../../resources/images/noImage.png";
 
-const Launch = ({ name, patch, date, success }: launchProps) => {
+const Launch = ({ launchId, name, patch, date, success }: launchProps) => {
   const dateParsed = new Date(date);
 
   return (
@@ -22,12 +23,15 @@ const Launch = ({ name, patch, date, success }: launchProps) => {
           icon={success ? "check-circle" : "times-circle"}
         />
       </div>
-      <Button name="SHOW DETAILS" />
+      <Link to={`/launches/${launchId}`}>
+        <Button name="SHOW DETAILS" />
+      </Link>
     </div>
   );
 };
 
 type launchProps = {
+  launchId: string;
   name: string;
   patch: string;
   date: string;

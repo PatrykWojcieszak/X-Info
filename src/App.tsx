@@ -16,7 +16,7 @@ const routes = (
   <Switch>
     <Route path="/home" exact render={() => <Home />} />
     <Route path="/launches" exact render={() => <Launches />} />
-    <Route path="/launches/launch" exact render={() => <Launch />} />
+    <Route path="/launches/:id" exact render={() => <Launch />} />
     <Route path="/vehicles" exact render={() => <Vehicles />} />
     <Route path="/vehicles/falcon-heavy" exact render={() => <Rocket />} />
     <Route path="/about" exact render={() => <About />} />

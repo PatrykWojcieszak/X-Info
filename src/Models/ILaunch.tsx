@@ -1,8 +1,10 @@
+import IFailure from "./IFailure";
 import ILaunchpad from "./ILaunchpad";
 import IPayload from "./IPayload";
 import IRocket from "./IRocket";
 
 interface ILaunch {
+  id: string;
   flight: Number;
   name: string;
   date_utc: string;
@@ -17,7 +19,7 @@ interface ILaunch {
   window: Number;
   rocket: IRocket;
   success: boolean;
-  failures: [{ time: Number; altitude: Number; reason: string }];
+  failures: IFailure[];
   upcoming: boolean;
   details: string;
   fairings: {
