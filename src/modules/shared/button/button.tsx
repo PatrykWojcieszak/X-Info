@@ -6,7 +6,7 @@ const Button = ({ name, selected, clicked }: buttonProps) => {
   const btnStyle = [styles.Button];
 
   if (selected) btnStyle.push(styles.Selected);
-  console.log(selected);
+
   return (
     <button onClick={clicked} className={btnStyle.join(" ")}>
       {name}

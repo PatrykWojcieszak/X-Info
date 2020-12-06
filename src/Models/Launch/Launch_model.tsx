@@ -1,3 +1,5 @@
+import Launchpad_model from "../Launchpad/Launchpad_model";
+import Rocket_model from "../Rocket/Rocket_model";
 import Fairings_model from "./Fairings_model";
 
 interface Launch_model {
@@ -13,7 +15,7 @@ interface Launch_model {
   tdb: boolean;
   net: boolean;
   window: Number;
-  rocket: string;
+  rocket: Rocket_model;
   success: boolean;
   failures: [{ time: Number; altitude: Number; reason: string }];
   upcoming: boolean;
@@ -23,7 +25,7 @@ interface Launch_model {
   ships: [];
   capsules: [];
   payloads: [];
-  launchpad: string;
+  launchpad: Launchpad_model;
   cores: [
     {
       core: string;

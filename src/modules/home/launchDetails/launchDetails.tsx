@@ -7,6 +7,8 @@ const LaunchDetails = ({
   flightNumber,
   dateLocal,
   details,
+  rocketName,
+  launchpadFullName,
 }: launchDetailsProps) => {
   const launchDetailsAnim = {
     hidden: {
@@ -36,8 +38,8 @@ const LaunchDetails = ({
       <div className={styles.ValuesContainer}>
         <h3>{flightNumber}</h3>
         <h3>{formattedDate.toUTCString()}</h3>
-        <h3>Falcon 9</h3>
-        <h3>Vandenberg Air Force Base Space Launch Complex 4E</h3>
+        <h3>{rocketName}</h3>
+        <h3>{launchpadFullName}</h3>
         <h3>{details}</h3>
       </div>
     </motion.div>
@@ -48,6 +50,8 @@ type launchDetailsProps = {
   flightNumber: Number;
   dateLocal: string;
   details: string;
+  rocketName: string;
+  launchpadFullName: string;
 };
 
 export default LaunchDetails;
