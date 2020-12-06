@@ -3,15 +3,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion, AnimatePresence } from "framer-motion";
 import Axios from "axios";
 
+//COMPONENTS
 import Countdown from "./Countdown/Countdown";
 import RecentLaunches from "./RecentLaunches/RecentLaunches";
 import UpcomingLaunches from "./UpcomingLaunches/UpcomingLaunches";
 import LaunchDetails from "./LaunchDetails/LaunchDetails";
 
+//STYLES
 import styles from "./Home.module.scss";
 
+//MODELS
 import Launch_model from "../../Models/Launch/Launch_model";
 import QueryResult_model from "../../Models/QueryResult/QueryResult_model";
+
+//QUERIES
+import NextLaunchQuery from "../../Queries/NextLaunchQuery";
+import RecentLaunchesQuery from "../../Queries/RecentLaunchesQuery";
+import UpcomingLaunchesQuery from "../../Queries/UpcomingLaunchesQuery";
 
 const Home = () => {
   const [showLaunchDetails, setShowLaunchDetails] = useState(false);
@@ -38,103 +46,10 @@ const Home = () => {
     },
   };
 
-  const nextLaunchQuery = {
-    query: {
-      upcoming: true,
-    },
-    options: {
-      limit: 5,
-      select: {
-        name: 1,
-        date_local: 1,
-        flight_number: 1,
-        details: 1,
-      },
-      sort: {
-        flight_number: "asc",
-      },
-      populate: [
-        {
-          path: "launchpad",
-          select: {
-            name: 1,
-            full_name: 1,
-          },
-        },
-        {
-          path: "rocket",
-          select: {
-            name: 1,
-          },
-        },
-      ],
-    },
-  };
-
-  const recentLaunchesQuery = {
-    query: {
-      date_utc: {
-        $gte: "2020-06-06T00:00:00.000Z",
-        $lte: "2020-12-06T00:00:00.000Z",
-      },
-    },
-    options: {
-      limit: 5,
-      select: {
-        name: 1,
-        date_local: 1,
-        date_utc: 1,
-        success: 1,
-        links: 1,
-      },
-      sort: {
-        flight_number: "desc",
-      },
-    },
-  };
-
-  const upcomingLaunchesQuery = {
-    query: {
-      upcoming: true,
-    },
-    options: {
-      select: {
-        name: 1,
-        date_local: 1,
-        date_utc: 1,
-        flight_number: 1,
-      },
-      sort: {
-        flight_number: "asc",
-      },
-      populate: [
-        {
-          path: "launchpad",
-          select: {
-            name: 1,
-            full_name: 1,
-          },
-        },
-        {
-          path: "rocket",
-          select: {
-            name: 1,
-          },
-        },
-        {
-          path: "payloads",
-          select: {
-            customers: 1,
-          },
-        },
-      ],
-    },
-  };
-
   useEffect(() => {
     Axios.post<QueryResult_model<Launch_model>>(
       "https://api.spacexdata.com/v4/launches/query",
-      nextLaunchQuery
+      NextLaunchQuery
     )
       .then((res) => {
         setNextLaunch(res.data);
@@ -143,7 +58,7 @@ const Home = () => {
 
     Axios.post<QueryResult_model<Launch_model>>(
       "https://api.spacexdata.com/v4/launches/query",
-      recentLaunchesQuery
+      RecentLaunchesQuery
     )
       .then((res) => {
         setRecentLaunches(res.data);
@@ -152,7 +67,7 @@ const Home = () => {
 
     Axios.post<QueryResult_model<Launch_model>>(
       "https://api.spacexdata.com/v4/launches/query",
-      upcomingLaunchesQuery
+      UpcomingLaunchesQuery
     )
       .then((res) => {
         console.log(res.data);
