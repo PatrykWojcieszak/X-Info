@@ -7,8 +7,8 @@ interface ILaunchpad {
   timezone: string;
   latitude: string;
   longitude: string;
-  launch_attempts: Number;
-  launch_success: Number;
+  launch_attempts: number;
+  launch_success: number;
   rockets: [];
   launches: [];
 }

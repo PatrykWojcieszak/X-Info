@@ -1,6 +1,6 @@
 interface IFailure {
-  time: Number;
-  altitude: Number;
+  time: number;
+  altitude: number;
   reason: string;
 }
 

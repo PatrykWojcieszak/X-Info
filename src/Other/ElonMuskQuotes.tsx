@@ -27,6 +27,7 @@ const Quotes = [
   "Disruptive technology where you really have a big technology discontinuity... tends to come from new companies.",
   "As much as possible, avoid hiring MBAs. MBA programs don't teach people how to create companies.",
   "Don't delude yourself into thinking something's working when it's not, or you're gonna get fixated on a bad solution.",
+  "If humanity doesn't land on Mars in my lifetime, I would be very disappointed.",
 ];
 
 const randomQuote = () => {

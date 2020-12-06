@@ -2,89 +2,89 @@ interface IRocket {
   name: string;
   type: string;
   active: boolean;
-  stages: Number;
-  boosters: Number;
-  cost_per_launch: Number;
-  success_rate_pct: Number;
+  stages: number;
+  boosters: number;
+  cost_per_launch: number;
+  success_rate_pct: number;
   first_flight: string;
   country: string;
   company: string;
   height: {
-    meters: Number;
-    feet: Number;
+    meters: number;
+    feet: number;
   };
   diameter: {
-    meters: Number;
-    feet: Number;
+    meters: number;
+    feet: number;
   };
   mass: {
-    kg: Number;
-    lb: Number;
+    kg: number;
+    lb: number;
   };
   payload_weights: {
     type: [];
   };
   first_stage: {
     reusable: boolean;
-    engines: Number;
-    fuel_amount_tons: Number;
-    burn_time_sec: Number;
+    engines: number;
+    fuel_amount_tons: number;
+    burn_time_sec: number;
     thrust_sea_lever: {
-      kN: Number;
-      lbf: Number;
+      kN: number;
+      lbf: number;
     };
     thrust_vacuum: {
-      kN: Number;
-      lbf: Number;
+      kN: number;
+      lbf: number;
     };
   };
   second_stage: {
     reusable: boolean;
-    engines: Number;
-    fuel_amount_tons: Number;
-    burn_time_sec: Number;
+    engines: number;
+    fuel_amount_tons: number;
+    burn_time_sec: number;
     thrust: {
-      kN: Number;
-      lbf: Number;
+      kN: number;
+      lbf: number;
     };
     payloads: {
       option_1: string;
       composite_fairing: {
         height: {
-          meters: Number;
-          feet: Number;
+          meters: number;
+          feet: number;
         };
         diameter: {
-          meters: Number;
-          feet: Number;
+          meters: number;
+          feet: number;
         };
       };
     };
   };
   engines: {
-    number: Number;
+    number: number;
     type: string;
     version: string;
     layout: string;
     isp: {
-      sea_level: Number;
-      vacuum: Number;
+      sea_level: number;
+      vacuum: number;
     };
-    engine_loss_max: Number;
+    engine_loss_max: number;
     propellant_1: string;
     propellant_2: string;
     thrust_sea_level: {
-      kN: Number;
-      lbf: Number;
+      kN: number;
+      lbf: number;
     };
     thrust_vacuum: {
-      kN: Number;
-      lbf: Number;
+      kN: number;
+      lbf: number;
     };
-    thrust_to_weight: Number;
+    thrust_to_weight: number;
   };
   landing_legs: {
-    number: Number;
+    number: number;
     material: {};
   };
   flickr_images: [];

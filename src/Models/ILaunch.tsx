@@ -5,18 +5,18 @@ import IRocket from "./IRocket";
 
 interface ILaunch {
   id: string;
-  flight: Number;
+  flight: number;
   name: string;
   date_utc: string;
-  date_unix: Number;
+  date_unix: number;
   date_local: string;
-  flight_number: Number;
+  flight_number: number;
   date_precision: string;
   static_fire_date_utc: string;
   static_fire_date_unix: string;
   tdb: boolean;
   net: boolean;
-  window: Number;
+  window: number;
   rocket: IRocket;
   success: boolean;
   failures: IFailure[];
@@ -36,7 +36,7 @@ interface ILaunch {
   cores: [
     {
       core: string;
-      flight: Number;
+      flight: number;
       gridfins: boolean;
       legs: boolean;
       reused: boolean;

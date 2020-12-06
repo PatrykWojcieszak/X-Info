@@ -1,15 +1,15 @@
 interface IQueryResult<T> {
   docs: T[];
-  totalDocs: Number;
-  offset: Number;
-  limit: Number;
-  totalPages: Number;
-  page: Number;
-  pagingCounter: Number;
+  totalDocs: number;
+  offset: number;
+  limit: number;
+  totalPages: number;
+  page: number;
+  pagingCounter: number;
   hasPrevPage: boolean;
   hasNextPage: boolean;
-  prevPage: Number;
-  nextPage: Number;
+  prevPage: number;
+  nextPage: number;
 }
 
 export default IQueryResult;

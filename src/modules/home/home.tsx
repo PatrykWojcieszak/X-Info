@@ -37,8 +37,6 @@ const Home = () => {
     IQueryResult<ILaunch> | undefined
   >(undefined);
 
-  console.log(RandomQuote());
-
   const topContentAnim = {
     hidden: {
       opacity: 0,
