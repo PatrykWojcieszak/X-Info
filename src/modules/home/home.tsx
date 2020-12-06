@@ -21,6 +21,9 @@ import NextLaunchQuery from "../../Queries/NextLaunchQuery";
 import RecentLaunchesQuery from "../../Queries/RecentLaunchesQuery";
 import UpcomingLaunchesQuery from "../../Queries/UpcomingLaunchesQuery";
 
+//OTHER
+import RandomQuote from "../../Other/ElonMuskQuotes";
+
 const Home = () => {
   const [showLaunchDetails, setShowLaunchDetails] = useState(false);
 
@@ -33,6 +36,8 @@ const Home = () => {
   const [upcomingLaunches, setUpcomingLaunches] = useState<
     IQueryResult<ILaunch> | undefined
   >(undefined);
+
+  console.log(RandomQuote());
 
   const topContentAnim = {
     hidden: {
@@ -111,6 +116,11 @@ const Home = () => {
                   />
                 ) : null}
               </AnimatePresence>
+              <div className={styles.QuoteContainer}>
+                <h2>
+                  {RandomQuote()} - <span>Elon Musk</span>
+                </h2>
+              </div>
             </motion.div>
           </div>
           <div className={styles.Home__Content}>

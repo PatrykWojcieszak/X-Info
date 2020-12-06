@@ -61,6 +61,7 @@ const Launches = () => {
               patchImg={latestLaunch.links.patch.small}
               success={latestLaunch.success}
               failures={latestLaunch.failures}
+              launchId={latestLaunch.id}
             />{" "}
           </>
         ) : null}

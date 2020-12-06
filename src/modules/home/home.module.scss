@@ -14,6 +14,7 @@
       flex: 2;
       @include flex-column;
       justify-content: center;
+      position: relative;
 
       .LaunchTitle {
         display: flex;
@@ -29,6 +30,28 @@
         .LaunchName {
           color: $blue;
           font-weight: normal;
+        }
+      }
+
+      .QuoteContainer {
+        border-radius: 1rem;
+        padding: 0.8rem;
+        font-size: 0.6rem;
+        text-align: center;
+        position: absolute;
+        bottom: 1rem;
+        left: 0;
+        right: 0;
+        margin: auto;
+
+        h2 {
+          font-weight: 300;
+          color: $fontPrimary;
+
+          span {
+            font-weight: 700;
+            color: $blue;
+          }
         }
       }
 

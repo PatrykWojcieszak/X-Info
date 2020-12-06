@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 //COMPONENTS
 import Button from "../Button/Button";
@@ -21,6 +22,7 @@ const LaunchExtendedInfo = ({
   patchImg,
   success,
   failures,
+  launchId,
 }: LaunchExtendedInfoProps) => {
   const dateParsed = new Date(date_utc);
 
@@ -28,7 +30,11 @@ const LaunchExtendedInfo = ({
     <div className={styles.LatestLaunch}>
       <div className={styles.LeftContainer}>
         <img src={patchImg} alt="mission patch" />
-        {showMoreDetailsButton ? <Button name="MORE DETAILS" /> : null}
+        {showMoreDetailsButton ? (
+          <Link to={`/launches/${launchId}`}>
+            <Button name="MORE DETAILS" />
+          </Link>
+        ) : null}
       </div>
       <div className={styles.RightContainer}>
         <div className={styles.MainInfoContainer}>
@@ -86,6 +92,7 @@ type LaunchExtendedInfoProps = {
   patchImg: string;
   success: boolean;
   failures: IFailure[];
+  launchId: string;
 };
 
 export default LaunchExtendedInfo;
