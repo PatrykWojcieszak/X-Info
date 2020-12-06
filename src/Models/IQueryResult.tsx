@@ -1,4 +1,4 @@
-interface QueryResult_model<T> {
+interface IQueryResult<T> {
   docs: T[];
   totalDocs: Number;
   offset: Number;
@@ -12,4 +12,4 @@ interface QueryResult_model<T> {
   nextPage: Number;
 }
 
-export default QueryResult_model;
+export default IQueryResult;

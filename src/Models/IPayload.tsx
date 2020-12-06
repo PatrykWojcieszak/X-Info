@@ -1,4 +1,4 @@
-interface Payload_model {
+interface IPayload {
   name: string;
   type: string;
   reused: boolean;
@@ -36,4 +36,4 @@ interface Payload_model {
   };
 }
 
-export default Payload_model;
+export default IPayload;

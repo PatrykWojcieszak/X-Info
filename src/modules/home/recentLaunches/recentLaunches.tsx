@@ -4,7 +4,7 @@ import Launch from "./Launch/Launch";
 import Button from "../../shared/Button/Button";
 
 import styles from "./RecentLaunches.module.scss";
-import Launch_model from "../../../Models/Launch/Launch_model";
+import Launch_model from "../../../Models/ILaunch";
 
 const RecentLaunches = ({ launches }: recentLaunchesProps) => {
   return (

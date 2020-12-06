@@ -5,7 +5,7 @@ import LaunchShortInfo from "../../shared/LaunchShortInfo/LaunchShortInfo";
 
 import styles from "./UpcomingLaunches.module.scss";
 
-import Launch_model from "../../../Models/Launch/Launch_model";
+import Launch_model from "../../../Models/ILaunch";
 
 const UpcomingLaunches = ({ launches }: upcomingLaunchesProps) => {
   return (

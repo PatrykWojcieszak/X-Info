@@ -13,8 +13,8 @@ import LaunchDetails from "./LaunchDetails/LaunchDetails";
 import styles from "./Home.module.scss";
 
 //MODELS
-import Launch_model from "../../Models/Launch/Launch_model";
-import QueryResult_model from "../../Models/QueryResult/QueryResult_model";
+import ILaunch from "../../Models/ILaunch";
+import IQueryResult from "../../Models/IQueryResult";
 
 //QUERIES
 import NextLaunchQuery from "../../Queries/NextLaunchQuery";
@@ -25,13 +25,13 @@ const Home = () => {
   const [showLaunchDetails, setShowLaunchDetails] = useState(false);
 
   const [nextLaunch, setNextLaunch] = useState<
-    QueryResult_model<Launch_model> | undefined
+    IQueryResult<ILaunch> | undefined
   >(undefined);
   const [recentLaunches, setRecentLaunches] = useState<
-    QueryResult_model<Launch_model> | undefined
+    IQueryResult<ILaunch> | undefined
   >(undefined);
   const [upcomingLaunches, setUpcomingLaunches] = useState<
-    QueryResult_model<Launch_model> | undefined
+    IQueryResult<ILaunch> | undefined
   >(undefined);
 
   const topContentAnim = {
@@ -47,7 +47,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    Axios.post<QueryResult_model<Launch_model>>(
+    Axios.post<IQueryResult<ILaunch>>(
       "https://api.spacexdata.com/v4/launches/query",
       NextLaunchQuery
     )
@@ -56,7 +56,7 @@ const Home = () => {
       })
       .catch((err) => {});
 
-    Axios.post<QueryResult_model<Launch_model>>(
+    Axios.post<IQueryResult<ILaunch>>(
       "https://api.spacexdata.com/v4/launches/query",
       RecentLaunchesQuery
     )
@@ -65,7 +65,7 @@ const Home = () => {
       })
       .catch((err) => {});
 
-    Axios.post<QueryResult_model<Launch_model>>(
+    Axios.post<IQueryResult<ILaunch>>(
       "https://api.spacexdata.com/v4/launches/query",
       UpcomingLaunchesQuery
     )

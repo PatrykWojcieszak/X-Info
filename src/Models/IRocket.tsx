@@ -1,4 +1,4 @@
-interface Rocket_model {
+interface IRocket {
   name: string;
   type: string;
   active: boolean;
@@ -92,4 +92,4 @@ interface Rocket_model {
   description: string;
 }
 
-export default Rocket_model;
+export default IRocket;

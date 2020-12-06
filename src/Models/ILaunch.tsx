@@ -1,7 +1,8 @@
-import Launchpad_model from "../Launchpad/Launchpad_model";
-import Payload_model from "../Payload/Payload_model";
-import Rocket_model from "../Rocket/Rocket_model";
-interface Launch_model {
+import ILaunchpad from "./ILaunchpad";
+import IPayload from "./IPayload";
+import IRocket from "./IRocket";
+
+interface ILaunch {
   flight: Number;
   name: string;
   date_utc: string;
@@ -14,7 +15,7 @@ interface Launch_model {
   tdb: boolean;
   net: boolean;
   window: Number;
-  rocket: Rocket_model;
+  rocket: IRocket;
   success: boolean;
   failures: [{ time: Number; altitude: Number; reason: string }];
   upcoming: boolean;
@@ -28,8 +29,8 @@ interface Launch_model {
   crew: [];
   ships: [];
   capsules: [];
-  payloads: Payload_model[];
-  launchpad: Launchpad_model;
+  payloads: IPayload[];
+  launchpad: ILaunchpad;
   cores: [
     {
       core: string;
@@ -67,4 +68,4 @@ interface Launch_model {
   auto_update: boolean;
 }
 
-export default Launch_model;
+export default ILaunch;
