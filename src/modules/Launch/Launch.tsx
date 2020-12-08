@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import LaunchExtendedInfo from "../shared/LaunchExtendedInfo/LaunchExtendedInfo";
+import { useParams } from "react-router-dom";
+import Axios from "axios";
 
+//COMPONENTS
+import LaunchExtendedInfo from "../shared/LaunchExtendedInfo/LaunchExtendedInfo";
 import InfoLine from "../shared/InfoLine/InfoLine";
 import Gallery from "../shared/Gallery/Gallery";
 import CrewPerson from "./CrewPerson/CrewPerson";
 import Ship from "./Ship/Ship";
 
+//STYLE
 import fhheavy from "../../resources/images/falconHeavy.png";
 import styles from "./Launch.module.scss";
 
+//MODELS
+import ILaunch from "../../Models/ILaunch";
+
+//QUERIES
+import LaunchQuery from "../../Queries/LaunchQuery";
+import IQueryResult from "../../Models/IQueryResult";
+
+//IMAGES
 const images = [
   "https://cdni0.trtworld.com/w960/h540/q75/76923_USASpaceX_1587156063102.jpeg",
   "https://mk0spaceflightnoa02a.kinstacdn.com/wp-content/uploads/2020/01/49399916862_cd676f67f6_o-copy.jpg",
@@ -19,9 +31,43 @@ const images = [
 ];
 
 const Launch = () => {
+  const { flight_number } = useParams();
+
+  const [launch, setLaunch] = useState<ILaunch | undefined>(undefined);
+
+  useEffect(() => {
+    const query = LaunchQuery;
+    query.query.flight_number = flight_number;
+
+    Axios.post<IQueryResult<ILaunch>>(
+      "https://api.spacexdata.com/v4/launches/query",
+      query
+    )
+      .then((res) => {
+        console.log(res.data);
+        setLaunch(res.data.docs[0]);
+      })
+      .catch((err) => {});
+  }, [flight_number]);
+
   return (
     <div className={styles.Launch}>
-      {/* <LaunchExtendedInfo showMoreDetailsButton={false} /> */}
+      {launch !== undefined ? (
+        <LaunchExtendedInfo
+          showMoreDetailsButton={false}
+          details={launch.details}
+          launchName={launch.name}
+          date_local={launch.date_local}
+          date_utc={launch.date_utc}
+          rocketName={launch.rocket.name}
+          launchSiteName={launch.launchpad.full_name}
+          flightNumber={launch.flight_number}
+          patchImg={launch.links.patch.small}
+          success={launch.success}
+          failures={launch.failures}
+          launchId={launch.id}
+        />
+      ) : null}
       <div className={styles.Row}>
         <div className={styles.Rocket}>
           <h3>FALCON HEAVY</h3>

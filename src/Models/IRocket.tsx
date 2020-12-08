@@ -1,4 +1,5 @@
 interface IRocket {
+  id: string;
   name: string;
   type: string;
   active: boolean;

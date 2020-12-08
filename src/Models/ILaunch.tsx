@@ -1,7 +1,10 @@
+import ICore from "./ICore";
+import ICrew from "./ICrew";
 import IFailure from "./IFailure";
 import ILaunchpad from "./ILaunchpad";
 import IPayload from "./IPayload";
 import IRocket from "./IRocket";
+import IShip from "./IShip";
 
 interface ILaunch {
   id: string;
@@ -28,24 +31,12 @@ interface ILaunch {
     recovered: boolean;
     ships: [];
   };
-  crew: [];
-  ships: [];
+  crew: ICrew[];
+  ships: IShip[];
   capsules: [];
   payloads: IPayload[];
   launchpad: ILaunchpad;
-  cores: [
-    {
-      core: string;
-      flight: number;
-      gridfins: boolean;
-      legs: boolean;
-      reused: boolean;
-      landing_attempt: boolean;
-      landing_success: boolean;
-      landing_type: string;
-      landpad: string;
-    }
-  ];
+  cores: ICore[];
   links: {
     patch: {
       small: string;
