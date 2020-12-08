@@ -13,6 +13,7 @@ const RecentLaunchesQuery = {
       date_utc: 1,
       success: 1,
       links: 1,
+      flight_number: 1,
     },
     sort: {
       flight_number: "desc",

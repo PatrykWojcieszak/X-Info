@@ -63,7 +63,7 @@ const Countdown = ({ dateLocal }: countdownProps) => {
           <div className={styles.Element}>
             <h2>{("0" + timer.seconds).slice(-2)}</h2>
             <h4>SECONDS</h4>
-          </div>{" "}
+          </div>
         </div>
       ) : null}
     </>

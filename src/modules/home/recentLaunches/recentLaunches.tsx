@@ -16,7 +16,7 @@ const RecentLaunches = ({ launches }: recentLaunchesProps) => {
       <div className={styles.Content}>
         {launches.map((launch, index) => (
           <Launch
-            launchId={launch.id}
+            flightNumber={launch.flight_number}
             key={index}
             name={launch.name}
             patch={launch.links.patch.small}

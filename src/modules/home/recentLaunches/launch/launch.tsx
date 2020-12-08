@@ -9,7 +9,7 @@ import Button from "../../../shared/Button/Button";
 import styles from "./Launch.module.scss";
 import noImage from "../../../../resources/images/noImage.png";
 
-const Launch = ({ launchId, name, patch, date, success }: launchProps) => {
+const Launch = ({ flightNumber, name, patch, date, success }: launchProps) => {
   const dateParsed = new Date(date);
 
   return (
@@ -23,7 +23,7 @@ const Launch = ({ launchId, name, patch, date, success }: launchProps) => {
           icon={success ? "check-circle" : "times-circle"}
         />
       </div>
-      <Link to={`/launches/${launchId}`}>
+      <Link to={`/launches/${flightNumber}`}>
         <Button name="SHOW DETAILS" />
       </Link>
     </div>
@@ -31,7 +31,7 @@ const Launch = ({ launchId, name, patch, date, success }: launchProps) => {
 };
 
 type launchProps = {
-  launchId: string;
+  flightNumber: number;
   name: string;
   patch: string;
   date: string;
