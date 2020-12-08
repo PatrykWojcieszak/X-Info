@@ -13,9 +13,16 @@
   }
 
   img {
+    border: 1px solid transparent;
     border-left: 1px solid $fontSecondary;
     border-top: 1px solid $fontSecondary;
+    transition: all 0.4s ease-in-out;
     border-top-left-radius: 0.5rem;
+
+    &:hover {
+      border-radius: 0.5rem;
+      border: 1px solid $fontSecondary;
+    }
   }
 }
 
