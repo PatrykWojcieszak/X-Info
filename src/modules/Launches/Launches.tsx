@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Axios from "axios";
-import InfiniteScroll from "react-infinite-scroller";
 
 //COMPONENTS
 import Button from "../shared/Button/Button";
@@ -47,7 +46,6 @@ const Launches = () => {
     let query = PastLaunchesQuery;
 
     if (pastLaunches !== undefined) {
-      console.log(query);
       query.options.page = pastLaunches.nextPage;
     }
 
@@ -57,16 +55,15 @@ const Launches = () => {
     )
       .then((res) => {
         const nextLaunches = res.data;
+
         if (pastLaunches !== undefined) {
-          pastLaunches.docs.map((launch) => {
-            nextLaunches.docs.push(launch);
-          });
+          nextLaunches.docs = [...pastLaunches.docs, ...res.data.docs];
         }
 
         setPastLaunches(nextLaunches);
       })
       .catch((err) => {});
-  }, []);
+  }, [pastLaunches]);
 
   useEffect(() => {
     Axios.post<IQueryResult<ILaunch>>(
@@ -94,24 +91,6 @@ const Launches = () => {
 
     if (upcomingLaunches === undefined) FetchUpcomingLaunches();
   };
-
-  const pastLaunchesArr: any[] = [];
-
-  if (pastLaunches !== undefined) {
-    pastLaunches.docs.map((launch, index) =>
-      pastLaunchesArr.push(
-        <LaunchShortInfo
-          key={index}
-          launchName={launch.name}
-          launchDateUtc={launch.date_utc}
-          rocketName={launch.rocket.name}
-          launchSiteName={launch.launchpad.full_name}
-          customer={launch.payloads[0].customers[0]}
-          flightNumber={launch.flight_number}
-        />
-      )
-    );
-  }
 
   return (
     <div className={styles.Launches}>
@@ -165,22 +144,8 @@ const Launches = () => {
           : null}
 
         {pastLaunches !== undefined && showPastLaunches ? (
-          <InfiniteScroll
-            pageStart={0}
-            loadMore={FetchPastLaunches}
-            hasMore={pastLaunches.hasNextPage}
-            loader={
-              <div className="loader" key={0}>
-                Loading ...
-              </div>
-            }>
-            {pastLaunchesArr}
-          </InfiniteScroll>
-        ) : null}
-
-        {/* {pastLaunches !== undefined && showPastLaunches
-          ? 
-          pastLaunches.docs.map((launch, index) => (
+          <>
+            {pastLaunches.docs.map((launch, index) => (
               <LaunchShortInfo
                 key={index}
                 launchName={launch.name}
@@ -190,8 +155,14 @@ const Launches = () => {
                 customer={launch.payloads[0].customers[0]}
                 flightNumber={launch.flight_number}
               />
-            ))
-          : null} */}
+            ))}
+            {pastLaunches.nextPage !== null ? (
+              <div style={{ marginTop: "2rem" }}>
+                <Button name="LOAD MORE" clicked={FetchPastLaunches} />
+              </div>
+            ) : null}
+          </>
+        ) : null}
       </div>
     </div>
   );
