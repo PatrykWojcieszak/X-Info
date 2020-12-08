@@ -3,10 +3,16 @@
 .Countdown {
   @include flex-center;
   justify-content: space-between;
+  width: 100%;
+
+  .Time {
+  }
+
+  .Labels {
+  }
 
   .Element {
     @include flex-center-column;
-    width: 120px;
 
     h2 {
       font-family: "Orbitron";
@@ -21,9 +27,13 @@
   }
 
   .Colon {
+    @include flex-center;
     font-size: 6rem;
     color: $blue;
   }
+}
+
+.Countdown > * {
 }
 
 @include desktop {

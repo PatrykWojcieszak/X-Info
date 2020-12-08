@@ -45,7 +45,19 @@ const Countdown = ({ dateLocal }: countdownProps) => {
     <>
       {timer !== undefined ? (
         <div className={styles.Countdown}>
-          <div className={styles.Element}>
+          <div className={styles.Time}>
+            <h2>{timer.days}</h2>
+            <h2>{timer.hours}</h2>
+            <h2>{timer.minutes}</h2>
+            <h2>{timer.seconds}</h2>
+          </div>
+          <div className={styles.Labels}>
+            <h4>DAYS</h4>
+            <h4>HOURS</h4>
+            <h4>MINUTES</h4>
+            <h4>SECONDS</h4>
+          </div>
+          {/* <div className={styles.Element}>
             <h2>{timer.days}</h2>
             <h4>DAYS</h4>
           </div>
@@ -63,7 +75,7 @@ const Countdown = ({ dateLocal }: countdownProps) => {
           <div className={styles.Element}>
             <h2>{timer.seconds}</h2>
             <h4>SECONDS</h4>
-          </div>
+          </div> */}
         </div>
       ) : null}
     </>

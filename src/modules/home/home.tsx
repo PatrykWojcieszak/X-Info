@@ -81,8 +81,8 @@ const Home = () => {
 
   return (
     <>
-      {nextLaunch !== undefined ? (
-        <div className={styles.Home}>
+      <div className={styles.Home}>
+        {nextLaunch !== undefined ? (
           <div className={styles.Top}>
             <motion.div
               variants={topContentAnim}
@@ -121,18 +121,16 @@ const Home = () => {
               </div>
             </motion.div>
           </div>
-          <div className={styles.Home__Content}>
-            {recentLaunches !== undefined ? (
-              <RecentLaunches launches={recentLaunches.docs} />
-            ) : null}
-            {upcomingLaunches !== undefined ? (
-              <UpcomingLaunches launches={upcomingLaunches.docs} />
-            ) : null}
-          </div>
+        ) : null}
+        <div className={styles.Home__Content}>
+          {recentLaunches !== undefined ? (
+            <RecentLaunches launches={recentLaunches.docs} />
+          ) : null}
+          {upcomingLaunches !== undefined ? (
+            <UpcomingLaunches launches={upcomingLaunches.docs} />
+          ) : null}
         </div>
-      ) : (
-        <p>Fetching data...</p>
-      )}
+      </div>
     </>
   );
 };
