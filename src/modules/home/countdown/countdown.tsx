@@ -45,37 +45,25 @@ const Countdown = ({ dateLocal }: countdownProps) => {
     <>
       {timer !== undefined ? (
         <div className={styles.Countdown}>
-          <div className={styles.Time}>
-            <h2>{timer.days}</h2>
-            <h2>{timer.hours}</h2>
-            <h2>{timer.minutes}</h2>
-            <h2>{timer.seconds}</h2>
-          </div>
-          <div className={styles.Labels}>
-            <h4>DAYS</h4>
-            <h4>HOURS</h4>
-            <h4>MINUTES</h4>
-            <h4>SECONDS</h4>
-          </div>
-          {/* <div className={styles.Element}>
-            <h2>{timer.days}</h2>
+          <div className={styles.Element}>
+            <h2>{("0" + timer.days).slice(-2)}</h2>
             <h4>DAYS</h4>
           </div>
           <h2 className={styles.Colon}>:</h2>
           <div className={styles.Element}>
-            <h2>{timer.hours}</h2>
+            <h2>{("0" + timer.hours).slice(-2)}</h2>
             <h4>HOURS</h4>
           </div>
           <h2 className={styles.Colon}>:</h2>
           <div className={styles.Element}>
-            <h2>{timer.minutes}</h2>
+            <h2>{("0" + timer.minutes).slice(-2)}</h2>
             <h4>MINUTES</h4>
           </div>
           <h2 className={styles.Colon}>:</h2>
           <div className={styles.Element}>
-            <h2>{timer.seconds}</h2>
+            <h2>{("0" + timer.seconds).slice(-2)}</h2>
             <h4>SECONDS</h4>
-          </div> */}
+          </div>{" "}
         </div>
       ) : null}
     </>

@@ -5,14 +5,9 @@
   justify-content: space-between;
   width: 100%;
 
-  .Time {
-  }
-
-  .Labels {
-  }
-
   .Element {
     @include flex-center-column;
+    width: 244px;
 
     h2 {
       font-family: "Orbitron";
