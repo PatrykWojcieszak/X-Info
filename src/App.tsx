@@ -15,7 +15,7 @@ import "./App.scss";
 const routes = (
   <Switch>
     <Route path="/home" exact render={() => <Home />} />
-    <Route path="/launches" exact render={() => <Launches />} />
+    <Route path="/launches/:launchType" exact render={() => <Launches />} />
     <Route path="/launches/:flight_number" exact render={() => <Launch />} />
     <Route path="/vehicles" exact render={() => <Vehicles />} />
     <Route path="/vehicles/:vehicle" exact render={() => <Rocket />} />

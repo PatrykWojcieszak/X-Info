@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import Launch from "./Launch/Launch";
 import Button from "../../shared/Button/Button";
@@ -11,7 +12,9 @@ const RecentLaunches = ({ launches }: recentLaunchesProps) => {
     <div className={styles.RecentLaunches}>
       <div className={styles.Top}>
         <h2>RECENT LAUNCHES</h2>
-        <Button name="SHOW MORE" />
+        <Link to="/launches/past">
+          <Button name="SHOW MORE" />
+        </Link>
       </div>
       <div className={styles.Content}>
         {launches.map((launch, index) => (

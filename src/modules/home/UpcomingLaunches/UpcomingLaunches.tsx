@@ -1,10 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
+//COMPONENTS
 import Button from "../../shared/Button/Button";
 import LaunchShortInfo from "../../shared/LaunchShortInfo/LaunchShortInfo";
 
+//STYLES
 import styles from "./UpcomingLaunches.module.scss";
 
+//MODELS
 import Launch_model from "../../../Models/ILaunch";
 
 const UpcomingLaunches = ({ launches }: upcomingLaunchesProps) => {
@@ -25,7 +29,9 @@ const UpcomingLaunches = ({ launches }: upcomingLaunchesProps) => {
         />
       ))}
       <div className={styles.ButtonWrapper}>
-        <Button name="SHOW ALL" />
+        <Link to="/launches/upcoming">
+          <Button name="SHOW ALL" />
+        </Link>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Axios from "axios";
+import { useParams } from "react-router-dom";
 
 //COMPONENTS
 import Button from "../shared/Button/Button";
@@ -30,6 +31,8 @@ const Launches = () => {
   const [pastLaunches, setPastLaunches] = useState<
     IQueryResult<ILaunch> | undefined
   >(undefined);
+
+  const { launchType } = useParams();
 
   const FetchUpcomingLaunches = useCallback(() => {
     Axios.post<IQueryResult<ILaunch>>(
@@ -65,6 +68,20 @@ const Launches = () => {
       .catch((err) => {});
   }, [pastLaunches]);
 
+  const showPastLaunchesHandler = useCallback(() => {
+    setShowPastLaunches(true);
+    setShowUpcomingLaunches(false);
+
+    if (pastLaunches === undefined) FetchPastLaunches();
+  }, [pastLaunches, FetchPastLaunches]);
+
+  const showUpcomingLaunchesHandler = () => {
+    setShowPastLaunches(false);
+    setShowUpcomingLaunches(true);
+
+    if (upcomingLaunches === undefined) FetchUpcomingLaunches();
+  };
+
   useEffect(() => {
     Axios.post<IQueryResult<ILaunch>>(
       "https://api.spacexdata.com/v4/launches/query",
@@ -75,22 +92,9 @@ const Launches = () => {
       })
       .catch((err) => {});
 
+    if (launchType === "past") showPastLaunchesHandler();
     FetchUpcomingLaunches();
-  }, [FetchUpcomingLaunches]);
-
-  const showPastLaunchesHandler = () => {
-    setShowPastLaunches(true);
-    setShowUpcomingLaunches(false);
-
-    if (pastLaunches === undefined) FetchPastLaunches();
-  };
-
-  const showUpcomingLaunchesHandler = () => {
-    setShowPastLaunches(false);
-    setShowUpcomingLaunches(true);
-
-    if (upcomingLaunches === undefined) FetchUpcomingLaunches();
-  };
+  }, [FetchUpcomingLaunches, FetchPastLaunches, launchType]);
 
   return (
     <div className={styles.Launches}>
