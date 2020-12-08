@@ -1,9 +1,12 @@
 import React from "react";
 
+//COMPONENTS
 import VehicleRocket from "./VehicleRocket/VehicleRocket";
 
+//STYLES
 import styles from "./Vehicles.module.scss";
 
+//IMAGES
 import falcon1 from "../../resources/images/f1.png";
 import falcon9 from "../../resources/images/f9.png";
 import falconHeavy from "../../resources/images/fh2.png";
@@ -21,10 +24,14 @@ const Vehicles = () => {
         </h4>
       </div>
 
-      <VehicleRocket name="Falcon 1" img={falcon1} />
-      <VehicleRocket name="Falcon 9" img={falcon9} />
-      <VehicleRocket name="Falcon Heavy" img={falconHeavy} />
-      <VehicleRocket name="Starship" img={starship} />
+      <VehicleRocket name="Falcon 1" img={falcon1} link="Falcon 1" />
+      <VehicleRocket name="Falcon 9" img={falcon9} link="Falcon 9" />
+      <VehicleRocket
+        name="Falcon Heavy"
+        img={falconHeavy}
+        link="Falcon Heavy"
+      />
+      <VehicleRocket name="Starship" img={starship} link="Starship" />
     </div>
   );
 };

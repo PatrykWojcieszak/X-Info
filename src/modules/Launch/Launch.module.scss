@@ -17,6 +17,8 @@
       transition: all 0.4s ease-in-out;
       border: 1px solid transparent;
       border-radius: 0.8rem;
+      max-width: 163px;
+      min-width: 163px;
 
       &:hover {
         border: 1px solid $fontSecondary;
@@ -78,41 +80,11 @@
     }
   }
 
-  .SocialsContainer {
+  .MediaContainer {
     @include flex-center;
     flex-wrap: wrap;
     justify-content: space-evenly;
     margin-bottom: 3rem;
-
-    .Icon {
-      @include flex-center-column;
-      cursor: pointer;
-      transition: all 0.4s ease-in-out;
-      padding: 0.6rem;
-      box-sizing: border-box;
-      border-radius: 0.7rem;
-      min-width: 150px;
-
-      svg {
-        color: $blue;
-        font-size: 3rem;
-      }
-
-      h4 {
-        margin-top: 1.2rem;
-        font-weight: 100;
-        color: $fontSecondary;
-      }
-
-      &:hover {
-        background-color: $blue;
-
-        svg,
-        h4 {
-          color: $fontPrimary;
-        }
-      }
-    }
   }
 
   .YoutubeContainer {

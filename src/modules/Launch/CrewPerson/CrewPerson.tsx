@@ -1,16 +1,21 @@
 import React from "react";
 
 import styles from "./CrewPerson.module.scss";
-import crewPersnImg from "../../../resources/images/crewPerson.jpg";
 
-const CrewPerson = () => {
+const CrewPerson = ({ name, img, agency }: crewPersonProps) => {
   return (
     <div className={styles.CrewPerson}>
-      <img src={crewPersnImg} alt="astronaut" />
-      <h3 className={styles.Name}>Soichi Nogouchi</h3>
-      <h3 className={styles.Agency}>NASA/JAXA</h3>
+      <img src={img} alt="astronaut" />
+      <h3 className={styles.Name}>{name}</h3>
+      <h3 className={styles.Agency}>{agency}</h3>
     </div>
   );
+};
+
+type crewPersonProps = {
+  name: string;
+  img: string;
+  agency: string;
 };
 
 export default CrewPerson;

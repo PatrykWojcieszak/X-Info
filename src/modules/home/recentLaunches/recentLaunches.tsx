@@ -4,8 +4,9 @@ import Launch from "./Launch/Launch";
 import Button from "../../shared/Button/Button";
 
 import styles from "./RecentLaunches.module.scss";
+import Launch_model from "../../../Models/ILaunch";
 
-const RecentLaunches = () => {
+const RecentLaunches = ({ launches }: recentLaunchesProps) => {
   return (
     <div className={styles.RecentLaunches}>
       <div className={styles.Top}>
@@ -13,14 +14,23 @@ const RecentLaunches = () => {
         <Button name="SHOW MORE" />
       </div>
       <div className={styles.Content}>
-        <Launch />
-        <Launch />
-        <Launch />
-        <Launch />
-        <Launch />
+        {launches.map((launch, index) => (
+          <Launch
+            launchId={launch.id}
+            key={index}
+            name={launch.name}
+            patch={launch.links.patch.small}
+            date={launch.date_local}
+            success={launch.success}
+          />
+        ))}
       </div>
     </div>
   );
+};
+
+type recentLaunchesProps = {
+  launches: Launch_model[];
 };
 
 export default RecentLaunches;

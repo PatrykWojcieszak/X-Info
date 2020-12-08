@@ -16,6 +16,7 @@
     .Name_Date {
       @include flex-column;
       align-items: flex-start;
+      min-width: 40%;
 
       h2 {
         color: $blue;

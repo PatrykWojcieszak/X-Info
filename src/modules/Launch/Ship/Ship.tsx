@@ -1,17 +1,21 @@
 import React from "react";
 
 import styles from "./Ship.module.scss";
-import shipImage from "../../../resources/images/ship.jpg";
 
-const Ship = () => {
+const Ship = ({ name, img }: shipProps) => {
   return (
     <div className={styles.Ship}>
-      <img src={shipImage} alt="ship" />
+      <img src={img} alt="ship" />
       <h3>
-        NAME: <span>Just Read The Instructions 2</span>
+        NAME: <span>{name}</span>
       </h3>
     </div>
   );
+};
+
+type shipProps = {
+  name: string;
+  img: string;
 };
 
 export default Ship;

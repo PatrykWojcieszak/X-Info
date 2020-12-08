@@ -1,30 +1,46 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-import styles from "./LaunchExtendedInfo.module.scss";
-import patch from "../../../resources/images/patch.png";
+//COMPONENTS
 import Button from "../Button/Button";
+
+//STYLES
+import styles from "./LaunchExtendedInfo.module.scss";
+
+//MODELS
+import IFailure from "../../../Models/IFailure";
 
 const LaunchExtendedInfo = ({
   showMoreDetailsButton,
+  details,
+  launchName,
+  date_utc,
+  date_local,
+  rocketName,
+  launchSiteName,
+  flightNumber,
+  patchImg,
+  success,
+  failures,
+  launchId,
 }: LaunchExtendedInfoProps) => {
+  const dateParsed = new Date(date_utc);
+
   return (
     <div className={styles.LatestLaunch}>
       <div className={styles.LeftContainer}>
-        <img src={patch} alt="mission patch" />
-        {showMoreDetailsButton ? <Button name="MORE DETAILS" /> : null}
+        <img src={patchImg} alt="mission patch" />
+        {showMoreDetailsButton ? (
+          <Link to={`/launches/${flightNumber}`}>
+            <Button name="MORE DETAILS" />
+          </Link>
+        ) : null}
       </div>
       <div className={styles.RightContainer}>
         <div className={styles.MainInfoContainer}>
-          <h2>Sentinel-6 Michael Freilich</h2>
-          <p>
-            SpaceX will launch GPS Block III Space Vehicle 04 from SLC-40, Cape
-            Canaveral AFS aboard a Falcon 9. GPS III is owned and operated by
-            the US Air Force and produced by Lockheed Martin. This will be the
-            fourth GPS III satellite launched and the third launched by SpaceX.
-            The satellite will be delivered into a MEO transfer orbit. The
-            booster for this mission will land on an ASDS.
-          </p>
-          <h4 className={styles.LaunchNumber}>#112</h4>
+          <h2>{launchName}</h2>
+          <p>{details} </p>
+          <h4 className={styles.LaunchNumber}>#{flightNumber}</h4>
           <div className={styles.DetailsWrapper}>
             <div className={styles.TitlesContainer}>
               <h4>LAUNCH SITE:</h4>
@@ -33,30 +49,32 @@ const LaunchExtendedInfo = ({
               <h4>LAUNCH:</h4>
             </div>
             <div className={styles.ValuesContainer}>
-              <h4>Kennedy Space Center Historic Launch Complex 39A</h4>
-              <h4>Falcon 9</h4>
-              <h4>11.21.2020</h4>
-              <h4 style={{ color: true ? "#4BB543" : "#FA113D" }}>
-                SUCCESSFUL
+              <h4>{launchSiteName}</h4>
+              <h4>{rocketName}</h4>
+              <h4>{dateParsed.toDateString()}</h4>
+              <h4 style={{ color: success ? "#4BB543" : "#FA113D" }}>
+                {success ? "SUCCESSFUL" : "FAILURE"}
               </h4>
             </div>
           </div>
         </div>
-        <div className={styles.FailureContainer}>
-          <p>
-            The rocket and Amos-6 payload were lost in a launch pad explosion on
-            September 1, 2016 during propellant fill prior to a static fire
-            test. The pad was clear of personnel and there were no injuries.
-          </p>
-          <h4>FAILURES:</h4>
-          <ul>
-            <li>
-              buckled liner in several of the COPV tanks, causing perforations
-              that allowed liquid and/or solid oxygen to accumulate underneath
-              the lining, which was ignited by friction.
-            </li>
-          </ul>
-        </div>
+        {success ? null : (
+          <div className={styles.FailureContainer}>
+            <p>
+              The rocket and Amos-6 payload were lost in a launch pad explosion
+              on September 1, 2016 during propellant fill prior to a static fire
+              test. The pad was clear of personnel and there were no injuries.
+            </p>
+            <h4>FAILURES:</h4>
+            <ul>
+              <li>
+                buckled liner in several of the COPV tanks, causing perforations
+                that allowed liquid and/or solid oxygen to accumulate underneath
+                the lining, which was ignited by friction.
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -64,6 +82,17 @@ const LaunchExtendedInfo = ({
 
 type LaunchExtendedInfoProps = {
   showMoreDetailsButton: boolean;
+  details: string;
+  launchName: string;
+  date_utc: string;
+  date_local: string;
+  rocketName: string;
+  launchSiteName: string;
+  flightNumber: Number;
+  patchImg: string;
+  success: boolean;
+  failures: IFailure[];
+  launchId: string;
 };
 
 export default LaunchExtendedInfo;

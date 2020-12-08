@@ -10,7 +10,7 @@
   border-bottom: 1px solid $fontPrimary;
 
   .Title {
-    color: $fontPrimary;
+    color: $fontPrimary !important;
     text-transform: uppercase;
   }
 
