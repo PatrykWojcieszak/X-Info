@@ -12,6 +12,9 @@ import Ship from "./Ship/Ship";
 
 //STYLE
 import fhheavy from "../../resources/images/falconHeavy.png";
+import falcon1 from "../../resources/images/f1.png";
+import starship from "../../resources/images/st.png";
+import falcon9 from "../../resources/images/falcon9.png";
 import styles from "./Launch.module.scss";
 
 //MODELS
@@ -20,6 +23,7 @@ import ILaunch from "../../Models/ILaunch";
 //QUERIES
 import LaunchQuery from "../../Queries/LaunchQuery";
 import IQueryResult from "../../Models/IQueryResult";
+import LinkBtn from "./LinkBtn/LinkBtn";
 
 //IMAGES
 const images = [
@@ -50,6 +54,53 @@ const Launch = () => {
       .catch((err) => {});
   }, [flight_number]);
 
+  //ROCKET IMAGE
+  let rocketImg = <img src={falcon9} alt="Falcon 9" />;
+
+  if (launch?.rocket.name === "Falcon 1")
+    rocketImg = <img src={falcon1} alt="Falcon 1" />;
+  else if (launch?.rocket.name === "Falcon 9")
+    rocketImg = <img src={falcon9} alt="Falcon 9" />;
+  else if (launch?.rocket.name === "Falcon Heavy")
+    rocketImg = <img src={fhheavy} alt="Falcon Heavy" />;
+  else if (launch?.rocket.name === "Starship")
+    rocketImg = <img src={starship} alt="Starship" />;
+
+  //CREW COMPONENTS
+  let crew = <></>;
+  if (launch !== undefined && launch.crew.length > 0) {
+    crew = (
+      <div className={styles.AdditionalInfo}>
+        <h2>CREW</h2>
+        <div className={styles.AdditionalInfo__Content}>
+          {launch.crew.map((crew, index) => (
+            <CrewPerson
+              key={index}
+              name={crew.name}
+              img={crew.image}
+              agency={crew.agency}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  //SHIP COMPONENTS
+  let ship = <></>;
+  if (launch !== undefined && launch.ships.length > 0) {
+    ship = (
+      <div className={styles.AdditionalInfo}>
+        <h2>USED SHIPS</h2>
+        <div className={styles.AdditionalInfo__Content}>
+          {launch.ships.map((ship, index) => (
+            <Ship key={index} name={ship.name} img={ship.image} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.Launch}>
       {launch !== undefined ? (
@@ -70,8 +121,8 @@ const Launch = () => {
       ) : null}
       <div className={styles.Row}>
         <div className={styles.Rocket}>
-          <h3>FALCON HEAVY</h3>
-          <img src={fhheavy} alt="rocket" />
+          <h3>{launch?.rocket.name}</h3>
+          {rocketImg}
         </div>
         <div className={styles.InfoContainer}>
           <div className={styles.InfoWrapper}>
@@ -92,59 +143,98 @@ const Launch = () => {
           </div>
         </div>
       </div>
-      <div className={styles.AdditionalInfo}>
-        <h2>CREW</h2>
-        <div className={styles.AdditionalInfo__Content}>
-          <CrewPerson />
-          <CrewPerson />
-          <CrewPerson />
-          <CrewPerson />
-        </div>
-      </div>
-      <div className={styles.AdditionalInfo}>
-        <h2>USED SHIPS</h2>
-        <div className={styles.AdditionalInfo__Content}>
-          <Ship />
-          <Ship />
-          <Ship />
-        </div>
-      </div>
+      {crew}
+      {ship}
       <div className={styles.YoutubeContainer}>
         <iframe
           title="spacex video"
           width="560"
           height="315"
-          src="https://www.youtube.com/embed/J442-ti-Dhg"
+          src={`https://www.youtube.com/embed/${launch?.links.youtube_id}`}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen></iframe>
       </div>
       <Gallery images={images} />
       <div className={styles.SocialsContainer}>
-        <div className={styles.Icon}>
+        {launch?.links.reddit.campaign !== null ? (
+          <LinkBtn
+            name="CAMPAIGN"
+            icon="reddit-alien"
+            brand
+            link={launch?.links.reddit.campaign}
+          />
+        ) : null}
+
+        {launch?.links.reddit.launch !== null ? (
+          <LinkBtn
+            name="LAUNCH"
+            icon="reddit-alien"
+            brand
+            link={launch?.links.reddit.launch}
+          />
+        ) : null}
+
+        {launch?.links.reddit.media !== null ? (
+          <LinkBtn
+            name="MEDIA"
+            icon="reddit-alien"
+            brand
+            link={launch?.links.reddit.media}
+          />
+        ) : null}
+
+        {launch?.links.wikipedia !== null ? (
+          <LinkBtn
+            name="WIKIPEDIA"
+            icon="wikipedia-w"
+            brand
+            link={launch?.links.wikipedia}
+          />
+        ) : null}
+
+        {launch?.links.article !== null ? (
+          <LinkBtn
+            name="ARTICLE"
+            icon="file-alt"
+            brand={false}
+            link={launch?.links.article}
+          />
+        ) : null}
+
+        {launch?.links.presskit !== null ? (
+          <LinkBtn
+            name="PRESS KIT"
+            icon="newspaper"
+            brand={false}
+            link={launch?.links.presskit}
+          />
+        ) : null}
+
+        {/* <div className={styles.Icon}>
           <FontAwesomeIcon icon={["fab", "reddit-alien"]} />
           <h4>CAMPAIGN</h4>
         </div>
         <div className={styles.Icon}>
           <FontAwesomeIcon icon={["fab", "reddit-alien"]} />
           <h4>LAUNCH</h4>
-        </div>
-        <div className={styles.Icon}>
+        </div> */}
+        {/* <div className={styles.Icon}>
           <FontAwesomeIcon icon={["fab", "reddit-alien"]} />
           <h4>MEDIA</h4>
-        </div>
-        <div className={styles.Icon}>
+        </div> */}
+        {/* <div className={styles.Icon}>
           <FontAwesomeIcon icon={["fab", "wikipedia-w"]} />
           <h4>WIKIPEDIA</h4>
-        </div>
-        <div className={styles.Icon}>
+        </div> */}
+        {/* <div className={styles.Icon}>
           <FontAwesomeIcon icon="file-alt" />
           <h4>ARTICLE</h4>
         </div>
         <div className={styles.Icon}>
           <FontAwesomeIcon icon="newspaper" />
           <h4>PRESS KIT</h4>
-        </div>
+        </div> */}
       </div>
     </div>
   );
