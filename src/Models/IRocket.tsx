@@ -1,3 +1,5 @@
+import IPayloadWeights from "./IPayloadWeights";
+
 interface IRocket {
   id: string;
   name: string;
@@ -22,15 +24,13 @@ interface IRocket {
     kg: number;
     lb: number;
   };
-  payload_weights: {
-    type: [];
-  };
+  payload_weights: IPayloadWeights[];
   first_stage: {
     reusable: boolean;
     engines: number;
     fuel_amount_tons: number;
     burn_time_sec: number;
-    thrust_sea_lever: {
+    thrust_sea_level: {
       kN: number;
       lbf: number;
     };

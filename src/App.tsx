@@ -18,7 +18,7 @@ const routes = (
     <Route path="/launches" exact render={() => <Launches />} />
     <Route path="/launches/:flight_number" exact render={() => <Launch />} />
     <Route path="/vehicles" exact render={() => <Vehicles />} />
-    <Route path="/vehicles/falcon-heavy" exact render={() => <Rocket />} />
+    <Route path="/vehicles/:vehicle" exact render={() => <Rocket />} />
     <Route path="/about" exact render={() => <About />} />
     <Redirect to="/home" />
   </Switch>

@@ -2,20 +2,6 @@
 
 .Rocket {
   .Top {
-    background: rgba(0, 0, 0, 0.6) url("../../resources/images/fheavy_bg2.jpg");
-    background-blend-mode: darken;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    height: 100vh;
-    position: relative;
-
-    // img {
-    //   height: 100%;
-    //   width: 100%;
-    //   object-fit: cover;
-    // }
-
     .HeroText {
       // background-color: rgba($color: #000000, $alpha: 0.4);
       @include flex-center-column;
@@ -28,6 +14,7 @@
 
       h2 {
         font-size: 5rem;
+        text-transform: uppercase;
       }
 
       h2,
@@ -48,7 +35,7 @@
   .Content {
     @include flex-center;
     margin-top: 2rem;
-    padding: 0 25rem;
+    padding: 0 24rem;
     align-items: flex-start;
 
     .Rocket {
@@ -85,13 +72,25 @@
           margin-bottom: 1.5rem;
         }
 
-        .Details {
-          @include flex-center-column;
-          justify-content: flex-start;
+        .DetailsContainer {
+          position: relative;
           width: 100%;
+
+          .Details {
+            @include flex-center-column;
+            justify-content: flex-start;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
         }
       }
     }
+  }
+
+  .GalleryWrapper {
+    padding: 0 24rem;
   }
 }
 
@@ -142,5 +141,37 @@
         }
       }
     }
+
+    .GalleryWrapper {
+      padding: 0 1rem;
+    }
   }
+}
+
+.Falcon1,
+.Falcon9,
+.FalconHeavy,
+.Starship {
+  background-blend-mode: darken;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
+  position: relative;
+}
+
+.Falcon1 {
+  background: rgba(0, 0, 0, 0.6) url("../../resources/images/falcon1_bg.jpg");
+}
+
+.Falcon9 {
+  background: rgba(0, 0, 0, 0.6) url("../../resources/images/falcon9_bg.jpg");
+}
+
+.FalconHeavy {
+  background: rgba(0, 0, 0, 0.6) url("../../resources/images/fheavy_bg2.jpg");
+}
+
+.Starship {
+  background: rgba(0, 0, 0, 0.6) url("../../resources/images/starship_bg.jpg");
 }
