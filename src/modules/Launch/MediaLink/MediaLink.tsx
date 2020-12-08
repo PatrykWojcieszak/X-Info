@@ -4,9 +4,9 @@ import { IconName } from "@fortawesome/fontawesome-common-types";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 //STYLES
-import styles from "./LinkBtn.module.scss";
+import styles from "./MediaLink.module.scss";
 
-const LinkBtn = ({ name, icon, brand, link }: linkBtnProps) => {
+const MediaLink = ({ name, icon, brand, link }: mediaLinkProps) => {
   let faIcon = ["fas", icon] as IconProp;
 
   if (brand) faIcon = ["fab", icon] as IconProp;
@@ -21,11 +21,11 @@ const LinkBtn = ({ name, icon, brand, link }: linkBtnProps) => {
   );
 };
 
-type linkBtnProps = {
+type mediaLinkProps = {
   name: string;
   icon: IconName;
   brand: boolean;
   link?: string;
 };
 
-export default LinkBtn;
+export default MediaLink;

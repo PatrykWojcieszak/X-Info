@@ -45,7 +45,18 @@ const LaunchQuery = {
         },
       },
       "payloads",
-      "cores",
+      {
+        path: "cores",
+        populate: [
+          {
+            path: "landpad",
+            select: {
+              name: 1,
+              full_name: 1,
+            },
+          },
+        ],
+      },
     ],
   },
 };

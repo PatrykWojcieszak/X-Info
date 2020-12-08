@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 
@@ -23,16 +22,7 @@ import ILaunch from "../../Models/ILaunch";
 //QUERIES
 import LaunchQuery from "../../Queries/LaunchQuery";
 import IQueryResult from "../../Models/IQueryResult";
-import LinkBtn from "./LinkBtn/LinkBtn";
-
-//IMAGES
-const images = [
-  "https://cdni0.trtworld.com/w960/h540/q75/76923_USASpaceX_1587156063102.jpeg",
-  "https://mk0spaceflightnoa02a.kinstacdn.com/wp-content/uploads/2020/01/49399916862_cd676f67f6_o-copy.jpg",
-  "https://e3.365dm.com/20/11/768x432/skynews-spacex-falcon-9-rocket_5173738.jpg?20201116003945",
-  "https://highxtar.com/wp-content/uploads/2020/05/highxtar-spacex-elon-musk-occupy-mars2.jpg",
-  "https://www.nasa.gov/sites/default/files/thumbnails/image/crew-1_certification_feature_main.jpg",
-];
+import MediaLink from "./MediaLink/MediaLink";
 
 const Launch = () => {
   const { flight_number } = useParams();
@@ -126,20 +116,38 @@ const Launch = () => {
         </div>
         <div className={styles.InfoContainer}>
           <div className={styles.InfoWrapper}>
-            <h2>PAYLOAD #1</h2>
-            <InfoLine title="MASS" value="70 kg | 229.6 lb" />
-            <InfoLine title="MASS" value="70 kg | 229.6 lb" />
-            <InfoLine title="MASS" value="70 kg | 229.6 lb" />
-            <InfoLine title="MASS" value="70 kg | 229.6 lb" />
-            <InfoLine title="MASS" value="70 kg | 229.6 lb" />
-            <InfoLine title="MASS" value="70 kg | 229.6 lb" />
+            {launch?.payloads.map((payload, index) => (
+              <div key={index}>
+                <h2>PAYLOAD #{index + 1}</h2>
+                <InfoLine title="NAME" value={`${payload.name}`} />
+                <InfoLine title="CUSTOMER" value={`${payload.customers}`} />
+                <InfoLine
+                  title="MANUFACTURER"
+                  value={`${payload.manufacturers}`}
+                />
+                <InfoLine title="TYPE" value={`${payload.type}`} />
+                <InfoLine
+                  title="MASS"
+                  value={`${payload.mass_kg} kg | ${payload.mass_lbs} lb`}
+                />
+                <InfoLine title="ORBIT" value={`${payload.orbit}`} />
+              </div>
+            ))}
           </div>
           <div className={styles.InfoWrapper}>
-            <h2>CORE</h2>
-            <InfoLine title="MASS" value="70 kg | 229.6 lb" />
-            <InfoLine title="MASS" value="70 kg | 229.6 lb" />
-            <InfoLine title="MASS" value="70 kg | 229.6 lb" />
-            <InfoLine title="MASS" value="70 kg | 229.6 lb" />
+            {launch?.cores.map((core, index) => (
+              <div key={index}>
+                <h2>CORE #{index + 1}</h2>
+                <InfoLine
+                  title="LANDING"
+                  value={core.landing_success ? "SUCCESSFUL" : "FAILED"}
+                />
+                <InfoLine title="LANDING TYPE" value={core.landing_type} />
+                <InfoLine title="LANDING PAD" value={core.landpad.name} />
+                <InfoLine title="REUSED" value={core.reused ? "YES" : "NO"} />
+                <InfoLine title="FLIGHTS" value={`${core.flight}`} />
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -155,10 +163,12 @@ const Launch = () => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen></iframe>
       </div>
-      <Gallery images={images} />
-      <div className={styles.SocialsContainer}>
+      {launch !== undefined ? (
+        <Gallery images={launch.links.flickr.original} />
+      ) : null}
+      <div className={styles.MediaContainer}>
         {launch?.links.reddit.campaign !== null ? (
-          <LinkBtn
+          <MediaLink
             name="CAMPAIGN"
             icon="reddit-alien"
             brand
@@ -167,7 +177,7 @@ const Launch = () => {
         ) : null}
 
         {launch?.links.reddit.launch !== null ? (
-          <LinkBtn
+          <MediaLink
             name="LAUNCH"
             icon="reddit-alien"
             brand
@@ -176,7 +186,7 @@ const Launch = () => {
         ) : null}
 
         {launch?.links.reddit.media !== null ? (
-          <LinkBtn
+          <MediaLink
             name="MEDIA"
             icon="reddit-alien"
             brand
@@ -185,7 +195,7 @@ const Launch = () => {
         ) : null}
 
         {launch?.links.wikipedia !== null ? (
-          <LinkBtn
+          <MediaLink
             name="WIKIPEDIA"
             icon="wikipedia-w"
             brand
@@ -194,7 +204,7 @@ const Launch = () => {
         ) : null}
 
         {launch?.links.article !== null ? (
-          <LinkBtn
+          <MediaLink
             name="ARTICLE"
             icon="file-alt"
             brand={false}
@@ -203,38 +213,13 @@ const Launch = () => {
         ) : null}
 
         {launch?.links.presskit !== null ? (
-          <LinkBtn
+          <MediaLink
             name="PRESS KIT"
             icon="newspaper"
             brand={false}
             link={launch?.links.presskit}
           />
         ) : null}
-
-        {/* <div className={styles.Icon}>
-          <FontAwesomeIcon icon={["fab", "reddit-alien"]} />
-          <h4>CAMPAIGN</h4>
-        </div>
-        <div className={styles.Icon}>
-          <FontAwesomeIcon icon={["fab", "reddit-alien"]} />
-          <h4>LAUNCH</h4>
-        </div> */}
-        {/* <div className={styles.Icon}>
-          <FontAwesomeIcon icon={["fab", "reddit-alien"]} />
-          <h4>MEDIA</h4>
-        </div> */}
-        {/* <div className={styles.Icon}>
-          <FontAwesomeIcon icon={["fab", "wikipedia-w"]} />
-          <h4>WIKIPEDIA</h4>
-        </div> */}
-        {/* <div className={styles.Icon}>
-          <FontAwesomeIcon icon="file-alt" />
-          <h4>ARTICLE</h4>
-        </div>
-        <div className={styles.Icon}>
-          <FontAwesomeIcon icon="newspaper" />
-          <h4>PRESS KIT</h4>
-        </div> */}
       </div>
     </div>
   );
