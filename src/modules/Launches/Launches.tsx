@@ -130,18 +130,20 @@ const Launches = () => {
         ) : null}
       </div>
       <div className={styles.Content}>
-        <div className={styles.ButtonsWrapper}>
-          <Button
-            selected={showUpcomingLaunches}
-            clicked={showUpcomingLaunchesHandler}
-            name="UPCOMING LAUNCHES"
-          />
-          <Button
-            selected={showPastLaunches}
-            clicked={showPastLaunchesHandler}
-            name="PAST LAUNCHES"
-          />
-        </div>
+        {upcomingLaunches !== undefined || pastLaunches !== undefined ? (
+          <div className={styles.ButtonsWrapper}>
+            <Button
+              selected={showUpcomingLaunches}
+              clicked={showUpcomingLaunchesHandler}
+              name="UPCOMING LAUNCHES"
+            />
+            <Button
+              selected={showPastLaunches}
+              clicked={showPastLaunchesHandler}
+              name="PAST LAUNCHES"
+            />
+          </div>
+        ) : null}
 
         {upcomingLaunches !== undefined && showUpcomingLaunches
           ? upcomingLaunches.docs.map((launch, index) => (

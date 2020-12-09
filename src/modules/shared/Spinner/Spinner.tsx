@@ -4,18 +4,7 @@ import React from "react";
 import styles from "./Spinner.module.scss";
 
 const Spinner = () => {
-  return (
-    <div className={styles.idsRoller}>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  );
+  return <div className={styles.Loader}>Loading...</div>;
 };
 
 export default Spinner;

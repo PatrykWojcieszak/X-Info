@@ -3,11 +3,14 @@ export const pageVariantsAnim = {
     opacity: 0,
   },
   in: {
-    transition: { duration: 1.25 },
+    transition: { duration: 1, ease: "easeOut" },
     opacity: 1,
+    when: "beforeChildren",
+    staggerChildren: 0.2,
   },
   out: {
     opacity: 0,
+    transition: { duration: 0.25, ease: "easeOut" },
   },
 };
 
