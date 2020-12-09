@@ -24,7 +24,7 @@ import ILaunch from "../../Models/ILaunch";
 import LaunchQuery from "../../Queries/LaunchQuery";
 import IQueryResult from "../../Models/IQueryResult";
 import MediaLink from "./MediaLink/MediaLink";
-import { pageVariants } from "../../Animations/Animations_motion";
+import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 const Launch = () => {
   const { flight_number } = useParams();
@@ -98,7 +98,7 @@ const Launch = () => {
       initial="initial"
       animate="in"
       exit="out"
-      variants={pageVariants}
+      variants={pageVariantsAnim}
       className={styles.Launch}>
       {launch !== undefined ? (
         <LaunchExtendedInfo

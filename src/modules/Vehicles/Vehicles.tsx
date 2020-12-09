@@ -12,7 +12,7 @@ import falcon1 from "../../resources/images/f1.png";
 import falcon9 from "../../resources/images/f9.png";
 import falconHeavy from "../../resources/images/fh2.png";
 import starship from "../../resources/images/st.png";
-import { pageVariants } from "../../Animations/Animations_motion";
+import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 const Vehicles = () => {
   return (
@@ -20,7 +20,7 @@ const Vehicles = () => {
       initial="initial"
       animate="in"
       exit="out"
-      variants={pageVariants}
+      variants={pageVariantsAnim}
       className={styles.Vehicles}>
       <div className={styles.InfoContainer}>
         <h2>ROCKETS</h2>

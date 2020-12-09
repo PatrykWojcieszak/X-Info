@@ -22,7 +22,7 @@ import PastLaunchesQuery from "../../Queries/PastLaunchesQuery";
 import UpcomingLaunchesQuery from "../../Queries/UpcomingLaunchesQuery";
 
 //OTHER
-import { pageVariants } from "../../Animations/Animations_motion";
+import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 const Launches = () => {
   const [showPastLaunches, setShowPastLaunches] = useState(false);
@@ -106,7 +106,7 @@ const Launches = () => {
       initial="initial"
       animate="in"
       exit="out"
-      variants={pageVariants}
+      variants={pageVariantsAnim}
       className={styles.Launches}>
       <div className={styles.Latest}>
         {latestLaunch !== undefined ? (

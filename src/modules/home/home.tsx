@@ -11,6 +11,7 @@ import LaunchDetails from "./LaunchDetails/LaunchDetails";
 
 //STYLES
 import styles from "./Home.module.scss";
+import IResponseData from "../../Models/IResponseData";
 
 //MODELS
 import ILaunch from "../../Models/ILaunch";
@@ -22,8 +23,10 @@ import UpcomingLaunchesQuery from "../../Queries/UpcomingLaunchesQuery";
 
 //OTHER
 import RandomQuote from "../../Other/ElonMuskQuotes";
-import { pageVariants } from "../../Animations/Animations_motion";
-import IResponseData from "../../Models/IResponseData";
+import {
+  pageVariantsAnim,
+  bottomToTopAnim,
+} from "../../Animations/Animations_motion";
 
 const endpointURL = "https://api.spacexdata.com/v4/launches/query";
 
@@ -45,30 +48,18 @@ const Home = () => {
     UpcomingLaunchesQuery
   );
 
-  const topContentAnim = {
-    hidden: {
-      opacity: 0,
-      y: 100,
-    },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 1.25 },
-    },
-  };
-
   return (
     <>
       <motion.div
         initial="initial"
         animate="in"
         exit="out"
-        variants={pageVariants}
+        variants={pageVariantsAnim}
         className={styles.Home}>
         {nextLaunch.data.docs.length > 0 ? (
           <div className={styles.Top}>
             <motion.div
-              variants={topContentAnim}
+              variants={bottomToTopAnim}
               initial="hidden"
               animate="show"
               className={styles.Top__Content}>

@@ -23,7 +23,12 @@ import falcon9_img from "../../resources/images/falcon9.png";
 //QUERIES
 import RocketQuery from "../../Queries/RocketQuery";
 import IQueryResult from "../../Models/IQueryResult";
-import { pageVariants } from "../../Animations/Animations_motion";
+
+//OTHER
+import {
+  pageVariantsAnim,
+  rightToLeftAnim,
+} from "../../Animations/Animations_motion";
 
 const Rocket = () => {
   const [rocket, setRocket] = useState<IRocket | undefined>(undefined);
@@ -33,22 +38,6 @@ const Rocket = () => {
   const [showFirstStage, setShowFirstStage] = useState(false);
   const [showSecondStage, setShowSecondStage] = useState(false);
   const [showLandingLegs, setShowLandingLegs] = useState(false);
-
-  const detailsAnim = {
-    hidden: {
-      opacity: 0,
-      x: 100,
-    },
-    show: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.5, type: "tween" },
-    },
-    exit: {
-      opacity: 0,
-      x: -100,
-    },
-  };
 
   useEffect(() => {
     const query = RocketQuery;
@@ -115,7 +104,7 @@ const Rocket = () => {
   if (rocket !== undefined)
     overViewDetails = (
       <motion.div
-        variants={detailsAnim}
+        variants={rightToLeftAnim}
         initial="hidden"
         animate="show"
         exit="exit"
@@ -147,7 +136,7 @@ const Rocket = () => {
   if (rocket !== undefined)
     stageOneDetails = (
       <motion.div
-        variants={detailsAnim}
+        variants={rightToLeftAnim}
         initial="hidden"
         animate="show"
         exit="exit"
@@ -192,7 +181,7 @@ const Rocket = () => {
   if (rocket !== undefined)
     stageTwoDetails = (
       <motion.div
-        variants={detailsAnim}
+        variants={rightToLeftAnim}
         initial="hidden"
         animate="show"
         exit="exit"
@@ -218,7 +207,7 @@ const Rocket = () => {
   if (rocket !== undefined)
     landingLegsDetails = (
       <motion.div
-        variants={detailsAnim}
+        variants={rightToLeftAnim}
         initial="hidden"
         animate="show"
         exit="exit"
@@ -233,7 +222,7 @@ const Rocket = () => {
       initial="initial"
       animate="in"
       exit="out"
-      variants={pageVariants}
+      variants={pageVariantsAnim}
       className={styles.Rocket}>
       <div className={rocketHeroImg.join(" ")}>
         {/* <img src={falconHeavy_bg} alt="falcon heavy" /> */}
