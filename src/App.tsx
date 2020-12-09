@@ -2,16 +2,41 @@ import React, { Suspense } from "react";
 import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
-import Home from "./modules/Home/Home";
-import Launches from "./modules/Launches/Launches";
 import Nav from "./modules/shared/Nav/Nav";
 import Footer from "./modules/shared/Footer/Footer";
-import About from "./modules/About/About";
-import Vehicles from "./modules/Vehicles/Vehicles";
-import Rocket from "./modules/Rocket/Rocket";
-import Launch from "./modules/Launch/Launch";
+
+// import About from "./modules/About/About";
+// import Home from "./modules/Home/Home";
+// import Launches from "./modules/Launches/Launches";
+// import Vehicles from "./modules/Vehicles/Vehicles";
+// import Rocket from "./modules/Rocket/Rocket";
+// import Launch from "./modules/Launch/Launch";
 
 import "./App.scss";
+
+const Home = React.lazy(() => {
+  return import("./modules/Home/Home");
+});
+
+const Launches = React.lazy(() => {
+  return import("./modules/Launches/Launches");
+});
+
+const About = React.lazy(() => {
+  return import("./modules/About/About");
+});
+
+const Vehicles = React.lazy(() => {
+  return import("./modules/Vehicles/Vehicles");
+});
+
+const Rocket = React.lazy(() => {
+  return import("./modules/Rocket/Rocket");
+});
+
+const Launch = React.lazy(() => {
+  return import("./modules/Launch/Launch");
+});
 
 const routes = (
   <AnimatePresence>
