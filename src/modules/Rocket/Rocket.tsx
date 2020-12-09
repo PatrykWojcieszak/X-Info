@@ -29,6 +29,7 @@ import {
   pageVariantsAnim,
   rightToLeftAnim,
 } from "../../Animations/Animations_motion";
+import RocketQuotes from "../../Other/RocketQuotes";
 
 const Rocket = () => {
   const [rocket, setRocket] = useState<IRocket | undefined>(undefined);
@@ -81,22 +82,27 @@ const Rocket = () => {
     setShowLandingLegs(true);
   };
 
+  let rocketQuote = "";
   const rocketHeroImg = [styles.Top];
   let rocketImg = "";
 
   if (vehicle === "Falcon 1") {
     rocketHeroImg.push(styles.Falcon1);
     rocketImg = falcon1_img;
+    rocketQuote = RocketQuotes[0];
   } else if (vehicle === "Falcon 9") {
     rocketHeroImg.push(styles.Falcon9);
     rocketImg = falcon9_img;
+    rocketQuote = RocketQuotes[1];
   } else if (vehicle === "Falcon Heavy") {
     rocketHeroImg.push(styles.FalconHeavy);
     rocketImg = falconheavy_img;
+    rocketQuote = RocketQuotes[2];
   }
   if (vehicle === "Starship") {
     rocketHeroImg.push(styles.Starship);
     rocketImg = starship_img;
+    rocketQuote = RocketQuotes[3];
   }
 
   //OVERVIEW DETAILS
@@ -229,7 +235,7 @@ const Rocket = () => {
         <div className={styles.HeroText}>
           <h2>{rocket?.name}</h2>
           <h4>
-            Holy flying fuck, that thing took off! - <span>Elon Musk</span>
+            {rocketQuote} - <span>Elon Musk</span>
           </h4>
         </div>
       </div>
