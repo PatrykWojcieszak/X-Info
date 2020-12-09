@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion, AnimatePresence } from "framer-motion";
-import Axios from "axios";
+import { useFetch } from "../../Hooks/useFetch";
 
 //COMPONENTS
 import Countdown from "./Countdown/Countdown";
@@ -14,7 +14,6 @@ import styles from "./Home.module.scss";
 
 //MODELS
 import ILaunch from "../../Models/ILaunch";
-import IQueryResult from "../../Models/IQueryResult";
 
 //QUERIES
 import NextLaunchQuery from "../../Queries/NextLaunchQuery";
@@ -24,19 +23,27 @@ import UpcomingLaunchesQuery from "../../Queries/UpcomingLaunchesQuery";
 //OTHER
 import RandomQuote from "../../Other/ElonMuskQuotes";
 import { pageVariants } from "../../Animations/Animations_motion";
+import IResponseData from "../../Models/IResponseData";
+
+const endpointURL = "https://api.spacexdata.com/v4/launches/query";
 
 const Home = () => {
   const [showLaunchDetails, setShowLaunchDetails] = useState(false);
 
-  const [nextLaunch, setNextLaunch] = useState<
-    IQueryResult<ILaunch> | undefined
-  >(undefined);
-  const [recentLaunches, setRecentLaunches] = useState<
-    IQueryResult<ILaunch> | undefined
-  >(undefined);
-  const [upcomingLaunches, setUpcomingLaunches] = useState<
-    IQueryResult<ILaunch> | undefined
-  >(undefined);
+  const nextLaunch: IResponseData<ILaunch> = useFetch<ILaunch>(
+    endpointURL,
+    NextLaunchQuery
+  );
+
+  const recentLaunches: IResponseData<ILaunch> = useFetch<ILaunch>(
+    endpointURL,
+    RecentLaunchesQuery
+  );
+
+  const upcomingLaunches: IResponseData<ILaunch> = useFetch<ILaunch>(
+    endpointURL,
+    UpcomingLaunchesQuery
+  );
 
   const topContentAnim = {
     hidden: {
@@ -50,36 +57,6 @@ const Home = () => {
     },
   };
 
-  useEffect(() => {
-    Axios.post<IQueryResult<ILaunch>>(
-      "https://api.spacexdata.com/v4/launches/query",
-      NextLaunchQuery
-    )
-      .then((res) => {
-        setNextLaunch(res.data);
-      })
-      .catch((err) => {});
-
-    Axios.post<IQueryResult<ILaunch>>(
-      "https://api.spacexdata.com/v4/launches/query",
-      RecentLaunchesQuery
-    )
-      .then((res) => {
-        setRecentLaunches(res.data);
-      })
-      .catch((err) => {});
-
-    Axios.post<IQueryResult<ILaunch>>(
-      "https://api.spacexdata.com/v4/launches/query",
-      UpcomingLaunchesQuery
-    )
-      .then((res) => {
-        console.log(res.data);
-        setUpcomingLaunches(res.data);
-      })
-      .catch((err) => {});
-  }, []);
-
   return (
     <>
       <motion.div
@@ -88,7 +65,7 @@ const Home = () => {
         exit="out"
         variants={pageVariants}
         className={styles.Home}>
-        {nextLaunch !== undefined ? (
+        {nextLaunch.data.docs.length > 0 ? (
           <div className={styles.Top}>
             <motion.div
               variants={topContentAnim}
@@ -97,9 +74,11 @@ const Home = () => {
               className={styles.Top__Content}>
               <div className={styles.LaunchTitle}>
                 <h2>NEXT LAUNCH: </h2>
-                <h2 className={styles.LaunchName}>{nextLaunch.docs[0].name}</h2>
+                <h2 className={styles.LaunchName}>
+                  {nextLaunch.data.docs[0].name}
+                </h2>
               </div>
-              <Countdown dateLocal={nextLaunch.docs[0].date_local} />
+              <Countdown dateLocal={nextLaunch.data.docs[0].date_local} />
               {showLaunchDetails ? null : (
                 <div className={styles.ShowMore}>
                   <FontAwesomeIcon
@@ -112,11 +91,13 @@ const Home = () => {
               <AnimatePresence>
                 {showLaunchDetails ? (
                   <LaunchDetails
-                    flightNumber={nextLaunch.docs[0].flight_number}
-                    dateLocal={nextLaunch.docs[0].date_local}
-                    details={nextLaunch.docs[0].details}
-                    rocketName={nextLaunch.docs[0].rocket.name}
-                    launchpadFullName={nextLaunch.docs[0].launchpad.full_name}
+                    flightNumber={nextLaunch.data.docs[0].flight_number}
+                    dateLocal={nextLaunch.data.docs[0].date_local}
+                    details={nextLaunch.data.docs[0].details}
+                    rocketName={nextLaunch.data.docs[0].rocket.name}
+                    launchpadFullName={
+                      nextLaunch.data.docs[0].launchpad.full_name
+                    }
                   />
                 ) : null}
               </AnimatePresence>
@@ -129,11 +110,11 @@ const Home = () => {
           </div>
         ) : null}
         <div className={styles.Home__Content}>
-          {recentLaunches !== undefined ? (
-            <RecentLaunches launches={recentLaunches.docs} />
+          {recentLaunches.data.docs.length > 0 ? (
+            <RecentLaunches launches={recentLaunches.data.docs} />
           ) : null}
-          {upcomingLaunches !== undefined ? (
-            <UpcomingLaunches launches={upcomingLaunches.docs} />
+          {upcomingLaunches.data.docs.length > 0 ? (
+            <UpcomingLaunches launches={upcomingLaunches.data.docs} />
           ) : null}
         </div>
       </motion.div>
