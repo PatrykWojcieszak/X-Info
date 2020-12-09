@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 //COMPONENTS
 import Button from "../shared/Button/Button";
@@ -159,15 +160,18 @@ const Launches = () => {
         {pastLaunches !== undefined && showPastLaunches ? (
           <>
             {pastLaunches.docs.map((launch, index) => (
-              <LaunchShortInfo
-                key={index}
-                launchName={launch.name}
-                launchDateUtc={launch.date_utc}
-                rocketName={launch.rocket.name}
-                launchSiteName={launch.launchpad.full_name}
-                customer={launch.payloads[0].customers[0]}
-                flightNumber={launch.flight_number}
-              />
+              <Link to={`/launch/${launch.flight_number}`}>
+                <LaunchShortInfo
+                  key={index}
+                  launchName={launch.name}
+                  launchDateUtc={launch.date_utc}
+                  rocketName={launch.rocket.name}
+                  launchSiteName={launch.launchpad.full_name}
+                  customer={launch.payloads[0].customers[0]}
+                  flightNumber={launch.flight_number}
+                  success={launch.success}
+                />
+              </Link>
             ))}
             {pastLaunches.nextPage !== null ? (
               <div style={{ marginTop: "2rem" }}>

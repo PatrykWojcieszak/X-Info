@@ -31,7 +31,7 @@ const LaunchExtendedInfo = ({
       <div className={styles.LeftContainer}>
         <img src={patchImg} alt="mission patch" />
         {showMoreDetailsButton ? (
-          <Link to={`/launches/${flightNumber}`}>
+          <Link to={`/launch/${flightNumber}`}>
             <Button name="MORE DETAILS" />
           </Link>
         ) : null}

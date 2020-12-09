@@ -1,10 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+//COMPONENTS
 import Launch from "./Launch/Launch";
 import Button from "../../shared/Button/Button";
 
+//STYLES
 import styles from "./RecentLaunches.module.scss";
+
+//MODELS
 import Launch_model from "../../../Models/ILaunch";
 
 const RecentLaunches = ({ launches }: recentLaunchesProps) => {

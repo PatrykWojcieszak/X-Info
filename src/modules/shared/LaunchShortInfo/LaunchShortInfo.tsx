@@ -9,6 +9,7 @@ const LaunchShortInfo = ({
   launchSiteName,
   customer,
   flightNumber,
+  success,
 }: launchShortInfoProps) => {
   const dateParsed = new Date(launchDateUtc);
 
@@ -19,9 +20,19 @@ const LaunchShortInfo = ({
           <h2>{launchName}</h2>
           <h4>{dateParsed.toDateString()}</h4>
         </div>
-        <div className={styles.RocketType}>
-          <h4>ROCKET: </h4>
-          <h3>{rocketName}</h3>
+        <div className={styles.Column}>
+          <div className={styles.Row}>
+            <h4>ROCKET: </h4>
+            <h3>{rocketName}</h3>
+          </div>
+          {success !== undefined ? (
+            <div className={styles.Row}>
+              <h4>LAUNCH: </h4>
+              <h3 style={{ color: success ? "#4BB543" : "#FA113D" }}>
+                {success ? "SUCCESSFUL" : "FAILURE"}
+              </h3>
+            </div>
+          ) : null}
         </div>
         <h4 className={styles.LaunchNumber}>#{flightNumber}</h4>
       </div>
@@ -51,6 +62,7 @@ type launchShortInfoProps = {
   launchSiteName: string;
   customer: string;
   flightNumber: Number;
+  success?: boolean;
 };
 
 export default LaunchShortInfo;

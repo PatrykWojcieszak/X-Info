@@ -17,6 +17,7 @@
       @include flex-column;
       align-items: flex-start;
       min-width: 40%;
+      max-width: 40%;
 
       h2 {
         color: $blue;
@@ -31,18 +32,24 @@
       }
     }
 
-    .RocketType {
-      @include flex-center;
-      font-size: 1.3rem;
+    .Column {
+      @include flex-column;
+      align-items: flex-start;
 
-      h4 {
-        font-weight: 100;
-        color: $fontSecondary;
-      }
+      .Row {
+        @include flex-center;
+        margin: 0.5rem 0;
+        font-size: 1.3rem;
 
-      h3 {
-        margin-left: 0.6rem;
-        color: $fontPrimary;
+        h4 {
+          font-weight: 100;
+          color: $fontSecondary;
+        }
+
+        h3 {
+          margin-left: 0.6rem;
+          color: $fontPrimary;
+        }
       }
     }
 
@@ -96,7 +103,7 @@
         margin-bottom: 0.7rem;
       }
 
-      .RocketType {
+      .Column {
         font-size: 1rem;
       }
 
@@ -126,7 +133,7 @@
         }
       }
 
-      .RocketType {
+      .Column {
         font-size: 0.8rem;
       }
 
