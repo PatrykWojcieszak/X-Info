@@ -23,6 +23,7 @@ import UpcomingLaunchesQuery from "../../Queries/UpcomingLaunchesQuery";
 
 //OTHER
 import RandomQuote from "../../Other/ElonMuskQuotes";
+import { pageVariants } from "../../Animations/Animations_motion";
 
 const Home = () => {
   const [showLaunchDetails, setShowLaunchDetails] = useState(false);
@@ -81,7 +82,12 @@ const Home = () => {
 
   return (
     <>
-      <div className={styles.Home}>
+      <motion.div
+        initial="initial"
+        animate="in"
+        exit="out"
+        variants={pageVariants}
+        className={styles.Home}>
         {nextLaunch !== undefined ? (
           <div className={styles.Top}>
             <motion.div
@@ -130,7 +136,7 @@ const Home = () => {
             <UpcomingLaunches launches={upcomingLaunches.docs} />
           ) : null}
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

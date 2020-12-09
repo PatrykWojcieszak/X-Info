@@ -23,6 +23,7 @@ import falcon9_img from "../../resources/images/falcon9.png";
 //QUERIES
 import RocketQuery from "../../Queries/RocketQuery";
 import IQueryResult from "../../Models/IQueryResult";
+import { pageVariants } from "../../Animations/Animations_motion";
 
 const Rocket = () => {
   const [rocket, setRocket] = useState<IRocket | undefined>(undefined);
@@ -228,7 +229,12 @@ const Rocket = () => {
     );
 
   return (
-    <div className={styles.Rocket}>
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      className={styles.Rocket}>
       <div className={rocketHeroImg.join(" ")}>
         {/* <img src={falconHeavy_bg} alt="falcon heavy" /> */}
         <div className={styles.HeroText}>
@@ -295,7 +301,7 @@ const Rocket = () => {
           <Gallery images={rocket.flickr_images} />
         ) : null}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

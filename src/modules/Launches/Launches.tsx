@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 
 //COMPONENTS
 import Button from "../shared/Button/Button";
@@ -18,6 +19,9 @@ import IQueryResult from "../../Models/IQueryResult";
 import LatestLaunchQuery from "../../Queries/LatestLaunchQuery";
 import PastLaunchesQuery from "../../Queries/PastLaunchesQuery";
 import UpcomingLaunchesQuery from "../../Queries/UpcomingLaunchesQuery";
+
+//OTHER
+import { pageVariants } from "../../Animations/Animations_motion";
 
 const Launches = () => {
   const [showPastLaunches, setShowPastLaunches] = useState(false);
@@ -94,10 +98,15 @@ const Launches = () => {
 
     if (launchType === "past") showPastLaunchesHandler();
     FetchUpcomingLaunches();
-  }, [FetchUpcomingLaunches, FetchPastLaunches, launchType]);
+  }, [FetchUpcomingLaunches, launchType, showPastLaunchesHandler]);
 
   return (
-    <div className={styles.Launches}>
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      className={styles.Launches}>
       <div className={styles.Latest}>
         {latestLaunch !== undefined ? (
           <>
@@ -168,7 +177,7 @@ const Launches = () => {
           </>
         ) : null}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

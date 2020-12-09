@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
+import { motion } from "framer-motion";
 
 //COMPONENTS
 import LaunchExtendedInfo from "../shared/LaunchExtendedInfo/LaunchExtendedInfo";
@@ -23,6 +24,7 @@ import ILaunch from "../../Models/ILaunch";
 import LaunchQuery from "../../Queries/LaunchQuery";
 import IQueryResult from "../../Models/IQueryResult";
 import MediaLink from "./MediaLink/MediaLink";
+import { pageVariants } from "../../Animations/Animations_motion";
 
 const Launch = () => {
   const { flight_number } = useParams();
@@ -92,7 +94,12 @@ const Launch = () => {
   }
 
   return (
-    <div className={styles.Launch}>
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      className={styles.Launch}>
       {launch !== undefined ? (
         <LaunchExtendedInfo
           showMoreDetailsButton={false}
@@ -221,7 +228,7 @@ const Launch = () => {
           />
         ) : null}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 //COMPONENTS
 import VehicleRocket from "./VehicleRocket/VehicleRocket";
@@ -11,10 +12,16 @@ import falcon1 from "../../resources/images/f1.png";
 import falcon9 from "../../resources/images/f9.png";
 import falconHeavy from "../../resources/images/fh2.png";
 import starship from "../../resources/images/st.png";
+import { pageVariants } from "../../Animations/Animations_motion";
 
 const Vehicles = () => {
   return (
-    <div className={styles.Vehicles}>
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      className={styles.Vehicles}>
       <div className={styles.InfoContainer}>
         <h2>ROCKETS</h2>
         <h4>
@@ -32,7 +39,7 @@ const Vehicles = () => {
         link="Falcon Heavy"
       />
       <VehicleRocket name="Starship" img={starship} link="Starship" />
-    </div>
+    </motion.div>
   );
 };
 

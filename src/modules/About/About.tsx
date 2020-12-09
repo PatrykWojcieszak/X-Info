@@ -1,10 +1,20 @@
+import { motion } from "framer-motion";
 import React from "react";
 
+//STYLES
 import styles from "./About.module.scss";
+
+//OTHER
+import { pageVariants } from "../../Animations/Animations_motion";
 
 const About = () => {
   return (
-    <div className={styles.About}>
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      className={styles.About}>
       <div className={styles.InfoContainer}>
         <h2>ABOUT</h2>
         <p>
@@ -63,7 +73,7 @@ const About = () => {
           .
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
