@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
+import { useFetch } from "../../Hooks/useFetch";
 
 //COMPONENTS
 import Button from "../shared/Button/Button";
@@ -22,37 +22,34 @@ import falcon9_img from "../../resources/images/falcon9.png";
 
 //QUERIES
 import RocketQuery from "../../Queries/RocketQuery";
-import IQueryResult from "../../Models/IQueryResult";
+import RocketQuotes from "../../Other/RocketQuotes";
 
 //OTHER
 import {
   pageVariantsAnim,
   rightToLeftAnim,
 } from "../../Animations/Animations_motion";
-import RocketQuotes from "../../Other/RocketQuotes";
+
+const endpointURL = "https://api.spacexdata.com/v4/rockets/query";
 
 const Rocket = () => {
-  const [rocket, setRocket] = useState<IRocket | undefined>(undefined);
   const { vehicle } = useParams();
+  const query = RocketQuery;
+  query.query.name = vehicle;
+
+  const [rocket, loadingRocket, invokeRocket] = useFetch<IRocket>(
+    endpointURL,
+    query
+  );
+
+  useEffect(() => {
+    invokeRocket();
+  }, [invokeRocket]);
 
   const [showOverview, setShowOverview] = useState(true);
   const [showFirstStage, setShowFirstStage] = useState(false);
   const [showSecondStage, setShowSecondStage] = useState(false);
   const [showLandingLegs, setShowLandingLegs] = useState(false);
-
-  useEffect(() => {
-    const query = RocketQuery;
-    query.query.name = vehicle;
-
-    Axios.post<IQueryResult<IRocket>>(
-      "https://api.spacexdata.com/v4/rockets/query",
-      query
-    )
-      .then((res) => {
-        setRocket(res.data.docs[0]);
-      })
-      .catch((err) => {});
-  }, [vehicle]);
 
   const showOverviewHandler = () => {
     setShowOverview(true);
@@ -107,7 +104,7 @@ const Rocket = () => {
 
   //OVERVIEW DETAILS
   let overViewDetails = <></>;
-  if (rocket !== undefined)
+  if (loadingRocket === false)
     overViewDetails = (
       <motion.div
         variants={rightToLeftAnim}
@@ -117,17 +114,17 @@ const Rocket = () => {
         className={styles.Details}>
         <InfoLine
           title="HEIGHT"
-          value={`${rocket.height.meters} m | ${rocket.height.feet} feet}`}
+          value={`${rocket.docs[0].height.meters} m | ${rocket.docs[0].height.feet} feet}`}
         />
         <InfoLine
           title="DIAMETER"
-          value={`${rocket.diameter.meters} m | ${rocket.diameter.feet} feet}`}
+          value={`${rocket.docs[0].diameter.meters} m | ${rocket.docs[0].diameter.feet} feet}`}
         />
         <InfoLine
           title="MASS"
-          value={`${rocket.mass.kg} kg | ${rocket.mass.lb} lb}`}
+          value={`${rocket.docs[0].mass.kg} kg | ${rocket.docs[0].mass.lb} lb}`}
         />
-        {rocket.payload_weights.map((payload, index) => (
+        {rocket.docs[0].payload_weights.map((payload, index) => (
           <InfoLine
             key={index}
             title={payload.id}
@@ -139,7 +136,7 @@ const Rocket = () => {
 
   //STAGE 1 DETAILS
   let stageOneDetails = <></>;
-  if (rocket !== undefined)
+  if (loadingRocket === false)
     stageOneDetails = (
       <motion.div
         variants={rightToLeftAnim}
@@ -147,44 +144,47 @@ const Rocket = () => {
         animate="show"
         exit="exit"
         className={styles.Details}>
-        <InfoLine title="ENGINES" value={`${rocket.first_stage.engines}`} />
+        <InfoLine
+          title="ENGINES"
+          value={`${rocket.docs[0].first_stage.engines}`}
+        />
         <InfoLine
           title="THRUST AT SEA LEVEL"
-          value={`${rocket.first_stage.thrust_sea_level.kN} kn | ${rocket.first_stage.thrust_sea_level.lbf} lbf}`}
+          value={`${rocket.docs[0].first_stage.thrust_sea_level.kN} kn | ${rocket.docs[0].first_stage.thrust_sea_level.lbf} lbf}`}
         />
         <InfoLine
           title="THRUST VACUUM"
-          value={`${rocket.first_stage.thrust_vacuum.kN} kn | ${rocket.first_stage.thrust_vacuum.lbf} lbf}`}
+          value={`${rocket.docs[0].first_stage.thrust_vacuum.kN} kn | ${rocket.docs[0].first_stage.thrust_vacuum.lbf} lbf}`}
         />
         <InfoLine
           title="FUEL AMOUNT"
-          value={`${rocket.first_stage.fuel_amount_tons} tons`}
+          value={`${rocket.docs[0].first_stage.fuel_amount_tons} tons`}
         />
         <InfoLine
           title="BURN TIME"
-          value={`${rocket.first_stage.burn_time_sec} sec `}
+          value={`${rocket.docs[0].first_stage.burn_time_sec} sec `}
         />
-        <InfoLine title="TYPE" value={`${rocket.engines.type} `} />
-        <InfoLine title="VERSION" value={`${rocket.engines.version}`} />
-        <InfoLine title="LAYOUT" value={`${rocket.engines.layout}`} />
+        <InfoLine title="TYPE" value={`${rocket.docs[0].engines.type} `} />
+        <InfoLine title="VERSION" value={`${rocket.docs[0].engines.version}`} />
+        <InfoLine title="LAYOUT" value={`${rocket.docs[0].engines.layout}`} />
         <InfoLine
           title="REUSABLE"
-          value={rocket.first_stage.reusable ? "YES" : "NO"}
+          value={rocket.docs[0].first_stage.reusable ? "YES" : "NO"}
         />
         <InfoLine
           title="PROPELLANT 1"
-          value={`${rocket.engines.propellant_1}`}
+          value={`${rocket.docs[0].engines.propellant_1}`}
         />
         <InfoLine
           title="PROPELLANT 2"
-          value={`${rocket.engines.propellant_2}`}
+          value={`${rocket.docs[0].engines.propellant_2}`}
         />
       </motion.div>
     );
 
   //STAGE 2 DETAILS
   let stageTwoDetails = <></>;
-  if (rocket !== undefined)
+  if (loadingRocket === false)
     stageTwoDetails = (
       <motion.div
         variants={rightToLeftAnim}
@@ -192,25 +192,28 @@ const Rocket = () => {
         animate="show"
         exit="exit"
         className={styles.Details}>
-        <InfoLine title="ENGINES" value={`${rocket.second_stage.engines}`} />
+        <InfoLine
+          title="ENGINES"
+          value={`${rocket.docs[0].second_stage.engines}`}
+        />
         <InfoLine
           title="THRUST"
-          value={`${rocket.second_stage.thrust.kN} kn | ${rocket.second_stage.thrust.lbf} lbf`}
+          value={`${rocket.docs[0].second_stage.thrust.kN} kn | ${rocket.docs[0].second_stage.thrust.lbf} lbf`}
         />
         <InfoLine
           title="FUEL AMOUNT"
-          value={`${rocket.second_stage.fuel_amount_tons} tons`}
+          value={`${rocket.docs[0].second_stage.fuel_amount_tons} tons`}
         />
         <InfoLine
           title="BURN TIME"
-          value={`${rocket.second_stage.burn_time_sec} sec`}
+          value={`${rocket.docs[0].second_stage.burn_time_sec} sec`}
         />
       </motion.div>
     );
 
   //STAGE 2 DETAILS
   let landingLegsDetails = <></>;
-  if (rocket !== undefined)
+  if (loadingRocket === false)
     landingLegsDetails = (
       <motion.div
         variants={rightToLeftAnim}
@@ -218,8 +221,14 @@ const Rocket = () => {
         animate="show"
         exit="exit"
         className={styles.Details}>
-        <InfoLine title="NUMBER" value={`${rocket.landing_legs.number}`} />
-        <InfoLine title="MATERIAL" value={`${rocket.landing_legs.material} `} />
+        <InfoLine
+          title="NUMBER"
+          value={`${rocket.docs[0].landing_legs.number}`}
+        />
+        <InfoLine
+          title="MATERIAL"
+          value={`${rocket.docs[0].landing_legs.material} `}
+        />
       </motion.div>
     );
 
@@ -231,9 +240,8 @@ const Rocket = () => {
       variants={pageVariantsAnim}
       className={styles.Rocket}>
       <div className={rocketHeroImg.join(" ")}>
-        {/* <img src={falconHeavy_bg} alt="falcon heavy" /> */}
         <div className={styles.HeroText}>
-          <h2>{rocket?.name}</h2>
+          <h2>{rocket.docs[0]?.name}</h2>
           <h4>
             {rocketQuote} - <span>Elon Musk</span>
           </h4>
@@ -244,11 +252,14 @@ const Rocket = () => {
           <img src={rocketImg} alt="falcon heavy" />
         </div>
         <div className={styles.InfoContainer}>
-          <p>{rocket?.description}</p>
+          <p>{rocket.docs[0]?.description}</p>
           <h3>
             STATUS:{" "}
-            <span style={{ color: rocket?.active ? "#4BB543" : "#FA113D" }}>
-              {rocket?.active ? "ACTIVE" : "INACTIVE"}
+            <span
+              style={{
+                color: rocket.docs[0]?.active ? "#4BB543" : "#FA113D",
+              }}>
+              {rocket.docs[0]?.active ? "ACTIVE" : "INACTIVE"}
             </span>
           </h3>
           <div className={styles.RocketDetails}>
@@ -292,8 +303,8 @@ const Rocket = () => {
         </div>
       </div>
       <div className={styles.GalleryWrapper}>
-        {rocket !== undefined ? (
-          <Gallery images={rocket.flickr_images} />
+        {rocket.docs[0] !== undefined ? (
+          <Gallery images={rocket.docs[0].flickr_images} />
         ) : null}
       </div>
     </motion.div>

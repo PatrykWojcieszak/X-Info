@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion, AnimatePresence } from "framer-motion";
 import { useFetch } from "../../Hooks/useFetch";
@@ -11,7 +11,6 @@ import LaunchDetails from "./LaunchDetails/LaunchDetails";
 
 //STYLES
 import styles from "./Home.module.scss";
-import IResponseData from "../../Models/IResponseData";
 
 //MODELS
 import ILaunch from "../../Models/ILaunch";
@@ -33,20 +32,28 @@ const endpointURL = "https://api.spacexdata.com/v4/launches/query";
 const Home = () => {
   const [showLaunchDetails, setShowLaunchDetails] = useState(false);
 
-  const nextLaunch: IResponseData<ILaunch> = useFetch<ILaunch>(
+  const [nextLaunch, loadingNextLaunch, invokeNextLaunch] = useFetch<ILaunch>(
     endpointURL,
     NextLaunchQuery
   );
 
-  const recentLaunches: IResponseData<ILaunch> = useFetch<ILaunch>(
-    endpointURL,
-    RecentLaunchesQuery
-  );
+  const [
+    recentLaunches,
+    loadingUpcomingLaunch,
+    invokeUpcomingLaunch,
+  ] = useFetch<ILaunch>(endpointURL, RecentLaunchesQuery);
 
-  const upcomingLaunches: IResponseData<ILaunch> = useFetch<ILaunch>(
-    endpointURL,
-    UpcomingLaunchesQuery
-  );
+  const [
+    upcomingLaunches,
+    loadingPastLaunch,
+    invokePastLaunch,
+  ] = useFetch<ILaunch>(endpointURL, UpcomingLaunchesQuery);
+
+  useEffect(() => {
+    invokeNextLaunch();
+    invokeUpcomingLaunch();
+    invokePastLaunch();
+  }, [invokeNextLaunch, invokeUpcomingLaunch, invokePastLaunch]);
 
   return (
     <>
@@ -56,7 +63,7 @@ const Home = () => {
         exit="out"
         variants={pageVariantsAnim}
         className={styles.Home}>
-        {nextLaunch.data.docs.length > 0 ? (
+        {loadingNextLaunch === false ? (
           <div className={styles.Top}>
             <motion.div
               variants={bottomToTopAnim}
@@ -65,11 +72,9 @@ const Home = () => {
               className={styles.Top__Content}>
               <div className={styles.LaunchTitle}>
                 <h2>NEXT LAUNCH: </h2>
-                <h2 className={styles.LaunchName}>
-                  {nextLaunch.data.docs[0].name}
-                </h2>
+                <h2 className={styles.LaunchName}>{nextLaunch.docs[0].name}</h2>
               </div>
-              <Countdown dateLocal={nextLaunch.data.docs[0].date_local} />
+              <Countdown dateLocal={nextLaunch.docs[0].date_local} />
               {showLaunchDetails ? null : (
                 <div className={styles.ShowMore}>
                   <FontAwesomeIcon
@@ -82,13 +87,11 @@ const Home = () => {
               <AnimatePresence>
                 {showLaunchDetails ? (
                   <LaunchDetails
-                    flightNumber={nextLaunch.data.docs[0].flight_number}
-                    dateLocal={nextLaunch.data.docs[0].date_local}
-                    details={nextLaunch.data.docs[0].details}
-                    rocketName={nextLaunch.data.docs[0].rocket.name}
-                    launchpadFullName={
-                      nextLaunch.data.docs[0].launchpad.full_name
-                    }
+                    flightNumber={nextLaunch.docs[0].flight_number}
+                    dateLocal={nextLaunch.docs[0].date_local}
+                    details={nextLaunch.docs[0].details}
+                    rocketName={nextLaunch.docs[0].rocket.name}
+                    launchpadFullName={nextLaunch.docs[0].launchpad.full_name}
                   />
                 ) : null}
               </AnimatePresence>
@@ -101,11 +104,11 @@ const Home = () => {
           </div>
         ) : null}
         <div className={styles.Home__Content}>
-          {recentLaunches.data.docs.length > 0 ? (
-            <RecentLaunches launches={recentLaunches.data.docs} />
+          {loadingUpcomingLaunch === false ? (
+            <RecentLaunches launches={recentLaunches.docs} />
           ) : null}
-          {upcomingLaunches.data.docs.length > 0 ? (
-            <UpcomingLaunches launches={upcomingLaunches.data.docs} />
+          {loadingPastLaunch === false ? (
+            <UpcomingLaunches launches={upcomingLaunches.docs} />
           ) : null}
         </div>
       </motion.div>

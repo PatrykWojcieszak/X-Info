@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
-import Axios from "axios";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useFetch } from "../../Hooks/useFetch";
 
 //COMPONENTS
 import Button from "../shared/Button/Button";
@@ -14,7 +14,6 @@ import styles from "./Launches.module.scss";
 
 //MODELS
 import ILaunch from "../../Models/ILaunch";
-import IQueryResult from "../../Models/IQueryResult";
 
 //QUERIES
 import LatestLaunchQuery from "../../Queries/LatestLaunchQuery";
@@ -24,82 +23,107 @@ import UpcomingLaunchesQuery from "../../Queries/UpcomingLaunchesQuery";
 //OTHER
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
+const endpointURL = "https://api.spacexdata.com/v4/launches/query";
+
 const Launches = () => {
   const [showPastLaunches, setShowPastLaunches] = useState(false);
   const [showUpcomingLaunches, setShowUpcomingLaunches] = useState(true);
-  const [latestLaunch, setLatestLaunch] = useState<ILaunch | undefined>(
-    undefined
-  );
-  const [upcomingLaunches, setUpcomingLaunches] = useState<
-    IQueryResult<ILaunch> | undefined
-  >(undefined);
-  const [pastLaunches, setPastLaunches] = useState<
-    IQueryResult<ILaunch> | undefined
-  >(undefined);
+
+  const [
+    latestLaunch,
+    loadingLatestLaunch,
+    invokeFetchLatest,
+  ] = useFetch<ILaunch>(endpointURL, LatestLaunchQuery);
+
+  const [
+    upcomingLaunches,
+    loadingUpcomingLaunches,
+    invokeFetchUpcoming,
+  ] = useFetch<ILaunch>(endpointURL, UpcomingLaunchesQuery);
+
+  const [
+    pastLaunches,
+    loadingPastLaunches,
+    invokeFetchPast,
+  ] = useFetch<ILaunch>(endpointURL, PastLaunchesQuery);
+
+  useEffect(() => {
+    invokeFetchLatest();
+    invokeFetchUpcoming();
+    invokeFetchPast();
+  }, [invokeFetchLatest, invokeFetchUpcoming, invokeFetchPast]);
 
   const { launchType } = useParams();
 
-  const FetchUpcomingLaunches = useCallback(() => {
-    Axios.post<IQueryResult<ILaunch>>(
-      "https://api.spacexdata.com/v4/launches/query",
-      UpcomingLaunchesQuery
-    )
-      .then((res) => {
-        setUpcomingLaunches(res.data);
-      })
-      .catch((err) => {});
-  }, []);
-
-  const FetchPastLaunches = useCallback(() => {
+  const FetchPastLaunches = () => {
     let query = PastLaunchesQuery;
 
-    if (pastLaunches !== undefined) {
-      query.options.page = pastLaunches.nextPage;
+    if (pastLaunches.docs.length > 0) {
+      query.options.limit += 10;
+      // query.options.page = pastLaunches.nextPage;
     }
 
-    Axios.post<IQueryResult<ILaunch>>(
-      "https://api.spacexdata.com/v4/launches/query",
-      query
-    )
-      .then((res) => {
-        const nextLaunches = res.data;
+    invokeFetchPast();
+  };
 
-        if (pastLaunches !== undefined) {
-          nextLaunches.docs = [...pastLaunches.docs, ...res.data.docs];
-        }
-
-        setPastLaunches(nextLaunches);
-      })
-      .catch((err) => {});
-  }, [pastLaunches]);
-
-  const showPastLaunchesHandler = useCallback(() => {
+  const showPastLaunchesHandler = () => {
     setShowPastLaunches(true);
     setShowUpcomingLaunches(false);
-
-    if (pastLaunches === undefined) FetchPastLaunches();
-  }, [pastLaunches, FetchPastLaunches]);
+  };
 
   const showUpcomingLaunchesHandler = () => {
     setShowPastLaunches(false);
     setShowUpcomingLaunches(true);
-
-    if (upcomingLaunches === undefined) FetchUpcomingLaunches();
   };
 
-  useEffect(() => {
-    Axios.post<IQueryResult<ILaunch>>(
-      "https://api.spacexdata.com/v4/launches/query",
-      LatestLaunchQuery
-    )
-      .then((res) => {
-        setLatestLaunch(res.data.docs[0]);
-      })
-      .catch((err) => {});
+  if (launchType === "past") showPastLaunchesHandler();
+  // else FetchUpcomingLaunches();
 
-    if (launchType === "past") showPastLaunchesHandler();
-    FetchUpcomingLaunches();
-  }, [FetchUpcomingLaunches, launchType, showPastLaunchesHandler]);
+  let upcomingLaunchesArr = <></>;
+  if (loadingUpcomingLaunches === false) {
+    upcomingLaunchesArr = (
+      <>
+        {upcomingLaunches.docs.map((launch, index) => (
+          <LaunchShortInfo
+            key={index}
+            launchName={launch?.name}
+            launchDateUtc={launch?.date_utc}
+            rocketName={launch?.rocket.name}
+            launchSiteName={launch?.launchpad.full_name}
+            customer={launch.payloads[0].customers[0]}
+            flightNumber={launch?.flight_number}
+          />
+        ))}
+      </>
+    );
+  }
+
+  let pastLaunchesArr = <></>;
+  if (loadingPastLaunches === false) {
+    pastLaunchesArr = (
+      <>
+        {pastLaunches.docs.map((launch, index) => (
+          <Link to={`/launch/${launch.flight_number}`}>
+            <LaunchShortInfo
+              key={index}
+              launchName={launch.name}
+              launchDateUtc={launch.date_utc}
+              rocketName={launch.rocket.name}
+              launchSiteName={launch.launchpad.full_name}
+              customer={launch.payloads[0].customers[0]}
+              flightNumber={launch.flight_number}
+              success={launch.success}
+            />
+          </Link>
+        ))}
+        {pastLaunches.nextPage !== null ? (
+          <div style={{ marginTop: "2rem" }}>
+            <Button name="LOAD MORE" clicked={FetchPastLaunches} />
+          </div>
+        ) : null}
+      </>
+    );
+  }
 
   return (
     <motion.div
@@ -109,28 +133,28 @@ const Launches = () => {
       variants={pageVariantsAnim}
       className={styles.Launches}>
       <div className={styles.Latest}>
-        {latestLaunch !== undefined ? (
+        {latestLaunch.docs[0] !== undefined ? (
           <>
             <h2>LATEST LAUNCH</h2>
             <LatestLaunch
               showMoreDetailsButton
-              details={latestLaunch.details}
-              launchName={latestLaunch.name}
-              date_local={latestLaunch.date_local}
-              date_utc={latestLaunch.date_utc}
-              rocketName={latestLaunch.rocket.name}
-              launchSiteName={latestLaunch.launchpad.full_name}
-              flightNumber={latestLaunch.flight_number}
-              patchImg={latestLaunch.links.patch.small}
-              success={latestLaunch.success}
-              failures={latestLaunch.failures}
-              launchId={latestLaunch.id}
+              details={latestLaunch.docs[0].details}
+              launchName={latestLaunch.docs[0].name}
+              date_local={latestLaunch.docs[0].date_local}
+              date_utc={latestLaunch.docs[0].date_utc}
+              rocketName={latestLaunch.docs[0].rocket.name}
+              launchSiteName={latestLaunch.docs[0].launchpad.full_name}
+              flightNumber={latestLaunch.docs[0].flight_number}
+              patchImg={latestLaunch.docs[0].links.patch.small}
+              success={latestLaunch.docs[0].success}
+              failures={latestLaunch.docs[0].failures}
+              launchId={latestLaunch.docs[0].id}
             />
           </>
         ) : null}
       </div>
       <div className={styles.Content}>
-        {upcomingLaunches !== undefined || pastLaunches !== undefined ? (
+        {loadingUpcomingLaunches === false || loadingPastLaunches === false ? (
           <div className={styles.ButtonsWrapper}>
             <Button
               selected={showUpcomingLaunches}
@@ -145,43 +169,9 @@ const Launches = () => {
           </div>
         ) : null}
 
-        {upcomingLaunches !== undefined && showUpcomingLaunches
-          ? upcomingLaunches.docs.map((launch, index) => (
-              <LaunchShortInfo
-                key={index}
-                launchName={launch.name}
-                launchDateUtc={launch.date_utc}
-                rocketName={launch.rocket.name}
-                launchSiteName={launch.launchpad.full_name}
-                customer={launch.payloads[0].customers[0]}
-                flightNumber={launch.flight_number}
-              />
-            ))
-          : null}
+        {showUpcomingLaunches ? upcomingLaunchesArr : null}
 
-        {pastLaunches !== undefined && showPastLaunches ? (
-          <>
-            {pastLaunches.docs.map((launch, index) => (
-              <Link to={`/launch/${launch.flight_number}`}>
-                <LaunchShortInfo
-                  key={index}
-                  launchName={launch.name}
-                  launchDateUtc={launch.date_utc}
-                  rocketName={launch.rocket.name}
-                  launchSiteName={launch.launchpad.full_name}
-                  customer={launch.payloads[0].customers[0]}
-                  flightNumber={launch.flight_number}
-                  success={launch.success}
-                />
-              </Link>
-            ))}
-            {pastLaunches.nextPage !== null ? (
-              <div style={{ marginTop: "2rem" }}>
-                <Button name="LOAD MORE" clicked={FetchPastLaunches} />
-              </div>
-            ) : null}
-          </>
-        ) : null}
+        {showPastLaunches ? pastLaunchesArr : null}
       </div>
     </motion.div>
   );
