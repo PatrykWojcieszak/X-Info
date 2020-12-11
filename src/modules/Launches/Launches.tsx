@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useFetch } from "../../Hooks/useFetch";
 
@@ -21,7 +21,10 @@ import PastLaunchesQuery from "../../Queries/PastLaunchesQuery";
 import UpcomingLaunchesQuery from "../../Queries/UpcomingLaunchesQuery";
 
 //OTHER
-import { pageVariantsAnim } from "../../Animations/Animations_motion";
+import {
+  pageVariantsAnim,
+  showLaunchesList,
+} from "../../Animations/Animations_motion";
 
 const endpointURL = "https://api.spacexdata.com/v4/launches/query";
 
@@ -82,7 +85,12 @@ const Launches = () => {
   let upcomingLaunchesArr = <></>;
   if (loadingUpcomingLaunches === false) {
     upcomingLaunchesArr = (
-      <>
+      <motion.div
+        variants={showLaunchesList}
+        initial="initial"
+        animate="in"
+        exit="out"
+        style={{ width: "100%" }}>
         {upcomingLaunches.docs.map((launch, index) => (
           <LaunchShortInfo
             key={index}
@@ -94,14 +102,19 @@ const Launches = () => {
             flightNumber={launch?.flight_number}
           />
         ))}
-      </>
+      </motion.div>
     );
   }
 
   let pastLaunchesArr = <></>;
   if (loadingPastLaunches === false) {
     pastLaunchesArr = (
-      <>
+      <motion.div
+        variants={showLaunchesList}
+        initial="initial"
+        animate="in"
+        exit="out"
+        style={{ width: "100%" }}>
         {pastLaunches.docs.map((launch, index) => (
           <Link to={`/launch/${launch.flight_number}`}>
             <LaunchShortInfo
@@ -121,7 +134,7 @@ const Launches = () => {
             <Button name="LOAD MORE" clicked={FetchPastLaunches} />
           </div>
         ) : null}
-      </>
+      </motion.div>
     );
   }
 
@@ -169,9 +182,13 @@ const Launches = () => {
           </div>
         ) : null}
 
-        {showUpcomingLaunches ? upcomingLaunchesArr : null}
+        <AnimatePresence>
+          {showUpcomingLaunches ? upcomingLaunchesArr : null}
+        </AnimatePresence>
 
-        {showPastLaunches ? pastLaunchesArr : null}
+        <AnimatePresence>
+          {showPastLaunches ? pastLaunchesArr : null}
+        </AnimatePresence>
       </div>
     </motion.div>
   );

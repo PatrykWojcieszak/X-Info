@@ -41,3 +41,22 @@ export const rightToLeftAnim = {
     x: -100,
   },
 };
+
+export const showLaunchesList = {
+  initial: {
+    opacity: 0,
+    y: 100,
+  },
+  in: {
+    transition: { duration: 1, ease: "easeOut" },
+    opacity: 1,
+    y: 0,
+    when: "beforeChildren",
+    staggerChildren: 0.2,
+  },
+  out: {
+    y: 100,
+    opacity: 0,
+    transition: { duration: 0.4, ease: "easeOut" },
+  },
+};
