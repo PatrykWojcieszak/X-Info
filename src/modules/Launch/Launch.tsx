@@ -170,7 +170,7 @@ const Launch = () => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen></iframe>
       </div>
-      {launch.docs[0] !== undefined ? (
+      {launch.docs[0]?.links.flickr.original.length > 0 ? (
         <Gallery images={launch.docs[0].links.flickr.original} />
       ) : null}
       <div className={styles.MediaContainer}>

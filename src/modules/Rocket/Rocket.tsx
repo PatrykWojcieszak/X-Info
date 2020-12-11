@@ -303,7 +303,7 @@ const Rocket = () => {
         </div>
       </div>
       <div className={styles.GalleryWrapper}>
-        {rocket.docs[0] !== undefined ? (
+        {rocket.docs[0]?.flickr_images.length > 0 ? (
           <Gallery images={rocket.docs[0].flickr_images} />
         ) : null}
       </div>
