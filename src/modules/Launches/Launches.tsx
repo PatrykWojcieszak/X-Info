@@ -100,6 +100,7 @@ const Launches = () => {
             launchSiteName={launch?.launchpad.full_name}
             customer={launch.payloads[0].customers[0]}
             flightNumber={launch?.flight_number}
+            nationality={launch.payloads[0].nationalities[0]}
           />
         ))}
       </motion.div>
@@ -126,6 +127,7 @@ const Launches = () => {
               customer={launch.payloads[0].customers[0]}
               flightNumber={launch.flight_number}
               success={launch.success}
+              nationality={launch.payloads[0].nationalities[0]}
             />
           </Link>
         ))}

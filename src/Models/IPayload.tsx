@@ -5,7 +5,7 @@ interface IPayload {
   launch: string;
   customers: string[];
   norad_ids: [];
-  nationalities: [];
+  nationalities: string[];
   manufacturers: [];
   mass_kg: number;
   mass_lbs: number;

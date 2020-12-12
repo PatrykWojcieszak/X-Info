@@ -1,6 +1,10 @@
 import React from "react";
 
+//STYLES
 import styles from "./LaunchShortInfo.module.scss";
+
+//OTHER
+import { getCountryCode } from "../../../Other/GetCountryCode";
 
 const LaunchShortInfo = ({
   launchName,
@@ -10,7 +14,9 @@ const LaunchShortInfo = ({
   customer,
   flightNumber,
   success,
+  nationality,
 }: launchShortInfoProps) => {
+  const countryCode = getCountryCode(nationality);
   const dateParsed = new Date(launchDateUtc);
 
   return (
@@ -48,7 +54,7 @@ const LaunchShortInfo = ({
       </div>
       <img
         className={styles.Flag}
-        src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg"
+        src={`https://www.countryflags.io/${countryCode}/flat/64.png`}
         alt="flag"
       />
     </div>
@@ -63,6 +69,7 @@ type launchShortInfoProps = {
   customer: string;
   flightNumber: Number;
   success?: boolean;
+  nationality: string;
 };
 
 export default LaunchShortInfo;

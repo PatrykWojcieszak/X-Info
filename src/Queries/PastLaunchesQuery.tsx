@@ -34,6 +34,7 @@ const PastLaunchesQuery = {
         path: "payloads",
         select: {
           customers: 1,
+          nationalities: 1,
         },
       },
     ],

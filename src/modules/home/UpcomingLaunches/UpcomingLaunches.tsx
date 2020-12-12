@@ -26,6 +26,7 @@ const UpcomingLaunches = ({ launches }: upcomingLaunchesProps) => {
           launchSiteName={launch.launchpad.full_name}
           customer={launch.payloads[0].customers[0]}
           flightNumber={launch.flight_number}
+          nationality={launch.payloads[0].nationalities[0]}
         />
       ))}
       <div className={styles.ButtonWrapper}>
