@@ -31,6 +31,7 @@ const endpointURL = "https://api.spacexdata.com/v4/launches/query";
 const Launches = () => {
   const [showPastLaunches, setShowPastLaunches] = useState(false);
   const [showUpcomingLaunches, setShowUpcomingLaunches] = useState(true);
+  const { launchType } = useParams();
 
   const [
     latestLaunch,
@@ -50,13 +51,25 @@ const Launches = () => {
     invokeFetchPast,
   ] = useFetch<ILaunch>(endpointURL, PastLaunchesQuery);
 
+  const showPastLaunchesHandler = () => {
+    setShowPastLaunches(true);
+    setShowUpcomingLaunches(false);
+  };
+
+  const showUpcomingLaunchesHandler = () => {
+    setShowPastLaunches(false);
+    setShowUpcomingLaunches(true);
+  };
+
   useEffect(() => {
     invokeFetchLatest();
     invokeFetchUpcoming();
     invokeFetchPast();
-  }, [invokeFetchLatest, invokeFetchUpcoming, invokeFetchPast]);
 
-  const { launchType } = useParams();
+    if (launchType === "past") {
+      showPastLaunchesHandler();
+    }
+  }, [invokeFetchLatest, invokeFetchUpcoming, invokeFetchPast, launchType]);
 
   const FetchPastLaunches = () => {
     let query = PastLaunchesQuery;
@@ -68,19 +81,6 @@ const Launches = () => {
 
     invokeFetchPast();
   };
-
-  const showPastLaunchesHandler = () => {
-    setShowPastLaunches(true);
-    setShowUpcomingLaunches(false);
-  };
-
-  const showUpcomingLaunchesHandler = () => {
-    setShowPastLaunches(false);
-    setShowUpcomingLaunches(true);
-  };
-
-  if (launchType === "past") showPastLaunchesHandler();
-  // else FetchUpcomingLaunches();
 
   let upcomingLaunchesArr = <></>;
   if (loadingUpcomingLaunches === false) {
