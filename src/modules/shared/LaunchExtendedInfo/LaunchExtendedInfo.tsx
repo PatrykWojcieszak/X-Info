@@ -58,13 +58,8 @@ const LaunchExtendedInfo = ({
             </div>
           </div>
         </div>
-        {success ? null : (
+        {!success && failures.length > 0 ? (
           <div className={styles.FailureContainer}>
-            {/* <p>
-              The rocket and Amos-6 payload were lost in a launch pad explosion
-              on September 1, 2016 during propellant fill prior to a static fire
-              test. The pad was clear of personnel and there were no injuries.
-            </p> */}
             <h4>FAILURES:</h4>
             <ul>
               {failures.map((failure, index) => (
@@ -72,7 +67,7 @@ const LaunchExtendedInfo = ({
               ))}
             </ul>
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   );

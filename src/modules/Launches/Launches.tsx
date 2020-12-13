@@ -117,9 +117,8 @@ const Launches = () => {
         exit="out"
         style={{ width: "100%" }}>
         {pastLaunches.docs.map((launch, index) => (
-          <Link to={`/launch/${launch.flight_number}`}>
+          <Link key={index} to={`/launch/${launch.flight_number}`}>
             <LaunchShortInfo
-              key={index}
               launchName={launch.name}
               launchDateUtc={launch.date_utc}
               rocketName={launch.rocket.name}

@@ -5,8 +5,7 @@ export const pageVariantsAnim = {
   in: {
     transition: { duration: 1, ease: "easeOut" },
     opacity: 1,
-    when: "beforeChildren",
-    staggerChildren: 0.2,
+    staggerChildren: 1,
   },
   out: {
     opacity: 0,
@@ -51,8 +50,8 @@ export const showLaunchesList = {
     transition: { duration: 1, ease: "easeOut" },
     opacity: 1,
     y: 0,
-    when: "beforeChildren",
-    staggerChildren: 0.2,
+    // when: "beforeChildren",
+    staggerChildren: 1,
   },
   out: {
     y: 100,
