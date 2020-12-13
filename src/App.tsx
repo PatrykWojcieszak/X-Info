@@ -5,13 +5,6 @@ import { AnimatePresence } from "framer-motion";
 import Nav from "./modules/shared/Nav/Nav";
 import Footer from "./modules/shared/Footer/Footer";
 
-// import About from "./modules/About/About";
-// import Home from "./modules/Home/Home";
-// import Launches from "./modules/Launches/Launches";
-// import Vehicles from "./modules/Vehicles/Vehicles";
-// import Rocket from "./modules/Rocket/Rocket";
-// import Launch from "./modules/Launch/Launch";
-
 import "./App.scss";
 
 const Home = React.lazy(() => {

@@ -18,4 +18,4 @@ type crewPersonProps = {
   agency: string;
 };
 
-export default CrewPerson;
+export default React.memo(CrewPerson);

@@ -4,27 +4,7 @@ import { wrap } from "popmotion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import styles from "./Gallery.module.scss";
-
-const variants = {
-  enter: (direction: number) => {
-    return {
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0,
-    };
-  },
-  center: {
-    zIndex: 1,
-    x: 0,
-    opacity: 1,
-  },
-  exit: (direction: number) => {
-    return {
-      zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
-      opacity: 0,
-    };
-  },
-};
+import { GalleryAnim } from "../../../Animations/Animations_motion";
 
 const swipeConfidenceThreshold = 10000;
 const swipePower = (offset: number, velocity: number) => {
@@ -49,7 +29,7 @@ const Gallery = ({ images }: galleryProps) => {
             key={page}
             src={images[imageIndex]}
             custom={direction}
-            variants={variants}
+            variants={GalleryAnim}
             initial="enter"
             animate="center"
             exit="exit"

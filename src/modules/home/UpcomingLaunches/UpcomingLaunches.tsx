@@ -42,4 +42,4 @@ type upcomingLaunchesProps = {
   launches: Launch_model[];
 };
 
-export default UpcomingLaunches;
+export default React.memo(UpcomingLaunches);

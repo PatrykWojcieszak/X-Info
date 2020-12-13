@@ -10,7 +10,6 @@ const MediaLink = ({ name, icon, brand, link }: mediaLinkProps) => {
   let faIcon = ["fas", icon] as IconProp;
 
   if (brand) faIcon = ["fab", icon] as IconProp;
-
   return (
     <a href={link} target="_blank" rel="noopener noreferrer">
       <div className={styles.LinkBtn}>
@@ -28,4 +27,4 @@ type mediaLinkProps = {
   link?: string;
 };
 
-export default MediaLink;
+export default React.memo(MediaLink);

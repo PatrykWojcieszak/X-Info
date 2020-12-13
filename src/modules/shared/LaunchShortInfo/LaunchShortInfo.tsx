@@ -72,4 +72,4 @@ type launchShortInfoProps = {
   nationality: string;
 };
 
-export default LaunchShortInfo;
+export default React.memo(LaunchShortInfo);

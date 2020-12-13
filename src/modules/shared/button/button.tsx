@@ -20,4 +20,4 @@ type buttonProps = {
   clicked?: () => void;
 };
 
-export default Button;
+export default React.memo(Button);

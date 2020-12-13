@@ -74,4 +74,4 @@ type countdownProps = {
   dateLocal: string;
 };
 
-export default Countdown;
+export default React.memo(Countdown);

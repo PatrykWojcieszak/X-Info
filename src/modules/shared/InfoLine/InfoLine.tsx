@@ -16,4 +16,4 @@ type infoLineProps = {
   value: string;
 };
 
-export default InfoLine;
+export default React.memo(InfoLine);

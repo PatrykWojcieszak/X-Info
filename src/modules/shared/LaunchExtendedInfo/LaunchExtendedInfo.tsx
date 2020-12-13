@@ -88,4 +88,4 @@ type LaunchExtendedInfoProps = {
   launchId: string;
 };
 
-export default LaunchExtendedInfo;
+export default React.memo(LaunchExtendedInfo);

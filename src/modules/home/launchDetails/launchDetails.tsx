@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 import styles from "./LaunchDetails.module.scss";
+import { launchDetailsAnim } from "../../../Animations/Animations_motion";
 
 const LaunchDetails = ({
   flightNumber,
@@ -10,16 +11,6 @@ const LaunchDetails = ({
   rocketName,
   launchpadFullName,
 }: launchDetailsProps) => {
-  const launchDetailsAnim = {
-    hidden: {
-      opacity: 0,
-    },
-    show: {
-      opacity: 1,
-      transition: { duration: 0.8 },
-    },
-  };
-
   const formattedDate = new Date(dateLocal);
 
   return (
@@ -54,4 +45,4 @@ type launchDetailsProps = {
   launchpadFullName: string;
 };
 
-export default LaunchDetails;
+export default React.memo(LaunchDetails);

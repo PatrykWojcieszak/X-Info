@@ -21,4 +21,4 @@ type navElementProps = {
   exact: boolean;
 };
 
-export default NavElement;
+export default React.memo(NavElement);

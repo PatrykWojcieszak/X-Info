@@ -38,4 +38,4 @@ type launchProps = {
   success: boolean;
 };
 
-export default Launch;
+export default React.memo(Launch);

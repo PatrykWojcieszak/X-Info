@@ -40,4 +40,4 @@ type recentLaunchesProps = {
   launches: Launch_model[];
 };
 
-export default RecentLaunches;
+export default React.memo(RecentLaunches);

@@ -18,4 +18,4 @@ type shipProps = {
   img: string;
 };
 
-export default Ship;
+export default React.memo(Ship);
