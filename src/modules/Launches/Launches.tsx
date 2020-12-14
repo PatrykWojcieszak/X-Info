@@ -115,7 +115,13 @@ const Launches = () => {
         initial="initial"
         animate="in"
         exit="out"
-        style={{ width: "100%" }}>
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}>
         {pastLaunches.docs.map((launch, index) => (
           <Link key={index} to={`/launch/${launch.flight_number}`}>
             <LaunchShortInfo

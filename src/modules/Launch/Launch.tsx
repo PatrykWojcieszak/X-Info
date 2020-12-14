@@ -92,143 +92,151 @@ const Launch = () => {
   }
 
   return (
-    <motion.div
-      initial="initial"
-      animate="in"
-      exit="out"
-      variants={pageVariantsAnim}
-      className={styles.Launch}>
-      {launch.docs[0] !== undefined ? (
-        <LaunchExtendedInfo
-          showMoreDetailsButton={false}
-          details={launch.docs[0].details}
-          launchName={launch.docs[0].name}
-          date_local={launch.docs[0].date_local}
-          date_utc={launch.docs[0].date_utc}
-          rocketName={launch.docs[0].rocket.name}
-          launchSiteName={launch.docs[0].launchpad.full_name}
-          flightNumber={launch.docs[0].flight_number}
-          patchImg={launch.docs[0].links.patch.small}
-          success={launch.docs[0].success}
-          failures={launch.docs[0].failures}
-          launchId={launch.docs[0].id}
-        />
-      ) : null}
-      <div className={styles.Row}>
-        <Link to={`/vehicles/${launch.docs[0]?.rocket.name}`}>
-          <div className={styles.Rocket}>
-            <h3>{launch.docs[0]?.rocket.name}</h3>
-            {rocketImg}
-          </div>
-        </Link>
-        <div className={styles.InfoContainer}>
-          <div className={styles.InfoWrapper}>
-            {launch.docs[0]?.payloads.map((payload, index) => (
-              <div key={index}>
-                <h2>PAYLOAD #{index + 1}</h2>
-                <InfoLine title="NAME" value={`${payload.name}`} />
-                <InfoLine title="CUSTOMER" value={`${payload.customers}`} />
-                <InfoLine
-                  title="MANUFACTURER"
-                  value={`${payload.manufacturers}`}
-                />
-                <InfoLine title="TYPE" value={`${payload.type}`} />
-                <InfoLine
-                  title="MASS"
-                  value={`${payload.mass_kg} kg | ${payload.mass_lbs} lb`}
-                />
-                <InfoLine title="ORBIT" value={`${payload.orbit}`} />
+    <>
+      <motion.div
+        initial="initial"
+        animate="in"
+        exit="out"
+        variants={pageVariantsAnim}>
+        <div className={styles.Launch}>
+          {launch.docs[0] !== undefined ? (
+            <LaunchExtendedInfo
+              showMoreDetailsButton={false}
+              details={launch.docs[0].details}
+              launchName={launch.docs[0].name}
+              date_local={launch.docs[0].date_local}
+              date_utc={launch.docs[0].date_utc}
+              rocketName={launch.docs[0].rocket.name}
+              launchSiteName={launch.docs[0].launchpad.full_name}
+              flightNumber={launch.docs[0].flight_number}
+              patchImg={launch.docs[0].links.patch.small}
+              success={launch.docs[0].success}
+              failures={launch.docs[0].failures}
+              launchId={launch.docs[0].id}
+            />
+          ) : null}
+          <div className={styles.Row}>
+            <Link to={`/vehicles/${launch.docs[0]?.rocket.name}`}>
+              <div className={styles.Rocket}>
+                <h3>{launch.docs[0]?.rocket.name}</h3>
+                {rocketImg}
               </div>
-            ))}
-          </div>
-          <div className={styles.InfoWrapper}>
-            {launch.docs[0]?.cores.map((core, index) => (
-              <div key={index}>
-                <h2>CORE #{index + 1}</h2>
-                <InfoLine
-                  title="LANDING"
-                  value={core.landing_success ? "SUCCESSFUL" : "FAILED"}
-                />
-                <InfoLine title="LANDING TYPE" value={core.landing_type} />
-                <InfoLine title="LANDING PAD" value={core.landpad.name} />
-                <InfoLine title="REUSED" value={core.reused ? "YES" : "NO"} />
-                <InfoLine title="FLIGHTS" value={`${core.flight}`} />
+            </Link>
+            <div className={styles.InfoContainer}>
+              <div className={styles.InfoWrapper}>
+                {launch.docs[0]?.payloads.map((payload, index) => (
+                  <div key={index}>
+                    <h2>PAYLOAD #{index + 1}</h2>
+                    <InfoLine title="NAME" value={`${payload.name}`} />
+                    <InfoLine title="CUSTOMER" value={`${payload.customers}`} />
+                    <InfoLine
+                      title="MANUFACTURER"
+                      value={`${payload.manufacturers}`}
+                    />
+                    <InfoLine title="TYPE" value={`${payload.type}`} />
+                    <InfoLine
+                      title="MASS"
+                      value={`${payload.mass_kg} kg | ${payload.mass_lbs} lb`}
+                    />
+                    <InfoLine title="ORBIT" value={`${payload.orbit}`} />
+                  </div>
+                ))}
               </div>
-            ))}
+              <div className={styles.InfoWrapper}>
+                {launch.docs[0]?.cores.map((core, index) => (
+                  <div key={index}>
+                    <h2>CORE #{index + 1}</h2>
+                    <InfoLine
+                      title="LANDING"
+                      value={core.landing_success ? "SUCCESSFUL" : "FAILED"}
+                    />
+                    <InfoLine title="LANDING TYPE" value={core.landing_type} />
+                    <InfoLine title="LANDING PAD" value={core.landpad.name} />
+                    <InfoLine
+                      title="REUSED"
+                      value={core.reused ? "YES" : "NO"}
+                    />
+                    <InfoLine title="FLIGHTS" value={`${core.flight}`} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          {crew}
+          {ship}
+          <div className={styles.YoutubeContainer}>
+            <iframe
+              title="spacex video"
+              width="560"
+              height="315"
+              src={`https://www.youtube.com/embed/${launch.docs[0]?.links.youtube_id}`}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen></iframe>
           </div>
         </div>
-      </div>
-      {crew}
-      {ship}
-      <div className={styles.YoutubeContainer}>
-        <iframe
-          title="spacex video"
-          width="560"
-          height="315"
-          src={`https://www.youtube.com/embed/${launch.docs[0]?.links.youtube_id}`}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen></iframe>
-      </div>
-      {launch.docs[0]?.links.flickr.original.length > 0 ? (
-        <Gallery images={launch.docs[0].links.flickr.original} />
-      ) : null}
-      <div className={styles.MediaContainer}>
-        {launch.docs[0]?.links.reddit.campaign !== null ? (
-          <MediaLink
-            name="CAMPAIGN"
-            icon="reddit-alien"
-            brand
-            link={launch.docs[0]?.links.reddit.campaign}
-          />
-        ) : null}
+        <div style={{ padding: "0 1rem" }}>
+          {launch.docs[0]?.links.flickr.original.length > 0 ? (
+            <Gallery images={launch.docs[0].links.flickr.original} />
+          ) : null}
+          <div className={styles.MediaContainer}>
+            {launch.docs[0]?.links.reddit.campaign !== null ? (
+              <MediaLink
+                name="CAMPAIGN"
+                icon="reddit-alien"
+                brand
+                link={launch.docs[0]?.links.reddit.campaign}
+              />
+            ) : null}
 
-        {launch.docs[0]?.links.reddit.launch !== null ? (
-          <MediaLink
-            name="LAUNCH"
-            icon="reddit-alien"
-            brand
-            link={launch.docs[0]?.links.reddit.launch}
-          />
-        ) : null}
+            {launch.docs[0]?.links.reddit.launch !== null ? (
+              <MediaLink
+                name="LAUNCH"
+                icon="reddit-alien"
+                brand
+                link={launch.docs[0]?.links.reddit.launch}
+              />
+            ) : null}
 
-        {launch.docs[0]?.links.reddit.media !== null ? (
-          <MediaLink
-            name="MEDIA"
-            icon="reddit-alien"
-            brand
-            link={launch.docs[0]?.links.reddit.media}
-          />
-        ) : null}
+            {launch.docs[0]?.links.reddit.media !== null ? (
+              <MediaLink
+                name="MEDIA"
+                icon="reddit-alien"
+                brand
+                link={launch.docs[0]?.links.reddit.media}
+              />
+            ) : null}
 
-        {launch.docs[0]?.links.wikipedia !== null ? (
-          <MediaLink
-            name="WIKIPEDIA"
-            icon="wikipedia-w"
-            brand
-            link={launch.docs[0]?.links.wikipedia}
-          />
-        ) : null}
+            {launch.docs[0]?.links.wikipedia !== null ? (
+              <MediaLink
+                name="WIKIPEDIA"
+                icon="wikipedia-w"
+                brand
+                link={launch.docs[0]?.links.wikipedia}
+              />
+            ) : null}
 
-        {launch.docs[0]?.links.article !== null ? (
-          <MediaLink
-            name="ARTICLE"
-            icon="file-alt"
-            brand={false}
-            link={launch.docs[0]?.links.article}
-          />
-        ) : null}
+            {launch.docs[0]?.links.article !== null ? (
+              <MediaLink
+                name="ARTICLE"
+                icon="file-alt"
+                brand={false}
+                link={launch.docs[0]?.links.article}
+              />
+            ) : null}
 
-        {launch.docs[0]?.links.presskit !== null ? (
-          <MediaLink
-            name="PRESS KIT"
-            icon="newspaper"
-            brand={false}
-            link={launch.docs[0]?.links.presskit}
-          />
-        ) : null}
-      </div>
-    </motion.div>
+            {launch.docs[0]?.links.presskit !== null ? (
+              <MediaLink
+                name="PRESS KIT"
+                icon="newspaper"
+                brand={false}
+                link={launch.docs[0]?.links.presskit}
+              />
+            ) : null}
+          </div>
+        </div>
+      </motion.div>
+    </>
   );
 };
 

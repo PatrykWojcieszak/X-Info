@@ -18,6 +18,7 @@
   .Content {
     @include flex-center-column;
     margin: 7rem 0;
+    width: 100%;
 
     .ButtonsWrapper {
       width: 100%;
@@ -52,5 +53,16 @@
   .Launches {
     padding: 0 1rem;
     @include flex-center-column;
+
+    .Content {
+      .ButtonsWrapper {
+        @include flex-center;
+        justify-content: space-evenly;
+      }
+
+      .ButtonsWrapper > * {
+        margin-right: 0;
+      }
+    }
   }
 }

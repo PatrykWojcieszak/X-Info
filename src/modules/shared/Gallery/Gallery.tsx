@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { wrap } from "popmotion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import AliceCarousel from "react-alice-carousel";
 
 import styles from "./Gallery.module.scss";
 import { GalleryAnim } from "../../../Animations/Animations_motion";
@@ -20,10 +21,24 @@ const Gallery = ({ images }: galleryProps) => {
     setPage([page + newDirection, newDirection]);
   };
 
+  // const handleDragStart = (e) => e.preventDefault();
+  // const galleryItems: JSX.Element[] = [];
+  // images.map((img) => {
+  //   galleryItems.push(
+  //     <img
+  //       src={img}
+  //       onDragStart={handleDragStart}
+  //       alt="rocket img"
+  //       className={styles.Img}
+  //     />
+  //   );
+  // });
+
   return (
     <>
       <div className={styles.Gallery}>
-        <h2>GALLERY</h2>
+        {/* <h2>GALLERY</h2> */}
+        {/* <AliceCarousel mouseTracking items={galleryItems} /> */}
         <AnimatePresence initial={false} custom={direction}>
           <motion.img
             key={page}

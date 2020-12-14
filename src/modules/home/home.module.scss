@@ -89,6 +89,12 @@
 
 @include large {
   .Home {
+    .Top {
+      &__Content {
+        padding: 0 4rem;
+      }
+    }
+
     &__Content {
       padding: 0 4rem;
 
@@ -118,6 +124,7 @@
         }
       }
     }
+
     &__Content {
       display: flex;
       flex-direction: column;

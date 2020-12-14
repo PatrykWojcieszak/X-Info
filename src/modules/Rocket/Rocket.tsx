@@ -13,10 +13,11 @@ import IRocket from "../../Models/IRocket";
 
 //STYLES
 import styles from "./Rocket.module.scss";
+import "react-alice-carousel/lib/scss/alice-carousel.scss";
 
 //IMAGES
 import falconheavy_img from "../../resources/images/falconHeavy.png";
-import falcon1_img from "../../resources/images/f1.png";
+import falcon1_img from "../../resources/images/falcon1.png";
 import starship_img from "../../resources/images/st.png";
 import falcon9_img from "../../resources/images/falcon9.png";
 

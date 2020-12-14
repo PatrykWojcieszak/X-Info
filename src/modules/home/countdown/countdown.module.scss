@@ -31,7 +31,7 @@
 @include desktop {
   .Countdown {
     .Element {
-      width: 80px;
+      width: 150px;
 
       h2 {
         font-size: 6rem;
@@ -49,8 +49,6 @@
 @include tablet {
   .Countdown {
     .Element {
-      width: 40px;
-
       h2 {
         font-size: 2.5rem;
       }

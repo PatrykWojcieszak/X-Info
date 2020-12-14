@@ -80,13 +80,6 @@
     }
   }
 
-  .MediaContainer {
-    @include flex-center;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin-bottom: 3rem;
-  }
-
   .YoutubeContainer {
     margin-top: 4rem;
 
@@ -96,6 +89,13 @@
       border-radius: 1rem;
     }
   }
+}
+
+.MediaContainer {
+  @include flex-center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-bottom: 3rem;
 }
 
 @include desktop {
@@ -127,7 +127,7 @@
       }
 
       .InfoContainer {
-        margin-left: 2rem;
+        margin-left: 0;
 
         .InfoWrapper {
           h2 {

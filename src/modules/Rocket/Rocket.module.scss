@@ -25,6 +25,8 @@
       h4 {
         font-weight: 100;
         font-size: 1rem;
+        width: 80%;
+        text-align: center;
 
         span {
           font-weight: 500;
@@ -39,6 +41,7 @@
     margin-top: 2rem;
     padding: 0 24rem;
     align-items: flex-start;
+    position: relative;
 
     .Rocket {
       height: 60%;
@@ -92,7 +95,24 @@
   }
 
   .GalleryWrapper {
-    padding: 0 24rem;
+    padding: 0 1rem;
+    // padding: 0 24rem;
+  }
+}
+
+@include desktop {
+  .Rocket {
+    .GalleryWrapper {
+      // padding: 0 14rem;
+    }
+  }
+}
+
+@include large {
+  .Rocket {
+    .GalleryWrapper {
+      // padding: 0 4rem;
+    }
   }
 }
 
@@ -122,6 +142,7 @@
 
       .InfoContainer {
         margin-left: 2rem;
+        position: relative;
 
         p,
         h3 {
