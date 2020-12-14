@@ -13,7 +13,6 @@ import IRocket from "../../Models/IRocket";
 
 //STYLES
 import styles from "./Rocket.module.scss";
-import "react-alice-carousel/lib/scss/alice-carousel.scss";
 
 //IMAGES
 import falconheavy_img from "../../resources/images/falconHeavy.png";

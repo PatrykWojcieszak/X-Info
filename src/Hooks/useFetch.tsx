@@ -1,8 +1,10 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import axios from "axios";
 import IQueryResult from "../Models/IQueryResult";
 
 export const useFetch = <T extends unknown>(url, query) => {
+  const cache = useRef({});
+
   const initialQueryResult: IQueryResult<T> = {
     docs: [],
     totalDocs: 0,
@@ -21,15 +23,23 @@ export const useFetch = <T extends unknown>(url, query) => {
   const [data, setData] = useState<IQueryResult<T>>(initialQueryResult);
 
   const loadData = useCallback(() => {
-    axios
-      .post<IQueryResult<T>>(url, query)
-      .then((res) => {
-        setData(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (cache.current[url]) {
+      const data = cache.current[url];
+      setData(data);
+      console.log("z cache");
+    } else {
+      console.log("z axios");
+      axios
+        .post<IQueryResult<T>>(url, query)
+        .then((res) => {
+          cache.current[url] = res.data;
+          setData(res.data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, [query, url]);
 
   const res: [IQueryResult<T>, boolean, () => void] = [data, loading, loadData];
