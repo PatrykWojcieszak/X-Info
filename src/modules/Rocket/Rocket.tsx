@@ -27,6 +27,7 @@ import RocketQuotes from "../../Other/RocketQuotes";
 
 //OTHER
 import {
+  opacityAnim,
   pageVariantsAnim,
   rightToLeftAnim,
 } from "../../Animations/Animations_motion";
@@ -241,12 +242,16 @@ const Rocket = () => {
       variants={pageVariantsAnim}
       className={styles.Rocket}>
       <div className={rocketHeroImg.join(" ")}>
-        <div className={styles.HeroText}>
+        <motion.div
+          initial="initial"
+          animate="in"
+          variants={opacityAnim}
+          className={styles.HeroText}>
           <h2>{rocket.docs[0]?.name}</h2>
           <h4>
             {rocketQuote} - <span>Elon Musk</span>
           </h4>
-        </div>
+        </motion.div>
       </div>
       <div className={styles.Content}>
         <div className={styles.Rocket}>

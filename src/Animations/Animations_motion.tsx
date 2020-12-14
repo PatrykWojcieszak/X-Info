@@ -90,3 +90,13 @@ export const launchDetailsAnim = {
     transition: { duration: 0.8 },
   },
 };
+
+export const opacityAnim = {
+  initial: {
+    opacity: 0,
+  },
+  in: {
+    transition: { duration: 1, ease: "easeOut" },
+    opacity: 1,
+  },
+};
