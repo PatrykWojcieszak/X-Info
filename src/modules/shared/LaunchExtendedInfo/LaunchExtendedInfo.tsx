@@ -6,6 +6,7 @@ import Button from "../Button/Button";
 
 //STYLES
 import styles from "./LaunchExtendedInfo.module.scss";
+import noImage from "../../../resources/images/noImage.png";
 
 //MODELS
 import IFailure from "../../../Models/IFailure";
@@ -26,10 +27,14 @@ const LaunchExtendedInfo = ({
 }: LaunchExtendedInfoProps) => {
   const dateParsed = new Date(date_utc);
 
+  let launch = success ? "SUCCESSFUL" : "FAILURE";
+
+  if (dateParsed > new Date()) launch = "NOT LAUNCHED YET";
+
   return (
     <div className={styles.LatestLaunch}>
       <div className={styles.LeftContainer}>
-        <img src={patchImg} alt="mission patch" />
+        <img src={patchImg !== null ? patchImg : noImage} alt="mission patch" />
         {showMoreDetailsButton ? (
           <Link to={`/launch/${flightNumber}`}>
             <Button name="MORE DETAILS" />
@@ -53,7 +58,7 @@ const LaunchExtendedInfo = ({
               <h4>{rocketName}</h4>
               <h4>{dateParsed.toDateString()}</h4>
               <h4 style={{ color: success ? "#4BB543" : "#FA113D" }}>
-                {success ? "SUCCESSFUL" : "FAILURE"}
+                {launch}
               </h4>
             </div>
           </div>

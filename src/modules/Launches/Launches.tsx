@@ -123,18 +123,17 @@ const Launches = () => {
           alignItems: "center",
         }}>
         {pastLaunches.docs.map((launch, index) => (
-          <Link key={index} to={`/launch/${launch.flight_number}`}>
-            <LaunchShortInfo
-              launchName={launch.name}
-              launchDateUtc={launch.date_utc}
-              rocketName={launch.rocket.name}
-              launchSiteName={launch.launchpad.full_name}
-              customer={launch.payloads[0].customers[0]}
-              flightNumber={launch.flight_number}
-              success={launch.success}
-              nationality={launch.payloads[0].nationalities[0]}
-            />
-          </Link>
+          <LaunchShortInfo
+            key={index}
+            launchName={launch.name}
+            launchDateUtc={launch.date_utc}
+            rocketName={launch.rocket.name}
+            launchSiteName={launch.launchpad.full_name}
+            customer={launch.payloads[0].customers[0]}
+            flightNumber={launch.flight_number}
+            success={launch.success}
+            nationality={launch.payloads[0].nationalities[0]}
+          />
         ))}
         {pastLaunches.nextPage !== null ? (
           <div style={{ marginTop: "2rem" }}>

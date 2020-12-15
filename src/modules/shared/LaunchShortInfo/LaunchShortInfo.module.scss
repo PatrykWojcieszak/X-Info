@@ -8,6 +8,7 @@
   padding: 0.5rem;
   position: relative;
   box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
 
   .Top {
     @include flex-center;
@@ -91,6 +92,10 @@
     bottom: -15px;
     border-bottom-right-radius: 2rem;
   }
+
+  &:hover {
+    filter: brightness(140%);
+  }
 }
 
 @include large {
@@ -163,4 +168,8 @@
       border-bottom-right-radius: 1.3rem;
     }
   }
+}
+
+a {
+  text-decoration: none;
 }

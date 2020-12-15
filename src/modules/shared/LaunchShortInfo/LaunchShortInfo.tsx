@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 //STYLES
 import styles from "./LaunchShortInfo.module.scss";
@@ -20,44 +21,46 @@ const LaunchShortInfo = ({
   const dateParsed = new Date(launchDateUtc);
 
   return (
-    <div className={styles.Launch}>
-      <div className={styles.Top}>
-        <div className={styles.Name_Date}>
-          <h2>{launchName}</h2>
-          <h4>{dateParsed.toDateString()}</h4>
-        </div>
-        <div className={styles.Column}>
-          <div className={styles.Row}>
-            <h4>ROCKET: </h4>
-            <h3>{rocketName}</h3>
+    <Link to={`/launch/${flightNumber}`}>
+      <div className={styles.Launch}>
+        <div className={styles.Top}>
+          <div className={styles.Name_Date}>
+            <h2>{launchName}</h2>
+            <h4>{dateParsed.toDateString()}</h4>
           </div>
-          {success !== undefined ? (
+          <div className={styles.Column}>
             <div className={styles.Row}>
-              <h4>LAUNCH: </h4>
-              <h3 style={{ color: success ? "#4BB543" : "#FA113D" }}>
-                {success ? "SUCCESSFUL" : "FAILURE"}
-              </h3>
+              <h4>ROCKET: </h4>
+              <h3>{rocketName}</h3>
             </div>
-          ) : null}
+            {success !== undefined ? (
+              <div className={styles.Row}>
+                <h4>LAUNCH: </h4>
+                <h3 style={{ color: success ? "#4BB543" : "#FA113D" }}>
+                  {success ? "SUCCESSFUL" : "FAILURE"}
+                </h3>
+              </div>
+            ) : null}
+          </div>
+          <h4 className={styles.LaunchNumber}>#{flightNumber}</h4>
         </div>
-        <h4 className={styles.LaunchNumber}>#{flightNumber}</h4>
+        <div className={styles.Content}>
+          <div className={styles.Content__Element}>
+            <h4 className={styles.Title}>LAUNCH SITE: </h4>
+            <h4 className={styles.Title}>CUSTOMER: </h4>
+          </div>
+          <div className={styles.Content__Element}>
+            <h4 className={styles.Value}>{launchSiteName}</h4>
+            <h4 className={styles.Value}>{customer}</h4>
+          </div>
+        </div>
+        <img
+          className={styles.Flag}
+          src={`https://www.countryflags.io/${countryCode}/flat/64.png`}
+          alt="flag"
+        />
       </div>
-      <div className={styles.Content}>
-        <div className={styles.Content__Element}>
-          <h4 className={styles.Title}>LAUNCH SITE: </h4>
-          <h4 className={styles.Title}>CUSTOMER: </h4>
-        </div>
-        <div className={styles.Content__Element}>
-          <h4 className={styles.Value}>{launchSiteName}</h4>
-          <h4 className={styles.Value}>{customer}</h4>
-        </div>
-      </div>
-      <img
-        className={styles.Flag}
-        src={`https://www.countryflags.io/${countryCode}/flat/64.png`}
-        alt="flag"
-      />
-    </div>
+    </Link>
   );
 };
 
