@@ -122,7 +122,7 @@ const countries: Country[] = [
   { name: "Kenya", code: "KE" },
   { name: "Kiribati", code: "KI" },
   { name: "Korea (the Democratic People's Republic of)", code: "KP" },
-  { name: "Korea (the Republic of)", code: "KR" },
+  { name: "South Korea", code: "KR" },
   { name: "Kuwait", code: "KW" },
   { name: "Kyrgyzstan", code: "KG" },
   { name: "Lao People's Democratic Republic (the)", code: "LA" },
