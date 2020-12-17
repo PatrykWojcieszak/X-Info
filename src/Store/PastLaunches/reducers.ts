@@ -1,3 +1,4 @@
+import { faTruckLoading } from "@fortawesome/free-solid-svg-icons";
 import { updateObject } from "../../Utility/Utility";
 import {
   PastLaunchesState,
@@ -32,11 +33,19 @@ export function pastLaunchesReducer(
     case FETCH_PAST_LAUNCHES_START:
       return updateObject(state, { loading: true });
 
-    case FETCH_PAST_LAUNCHES_SUCCESS:
+    case FETCH_PAST_LAUNCHES_SUCCESS: {
+      const oldLaunches = state.pastLaunches.docs;
+      action.payload.docs = [...oldLaunches, ...action.payload.docs];
+
       return updateObject(state, {
         pastLaunches: action.payload,
         loading: false,
       });
+    }
+    // return updateObject(state, {
+    //   pastLaunches: action.payload,
+    //   loading: false,
+    // });
 
     case FETCH_PAST_LAUNCHES_FAIL:
       return updateObject(state, { loading: false });

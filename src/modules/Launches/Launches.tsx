@@ -27,8 +27,8 @@ const Launches = (props) => {
 
   const {
     onFetchLatestLaunch,
-    onFetchPastLaunch,
-    onFetchUpcomingLaunch,
+    onFetchPastLaunches,
+    onFetchUpcomingLaunches,
   } = props;
 
   const showPastLaunchesHandler = () => {
@@ -43,21 +43,21 @@ const Launches = (props) => {
 
   useEffect(() => {
     onFetchLatestLaunch();
-    onFetchPastLaunch(1);
-    onFetchUpcomingLaunch();
+    onFetchPastLaunches(1);
+    onFetchUpcomingLaunches();
 
     if (launchType === "past") {
       showPastLaunchesHandler();
     }
   }, [
     onFetchLatestLaunch,
-    onFetchPastLaunch,
-    onFetchUpcomingLaunch,
+    onFetchPastLaunches,
+    onFetchUpcomingLaunches,
     launchType,
   ]);
 
   const FetchPastLaunches = () => {
-    onFetchPastLaunch(props.pastLaunches.docs.nextPage);
+    onFetchPastLaunches(props.pastLaunches.nextPage);
   };
 
   let upcomingLaunchesArr = <></>;
@@ -193,8 +193,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onFetchLatestLaunch: () => dispatch(fetchLatestLaunch()),
-    onFetchPastLaunch: (page: number) => dispatch(fetchPastLaunches(page)),
-    onFetchUpcomingLaunch: () => dispatch(fetchUpcomingLaunches()),
+    onFetchPastLaunches: (page: number) => dispatch(fetchPastLaunches(page)),
+    onFetchUpcomingLaunches: () => dispatch(fetchUpcomingLaunches()),
   };
 };
 
