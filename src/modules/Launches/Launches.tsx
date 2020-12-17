@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
-import { useFetch } from "../../Hooks/useFetch";
 
 //COMPONENTS
 import Button from "../shared/Button/Button";
@@ -12,44 +10,26 @@ import LatestLaunch from "../shared/LaunchExtendedInfo/LaunchExtendedInfo";
 //STYLES
 import styles from "./Launches.module.scss";
 
-//MODELS
-import ILaunch from "../../Models/ILaunch";
-
-//QUERIES
-import LatestLaunchQuery from "../../Queries/LatestLaunchQuery";
-import PastLaunchesQuery from "../../Queries/PastLaunchesQuery";
-import UpcomingLaunchesQuery from "../../Queries/UpcomingLaunchesQuery";
-
 //OTHER
 import {
   pageVariantsAnim,
   showLaunchesList,
 } from "../../Animations/Animations_motion";
+import { fetchLatestLaunch } from "../../Store/LatestLaunch/actions";
+import { fetchPastLaunches } from "../../Store/PastLaunches/actions";
+import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/actions";
+import { connect } from "react-redux";
 
-const endpointURL = "https://api.spacexdata.com/v4/launches/query";
-
-const Launches = () => {
+const Launches = (props) => {
   const [showPastLaunches, setShowPastLaunches] = useState(false);
   const [showUpcomingLaunches, setShowUpcomingLaunches] = useState(true);
   const { launchType } = useParams();
 
-  const [
-    latestLaunch,
-    loadingLatestLaunch,
-    invokeFetchLatest,
-  ] = useFetch<ILaunch>(endpointURL, LatestLaunchQuery);
-
-  const [
-    upcomingLaunches,
-    loadingUpcomingLaunches,
-    invokeFetchUpcoming,
-  ] = useFetch<ILaunch>(endpointURL, UpcomingLaunchesQuery);
-
-  const [
-    pastLaunches,
-    loadingPastLaunches,
-    invokeFetchPast,
-  ] = useFetch<ILaunch>(endpointURL, PastLaunchesQuery);
+  const {
+    onFetchLatestLaunch,
+    onFetchPastLaunch,
+    onFetchUpcomingLaunch,
+  } = props;
 
   const showPastLaunchesHandler = () => {
     setShowPastLaunches(true);
@@ -62,28 +42,26 @@ const Launches = () => {
   };
 
   useEffect(() => {
-    invokeFetchLatest();
-    invokeFetchUpcoming();
-    invokeFetchPast();
+    onFetchLatestLaunch();
+    onFetchPastLaunch(1);
+    onFetchUpcomingLaunch();
 
     if (launchType === "past") {
       showPastLaunchesHandler();
     }
-  }, [invokeFetchLatest, invokeFetchUpcoming, invokeFetchPast, launchType]);
+  }, [
+    onFetchLatestLaunch,
+    onFetchPastLaunch,
+    onFetchUpcomingLaunch,
+    launchType,
+  ]);
 
   const FetchPastLaunches = () => {
-    let query = PastLaunchesQuery;
-
-    if (pastLaunches.docs.length > 0) {
-      query.options.limit += 10;
-      // query.options.page = pastLaunches.nextPage;
-    }
-
-    invokeFetchPast();
+    onFetchPastLaunch(props.pastLaunches.docs.nextPage);
   };
 
   let upcomingLaunchesArr = <></>;
-  if (loadingUpcomingLaunches === false) {
+  if (props.loadingUpcomingLaunches === false) {
     upcomingLaunchesArr = (
       <motion.div
         variants={showLaunchesList}
@@ -91,7 +69,7 @@ const Launches = () => {
         animate="in"
         exit="out"
         style={{ width: "100%" }}>
-        {upcomingLaunches.docs.map((launch, index) => (
+        {props.upcomingLaunches.docs.map((launch, index) => (
           <LaunchShortInfo
             key={index}
             launchName={launch?.name}
@@ -108,7 +86,7 @@ const Launches = () => {
   }
 
   let pastLaunchesArr = <></>;
-  if (loadingPastLaunches === false) {
+  if (props.loadingPastLaunches === false) {
     pastLaunchesArr = (
       <motion.div
         variants={showLaunchesList}
@@ -122,7 +100,7 @@ const Launches = () => {
           justifyContent: "center",
           alignItems: "center",
         }}>
-        {pastLaunches.docs.map((launch, index) => (
+        {props.pastLaunches.docs.map((launch, index) => (
           <LaunchShortInfo
             key={index}
             launchName={launch.name}
@@ -135,7 +113,7 @@ const Launches = () => {
             nationality={launch.payloads[0].nationalities[0]}
           />
         ))}
-        {pastLaunches.nextPage !== null ? (
+        {props.pastLaunches.nextPage !== null ? (
           <div style={{ marginTop: "2rem" }}>
             <Button name="LOAD MORE" clicked={FetchPastLaunches} />
           </div>
@@ -152,28 +130,29 @@ const Launches = () => {
       variants={pageVariantsAnim}
       className={styles.Launches}>
       <div className={styles.Latest}>
-        {latestLaunch.docs[0] !== undefined ? (
+        {props.latestLaunch.docs[0] !== undefined ? (
           <>
             <h2>LATEST LAUNCH</h2>
             <LatestLaunch
               showMoreDetailsButton
-              details={latestLaunch.docs[0].details}
-              launchName={latestLaunch.docs[0].name}
-              date_local={latestLaunch.docs[0].date_local}
-              date_utc={latestLaunch.docs[0].date_utc}
-              rocketName={latestLaunch.docs[0].rocket.name}
-              launchSiteName={latestLaunch.docs[0].launchpad.full_name}
-              flightNumber={latestLaunch.docs[0].flight_number}
-              patchImg={latestLaunch.docs[0].links.patch.small}
-              success={latestLaunch.docs[0].success}
-              failures={latestLaunch.docs[0].failures}
-              launchId={latestLaunch.docs[0].id}
+              details={props.latestLaunch.docs[0].details}
+              launchName={props.latestLaunch.docs[0].name}
+              date_local={props.latestLaunch.docs[0].date_local}
+              date_utc={props.latestLaunch.docs[0].date_utc}
+              rocketName={props.latestLaunch.docs[0].rocket.name}
+              launchSiteName={props.latestLaunch.docs[0].launchpad.full_name}
+              flightNumber={props.latestLaunch.docs[0].flight_number}
+              patchImg={props.latestLaunch.docs[0].links.patch.small}
+              success={props.latestLaunch.docs[0].success}
+              failures={props.latestLaunch.docs[0].failures}
+              launchId={props.latestLaunch.docs[0].id}
             />
           </>
         ) : null}
       </div>
       <div className={styles.Content}>
-        {loadingUpcomingLaunches === false || loadingPastLaunches === false ? (
+        {props.loadingUpcomingLaunches === false ||
+        props.loadingPastLaunches === false ? (
           <div className={styles.ButtonsWrapper}>
             <Button
               selected={showUpcomingLaunches}
@@ -200,4 +179,23 @@ const Launches = () => {
   );
 };
 
-export default Launches;
+const mapStateToProps = (state) => {
+  return {
+    latestLaunch: state.latestLaunch.latestLaunch,
+    loadingLatestLaunch: state.latestLaunch.loading,
+    pastLaunches: state.pastLaunches.pastLaunches,
+    loadingPastLaunches: state.pastLaunches.loading,
+    upcomingLaunches: state.upcomingLaunches.upcomingLaunches,
+    loadingUpcomingLaunches: state.upcomingLaunches.loading,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onFetchLatestLaunch: () => dispatch(fetchLatestLaunch()),
+    onFetchPastLaunch: (page: number) => dispatch(fetchPastLaunches(page)),
+    onFetchUpcomingLaunch: () => dispatch(fetchUpcomingLaunches()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Launches);

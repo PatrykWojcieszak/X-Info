@@ -27,43 +27,50 @@ import LaunchQuery from "../../Queries/LaunchQuery";
 
 //OTHER
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
+import { connect } from "react-redux";
+import { fetchLaunch } from "../../Store/Launch/actions";
 
 const endpointURL = "https://api.spacexdata.com/v4/launches/query";
 
-const Launch = () => {
+const Launch = (props) => {
   const { flight_number } = useParams();
-  const query = LaunchQuery;
-  query.query.flight_number = flight_number;
+  // const query = LaunchQuery;
+  // query.query.flight_number = flight_number;
 
-  const [launch, loadingLaunch, invokeLaunch] = useFetch<ILaunch>(
-    endpointURL,
-    query
-  );
+  const { onFetchLaunch } = props;
+
+  // const [launch, loadingLaunch, invokeLaunch] = useFetch<ILaunch>(
+  //   endpointURL,
+  //   query
+  // );
 
   useEffect(() => {
-    invokeLaunch();
-  }, [invokeLaunch]);
+    onFetchLaunch(flight_number);
+  }, [onFetchLaunch, flight_number]);
 
   //ROCKET IMAGE
   let rocketImg = <img src={falcon9} alt="Falcon 9" />;
 
-  if (launch.docs[0]?.rocket.name === "Falcon 1")
+  if (props.launch.docs[0]?.rocket.name === "Falcon 1")
     rocketImg = <img src={falcon1} alt="Falcon 1" />;
-  else if (launch.docs[0]?.rocket.name === "Falcon 9")
+  else if (props.launch.docs[0]?.rocket.name === "Falcon 9")
     rocketImg = <img src={falcon9} alt="Falcon 9" />;
-  else if (launch.docs[0]?.rocket.name === "Falcon Heavy")
+  else if (props.launch.docs[0]?.rocket.name === "Falcon Heavy")
     rocketImg = <img src={fhheavy} alt="Falcon Heavy" />;
-  else if (launch.docs[0]?.rocket.name === "Starship")
+  else if (props.launch.docs[0]?.rocket.name === "Starship")
     rocketImg = <img src={starship} alt="Starship" />;
 
   //CREW COMPONENTS
   let crew = <></>;
-  if (launch.docs[0] !== undefined && launch.docs[0].crew.length > 0) {
+  if (
+    props.launch.docs[0] !== undefined &&
+    props.launch.docs[0].crew.length > 0
+  ) {
     crew = (
       <div className={styles.AdditionalInfo}>
         <h2>CREW</h2>
         <div className={styles.AdditionalInfo__Content}>
-          {launch.docs[0].crew.map((crew, index) => (
+          {props.launch.docs[0].crew.map((crew, index) => (
             <CrewPerson
               key={index}
               name={crew.name}
@@ -78,12 +85,15 @@ const Launch = () => {
 
   //SHIP COMPONENTS
   let ship = <></>;
-  if (launch.docs[0] !== undefined && launch.docs[0].ships.length > 0) {
+  if (
+    props.launch.docs[0] !== undefined &&
+    props.launch.docs[0].ships.length > 0
+  ) {
     ship = (
       <div className={styles.AdditionalInfo}>
         <h2>USED SHIPS</h2>
         <div className={styles.AdditionalInfo__Content}>
-          {launch.docs[0].ships.map((ship, index) => (
+          {props.launch.docs[0].ships.map((ship, index) => (
             <Ship key={index} name={ship.name} img={ship.image} />
           ))}
         </div>
@@ -99,32 +109,32 @@ const Launch = () => {
         exit="out"
         variants={pageVariantsAnim}>
         <div className={styles.Launch}>
-          {launch.docs[0] !== undefined ? (
+          {props.launch.docs[0] !== undefined ? (
             <LaunchExtendedInfo
               showMoreDetailsButton={false}
-              details={launch.docs[0].details}
-              launchName={launch.docs[0].name}
-              date_local={launch.docs[0].date_local}
-              date_utc={launch.docs[0].date_utc}
-              rocketName={launch.docs[0].rocket.name}
-              launchSiteName={launch.docs[0].launchpad.full_name}
-              flightNumber={launch.docs[0].flight_number}
-              patchImg={launch.docs[0].links.patch.small}
-              success={launch.docs[0].success}
-              failures={launch.docs[0].failures}
-              launchId={launch.docs[0].id}
+              details={props.launch.docs[0].details}
+              launchName={props.launch.docs[0].name}
+              date_local={props.launch.docs[0].date_local}
+              date_utc={props.launch.docs[0].date_utc}
+              rocketName={props.launch.docs[0].rocket.name}
+              launchSiteName={props.launch.docs[0].launchpad.full_name}
+              flightNumber={props.launch.docs[0].flight_number}
+              patchImg={props.launch.docs[0].links.patch.small}
+              success={props.launch.docs[0].success}
+              failures={props.launch.docs[0].failures}
+              launchId={props.launch.docs[0].id}
             />
           ) : null}
           <div className={styles.Row}>
-            <Link to={`/vehicles/${launch.docs[0]?.rocket.name}`}>
+            <Link to={`/vehicles/${props.launch.docs[0]?.rocket.name}`}>
               <div className={styles.Rocket}>
-                <h3>{launch.docs[0]?.rocket.name}</h3>
+                <h3>{props.launch.docs[0]?.rocket.name}</h3>
                 {rocketImg}
               </div>
             </Link>
             <div className={styles.InfoContainer}>
               <div className={styles.InfoWrapper}>
-                {launch.docs[0]?.payloads.map((payload, index) => (
+                {props.launch.docs[0]?.payloads.map((payload, index) => (
                   <div key={index}>
                     <h2>PAYLOAD #{index + 1}</h2>
                     <InfoLine title="NAME" value={`${payload.name}`} />
@@ -143,7 +153,7 @@ const Launch = () => {
                 ))}
               </div>
               <div className={styles.InfoWrapper}>
-                {launch.docs[0]?.cores.map((core, index) => (
+                {props.launch.docs[0]?.cores.map((core, index) => (
                   <div key={index}>
                     <h2>CORE #{index + 1}</h2>
                     <InfoLine
@@ -169,68 +179,68 @@ const Launch = () => {
               title="spacex video"
               width="560"
               height="315"
-              src={`https://www.youtube.com/embed/${launch.docs[0]?.links.youtube_id}`}
+              src={`https://www.youtube.com/embed/${props.launch.docs[0]?.links.youtube_id}`}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen></iframe>
           </div>
         </div>
         <div style={{ padding: "0 1rem" }}>
-          {launch.docs[0]?.links.flickr.original.length > 0 ? (
-            <Gallery images={launch.docs[0].links.flickr.original} />
+          {props.launch.docs[0]?.links.flickr.original.length > 0 ? (
+            <Gallery images={props.launch.docs[0].links.flickr.original} />
           ) : null}
           <div className={styles.MediaContainer}>
-            {launch.docs[0]?.links.reddit.campaign !== null ? (
+            {props.launch.docs[0]?.links.reddit.campaign !== null ? (
               <MediaLink
                 name="CAMPAIGN"
                 icon="reddit-alien"
                 brand
-                link={launch.docs[0]?.links.reddit.campaign}
+                link={props.launch.docs[0]?.links.reddit.campaign}
               />
             ) : null}
 
-            {launch.docs[0]?.links.reddit.launch !== null ? (
+            {props.launch.docs[0]?.links.reddit.launch !== null ? (
               <MediaLink
                 name="LAUNCH"
                 icon="reddit-alien"
                 brand
-                link={launch.docs[0]?.links.reddit.launch}
+                link={props.launch.docs[0]?.links.reddit.launch}
               />
             ) : null}
 
-            {launch.docs[0]?.links.reddit.media !== null ? (
+            {props.launch.docs[0]?.links.reddit.media !== null ? (
               <MediaLink
                 name="MEDIA"
                 icon="reddit-alien"
                 brand
-                link={launch.docs[0]?.links.reddit.media}
+                link={props.launch.docs[0]?.links.reddit.media}
               />
             ) : null}
 
-            {launch.docs[0]?.links.wikipedia !== null ? (
+            {props.launch.docs[0]?.links.wikipedia !== null ? (
               <MediaLink
                 name="WIKIPEDIA"
                 icon="wikipedia-w"
                 brand
-                link={launch.docs[0]?.links.wikipedia}
+                link={props.launch.docs[0]?.links.wikipedia}
               />
             ) : null}
 
-            {launch.docs[0]?.links.article !== null ? (
+            {props.launch.docs[0]?.links.article !== null ? (
               <MediaLink
                 name="ARTICLE"
                 icon="file-alt"
                 brand={false}
-                link={launch.docs[0]?.links.article}
+                link={props.launch.docs[0]?.links.article}
               />
             ) : null}
 
-            {launch.docs[0]?.links.presskit !== null ? (
+            {props.launch.docs[0]?.links.presskit !== null ? (
               <MediaLink
                 name="PRESS KIT"
                 icon="newspaper"
                 brand={false}
-                link={launch.docs[0]?.links.presskit}
+                link={props.launch.docs[0]?.links.presskit}
               />
             ) : null}
           </div>
@@ -240,4 +250,18 @@ const Launch = () => {
   );
 };
 
-export default Launch;
+const mapStateToProps = (state) => {
+  return {
+    launch: state.launch.launch,
+    loadingLaunch: state.launch.loading,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onFetchLaunch: (flightNumber: number) =>
+      dispatch(fetchLaunch(flightNumber)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Launch);
