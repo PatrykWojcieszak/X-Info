@@ -29,13 +29,23 @@ const Home = (props) => {
     onFetchNextLaunch,
     onFetchUpcomingLaunch,
     onFetchRecentLaunch,
+    nextLaunch,
+    upcomingLaunches,
+    recentLaunches,
   } = props;
 
   useEffect(() => {
-    onFetchNextLaunch();
-    onFetchUpcomingLaunch();
-    onFetchRecentLaunch();
-  }, [onFetchNextLaunch, onFetchUpcomingLaunch, onFetchRecentLaunch]);
+    if (nextLaunch.docs[0] === undefined) onFetchNextLaunch();
+    if (upcomingLaunches.docs.length === 0) onFetchUpcomingLaunch();
+    if (recentLaunches.docs.length === 0) onFetchRecentLaunch();
+  }, [
+    onFetchNextLaunch,
+    onFetchUpcomingLaunch,
+    onFetchRecentLaunch,
+    nextLaunch,
+    upcomingLaunches,
+    recentLaunches,
+  ]);
 
   return (
     <>

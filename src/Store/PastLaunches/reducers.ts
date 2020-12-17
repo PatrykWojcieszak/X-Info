@@ -42,10 +42,6 @@ export function pastLaunchesReducer(
         loading: false,
       });
     }
-    // return updateObject(state, {
-    //   pastLaunches: action.payload,
-    //   loading: false,
-    // });
 
     case FETCH_PAST_LAUNCHES_FAIL:
       return updateObject(state, { loading: false });

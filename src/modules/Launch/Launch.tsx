@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useFetch } from "../../Hooks/useFetch";
 import { Link } from "react-router-dom";
 
 //COMPONENTS
@@ -19,30 +18,15 @@ import starship from "../../resources/images/st.png";
 import falcon9 from "../../resources/images/falcon9.png";
 import styles from "./Launch.module.scss";
 
-//MODELS
-import ILaunch from "../../Models/ILaunch";
-
-//QUERIES
-import LaunchQuery from "../../Queries/LaunchQuery";
-
 //OTHER
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 import { connect } from "react-redux";
 import { fetchLaunch } from "../../Store/Launch/actions";
 
-const endpointURL = "https://api.spacexdata.com/v4/launches/query";
-
 const Launch = (props) => {
   const { flight_number } = useParams();
-  // const query = LaunchQuery;
-  // query.query.flight_number = flight_number;
 
   const { onFetchLaunch } = props;
-
-  // const [launch, loadingLaunch, invokeLaunch] = useFetch<ILaunch>(
-  //   endpointURL,
-  //   query
-  // );
 
   useEffect(() => {
     onFetchLaunch(flight_number);
