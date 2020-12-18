@@ -92,7 +92,7 @@ const Launches = (props) => {
   }
 
   let pastLaunchesArr = <></>;
-  if (props.loadingPastLaunches === false) {
+  if (props.pastLaunches.docs.length > 0) {
     pastLaunchesArr = (
       <motion.div
         variants={showLaunchesList}
