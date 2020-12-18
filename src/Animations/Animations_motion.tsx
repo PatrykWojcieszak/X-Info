@@ -23,6 +23,11 @@ export const bottomToTopAnim = {
     y: 0,
     transition: { duration: 1.25 },
   },
+  exit: {
+    opacity: 0,
+    y: 100,
+    transition: { duration: 0.75, ease: "easeOut" },
+  },
 };
 
 export const rightToLeftAnim = {

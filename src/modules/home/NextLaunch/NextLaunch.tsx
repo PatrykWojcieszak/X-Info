@@ -17,10 +17,10 @@ const NextLaunch = ({ elonMuskQuote, nextLaunch }: nextLaunchProps) => {
   const [timer, setTimer] = useState<ITime>({
     days: 0,
     firstDateWasLater: true,
-    hours: 0,
-    minutes: 0,
+    hours: 6,
+    minutes: 94,
     months: 0,
-    seconds: 0,
+    seconds: 20,
     years: 0,
   });
 
@@ -42,53 +42,79 @@ const NextLaunch = ({ elonMuskQuote, nextLaunch }: nextLaunchProps) => {
     };
   }, [timeDiff]);
 
-  return (
-    <div className={styles.Top}>
-      <motion.div
-        variants={bottomToTopAnim}
-        initial="hidden"
-        animate="show"
-        className={styles.Top__Content}>
-        <div className={styles.LaunchTitle}>
-          <h2>NEXT LAUNCH: </h2>
-          <h2 className={styles.LaunchName}>{nextLaunch.docs[0].name}</h2>
-        </div>
-        {timer !== undefined ? (
-          <Countdown
-            days={timer.days}
-            hours={timer.hours}
-            minutes={timer.minutes}
-            seconds={timer.seconds}
-          />
-        ) : null}
-        {showLaunchDetails ? null : (
-          <div className={styles.ShowMore}>
-            <FontAwesomeIcon
-              icon="arrow-down"
-              onClick={() => setShowLaunchDetails(!showLaunchDetails)}
-            />
-            <h4>SHOW DETAILS</h4>
+  let nextLaunchWrapper = (
+    <AnimatePresence>
+      <div className={styles.Top}>
+        <motion.div
+          variants={bottomToTopAnim}
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          className={styles.Top__Content}>
+          <div className={styles.LaunchTitle}>
+            <h2>NEXT LAUNCH: </h2>
+            <h2 className={styles.LaunchName}>{nextLaunch.docs[0].name}</h2>
           </div>
-        )}
-        <AnimatePresence>
-          {showLaunchDetails ? (
-            <LaunchDetails
-              flightNumber={nextLaunch.docs[0].flight_number}
-              dateLocal={nextLaunch.docs[0].date_local}
-              details={nextLaunch.docs[0].details}
-              rocketName={nextLaunch.docs[0].rocket.name}
-              launchpadFullName={nextLaunch.docs[0].launchpad.full_name}
+          {timer !== undefined ? (
+            <Countdown
+              days={timer.days}
+              hours={timer.hours}
+              minutes={timer.minutes}
+              seconds={timer.seconds}
             />
           ) : null}
-        </AnimatePresence>
-        <div className={styles.QuoteContainer}>
-          <h2>
-            {elonMuskQuote} - <span>Elon Musk</span>
-          </h2>
-        </div>
-      </motion.div>
-    </div>
+          {showLaunchDetails ? null : (
+            <div className={styles.ShowMore}>
+              <FontAwesomeIcon
+                icon="arrow-down"
+                onClick={() => setShowLaunchDetails(!showLaunchDetails)}
+              />
+              <h4>SHOW DETAILS</h4>
+            </div>
+          )}
+          <AnimatePresence>
+            {showLaunchDetails ? (
+              <LaunchDetails
+                flightNumber={nextLaunch.docs[0].flight_number}
+                dateLocal={nextLaunch.docs[0].date_local}
+                details={nextLaunch.docs[0].details}
+                rocketName={nextLaunch.docs[0].rocket.name}
+                launchpadFullName={nextLaunch.docs[0].launchpad.full_name}
+              />
+            ) : null}
+          </AnimatePresence>
+          <div className={styles.QuoteContainer}>
+            <h2>
+              {elonMuskQuote} - <span>Elon Musk</span>
+            </h2>
+          </div>
+        </motion.div>
+      </div>
+    </AnimatePresence>
   );
+
+  if (timer.days === 0 && timer.hours === 0 && timer.minutes < 2)
+    nextLaunchWrapper = (
+      <AnimatePresence>
+        <motion.div
+          className={styles.YouTubeContainer}
+          variants={bottomToTopAnim}
+          initial="hidden"
+          animate="show"
+          exit="exit">
+          <iframe
+            title="spacex video"
+            width="100%"
+            height="100%"
+            src={`https://www.youtube.com/embed/${nextLaunch.docs[0].links.youtube_id}`}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen></iframe>
+        </motion.div>
+      </AnimatePresence>
+    );
+
+  return <div className={styles.NextLaunch}>{nextLaunchWrapper}</div>;
 };
 
 type nextLaunchProps = {

@@ -19,6 +19,7 @@ import { fetchLatestLaunch } from "../../Store/LatestLaunch/actions";
 import { fetchPastLaunches } from "../../Store/PastLaunches/actions";
 import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/actions";
 import { connect } from "react-redux";
+import Spinner from "../shared/Spinner/Spinner";
 
 const Launches = (props) => {
   const [showPastLaunches, setShowPastLaunches] = useState(false);
@@ -177,6 +178,7 @@ const Launches = (props) => {
           {showUpcomingLaunches ? upcomingLaunchesArr : null}
         </AnimatePresence>
 
+        {showPastLaunches && props.loadingPastLaunches ? <Spinner /> : null}
         <AnimatePresence>
           {showPastLaunches ? pastLaunchesArr : null}
         </AnimatePresence>

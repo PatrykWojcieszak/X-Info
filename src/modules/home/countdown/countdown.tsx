@@ -1,49 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
 import "moment-precise-range-plugin";
 
 import styles from "./Countdown.module.scss";
 
-interface Time {
-  days: Number;
-  firstDateWasLater: boolean;
-  hours: Number;
-  minutes: Number;
-  months: Number;
-  seconds: Number;
-  years: Number;
-}
-
 const Countdown = ({ days, hours, minutes, seconds }: countdownProps) => {
-  // const [timer, setTimer] = useState<Time>({
-  //   days: 0,
-  //   firstDateWasLater: true,
-  //   hours: 0,
-  //   minutes: 0,
-  //   months: 0,
-  //   seconds: 0,
-  //   years: 0,
-  // });
-
-  // const moment = require("moment");
-
-  // const timeDiff = useCallback(() => {
-  //   const launchDate = new Date(dateLocal);
-  //   const currentDate = new Date();
-  //   const diff = moment().preciseDiff(launchDate, currentDate, true);
-
-  //   return diff;
-  // }, [dateLocal, moment]);
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => setTimer(timeDiff), 1000);
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, [timeDiff]);
-
   return (
     <>
-      {/* {timer !== undefined ? ( */}
       <div className={styles.Countdown}>
         <div className={styles.Element}>
           <h2>{("0" + days).slice(-2)}</h2>
@@ -65,7 +27,6 @@ const Countdown = ({ days, hours, minutes, seconds }: countdownProps) => {
           <h4>SECONDS</h4>
         </div>
       </div>
-      {/* ) : null} */}
     </>
   );
 };

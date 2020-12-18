@@ -9,6 +9,7 @@ const NextLaunchQuery = {
       date_local: 1,
       flight_number: 1,
       details: 1,
+      links: 1,
     },
     sort: {
       flight_number: "asc",

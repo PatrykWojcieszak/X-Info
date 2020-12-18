@@ -73,6 +73,17 @@
   }
 }
 
+.NextLaunch {
+  height: 100vh;
+  position: relative;
+}
+
+.YouTubeContainer {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+}
+
 @include large {
   .Top {
     &__Content {
