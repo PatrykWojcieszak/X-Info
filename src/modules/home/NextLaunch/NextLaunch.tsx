@@ -1,28 +1,36 @@
 import React, { useState, useCallback, useEffect } from "react";
 import "moment-precise-range-plugin";
 import { motion, AnimatePresence } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+//COMPONENTS
+import LaunchDetails from "../LaunchDetails/LaunchDetails";
+import Countdown from "../Countdown/Countdown";
+
+//MODELS
+import { ITime } from "../../../Models/ITime";
+import ILaunch from "../../../Models/ILaunch";
+import IQueryResult from "../../../Models/IQueryResult";
 
 //STYLES
 import styles from "./NextLaunch.module.scss";
-import { ITime } from "../../../Models/ITime";
+
+//OTHER
 import { bottomToTopAnim } from "../../../Animations/Animations_motion";
-import Countdown from "../Countdown/Countdown";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import LaunchDetails from "../LaunchDetails/LaunchDetails";
-import IQueryResult from "../../../Models/IQueryResult";
-import ILaunch from "../../../Models/ILaunch";
+
+const initialTime: ITime = {
+  days: 0,
+  firstDateWasLater: true,
+  hours: 6,
+  minutes: 94,
+  months: 0,
+  seconds: 20,
+  years: 0,
+};
 
 const NextLaunch = ({ elonMuskQuote, nextLaunch }: nextLaunchProps) => {
   const [showLaunchDetails, setShowLaunchDetails] = useState(false);
-  const [timer, setTimer] = useState<ITime>({
-    days: 0,
-    firstDateWasLater: true,
-    hours: 6,
-    minutes: 94,
-    months: 0,
-    seconds: 20,
-    years: 0,
-  });
+  const [timer, setTimer] = useState<ITime>(initialTime);
 
   const moment = require("moment");
   const dateLocal = nextLaunch.docs[0].date_local;
@@ -36,11 +44,22 @@ const NextLaunch = ({ elonMuskQuote, nextLaunch }: nextLaunchProps) => {
   }, [dateLocal, moment]);
 
   useEffect(() => {
-    const interval = setInterval(() => setTimer(timeDiff), 1000);
+    const timeDifference = timeDiff;
+
+    const interval = setInterval(() => setTimer(timeDifference), 1000);
+
+    if (
+      timer.days === 0 &&
+      timer.hours === 0 &&
+      timer.minutes === 0 &&
+      timer.seconds === 0
+    )
+      clearInterval(interval);
+
     return () => {
       clearInterval(interval);
     };
-  }, [timeDiff]);
+  }, [timer, timeDiff]);
 
   let nextLaunchWrapper = (
     <AnimatePresence>
