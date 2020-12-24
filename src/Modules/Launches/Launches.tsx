@@ -28,8 +28,6 @@ const Launches = (props) => {
   const [showUpcomingLaunches, setShowUpcomingLaunches] = useState(true);
   const { launchType } = useParams();
 
-  console.log("render");
-
   const {
     onFetchLatestLaunch,
     onFetchPastLaunches,
@@ -119,7 +117,8 @@ const Launches = (props) => {
           />
         ))}
         {props.pastLaunches.nextPage ? (
-          <div style={{ marginTop: "2rem" }}>
+          <div style={{ marginTop: "2rem", position: "relative" }}>
+            {showPastLaunches && props.loadingPastLaunches ? <Spinner /> : null}
             <Button name="LOAD MORE" clicked={FetchPastLaunches} />
           </div>
         ) : null}
@@ -175,7 +174,6 @@ const Launches = (props) => {
           {showUpcomingLaunches ? upcomingLaunchesArr : null}
         </AnimatePresence>
 
-        {showPastLaunches && props.loadingPastLaunches ? <Spinner /> : null}
         <AnimatePresence>
           {showPastLaunches ? pastLaunchesArr : null}
         </AnimatePresence>

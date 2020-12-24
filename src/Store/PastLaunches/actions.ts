@@ -39,7 +39,6 @@ export const fetchPastLaunches = (page: number) => (dispatch, getState) => {
   }
 
   dispatch(fetchPastLaunchesStart());
-  console.log("Fetching");
   const query = PastLaunchesQuery;
   query.options.page = page;
 
