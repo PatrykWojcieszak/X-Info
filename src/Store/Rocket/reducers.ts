@@ -1,5 +1,4 @@
 import { updateObject } from "../../Utility/Utility";
-import { DEFAULT_KEY, generateCacheTTL } from "redux-cache";
 import {
   RocketState,
   FETCH_ROCKET_START,
@@ -9,7 +8,6 @@ import {
 } from "./types";
 
 const initialState: RocketState = {
-  [DEFAULT_KEY]: null,
   rocket: {
     docs: [],
     totalDocs: 0,
@@ -38,7 +36,6 @@ export function rocketReducer(
       return updateObject(state, {
         rocket: action.payload,
         loading: false,
-        [DEFAULT_KEY]: generateCacheTTL(),
       });
 
     case FETCH_ROCKET_FAIL:

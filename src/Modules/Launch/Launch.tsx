@@ -92,10 +92,16 @@ const Launch = (props) => {
                 title="LANDING"
                 value={core.landing_success ? "SUCCESSFUL" : "FAILED"}
               />
-              <InfoLine title="LANDING TYPE" value={core.landing_type} />
-              <InfoLine title="LANDING PAD" value={core.landpad.name} />
+              {core.landing_type ? (
+                <InfoLine title="LANDING TYPE" value={core.landing_type} />
+              ) : null}
+              {core.landpad.name ? (
+                <InfoLine title="LANDING PAD" value={core.landpad.name} />
+              ) : null}
               <InfoLine title="REUSED" value={core.reused ? "YES" : "NO"} />
-              <InfoLine title="FLIGHTS" value={`${core.flight}`} />
+              {core.flight ? (
+                <InfoLine title="FLIGHTS" value={`${core.flight}`} />
+              ) : null}
             </div>
           ) : null
         )}
@@ -157,18 +163,33 @@ const Launch = (props) => {
                 {props.launch.docs[0]?.payloads.map((payload, index) => (
                   <div key={index}>
                     <h2>PAYLOAD #{index + 1}</h2>
-                    <InfoLine title="NAME" value={`${payload.name}`} />
-                    <InfoLine title="CUSTOMER" value={`${payload.customers}`} />
-                    <InfoLine
-                      title="MANUFACTURER"
-                      value={`${payload.manufacturers}`}
-                    />
-                    <InfoLine title="TYPE" value={`${payload.type}`} />
-                    <InfoLine
-                      title="MASS"
-                      value={`${payload.mass_kg} kg | ${payload.mass_lbs} lb`}
-                    />
-                    <InfoLine title="ORBIT" value={`${payload.orbit}`} />
+                    {payload.name ? (
+                      <InfoLine title="NAME" value={`${payload.name}`} />
+                    ) : null}
+                    {payload.customers ? (
+                      <InfoLine
+                        title="CUSTOMER"
+                        value={`${payload.customers}`}
+                      />
+                    ) : null}
+                    {payload.manufacturers.length !== 0 ? (
+                      <InfoLine
+                        title="MANUFACTURER"
+                        value={`${payload.manufacturers[0]}`}
+                      />
+                    ) : null}
+                    {payload.type ? (
+                      <InfoLine title="TYPE" value={`${payload.type}`} />
+                    ) : null}
+                    {payload.mass_kg || payload.mass_lbs ? (
+                      <InfoLine
+                        title="MASS"
+                        value={`${payload.mass_kg} kg | ${payload.mass_lbs} lb`}
+                      />
+                    ) : null}
+                    {payload.orbit ? (
+                      <InfoLine title="ORBIT" value={`${payload.orbit}`} />
+                    ) : null}
                   </div>
                 ))}
               </div>
