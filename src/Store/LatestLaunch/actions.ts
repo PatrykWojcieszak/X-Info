@@ -1,4 +1,5 @@
 import axios from "axios";
+import { checkCacheValid } from "redux-cache";
 import ILaunch from "../../Models/ILaunch";
 import IQueryResult from "../../Models/IQueryResult";
 import LatestLaunchQuery from "../../Queries/LatestLaunchQuery";
@@ -31,20 +32,22 @@ export function fetchLatestLaunchFail(error: string): LatestLaunchTypes {
   };
 }
 
-export const fetchLatestLaunch = () => {
-  return (dispatch) => {
-    dispatch(fetchLatestLaunchStart());
+export const fetchLatestLaunch = () => (dispatch, getState) => {
+  const isCacheValid = checkCacheValid(getState, "latestLaunch");
+  if (isCacheValid) {
+    return null;
+  }
+  dispatch(fetchLatestLaunchStart());
 
-    axios
-      .post<IQueryResult<ILaunch>>(
-        "https://api.spacexdata.com/v4/launches/query",
-        LatestLaunchQuery
-      )
-      .then((res) => {
-        dispatch(fetchLatestLaunchSuccess(res.data));
-      })
-      .catch((err) => {
-        dispatch(fetchLatestLaunchFail(err));
-      });
-  };
+  axios
+    .post<IQueryResult<ILaunch>>(
+      "https://api.spacexdata.com/v4/launches/query",
+      LatestLaunchQuery
+    )
+    .then((res) => {
+      dispatch(fetchLatestLaunchSuccess(res.data));
+    })
+    .catch((err) => {
+      dispatch(fetchLatestLaunchFail(err));
+    });
 };

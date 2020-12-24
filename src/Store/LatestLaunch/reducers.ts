@@ -1,4 +1,5 @@
 import { updateObject } from "../../Utility/Utility";
+import { DEFAULT_KEY, generateCacheTTL } from "redux-cache";
 import {
   LatestLaunchState,
   FETCH_LATEST_LAUNCH_START,
@@ -9,6 +10,7 @@ import {
 
 const initialState: LatestLaunchState = {
   latestLaunch: {
+    [DEFAULT_KEY]: null,
     docs: [],
     totalDocs: 0,
     offset: 0,
@@ -36,6 +38,7 @@ export function latestLaunchReducer(
       return updateObject(state, {
         latestLaunch: action.payload,
         loading: false,
+        [DEFAULT_KEY]: generateCacheTTL(),
       });
 
     case FETCH_LATEST_LAUNCH_FAIL:

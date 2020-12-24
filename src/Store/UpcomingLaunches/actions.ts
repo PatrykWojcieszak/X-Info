@@ -1,4 +1,5 @@
 import axios from "axios";
+import { checkCacheValid } from "redux-cache";
 import ILaunch from "../../Models/ILaunch";
 import IQueryResult from "../../Models/IQueryResult";
 import UpcomingLaunchesQuery from "../../Queries/UpcomingLaunchesQuery";
@@ -33,20 +34,23 @@ export function fetchUpcomingLaunchesFail(
   };
 }
 
-export const fetchUpcomingLaunches = () => {
-  return (dispatch) => {
-    dispatch(fetchUpcomingLaunchesStart());
+export const fetchUpcomingLaunches = () => (dispatch, getState) => {
+  const isCacheValid = checkCacheValid(getState, "upcomingLaunches");
+  if (isCacheValid) {
+    return null;
+  }
 
-    axios
-      .post<IQueryResult<ILaunch>>(
-        "https://api.spacexdata.com/v4/launches/query",
-        UpcomingLaunchesQuery
-      )
-      .then((res) => {
-        dispatch(fetchUpcomingLaunchesSuccess(res.data));
-      })
-      .catch((err) => {
-        dispatch(fetchUpcomingLaunchesFail(err));
-      });
-  };
+  dispatch(fetchUpcomingLaunchesStart());
+
+  axios
+    .post<IQueryResult<ILaunch>>(
+      "https://api.spacexdata.com/v4/launches/query",
+      UpcomingLaunchesQuery
+    )
+    .then((res) => {
+      dispatch(fetchUpcomingLaunchesSuccess(res.data));
+    })
+    .catch((err) => {
+      dispatch(fetchUpcomingLaunchesFail(err));
+    });
 };

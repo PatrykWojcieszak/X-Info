@@ -1,4 +1,5 @@
 import { updateObject } from "../../Utility/Utility";
+import { DEFAULT_KEY, generateCacheTTL } from "redux-cache";
 import {
   LaunchState,
   FETCH_LAUNCH_START,
@@ -8,6 +9,7 @@ import {
 } from "./types";
 
 const initialState: LaunchState = {
+  [DEFAULT_KEY]: null,
   launch: {
     docs: [],
     totalDocs: 0,
@@ -36,6 +38,7 @@ export function launchReducer(
       return updateObject(state, {
         launch: action.payload,
         loading: false,
+        [DEFAULT_KEY]: generateCacheTTL(),
       });
 
     case FETCH_LAUNCH_FAIL:

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { checkCacheValid } from "redux-cache";
 import ILaunch from "../../Models/ILaunch";
 import IQueryResult from "../../Models/IQueryResult";
 import LaunchQuery from "../../Queries/LaunchQuery";
@@ -31,22 +32,25 @@ export function fetchLaunchFail(error: string): LaunchTypes {
   };
 }
 
-export const fetchLaunch = (flightNumber: number) => {
-  return (dispatch) => {
-    dispatch(fetchLaunchStart());
-    const query = LaunchQuery;
-    query.query.flight_number = flightNumber;
+export const fetchLaunch = (flightNumber: number) => (dispatch, getState) => {
+  const isCacheValid = checkCacheValid(getState, "launch");
+  if (isCacheValid) {
+    return null;
+  }
 
-    axios
-      .post<IQueryResult<ILaunch>>(
-        "https://api.spacexdata.com/v4/launches/query",
-        query
-      )
-      .then((res) => {
-        dispatch(fetchLaunchSuccess(res.data));
-      })
-      .catch((err) => {
-        dispatch(fetchLaunchFail(err));
-      });
-  };
+  dispatch(fetchLaunchStart());
+  const query = LaunchQuery;
+  query.query.flight_number = flightNumber;
+
+  axios
+    .post<IQueryResult<ILaunch>>(
+      "https://api.spacexdata.com/v4/launches/query",
+      query
+    )
+    .then((res) => {
+      dispatch(fetchLaunchSuccess(res.data));
+    })
+    .catch((err) => {
+      dispatch(fetchLaunchFail(err));
+    });
 };

@@ -1,4 +1,5 @@
 import { updateObject } from "../../Utility/Utility";
+import { DEFAULT_KEY, generateCacheTTL } from "redux-cache";
 
 import {
   PastLaunchesState,
@@ -9,6 +10,7 @@ import {
 } from "./types";
 
 const initialState: PastLaunchesState = {
+  [DEFAULT_KEY]: null,
   pastLaunches: {
     docs: [],
     totalDocs: 0,
@@ -36,6 +38,7 @@ export function pastLaunchesReducer(
     case FETCH_PAST_LAUNCHES_SUCCESS: {
       return {
         ...state,
+        [DEFAULT_KEY]: generateCacheTTL(),
         pastLaunches: {
           ...state.pastLaunches,
           ...action.payload,

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { checkCacheValid } from "redux-cache";
 import IQueryResult from "../../Models/IQueryResult";
 import IRocket from "../../Models/IRocket";
 import RocketQuery from "../../Queries/RocketQuery";
@@ -31,22 +32,25 @@ export function fetchRocketFail(error: string): RocketTypes {
   };
 }
 
-export const fetchRocket = (rocketName: string) => {
-  return (dispatch) => {
-    dispatch(fetchRocketStart());
-    const query = RocketQuery;
-    query.query.name = rocketName;
+export const fetchRocket = (rocketName: string) => (dispatch, getState) => {
+  const isCacheValid = checkCacheValid(getState, "rocket");
+  if (isCacheValid) {
+    return null;
+  }
 
-    axios
-      .post<IQueryResult<IRocket>>(
-        "https://api.spacexdata.com/v4/rockets/query",
-        query
-      )
-      .then((res) => {
-        dispatch(fetchRocketSuccess(res.data));
-      })
-      .catch((err) => {
-        dispatch(fetchRocketFail(err));
-      });
-  };
+  dispatch(fetchRocketStart());
+  const query = RocketQuery;
+  query.query.name = rocketName;
+
+  axios
+    .post<IQueryResult<IRocket>>(
+      "https://api.spacexdata.com/v4/rockets/query",
+      query
+    )
+    .then((res) => {
+      dispatch(fetchRocketSuccess(res.data));
+    })
+    .catch((err) => {
+      dispatch(fetchRocketFail(err));
+    });
 };

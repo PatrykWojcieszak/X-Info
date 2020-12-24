@@ -1,4 +1,5 @@
 import axios from "axios";
+import { checkCacheValid } from "redux-cache";
 import ILaunch from "../../Models/ILaunch";
 import IQueryResult from "../../Models/IQueryResult";
 import PastLaunchesQuery from "../../Queries/PastLaunchesQuery";
@@ -31,23 +32,26 @@ export function fetchPastLaunchesFail(error: string): PastLaunchesTypes {
   };
 }
 
-export const fetchPastLaunches = (page: number) => {
-  return (dispatch) => {
-    dispatch(fetchPastLaunchesStart());
+export const fetchPastLaunches = (page: number) => (dispatch, getState) => {
+  const isCacheValid = checkCacheValid(getState, "pastLaunches");
+  if (isCacheValid && page === 1) {
+    return null;
+  }
 
-    const query = PastLaunchesQuery;
-    query.options.page = page;
+  dispatch(fetchPastLaunchesStart());
+  console.log("Fetching");
+  const query = PastLaunchesQuery;
+  query.options.page = page;
 
-    axios
-      .post<IQueryResult<ILaunch>>(
-        "https://api.spacexdata.com/v4/launches/query",
-        query
-      )
-      .then((res) => {
-        dispatch(fetchPastLaunchesSuccess(res.data));
-      })
-      .catch((err) => {
-        dispatch(fetchPastLaunchesFail(err));
-      });
-  };
+  axios
+    .post<IQueryResult<ILaunch>>(
+      "https://api.spacexdata.com/v4/launches/query",
+      query
+    )
+    .then((res) => {
+      dispatch(fetchPastLaunchesSuccess(res.data));
+    })
+    .catch((err) => {
+      dispatch(fetchPastLaunchesFail(err));
+    });
 };
