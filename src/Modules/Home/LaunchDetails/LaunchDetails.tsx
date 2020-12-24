@@ -20,11 +20,11 @@ const LaunchDetails = ({
       animate="show"
       className={styles.LaunchDetails}>
       <div className={styles.TitleContainer}>
-        <h3>FLIGHT:</h3>
-        <h3>LAUNCH DATE:</h3>
-        <h3>ROCKET:</h3>
-        <h3>LAUNCH SITE:</h3>
-        <h3>DETAILS:</h3>
+        {flightNumber ? <h3>FLIGHT:</h3> : null}
+        {dateLocal ? <h3>LAUNCH DATE:</h3> : null}
+        {rocketName ? <h3>ROCKET:</h3> : null}
+        {launchpadFullName ? <h3>LAUNCH SITE:</h3> : null}
+        {details ? <h3>DETAILS:</h3> : null}
       </div>
       <div className={styles.ValuesContainer}>
         <h3>{flightNumber}</h3>

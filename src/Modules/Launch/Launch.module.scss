@@ -95,7 +95,7 @@
   @include flex-center;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  margin-bottom: 3rem;
+  margin: 3rem 0;
 }
 
 @include desktop {
@@ -157,4 +157,22 @@
 
 a {
   text-decoration: none;
+}
+
+.NoLaunchInfo {
+  @include flex-center-column;
+  height: 95vh;
+
+  h2 {
+    font-weight: 100;
+    color: $fontPrimary;
+    margin-bottom: 2rem;
+  }
+
+  img {
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    transform: rotate(30deg);
+  }
 }

@@ -15,8 +15,8 @@
   }
 
   .RightContainer {
-    @include flex-center-column;
     box-sizing: border-box;
+    width: 100%;
 
     .MainInfoContainer {
       background-color: $foreground;

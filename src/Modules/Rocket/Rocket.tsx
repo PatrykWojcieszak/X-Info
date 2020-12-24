@@ -94,7 +94,7 @@ const Rocket = (props) => {
 
   //OVERVIEW DETAILS
   let overViewDetails = <></>;
-  if (props.loadingRocket === false)
+  if (!props.loadingRocket)
     overViewDetails = (
       <motion.div
         variants={rightToLeftAnim}
@@ -102,18 +102,28 @@ const Rocket = (props) => {
         animate="show"
         exit="exit"
         className={styles.Details}>
-        <InfoLine
-          title="HEIGHT"
-          value={`${props.rocket.docs[0].height.meters} m | ${props.rocket.docs[0].height.feet} feet}`}
-        />
-        <InfoLine
-          title="DIAMETER"
-          value={`${props.rocket.docs[0].diameter.meters} m | ${props.rocket.docs[0].diameter.feet} feet}`}
-        />
-        <InfoLine
-          title="MASS"
-          value={`${props.rocket.docs[0].mass.kg} kg | ${props.rocket.docs[0].mass.lb} lb}`}
-        />
+        {props.rocket.docs[0].height.meters ||
+        props.rocket.docs[0].height.feet ? (
+          <InfoLine
+            title="HEIGHT"
+            value={`${props.rocket.docs[0].height.meters} m | ${props.rocket.docs[0].height.feet} feet`}
+          />
+        ) : null}
+
+        {props.rocket.docs[0].diameter.meters ||
+        props.rocket.docs[0].diameter.feet ? (
+          <InfoLine
+            title="DIAMETER"
+            value={`${props.rocket.docs[0].diameter.meters} m | ${props.rocket.docs[0].diameter.feet} feet`}
+          />
+        ) : null}
+        {props.rocket.docs[0].mass.kg || props.rocket.docs[0].mass.lb ? (
+          <InfoLine
+            title="MASS"
+            value={`${props.rocket.docs[0].mass.kg} kg | ${props.rocket.docs[0].mass.lb} lb`}
+          />
+        ) : null}
+
         {props.rocket.docs[0].payload_weights.map((payload, index) => (
           <InfoLine
             key={index}
@@ -126,7 +136,7 @@ const Rocket = (props) => {
 
   //STAGE 1 DETAILS
   let stageOneDetails = <></>;
-  if (props.loadingRocket === false)
+  if (!props.loadingRocket)
     stageOneDetails = (
       <motion.div
         variants={rightToLeftAnim}
@@ -134,56 +144,82 @@ const Rocket = (props) => {
         animate="show"
         exit="exit"
         className={styles.Details}>
-        <InfoLine
-          title="ENGINES"
-          value={`${props.rocket.docs[0].first_stage.engines}`}
-        />
-        <InfoLine
-          title="THRUST AT SEA LEVEL"
-          value={`${props.rocket.docs[0].first_stage.thrust_sea_level.kN} kn | ${props.rocket.docs[0].first_stage.thrust_sea_level.lbf} lbf}`}
-        />
-        <InfoLine
-          title="THRUST VACUUM"
-          value={`${props.rocket.docs[0].first_stage.thrust_vacuum.kN} kn | ${props.rocket.docs[0].first_stage.thrust_vacuum.lbf} lbf}`}
-        />
-        <InfoLine
-          title="FUEL AMOUNT"
-          value={`${props.rocket.docs[0].first_stage.fuel_amount_tons} tons`}
-        />
-        <InfoLine
-          title="BURN TIME"
-          value={`${props.rocket.docs[0].first_stage.burn_time_sec} sec `}
-        />
-        <InfoLine
-          title="TYPE"
-          value={`${props.rocket.docs[0].engines.type} `}
-        />
-        <InfoLine
-          title="VERSION"
-          value={`${props.rocket.docs[0].engines.version}`}
-        />
-        <InfoLine
-          title="LAYOUT"
-          value={`${props.rocket.docs[0].engines.layout}`}
-        />
+        {props.rocket.docs[0].first_stage.engines ? (
+          <InfoLine
+            title="ENGINES"
+            value={`${props.rocket.docs[0].first_stage.engines}`}
+          />
+        ) : null}
+
+        {props.rocket.docs[0].first_stage.thrust_sea_level.kN ||
+        props.rocket.docs[0].first_stage.thrust_sea_level.lbf ? (
+          <InfoLine
+            title="THRUST AT SEA LEVEL"
+            value={`${props.rocket.docs[0].first_stage.thrust_sea_level.kN} kn | ${props.rocket.docs[0].first_stage.thrust_sea_level.lbf} lbf`}
+          />
+        ) : null}
+
+        {props.rocket.docs[0].first_stage.thrust_vacuum.kN ||
+        props.rocket.docs[0].first_stage.thrust_vacuum.lbf ? (
+          <InfoLine
+            title="THRUST VACUUM"
+            value={`${props.rocket.docs[0].first_stage.thrust_vacuum.kN} kn | ${props.rocket.docs[0].first_stage.thrust_vacuum.lbf} lbf`}
+          />
+        ) : null}
+        {props.rocket.docs[0].first_stage.fuel_amount_tons ? (
+          <InfoLine
+            title="FUEL AMOUNT"
+            value={`${props.rocket.docs[0].first_stage.fuel_amount_tons} tons`}
+          />
+        ) : null}
+        {props.rocket.docs[0].first_stage.burn_time_sec ? (
+          <InfoLine
+            title="BURN TIME"
+            value={`${props.rocket.docs[0].first_stage.burn_time_sec} sec `}
+          />
+        ) : null}
+        {props.rocket.docs[0].engines.type ? (
+          <InfoLine
+            title="TYPE"
+            value={`${props.rocket.docs[0].engines.type} `}
+          />
+        ) : null}
+        {props.rocket.docs[0].engines.version ? (
+          <InfoLine
+            title="VERSION"
+            value={`${props.rocket.docs[0].engines.version}`}
+          />
+        ) : null}
+        {props.rocket.docs[0].engines.layout ? (
+          <InfoLine
+            title="LAYOUT"
+            value={`${props.rocket.docs[0].engines.layout}`}
+          />
+        ) : null}
+
         <InfoLine
           title="REUSABLE"
           value={props.rocket.docs[0].first_stage.reusable ? "YES" : "NO"}
         />
-        <InfoLine
-          title="PROPELLANT 1"
-          value={`${props.rocket.docs[0].engines.propellant_1}`}
-        />
-        <InfoLine
-          title="PROPELLANT 2"
-          value={`${props.rocket.docs[0].engines.propellant_2}`}
-        />
+        {props.rocket.docs[0].engines.propellant_1 ? (
+          <InfoLine
+            title="PROPELLANT 1"
+            value={`${props.rocket.docs[0].engines.propellant_1}`}
+          />
+        ) : null}
+
+        {props.rocket.docs[0].engines.propellant_2 ? (
+          <InfoLine
+            title="PROPELLANT 2"
+            value={`${props.rocket.docs[0].engines.propellant_2}`}
+          />
+        ) : null}
       </motion.div>
     );
 
   //STAGE 2 DETAILS
   let stageTwoDetails = <></>;
-  if (props.loadingRocket === false)
+  if (!props.loadingRocket)
     stageTwoDetails = (
       <motion.div
         variants={rightToLeftAnim}
@@ -191,28 +227,37 @@ const Rocket = (props) => {
         animate="show"
         exit="exit"
         className={styles.Details}>
-        <InfoLine
-          title="ENGINES"
-          value={`${props.rocket.docs[0].second_stage.engines}`}
-        />
-        <InfoLine
-          title="THRUST"
-          value={`${props.rocket.docs[0].second_stage.thrust.kN} kn | ${props.rocket.docs[0].second_stage.thrust.lbf} lbf`}
-        />
-        <InfoLine
-          title="FUEL AMOUNT"
-          value={`${props.rocket.docs[0].second_stage.fuel_amount_tons} tons`}
-        />
-        <InfoLine
-          title="BURN TIME"
-          value={`${props.rocket.docs[0].second_stage.burn_time_sec} sec`}
-        />
+        {props.rocket.docs[0].second_stage.engines ? (
+          <InfoLine
+            title="ENGINES"
+            value={`${props.rocket.docs[0].second_stage.engines}`}
+          />
+        ) : null}
+        {props.rocket.docs[0].second_stage.thrust.kN ||
+        props.rocket.docs[0].second_stage.thrust.lbf ? (
+          <InfoLine
+            title="THRUST"
+            value={`${props.rocket.docs[0].second_stage.thrust.kN} kn | ${props.rocket.docs[0].second_stage.thrust.lbf} lbf`}
+          />
+        ) : null}
+        {props.rocket.docs[0].second_stage.fuel_amount_tons ? (
+          <InfoLine
+            title="FUEL AMOUNT"
+            value={`${props.rocket.docs[0].second_stage.fuel_amount_tons} tons`}
+          />
+        ) : null}
+        {props.rocket.docs[0].second_s ? (
+          <InfoLine
+            title="BURN TIME"
+            value={`${props.rocket.docs[0].second_stage.burn_time_sec} sec`}
+          />
+        ) : null}
       </motion.div>
     );
 
-  //STAGE 2 DETAILS
+  //LANDING
   let landingLegsDetails = <></>;
-  if (props.loadingRocket === false)
+  if (!props.loadingRocket)
     landingLegsDetails = (
       <motion.div
         variants={rightToLeftAnim}
@@ -220,14 +265,19 @@ const Rocket = (props) => {
         animate="show"
         exit="exit"
         className={styles.Details}>
-        <InfoLine
-          title="NUMBER"
-          value={`${props.rocket.docs[0].landing_legs.number}`}
-        />
-        <InfoLine
-          title="MATERIAL"
-          value={`${props.rocket.docs[0].landing_legs.material} `}
-        />
+        {props.rocket.docs[0].landing_legs.number ? (
+          <InfoLine
+            title="NUMBER"
+            value={`${props.rocket.docs[0].landing_legs.number}`}
+          />
+        ) : null}
+
+        {props.rocket.docs[0].landing_legs.material ? (
+          <InfoLine
+            title="MATERIAL"
+            value={`${props.rocket.docs[0].landing_legs.material} `}
+          />
+        ) : null}
       </motion.div>
     );
 
@@ -282,11 +332,15 @@ const Rocket = (props) => {
                 clicked={showSecondStageHandler}
                 selected={showSecondStage}
               />
-              <Button
-                name="LANDING LEGS"
-                clicked={showLandingLegsHandler}
-                selected={showLandingLegs}
-              />
+              {!props.loadingRocket &&
+              (props.rocket.docs[0].landing_legs.number ||
+                props.rocket.docs[0].landing_legs.material) ? (
+                <Button
+                  name="LANDING LEGS"
+                  clicked={showLandingLegsHandler}
+                  selected={showLandingLegs}
+                />
+              ) : null}
             </div>
             <div className={styles.DetailsContainer}>
               <AnimatePresence>

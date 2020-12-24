@@ -10,6 +10,7 @@ import Gallery from "../Shared/Gallery/Gallery";
 import CrewPerson from "./CrewPerson/CrewPerson";
 import Ship from "./Ship/Ship";
 import MediaLink from "./MediaLink/MediaLink";
+import Button from "../Shared/Button/Button";
 
 //STYLE
 import fhheavy from "../../resources/images/falconHeavy.png";
@@ -17,6 +18,7 @@ import falcon1 from "../../resources/images/f1.png";
 import starship from "../../resources/images/st.png";
 import falcon9 from "../../resources/images/falcon9.png";
 import styles from "./Launch.module.scss";
+import sadRocket from "../../resources/images/sadRocket.png";
 
 //OTHER
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
@@ -46,10 +48,7 @@ const Launch = (props) => {
 
   //CREW COMPONENTS
   let crew = <></>;
-  if (
-    props.launch.docs[0] !== undefined &&
-    props.launch.docs[0].crew.length > 0
-  ) {
+  if (props.launch.docs[0] && props.launch.docs[0].crew.length > 0) {
     crew = (
       <div className={styles.AdditionalInfo}>
         <h2>CREW</h2>
@@ -69,10 +68,7 @@ const Launch = (props) => {
 
   //SHIP COMPONENTS
   let ship = <></>;
-  if (
-    props.launch.docs[0] !== undefined &&
-    props.launch.docs[0].ships.length > 0
-  ) {
+  if (props.launch.docs[0] && props.launch.docs[0].ships.length > 0) {
     ship = (
       <div className={styles.AdditionalInfo}>
         <h2>USED SHIPS</h2>
@@ -85,30 +81,70 @@ const Launch = (props) => {
     );
   }
 
-  return (
+  let cores = (
     <>
-      <motion.div
-        initial="initial"
-        animate="in"
-        exit="out"
-        variants={pageVariantsAnim}>
+      <div className={styles.InfoWrapper}>
+        {props.launch.docs[0]?.cores.map((core, index) =>
+          core.landpad ? (
+            <div key={index}>
+              <h2>CORE #{index + 1}</h2>
+              <InfoLine
+                title="LANDING"
+                value={core.landing_success ? "SUCCESSFUL" : "FAILED"}
+              />
+              <InfoLine title="LANDING TYPE" value={core.landing_type} />
+              <InfoLine title="LANDING PAD" value={core.landpad.name} />
+              <InfoLine title="REUSED" value={core.reused ? "YES" : "NO"} />
+              <InfoLine title="FLIGHTS" value={`${core.flight}`} />
+            </div>
+          ) : null
+        )}
+      </div>
+    </>
+  );
+
+  let youtube = <></>;
+  if (props.launch.docs[0]?.links.youtube_id) {
+    youtube = (
+      <div className={styles.YoutubeContainer}>
+        <iframe
+          title="spacex video"
+          width="560"
+          height="315"
+          src={`https://www.youtube.com/embed/${props.launch.docs[0]?.links.youtube_id}`}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen></iframe>
+      </div>
+    );
+  }
+
+  let launchInformation = (
+    <div className={styles.NoLaunchInfo}>
+      <img src={sadRocket} alt="sad rocket" />
+      <h2>There is no info about the launch yet!</h2>
+      <Button name="GET BACK TO EARTH" />
+    </div>
+  );
+
+  if (props.launch.docs[0]) {
+    launchInformation = (
+      <>
         <div className={styles.Launch}>
-          {props.launch.docs[0] !== undefined ? (
-            <LaunchExtendedInfo
-              showMoreDetailsButton={false}
-              details={props.launch.docs[0].details}
-              launchName={props.launch.docs[0].name}
-              date_local={props.launch.docs[0].date_local}
-              date_utc={props.launch.docs[0].date_utc}
-              rocketName={props.launch.docs[0].rocket.name}
-              launchSiteName={props.launch.docs[0].launchpad.full_name}
-              flightNumber={props.launch.docs[0].flight_number}
-              patchImg={props.launch.docs[0].links.patch.small}
-              success={props.launch.docs[0].success}
-              failures={props.launch.docs[0].failures}
-              launchId={props.launch.docs[0].id}
-            />
-          ) : null}
+          <LaunchExtendedInfo
+            showMoreDetailsButton={false}
+            details={props.launch.docs[0].details}
+            launchName={props.launch.docs[0].name}
+            date_local={props.launch.docs[0].date_local}
+            date_utc={props.launch.docs[0].date_utc}
+            rocketName={props.launch.docs[0].rocket.name}
+            launchSiteName={props.launch.docs[0].launchpad.full_name}
+            flightNumber={props.launch.docs[0].flight_number}
+            patchImg={props.launch.docs[0].links.patch.small}
+            success={props.launch.docs[0].success}
+            failures={props.launch.docs[0].failures}
+            launchId={props.launch.docs[0].id}
+          />
           <div className={styles.Row}>
             <Link to={`/vehicles/${props.launch.docs[0]?.rocket.name}`}>
               <div className={styles.Rocket}>
@@ -136,45 +172,19 @@ const Launch = (props) => {
                   </div>
                 ))}
               </div>
-              <div className={styles.InfoWrapper}>
-                {props.launch.docs[0]?.cores.map((core, index) => (
-                  <div key={index}>
-                    <h2>CORE #{index + 1}</h2>
-                    <InfoLine
-                      title="LANDING"
-                      value={core.landing_success ? "SUCCESSFUL" : "FAILED"}
-                    />
-                    <InfoLine title="LANDING TYPE" value={core.landing_type} />
-                    <InfoLine title="LANDING PAD" value={core.landpad.name} />
-                    <InfoLine
-                      title="REUSED"
-                      value={core.reused ? "YES" : "NO"}
-                    />
-                    <InfoLine title="FLIGHTS" value={`${core.flight}`} />
-                  </div>
-                ))}
-              </div>
+              {cores}
             </div>
           </div>
           {crew}
           {ship}
-          <div className={styles.YoutubeContainer}>
-            <iframe
-              title="spacex video"
-              width="560"
-              height="315"
-              src={`https://www.youtube.com/embed/${props.launch.docs[0]?.links.youtube_id}`}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen></iframe>
-          </div>
+          {youtube}
         </div>
         <div style={{ padding: "0 1rem" }}>
           {props.launch.docs[0]?.links.flickr.original.length > 0 ? (
             <Gallery images={props.launch.docs[0].links.flickr.original} />
           ) : null}
           <div className={styles.MediaContainer}>
-            {props.launch.docs[0]?.links.reddit.campaign !== null ? (
+            {props.launch.docs[0]?.links.reddit.campaign ? (
               <MediaLink
                 name="CAMPAIGN"
                 icon="reddit-alien"
@@ -183,7 +193,7 @@ const Launch = (props) => {
               />
             ) : null}
 
-            {props.launch.docs[0]?.links.reddit.launch !== null ? (
+            {props.launch.docs[0]?.links.reddit.launch ? (
               <MediaLink
                 name="LAUNCH"
                 icon="reddit-alien"
@@ -192,7 +202,7 @@ const Launch = (props) => {
               />
             ) : null}
 
-            {props.launch.docs[0]?.links.reddit.media !== null ? (
+            {props.launch.docs[0]?.links.reddit.media ? (
               <MediaLink
                 name="MEDIA"
                 icon="reddit-alien"
@@ -201,7 +211,7 @@ const Launch = (props) => {
               />
             ) : null}
 
-            {props.launch.docs[0]?.links.wikipedia !== null ? (
+            {props.launch.docs[0]?.links.wikipedia ? (
               <MediaLink
                 name="WIKIPEDIA"
                 icon="wikipedia-w"
@@ -210,7 +220,7 @@ const Launch = (props) => {
               />
             ) : null}
 
-            {props.launch.docs[0]?.links.article !== null ? (
+            {props.launch.docs[0]?.links.article ? (
               <MediaLink
                 name="ARTICLE"
                 icon="file-alt"
@@ -219,7 +229,7 @@ const Launch = (props) => {
               />
             ) : null}
 
-            {props.launch.docs[0]?.links.presskit !== null ? (
+            {props.launch.docs[0]?.links.presskit ? (
               <MediaLink
                 name="PRESS KIT"
                 icon="newspaper"
@@ -229,6 +239,18 @@ const Launch = (props) => {
             ) : null}
           </div>
         </div>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <motion.div
+        initial="initial"
+        animate="in"
+        exit="out"
+        variants={pageVariantsAnim}>
+        {launchInformation}
       </motion.div>
     </>
   );

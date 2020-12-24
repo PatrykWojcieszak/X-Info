@@ -48,7 +48,7 @@ const Launches = (props) => {
   };
 
   useEffect(() => {
-    if (latestLaunch.docs[0] === undefined) onFetchLatestLaunch();
+    if (!latestLaunch.docs[0]) onFetchLatestLaunch();
     if (latestLaunch.docs.length === 0) onFetchPastLaunches(1);
     if (latestLaunch.docs.length === 0) onFetchUpcomingLaunches();
 
@@ -70,7 +70,7 @@ const Launches = (props) => {
   };
 
   let upcomingLaunchesArr = <></>;
-  if (props.loadingUpcomingLaunches === false) {
+  if (!props.loadingUpcomingLaunches) {
     upcomingLaunchesArr = (
       <motion.div
         variants={showLaunchesList}
@@ -122,7 +122,7 @@ const Launches = (props) => {
             nationality={launch.payloads[0].nationalities[0]}
           />
         ))}
-        {props.pastLaunches.nextPage !== null ? (
+        {props.pastLaunches.nextPage ? (
           <div style={{ marginTop: "2rem" }}>
             <Button name="LOAD MORE" clicked={FetchPastLaunches} />
           </div>
@@ -139,7 +139,7 @@ const Launches = (props) => {
       variants={pageVariantsAnim}
       className={styles.Launches}>
       <div className={styles.Latest}>
-        {props.latestLaunch.docs[0] !== undefined ? (
+        {props.latestLaunch.docs[0] ? (
           <>
             <h2>LATEST LAUNCH</h2>
             <LatestLaunch
@@ -160,8 +160,7 @@ const Launches = (props) => {
         ) : null}
       </div>
       <div className={styles.Content}>
-        {props.loadingUpcomingLaunches === false ||
-        props.loadingPastLaunches === false ? (
+        {!props.loadingUpcomingLaunches || !props.loadingPastLaunches ? (
           <div className={styles.ButtonsWrapper}>
             <Button
               selected={showUpcomingLaunches}

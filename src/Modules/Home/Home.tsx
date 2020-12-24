@@ -29,7 +29,7 @@ const Home = (props) => {
   } = props;
 
   useEffect(() => {
-    if (nextLaunch.docs[0] === undefined) onFetchNextLaunch();
+    if (!nextLaunch.docs[0]) onFetchNextLaunch();
     if (upcomingLaunches.docs.length === 0) onFetchUpcomingLaunch();
     if (recentLaunches.docs.length === 0) onFetchRecentLaunch();
   }, [
@@ -49,14 +49,14 @@ const Home = (props) => {
         exit="out"
         variants={pageVariantsAnim}
         className={styles.Home}>
-        {props.loadingNextLaunch === false ? (
+        {!props.loadingNextLaunch ? (
           <NextLaunch elonMuskQuote={RandomQuote()} nextLaunch={nextLaunch} />
         ) : null}
         <div className={styles.Home__Content}>
-          {props.loadingRecentLaunches === false ? (
+          {!props.loadingRecentLaunches ? (
             <RecentLaunches launches={props.recentLaunches.docs} />
           ) : null}
-          {props.loadingUpcomingLaunches === false ? (
+          {!props.loadingUpcomingLaunches ? (
             <UpcomingLaunches launches={props.upcomingLaunches.docs} />
           ) : null}
         </div>

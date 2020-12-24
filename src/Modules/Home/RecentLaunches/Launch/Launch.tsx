@@ -14,7 +14,7 @@ const Launch = ({ flightNumber, name, patch, date, success }: launchProps) => {
 
   return (
     <div className={styles.Launch}>
-      <img src={patch !== null ? patch : noImage} alt="patch" />
+      <img src={patch ? patch : noImage} alt="patch" />
       <h3>{name}</h3>
       <div className={styles.Column}>
         <h4>{dateParsed.toDateString()}</h4>
