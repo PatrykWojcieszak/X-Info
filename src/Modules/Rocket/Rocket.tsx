@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 //COMPONENTS
-import Button from "../shared/Button/Button";
-import Gallery from "../shared/Gallery/Gallery";
-import InfoLine from "../shared/InfoLine/InfoLine";
+import Button from "../Shared/Button/Button";
+import Gallery from "../Shared/Gallery/Gallery";
+import InfoLine from "../Shared/InfoLine/InfoLine";
 
 //STYLES
 import styles from "./Rocket.module.scss";

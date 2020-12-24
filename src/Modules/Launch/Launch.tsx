@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 //COMPONENTS
-import LaunchExtendedInfo from "../shared/LaunchExtendedInfo/LaunchExtendedInfo";
-import InfoLine from "../shared/InfoLine/InfoLine";
-import Gallery from "../shared/Gallery/Gallery";
+import LaunchExtendedInfo from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo";
+import InfoLine from "../Shared/InfoLine/InfoLine";
+import Gallery from "../Shared/Gallery/Gallery";
 import CrewPerson from "./CrewPerson/CrewPerson";
 import Ship from "./Ship/Ship";
 import MediaLink from "./MediaLink/MediaLink";

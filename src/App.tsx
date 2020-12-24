@@ -2,33 +2,33 @@ import React, { Suspense } from "react";
 import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
-import Nav from "./modules/shared/Nav/Nav";
-import Footer from "./modules/shared/Footer/Footer";
+import Nav from "./Modules/Shared/Nav/Nav";
+import Footer from "./Modules/Shared/Footer/Footer";
 
 import "./App.scss";
 
 const Home = React.lazy(() => {
-  return import("./modules/Home/Home");
+  return import("./Modules/Home/Home");
 });
 
 const Launches = React.lazy(() => {
-  return import("./modules/Launches/Launches");
+  return import("./Modules/Launches/Launches");
 });
 
 const About = React.lazy(() => {
-  return import("./modules/About/About");
+  return import("./Modules/About/About");
 });
 
 const Vehicles = React.lazy(() => {
-  return import("./modules/Vehicles/Vehicles");
+  return import("./Modules/Vehicles/Vehicles");
 });
 
 const Rocket = React.lazy(() => {
-  return import("./modules/Rocket/Rocket");
+  return import("./Modules/Rocket/Rocket");
 });
 
 const Launch = React.lazy(() => {
-  return import("./modules/Launch/Launch");
+  return import("./Modules/Launch/Launch");
 });
 
 function App() {

@@ -3,9 +3,10 @@ import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 //COMPONENTS
-import Button from "../shared/Button/Button";
-import LaunchShortInfo from "../shared/LaunchShortInfo/LaunchShortInfo";
-import LatestLaunch from "../shared/LaunchExtendedInfo/LaunchExtendedInfo";
+import Button from "../Shared/Button/Button";
+import LaunchShortInfo from "../Shared/LaunchShortInfo/LaunchShortInfo";
+import LatestLaunch from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo";
+import Spinner from "../Shared/Spinner/Spinner";
 
 //STYLES
 import styles from "./Launches.module.scss";
@@ -15,11 +16,12 @@ import {
   pageVariantsAnim,
   showLaunchesList,
 } from "../../Animations/Animations_motion";
+
+//REDUX
 import { fetchLatestLaunch } from "../../Store/LatestLaunch/actions";
 import { fetchPastLaunches } from "../../Store/PastLaunches/actions";
 import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/actions";
 import { connect } from "react-redux";
-import Spinner from "../shared/Spinner/Spinner";
 
 const Launches = (props) => {
   const [showPastLaunches, setShowPastLaunches] = useState(false);

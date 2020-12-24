@@ -21,10 +21,10 @@ import { bottomToTopAnim } from "../../../Animations/Animations_motion";
 const initialTime: ITime = {
   days: 0,
   firstDateWasLater: true,
-  hours: 6,
-  minutes: 94,
+  hours: 4,
+  minutes: 20,
   months: 0,
-  seconds: 20,
+  seconds: 69,
   years: 0,
 };
 

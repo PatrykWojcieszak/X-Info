@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 //COMPONENTS
-import Button from "../../shared/Button/Button";
-import LaunchShortInfo from "../../shared/LaunchShortInfo/LaunchShortInfo";
+import Button from "../../Shared/Button/Button";
+import LaunchShortInfo from "../../Shared/LaunchShortInfo/LaunchShortInfo";
 
 //STYLES
 import styles from "./UpcomingLaunches.module.scss";

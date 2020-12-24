@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 //COMPONENTS
 import Launch from "./Launch/Launch";
-import Button from "../../shared/Button/Button";
+import Button from "../../Shared/Button/Button";
 
 //STYLES
 import styles from "./RecentLaunches.module.scss";
