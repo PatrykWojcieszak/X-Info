@@ -2,7 +2,7 @@ const RecentLaunchesQuery = {
   query: {
     date_utc: {
       $gte: "2020-06-06T00:00:00.000Z",
-      $lte: "2020-12-06T00:00:00.000Z",
+      $lte: new Date(),
     },
   },
   options: {
