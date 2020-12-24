@@ -34,7 +34,7 @@ const About = () => {
           </a>{" "}
           fans. Website provides countdown timer for next launch, previous and
           as well upcoming launches and also information about SpaceX vehicles
-          such as rockets, ships etc.
+          such as rockets.
         </p>
         <p>
           This website was developed and is maintained by{" "}
