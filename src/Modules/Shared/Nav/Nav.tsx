@@ -13,6 +13,7 @@ const Nav = () => {
         link="/launches/upcoming"
         exact={true}></NavElement>
       <NavElement name="VEHICLES" link="/vehicles" exact={true}></NavElement>
+      <NavElement name="STARLINK" link="/starlink" exact={true}></NavElement>
       <NavElement name="ABOUT" link="/about" exact={true}></NavElement>
     </div>
   );

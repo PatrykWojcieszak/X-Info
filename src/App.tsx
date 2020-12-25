@@ -31,6 +31,10 @@ const Launch = React.lazy(() => {
   return import("./Modules/Launch/Launch");
 });
 
+const Starlink = React.lazy(() => {
+  return import("./Modules/Starlink/Starlink");
+});
+
 function App() {
   let location = useLocation();
 
@@ -42,6 +46,7 @@ function App() {
         <Route path="/launch/:flight_number" exact render={() => <Launch />} />
         <Route path="/vehicles" exact render={() => <Vehicles />} />
         <Route path="/vehicles/:vehicle" exact render={() => <Rocket />} />
+        <Route path="/starlink" exact render={() => <Starlink />} />
         <Route path="/about" exact render={() => <About />} />
         <Redirect to="/home" />
       </Switch>
