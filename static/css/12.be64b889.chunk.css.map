@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/Modules/Starlink/Starlink.module.scss"],"names":[],"mappings":"AAEA,0BACE,WAAY","file":"12.be64b889.chunk.css","sourcesContent":["@import \"../../resources/styles/index.scss\";\r\n\r\n.Starlink {\r\n  height: 95vh;\r\n}\r\n"]}
