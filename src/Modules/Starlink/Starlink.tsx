@@ -9,6 +9,8 @@ import StarlinkQuery from "../../Queries/StarlinkQuery";
 
 import styles from "./Starlink.module.scss";
 import Spinner from "../Shared/Spinner/Spinner";
+import { motion } from "framer-motion";
+import { pageVariantsAnim } from "../../Animations/Animations_motion";
 interface ITest {
   lat: number;
   lng: number;
@@ -67,13 +69,9 @@ const Starlink = () => {
     });
   }
 
-  let globe = (
-    <>
-      <Spinner />
-    </>
-  );
+  let globe = <></>;
 
-  if (gData.length > 0) {
+  if (gData) {
     globe = (
       <Globe
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
@@ -84,7 +82,16 @@ const Starlink = () => {
     );
   }
 
-  return <div className={styles.Starlink}>{globe}</div>;
+  return (
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariantsAnim}
+      className={styles.Starlink}>
+      {globe}
+    </motion.div>
+  );
 };
 
 export default Starlink;
