@@ -8,6 +8,7 @@ import IQueryResult from "../../Models/IQueryResult";
 import StarlinkQuery from "../../Queries/StarlinkQuery";
 
 import styles from "./Starlink.module.scss";
+import Spinner from "../Shared/Spinner/Spinner";
 interface ITest {
   lat: number;
   lng: number;
@@ -66,7 +67,11 @@ const Starlink = () => {
     });
   }
 
-  let globe = <></>;
+  let globe = (
+    <>
+      <Spinner />
+    </>
+  );
 
   if (gData.length > 0) {
     globe = (

@@ -22,6 +22,7 @@ import { fetchLatestLaunch } from "../../Store/LatestLaunch/actions";
 import { fetchPastLaunches } from "../../Store/PastLaunches/actions";
 import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/actions";
 import { connect } from "react-redux";
+import ScrollToTop from "../Shared/ScrollToTop/ScrollToTop";
 
 const Launches = (props) => {
   const [showPastLaunches, setShowPastLaunches] = useState(false);
@@ -71,7 +72,7 @@ const Launches = (props) => {
         initial="initial"
         animate="in"
         exit="out"
-        style={{ width: "100%" }}>
+        style={{ width: "100%", position: "relative" }}>
         {props.upcomingLaunches.docs.map((launch, index) => (
           <LaunchShortInfo
             key={index}
@@ -102,6 +103,7 @@ const Launches = (props) => {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
+          position: "relative",
         }}>
         {props.pastLaunches.docs.map((launch, index) => (
           <LaunchShortInfo
@@ -178,6 +180,8 @@ const Launches = (props) => {
           {showPastLaunches ? pastLaunchesArr : null}
         </AnimatePresence>
       </div>
+
+      {showPastLaunches || showUpcomingLaunches ? <ScrollToTop /> : null}
     </motion.div>
   );
 };

@@ -32,49 +32,49 @@ const LaunchExtendedInfo = ({
   if (dateParsed > new Date()) launch = "NOT LAUNCHED YET";
 
   return (
-    <div className={styles.LatestLaunch}>
-      <div className={styles.LeftContainer}>
-        <img src={patchImg ? patchImg : noImage} alt="mission patch" />
-        {showMoreDetailsButton ? (
-          <Link to={`/launch/${flightNumber}`}>
-            <Button name="MORE DETAILS" />
-          </Link>
-        ) : null}
-      </div>
-      <div className={styles.RightContainer}>
-        <div className={styles.MainInfoContainer}>
-          <h2>{launchName}</h2>
-          <p>{details} </p>
-          <h4 className={styles.LaunchNumber}>#{flightNumber}</h4>
-          <div className={styles.DetailsWrapper}>
-            <div className={styles.TitlesContainer}>
-              <h4>LAUNCH SITE:</h4>
-              <h4>ROCKET:</h4>
-              <h4>DATE:</h4>
-              <h4>LAUNCH:</h4>
-            </div>
-            <div className={styles.ValuesContainer}>
-              <h4>{launchSiteName}</h4>
-              <h4>{rocketName}</h4>
-              <h4>{dateParsed.toDateString()}</h4>
-              <h4 style={{ color: success ? "#4BB543" : "#FA113D" }}>
-                {launch}
-              </h4>
-            </div>
-          </div>
+    <Link
+      style={{ cursor: showMoreDetailsButton ? "pointer" : "default" }}
+      to={showMoreDetailsButton ? `/launch/${flightNumber}` : null}>
+      <div className={styles.LatestLaunch}>
+        <div className={styles.LeftContainer}>
+          <img src={patchImg ? patchImg : noImage} alt="mission patch" />
+          {showMoreDetailsButton ? <Button name="MORE DETAILS" /> : null}
         </div>
-        {!success && failures.length > 0 ? (
-          <div className={styles.FailureContainer}>
-            <h4>FAILURES:</h4>
-            <ul>
-              {failures.map((failure, index) => (
-                <li key={index}>{failure.reason}</li>
-              ))}
-            </ul>
+        <div className={styles.RightContainer}>
+          <div className={styles.MainInfoContainer}>
+            <h2>{launchName}</h2>
+            <p>{details} </p>
+            <h4 className={styles.LaunchNumber}>#{flightNumber}</h4>
+            <div className={styles.DetailsWrapper}>
+              <div className={styles.TitlesContainer}>
+                <h4>LAUNCH SITE:</h4>
+                <h4>ROCKET:</h4>
+                <h4>DATE:</h4>
+                <h4>LAUNCH:</h4>
+              </div>
+              <div className={styles.ValuesContainer}>
+                <h4>{launchSiteName}</h4>
+                <h4>{rocketName}</h4>
+                <h4>{dateParsed.toDateString()}</h4>
+                <h4 style={{ color: success ? "#4BB543" : "#FA113D" }}>
+                  {launch}
+                </h4>
+              </div>
+            </div>
           </div>
-        ) : null}
+          {!success && failures.length > 0 ? (
+            <div className={styles.FailureContainer}>
+              <h4>FAILURES:</h4>
+              <ul>
+                {failures.map((failure, index) => (
+                  <li key={index}>{failure.reason}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

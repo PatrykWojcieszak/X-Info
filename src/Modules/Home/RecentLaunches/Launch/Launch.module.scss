@@ -3,11 +3,14 @@
 .Launch {
   @include flex-center-column;
   width: 240px;
-  margin: 1.5rem;
+  padding: 1.5rem;
   flex-wrap: wrap;
+  transition: all 0.4s ease-in-out;
+  border-radius: 1rem;
 
   img {
     width: 80%;
+    max-height: 155px;
   }
 
   h3 {
@@ -32,6 +35,10 @@
       color: $fontSecondary;
       font-weight: 100;
     }
+  }
+
+  &:hover {
+    background-color: #040404;
   }
 }
 

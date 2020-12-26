@@ -17,7 +17,7 @@ const UpcomingLaunches = ({ launches }: upcomingLaunchesProps) => {
       <div className={styles.Top}>
         <h2>UPCOMING LAUNCHES</h2>
       </div>
-      {launches.map((launch, index) => (
+      {launches.slice(0, 5).map((launch, index) => (
         <LaunchShortInfo
           key={index}
           launchName={launch.name}
