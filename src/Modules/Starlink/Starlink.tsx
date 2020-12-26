@@ -1,10 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import { getLatLngObj } from "tle.js";
-import IStarlink from "../../Models/IStarlink";
 import Globe from "react-globe.gl";
-import IQueryResult from "../../Models/IQueryResult";
-import StarlinkQuery from "../../Queries/StarlinkQuery";
 import { connect } from "react-redux";
 
 import styles from "./Starlink.module.scss";
@@ -79,6 +75,18 @@ const Starlink = (props) => {
       exit="out"
       variants={pageVariantsAnim}
       className={styles.Starlink}>
+      <div className={styles.StarlinkInfo}>
+        <h2>STARLINK</h2>
+        <h3>
+          <b>Starlink</b> is a satellite internet constellation being
+          constructed by{" "}
+          <a target="_blank" rel="noopener noreferrer" href="www.spacex.com">
+            SpaceX
+          </a>{" "}
+          providing satellite Internet access.
+        </h3>
+        <h4>Starlinks on the orbit: {props.starlinks.docs.length}</h4>
+      </div>
       {globe}
     </motion.div>
   );

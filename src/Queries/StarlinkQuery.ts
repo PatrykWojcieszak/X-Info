@@ -5,7 +5,7 @@ const StarlinkQuery = {
     },
   },
   options: {
-    limit: 1000,
+    pagination: false,
   },
 };
 
