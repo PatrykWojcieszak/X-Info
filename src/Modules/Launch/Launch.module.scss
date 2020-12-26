@@ -1,0 +1,178 @@
+@import "../../resources/styles/index.scss";
+
+.Launch {
+  margin-top: 8rem;
+  padding: 0 24rem;
+
+  .Row {
+    @include flex-center;
+    margin-top: 4rem;
+    align-items: flex-start;
+
+    .Rocket {
+      @include flex-center-column;
+      cursor: pointer;
+      padding: 0.6rem;
+      box-sizing: border-box;
+      transition: all 0.4s ease-in-out;
+      border: 1px solid transparent;
+      border-radius: 0.8rem;
+      max-width: 163px;
+      min-width: 163px;
+
+      &:hover {
+        border: 1px solid $fontSecondary;
+      }
+
+      h3 {
+        font-weight: 100;
+        font-size: 1.2rem;
+        color: $fontPrimary;
+        margin-bottom: 1rem;
+      }
+
+      img {
+        height: 800px;
+      }
+    }
+
+    .InfoContainer {
+      @include flex-center-column;
+      margin-left: 4rem;
+      width: 100%;
+
+      .InfoWrapper {
+        width: 100%;
+        @include flex-column;
+
+        margin-bottom: 2rem;
+
+        h2 {
+          font-weight: 100;
+          color: $fontPrimary;
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+
+  .AdditionalInfo {
+    @include flex-column;
+    align-items: flex-start;
+    margin: 2rem 0;
+
+    h2 {
+      font-weight: 100;
+      color: $fontPrimary;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    &__Content {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    &__Content > * {
+      margin: 1rem 0;
+    }
+  }
+
+  .YoutubeContainer {
+    margin-top: 4rem;
+
+    iframe {
+      width: 100%;
+      height: 800px;
+      border-radius: 1rem;
+    }
+  }
+}
+
+.MediaContainer {
+  @include flex-center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 3rem 0;
+}
+
+@include desktop {
+  .Launch {
+    padding: 0 10rem;
+  }
+}
+
+@include large {
+  .Launch {
+    padding: 0 4rem;
+  }
+}
+
+@include tablet {
+  .Launch {
+    padding: 0 1rem;
+
+    .Row {
+      .Rocket {
+        text-align: center;
+
+        &:hover {
+          border: 1px solid $fontSecondary;
+        }
+        img {
+          height: 400px;
+        }
+      }
+
+      .InfoContainer {
+        margin-left: 0;
+
+        .InfoWrapper {
+          h2 {
+            font-size: 1.5rem;
+          }
+        }
+      }
+    }
+
+    .AdditionalInfo {
+      align-items: center;
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      &__Content {
+        justify-content: center;
+      }
+
+      &__Content > * {
+        margin: 1rem;
+      }
+    }
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+.NoLaunchInfo {
+  @include flex-center-column;
+  height: 95vh;
+
+  h2 {
+    font-weight: 100;
+    color: $fontPrimary;
+    margin-bottom: 2rem;
+  }
+
+  img {
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    transform: rotate(30deg);
+  }
+}

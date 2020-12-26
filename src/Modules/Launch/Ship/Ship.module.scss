@@ -1,0 +1,26 @@
+@import "../../../resources/styles/index.scss";
+
+.Ship {
+  background-color: $foreground;
+  border-radius: 1rem;
+  width: 350px;
+
+  img {
+    width: 100%;
+    min-height: 180px;
+    max-height: 180px;
+    object-fit: cover;
+    border-radius: 1rem;
+  }
+
+  h3 {
+    font-weight: 100;
+    color: $fontSecondary;
+    margin: 0.8rem 0 0.8rem 0.8rem;
+
+    span {
+      color: $fontPrimary;
+      font-weight: 300;
+    }
+  }
+}

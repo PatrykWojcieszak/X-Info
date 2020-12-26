@@ -1,0 +1,42 @@
+@import "../../resources/styles/index.scss";
+
+.Home {
+  &__Content {
+    padding: 0 14rem;
+  }
+}
+
+@include desktop {
+  .Home {
+    &__Content {
+      padding: 0 7rem;
+    }
+  }
+}
+
+@include large {
+  .Home {
+    &__Content {
+      padding: 0 4rem;
+
+      .LaunchTitle {
+        display: flex;
+
+        h2 {
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+}
+
+@include tablet {
+  .Home {
+    &__Content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 2rem;
+    }
+  }
+}
