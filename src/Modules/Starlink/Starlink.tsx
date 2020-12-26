@@ -3,15 +3,15 @@ import axios from "axios";
 import { getLatLngObj } from "tle.js";
 import IStarlink from "../../Models/IStarlink";
 import Globe from "react-globe.gl";
-import * as THREE from "three";
 import IQueryResult from "../../Models/IQueryResult";
 import StarlinkQuery from "../../Queries/StarlinkQuery";
+import { connect } from "react-redux";
 
 import styles from "./Starlink.module.scss";
-import Spinner from "../Shared/Spinner/Spinner";
 import { motion } from "framer-motion";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
-interface ITest {
+import { fetchStarlink } from "../../Store/Starlink/actions";
+interface IMapData {
   lat: number;
   lng: number;
   alt: number;
@@ -19,22 +19,12 @@ interface ITest {
   color: string;
 }
 
-const Starlink = () => {
-  const [starlink, setStarlink] = useState<IQueryResult<IStarlink> | undefined>(
-    undefined
-  );
+const Starlink = (props) => {
+  const { onFetchStarlink, starlinks } = props;
 
   useEffect(() => {
     const interval = setInterval(() => {
-      axios
-        .post<IQueryResult<IStarlink>>(
-          "https://api.spacexdata.com/v4/starlink/query",
-          StarlinkQuery
-        )
-        .then((res) => {
-          setStarlink(res.data);
-        })
-        .catch((err) => {});
+      onFetchStarlink();
     }, 3000);
 
     return () => {
@@ -42,9 +32,9 @@ const Starlink = () => {
     };
   }, []);
 
-  const gData: ITest[] = [];
-  if (starlink) {
-    starlink.docs.map((starlink) => {
+  const gData: IMapData[] = [];
+  if (starlinks) {
+    starlinks.docs.map((starlink) => {
       const TLE0 = starlink?.spaceTrack.TLE_LINE0.substring(
         2,
         starlink?.spaceTrack.TLE_LINE0.length
@@ -94,4 +84,16 @@ const Starlink = () => {
   );
 };
 
-export default Starlink;
+const mapStateToProps = (state) => {
+  return {
+    starlinks: state.starlink.starlinks,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onFetchStarlink: () => dispatch(fetchStarlink()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Starlink);
