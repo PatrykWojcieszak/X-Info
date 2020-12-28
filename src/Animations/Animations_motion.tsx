@@ -30,6 +30,24 @@ export const bottomToTopAnim = {
   },
 };
 
+export const sideBarAnim = {
+  initial: {
+    opacity: 0,
+    x: +200,
+  },
+  in: {
+    x: 0,
+    transition: { duration: 0.75, ease: "easeOut" },
+    opacity: 1,
+    staggerChildren: 1,
+  },
+  out: {
+    x: +200,
+    opacity: 0,
+    transition: { duration: 0.25, ease: "easeOut" },
+  },
+};
+
 export const rightToLeftAnim = {
   hidden: {
     opacity: 0,

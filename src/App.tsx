@@ -1,11 +1,13 @@
-import React, { Suspense } from "react";
+import React, { useState, Suspense } from "react";
 import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
 import Nav from "./Modules/Shared/Nav/Nav";
 import Footer from "./Modules/Shared/Footer/Footer";
+import { useMediaQuery } from "./Hooks/useMediaQuery";
 
 import "./App.scss";
+import SideBar from "./Modules/Shared/Nav/SideBar/SideBar";
 
 const Home = React.lazy(() => {
   return import("./Modules/Home/Home");
@@ -38,6 +40,15 @@ const Starlink = React.lazy(() => {
 function App() {
   let location = useLocation();
 
+  const [sideBarOpen, setSideBarOpen] = useState(true);
+
+  const toggleSideBar = () => {
+    console.log("KILK");
+    setSideBarOpen(!sideBarOpen);
+  };
+
+  const isMobile = useMediaQuery("(max-width: 500px)");
+
   const routes = (
     <AnimatePresence exitBeforeEnter>
       <Switch location={location} key={location.pathname}>
@@ -53,9 +64,18 @@ function App() {
     </AnimatePresence>
   );
 
+  let sideBar = <AnimatePresence exitBeforeEnter></AnimatePresence>;
+
+  if (sideBarOpen)
+    sideBar = (
+      <AnimatePresence exitBeforeEnter>
+        <SideBar toggleSideBar={toggleSideBar} />
+      </AnimatePresence>
+    );
+
   return (
     <div className="App">
-      <Nav />
+      {isMobile ? sideBar : <Nav />}
       <Suspense fallback={<p>Loading...</p>}>{routes}</Suspense>
       {location.pathname !== "/about" ? <Footer /> : null}
     </div>

@@ -1,0 +1,32 @@
+@import "../../../../resources/styles/index.scss";
+
+.SideBar {
+  background-color: rgba($color: #000000, $alpha: 0.7);
+  width: 100%;
+  position: fixed;
+  height: 100%;
+  top: 0;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 999;
+
+  .Menu {
+    @include flex-center-column;
+    justify-content: flex-start;
+    width: 200px;
+    background-color: $foreground;
+    border-left: 1px solid $blue;
+    height: 100%;
+    position: relative;
+    padding-top: 2.5rem;
+
+    svg {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 2rem;
+      color: $fontPrimary;
+      cursor: pointer;
+    }
+  }
+}

@@ -17,6 +17,7 @@ import { fetchRecentLaunches } from "../../Store/RecentLaunches/actions";
 import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/actions";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 import NextLaunch from "./NextLaunch/NextLaunch";
+import Spinner from "../Shared/Spinner/Spinner";
 
 const Home = (props) => {
   const {
@@ -43,6 +44,11 @@ const Home = (props) => {
 
   return (
     <>
+      {props.loadingNextLaunch ||
+      props.loadingUpcomingLaunches ||
+      props.loadingRecentLaunches ? (
+        <Spinner />
+      ) : null}
       <motion.div
         initial="initial"
         animate="in"
