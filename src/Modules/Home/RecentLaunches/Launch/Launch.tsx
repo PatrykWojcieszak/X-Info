@@ -15,7 +15,7 @@ const Launch = ({ flightNumber, name, patch, date, success }: launchProps) => {
   return (
     <Link to={`/launch/${flightNumber}`}>
       <div className={styles.Launch}>
-        <img src={patch ? patch : noImage} alt="patch" />
+        <img src={patch ? patch : noImage} alt="patch" loading="lazy" />
         <h3>{name}</h3>
         <div className={styles.Column}>
           <h4>{dateParsed.toDateString()}</h4>

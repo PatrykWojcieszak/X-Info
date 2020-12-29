@@ -6,8 +6,10 @@ import Nav from "./Modules/Shared/Nav/Nav";
 import Footer from "./Modules/Shared/Footer/Footer";
 import { useMediaQuery } from "./Hooks/useMediaQuery";
 
-import "./App.scss";
 import SideBar from "./Modules/Shared/Nav/SideBar/SideBar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import styles from "./App.module.scss";
 
 const Home = React.lazy(() => {
   return import("./Modules/Home/Home");
@@ -64,18 +66,23 @@ function App() {
     </AnimatePresence>
   );
 
-  let sideBar = <AnimatePresence exitBeforeEnter></AnimatePresence>;
+  let sideBar = (
+    <FontAwesomeIcon
+      className={styles.MenuIcon}
+      onClick={() => setSideBarOpen(true)}
+      icon="bars"
+    />
+  );
 
-  if (sideBarOpen)
-    sideBar = (
-      <AnimatePresence exitBeforeEnter>
-        <SideBar toggleSideBar={toggleSideBar} />
-      </AnimatePresence>
-    );
+  if (sideBarOpen) sideBar = <SideBar toggleSideBar={toggleSideBar} />;
 
   return (
-    <div className="App">
-      {isMobile ? sideBar : <Nav />}
+    <div className={styles.App}>
+      {isMobile ? (
+        <AnimatePresence exitBeforeEnter> {sideBar} </AnimatePresence>
+      ) : (
+        <Nav />
+      )}
       <Suspense fallback={<p>Loading...</p>}>{routes}</Suspense>
       {location.pathname !== "/about" ? <Footer /> : null}
     </div>
