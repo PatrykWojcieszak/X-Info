@@ -25,10 +25,11 @@ const SideBar = () => {
   if (isOpen) bgStyles.push(styles.Background);
 
   const toggleOpenHandler = () => {
-    toggleOpen();
+    if (isOpen) toggleOpen();
   };
+
   const wrapperRef = useRef(null);
-  useClickOutside(wrapperRef, toggleOpen);
+  useClickOutside(wrapperRef, toggleOpenHandler);
 
   return (
     <motion.div
@@ -41,7 +42,7 @@ const SideBar = () => {
         ref={wrapperRef}
         variants={sideBarAnim}
         className={styles.Menu}>
-        <MenuToggle toggle={toggleOpenHandler} />
+        <MenuToggle toggle={() => toggleOpen()} />
         <NavElement name="HOME" link="/home" exact={true}></NavElement>
         <NavElement
           name="LAUNCHES"
