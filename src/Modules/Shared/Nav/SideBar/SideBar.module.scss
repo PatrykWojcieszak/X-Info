@@ -1,32 +1,43 @@
 @import "../../../../resources/styles/index.scss";
 
-.SideBar {
-  background-color: rgba($color: #000000, $alpha: 0.7);
+.Background {
   width: 100%;
-  position: fixed;
-  height: 100%;
   top: 0;
-  display: flex;
-  justify-content: flex-end;
-  z-index: 999;
+  background-color: rgba($color: #000000, $alpha: 0.7);
+  z-index: 500;
+  height: 100vh;
+  position: absolute;
+}
 
-  .Menu {
-    @include flex-center-column;
-    justify-content: flex-start;
-    width: 200px;
-    background-color: $foreground;
-    border-left: 1px solid $blue;
-    height: 100%;
-    position: relative;
-    padding-top: 2.5rem;
+.Menu {
+  @include flex-center-column;
+  background-color: $foreground;
+  border-right: 1px solid $blue;
+  justify-content: flex-start;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 200px;
+  z-index: 995;
+  padding-top: 5rem;
 
-    svg {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      font-size: 1.5rem;
-      color: $fontPrimary;
-      cursor: pointer;
-    }
+  button {
+    z-index: 999;
+    outline: none;
+    border: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    cursor: pointer;
+    position: absolute;
+    top: 18px;
+    left: 15px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: $blue;
+    padding-top: 7px;
+    padding-left: 8px;
   }
 }

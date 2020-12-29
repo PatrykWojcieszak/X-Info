@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from "react";
+import React, { Suspense } from "react";
 import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
@@ -7,7 +7,6 @@ import Footer from "./Modules/Shared/Footer/Footer";
 import { useMediaQuery } from "./Hooks/useMediaQuery";
 
 import SideBar from "./Modules/Shared/Nav/SideBar/SideBar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import styles from "./App.module.scss";
 
@@ -42,13 +41,6 @@ const Starlink = React.lazy(() => {
 function App() {
   let location = useLocation();
 
-  const [sideBarOpen, setSideBarOpen] = useState(true);
-
-  const toggleSideBar = () => {
-    console.log("KILK");
-    setSideBarOpen(!sideBarOpen);
-  };
-
   const isMobile = useMediaQuery("(max-width: 500px)");
 
   const routes = (
@@ -66,23 +58,9 @@ function App() {
     </AnimatePresence>
   );
 
-  let sideBar = (
-    <FontAwesomeIcon
-      className={styles.MenuIcon}
-      onClick={() => setSideBarOpen(true)}
-      icon="bars"
-    />
-  );
-
-  if (sideBarOpen) sideBar = <SideBar toggleSideBar={toggleSideBar} />;
-
   return (
     <div className={styles.App}>
-      {isMobile ? (
-        <AnimatePresence exitBeforeEnter> {sideBar} </AnimatePresence>
-      ) : (
-        <Nav />
-      )}
+      {isMobile ? <SideBar /> : <Nav />}
       <Suspense fallback={<p>Loading...</p>}>{routes}</Suspense>
       {location.pathname !== "/about" ? <Footer /> : null}
     </div>

@@ -31,24 +31,6 @@ export const bottomToTopAnim = {
 };
 
 export const sideBarAnim = {
-  initial: {
-    opacity: 0,
-    x: +200,
-  },
-  in: {
-    x: 0,
-    transition: { duration: 0.75, ease: "easeOut" },
-    opacity: 1,
-    staggerChildren: 1,
-  },
-  out: {
-    x: +200,
-    opacity: 0,
-    transition: { duration: 0.25, ease: "easeOut" },
-  },
-};
-
-const sidebar = {
   open: (height = 1000) => ({
     clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
     transition: {
@@ -60,7 +42,7 @@ const sidebar = {
   closed: {
     clipPath: "circle(30px at 40px 40px)",
     transition: {
-      delay: 0.5,
+      delay: 0.1,
       type: "spring",
       stiffness: 400,
       damping: 40,

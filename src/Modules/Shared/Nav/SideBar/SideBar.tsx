@@ -1,22 +1,47 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { motion } from "framer-motion";
-import React from "react";
-import { sideBarAnim } from "../../../../Animations/Animations_motion";
+import React, { useRef } from "react";
+import { motion, useCycle } from "framer-motion";
 
+//COMPONENTS
 import NavElement from "../NavElement/NavElement";
+import { MenuToggle } from "./MenuToggle/MenuToggle";
 
+//HOOKS
+import { useDimensions } from "../../../../Hooks/useDimmensions";
+import { useClickOutside } from "../../../../Hooks/useClickOutside";
+
+//STYLES
 import styles from "./SideBar.module.scss";
 
-const SideBar = ({ toggleSideBar }: sideBarProps) => {
+//ANIM
+import { sideBarAnim } from "../../../../Animations/Animations_motion";
+
+const SideBar = () => {
+  const [isOpen, toggleOpen] = useCycle(false, true);
+  const containerRef = useRef(null);
+  const { height } = useDimensions(containerRef);
+
+  const bgStyles: string[] = [];
+
+  if (isOpen) bgStyles.push(styles.Background);
+
+  const toggleOpenHandler = () => {
+    toggleOpen();
+  };
+  const wrapperRef = useRef(null);
+  useClickOutside(wrapperRef, toggleOpen);
+
   return (
-    <motion.div onClick={toggleSideBar} className={styles.SideBar}>
+    <motion.div
+      initial={false}
+      animate={isOpen ? "open" : "closed"}
+      custom={height}
+      ref={containerRef}
+      className={bgStyles.join(" ")}>
       <motion.div
-        initial="initial"
-        animate="in"
-        exit="out"
+        ref={wrapperRef}
         variants={sideBarAnim}
         className={styles.Menu}>
-        <FontAwesomeIcon icon="times" onClick={toggleSideBar} />
+        <MenuToggle toggle={toggleOpenHandler} />
         <NavElement name="HOME" link="/home" exact={true}></NavElement>
         <NavElement
           name="LAUNCHES"
@@ -28,10 +53,6 @@ const SideBar = ({ toggleSideBar }: sideBarProps) => {
       </motion.div>
     </motion.div>
   );
-};
-
-type sideBarProps = {
-  toggleSideBar: () => void;
 };
 
 export default SideBar;
