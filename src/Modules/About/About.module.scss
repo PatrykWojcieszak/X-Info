@@ -69,3 +69,21 @@
     }
   }
 }
+
+@include mobile {
+  .About {
+    margin-top: 2rem;
+
+    .InfoContainer {
+      width: 90%;
+
+      h2 {
+        font-size: 2.6rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}

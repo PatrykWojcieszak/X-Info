@@ -45,7 +45,6 @@
 @include tablet {
   .Launch {
     margin: 1rem 0;
-    width: 150px;
 
     h3 {
       font-size: 1.3rem;
@@ -54,7 +53,29 @@
 
     .Column {
       svg {
-        color: $green;
+        font-size: 1rem;
+        margin-left: 0.8rem;
+      }
+
+      h4 {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+
+@include mobile {
+  .Launch {
+    margin: 1rem 0;
+    width: 220px;
+
+    h3 {
+      font-size: 1.3rem;
+      min-height: 40px;
+    }
+
+    .Column {
+      svg {
         font-size: 1rem;
         margin-left: 0.8rem;
       }

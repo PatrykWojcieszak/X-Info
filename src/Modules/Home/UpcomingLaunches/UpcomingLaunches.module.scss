@@ -30,6 +30,16 @@
   }
 }
 
+@include mobile {
+  .UpcomingLaunches {
+    .Top {
+      h2 {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
 a {
   text-decoration: none;
 }

@@ -117,3 +117,16 @@
     }
   }
 }
+
+@include mobile {
+  .Top {
+    &__Content {
+      padding: 0 1rem;
+
+      .QuoteContainer {
+        font-size: 0.5rem;
+        bottom: 0.2rem;
+      }
+    }
+  }
+}

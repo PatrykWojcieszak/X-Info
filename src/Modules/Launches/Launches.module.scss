@@ -66,3 +66,27 @@
     }
   }
 }
+
+@include mobile {
+  .Launches {
+    padding: 0 1rem;
+    @include flex-center-column;
+
+    .Latest {
+      h2 {
+        font-size: 2.5rem;
+      }
+    }
+
+    .Content {
+      .ButtonsWrapper {
+        @include flex-center;
+        justify-content: space-evenly;
+      }
+
+      .ButtonsWrapper > * {
+        margin-right: 0;
+      }
+    }
+  }
+}

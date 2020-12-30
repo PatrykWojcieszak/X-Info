@@ -170,6 +170,59 @@
   }
 }
 
+@include mobile {
+  .Launch {
+    .Top {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .Name_Date {
+        align-items: flex-start;
+        margin-bottom: 0.7rem;
+        max-width: 90%;
+        min-width: 90%;
+
+        h2 {
+          font-size: 1.8rem;
+        }
+
+        h4 {
+          font-size: 0.7rem;
+        }
+      }
+
+      .Column {
+        .Row {
+          font-size: 0.9rem;
+        }
+      }
+
+      .LaunchNumber {
+        font-size: 0.9rem;
+      }
+    }
+
+    .Content {
+      margin-top: 1rem;
+
+      &__Element {
+        .Title,
+        .Value {
+          font-size: 0.7rem;
+        }
+      }
+    }
+
+    .Flag {
+      width: 40px;
+      position: absolute;
+      right: 0;
+      bottom: -7px;
+      border-bottom-right-radius: 1.3rem;
+    }
+  }
+}
+
 a {
   text-decoration: none;
 }

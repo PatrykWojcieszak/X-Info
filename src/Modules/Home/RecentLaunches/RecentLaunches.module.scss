@@ -35,6 +35,18 @@
   }
 }
 
+@include mobile {
+  .RecentLaunches {
+    margin-top: 1rem;
+
+    .Top {
+      h2 {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
 a {
   text-decoration: none;
 }

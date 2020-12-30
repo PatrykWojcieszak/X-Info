@@ -40,7 +40,7 @@ export const sideBarAnim = {
     },
   }),
   closed: {
-    clipPath: "circle(30px at 40px 40px)",
+    clipPath: "circle(23px at 40px 40px)",
     transition: {
       delay: 0.1,
       type: "spring",

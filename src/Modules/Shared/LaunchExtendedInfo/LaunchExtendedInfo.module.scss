@@ -164,3 +164,56 @@
     }
   }
 }
+
+@include mobile {
+  .LatestLaunch {
+    @include flex-center-column;
+
+    .LeftContainer {
+      margin-bottom: 2rem;
+    }
+
+    .RightContainer {
+      .MainInfoContainer {
+        .LaunchNumber {
+          font-size: 1.2rem;
+        }
+
+        p {
+          max-width: 90%;
+          font-size: 0.8rem;
+        }
+
+        h2 {
+          font-size: 2rem;
+        }
+
+        .DetailsWrapper {
+          .TitlesContainer {
+            h4 {
+              font-size: 0.8rem;
+            }
+          }
+
+          .ValuesContainer {
+            h4 {
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+
+      .FailureContainer {
+        p,
+        h4 {
+          font-size: 0.8rem;
+        }
+
+        ul {
+          width: 90%;
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
