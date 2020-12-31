@@ -13,6 +13,7 @@ interface IMapData {
   alt: number;
   radius: number;
   color: string;
+  label: string;
 }
 
 const Starlink = (props) => {
@@ -51,6 +52,7 @@ const Starlink = (props) => {
         alt: 0.9,
         radius: 0.01,
         color: "white",
+        label: starlink.spaceTrack.OBJECT_NAME,
       });
     });
   }
@@ -64,6 +66,9 @@ const Starlink = (props) => {
         pointsData={gData}
         pointAltitude={0.001}
         pointColor="color"
+        pointLabel="label"
+        showGraticules
+        pointRadius={0.35}
       />
     );
   }
