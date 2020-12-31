@@ -2,6 +2,15 @@
 
 .Rocket {
   .Top {
+    background-blend-mode: darken;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+
     .HeroText {
       @include flex-center-column;
       position: absolute;
@@ -160,18 +169,6 @@
       padding: 0 1rem;
     }
   }
-}
-
-.Falcon1,
-.Falcon9,
-.FalconHeavy,
-.Starship {
-  background-blend-mode: darken;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  height: 100vh;
-  position: relative;
 }
 
 .Falcon1 {
