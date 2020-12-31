@@ -7,6 +7,7 @@ import { HashRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import configureStore from "./Store/configureStore";
 import "./fontawesome/fontawesome";
+import ScrollToTop from "./Utility/ScrollToTop";
 
 const store = configureStore();
 
@@ -14,6 +15,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <React.StrictMode>
+        <ScrollToTop />
         <App />
       </React.StrictMode>
     </Router>
