@@ -1,5 +1,5 @@
 .Loader {
-  margin: 100px auto;
+  margin: auto;
   font-size: 25px;
   width: 1em;
   height: 1em;
@@ -15,7 +15,8 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 100%;
+  top: 0;
+  bottom: 0;
 }
 @-webkit-keyframes load5 {
   0%,

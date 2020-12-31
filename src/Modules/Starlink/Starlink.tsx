@@ -27,7 +27,7 @@ const Starlink = (props) => {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [onFetchStarlink]);
 
   const gData: IMapData[] = [];
   if (starlinks) {
@@ -100,6 +100,7 @@ const Starlink = (props) => {
 const mapStateToProps = (state) => {
   return {
     starlinks: state.starlink.starlinks,
+    loadingStarlinks: state.starlink.loading,
   };
 };
 
