@@ -12,11 +12,11 @@
 .Menu {
   @include flex-center-column;
   background-color: $foreground;
-  border-right: 1px solid $blue;
+  border-left: 1px solid $blue;
   justify-content: flex-start;
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
   bottom: 0;
   width: 200px;
   z-index: 995;
@@ -31,13 +31,13 @@
     -ms-user-select: none;
     cursor: pointer;
     position: absolute;
-    top: 18px;
-    left: 15px;
+    top: 14px;
+    right: 14px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
     background: $blue;
-    padding-top: 7px;
-    padding-left: 8px;
+    padding-top: 11px;
+    padding-left: 6px;
   }
 }
