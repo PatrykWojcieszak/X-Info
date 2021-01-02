@@ -24,3 +24,15 @@
     }
   }
 }
+
+@include large {
+  .Ship {
+    width: 45%;
+  }
+}
+
+@include tablet {
+  .Ship {
+    width: 350px;
+  }
+}

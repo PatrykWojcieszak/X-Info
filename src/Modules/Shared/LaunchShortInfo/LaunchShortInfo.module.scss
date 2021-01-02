@@ -17,8 +17,8 @@
     .Name_Date {
       @include flex-column;
       align-items: flex-start;
-      min-width: 40%;
-      max-width: 40%;
+      min-width: 50%;
+      max-width: 50%;
 
       h2 {
         color: $blue;
@@ -106,10 +106,14 @@
 
       .Name_Date {
         margin-bottom: 0.7rem;
+        max-width: 60%;
+        min-width: 60%;
       }
 
       .Column {
-        font-size: 1rem;
+        .Row {
+          font-size: 1.2rem;
+        }
       }
 
       .LaunchNumber {
@@ -138,14 +142,6 @@
         h4 {
           font-size: 0.7rem;
         }
-      }
-
-      .Column {
-        font-size: 0.8rem;
-      }
-
-      .LaunchNumber {
-        font-size: 1.2rem;
       }
     }
 
