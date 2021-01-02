@@ -10,6 +10,7 @@ import styles from "./RecentLaunches.module.scss";
 
 //MODELS
 import Launch_model from "../../../Models/ILaunch";
+import SkeletonElement from "../../Shared/Skeletons/SkeletonElement";
 
 const RecentLaunches = ({ launches }: recentLaunchesProps) => {
   return (
@@ -20,6 +21,12 @@ const RecentLaunches = ({ launches }: recentLaunchesProps) => {
           <Button name="SHOW MORE" />
         </Link>
       </div>
+
+      <SkeletonElement type="Text" />
+      <SkeletonElement type="Title" />
+      <SkeletonElement type="Avatar" />
+      <SkeletonElement type="Thumbnail" />
+
       <div className={styles.Content}>
         {launches.map((launch, index) => (
           <Launch

@@ -1,0 +1,29 @@
+@import "../../../resources/styles/index.scss";
+
+.Skeleton {
+  background-color: #ddd;
+  margin: 10px 0;
+  border-radius: 1rem;
+}
+
+.Text {
+  width: 100%;
+  height: 12px;
+}
+
+.Title {
+  width: 50%;
+  height: 20px;
+  margin-bottom: 15px;
+}
+
+.Avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.Thumbnail {
+  width: 100px;
+  height: 100px;
+}

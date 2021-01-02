@@ -44,27 +44,25 @@ const Home = (props) => {
 
   return (
     <>
-      {props.loadingNextLaunch ||
-      props.loadingUpcomingLaunches ||
-      props.loadingRecentLaunches ? (
-        <Spinner />
-      ) : null}
+      {(props.loadingNextLaunch ||
+        props.loadingUpcomingLaunches ||
+        props.loadingRecentLaunches) && <Spinner />}
       <motion.div
         initial="initial"
         animate="in"
         exit="out"
         variants={pageVariantsAnim}
         className={styles.Home}>
-        {!props.loadingNextLaunch ? (
+        {!props.loadingNextLaunch && (
           <NextLaunch elonMuskQuote={RandomQuote()} nextLaunch={nextLaunch} />
-        ) : null}
+        )}
         <div className={styles.Home__Content}>
-          {!props.loadingRecentLaunches ? (
+          {!props.loadingRecentLaunches && (
             <RecentLaunches launches={props.recentLaunches.docs} />
-          ) : null}
-          {!props.loadingUpcomingLaunches ? (
+          )}
+          {!props.loadingUpcomingLaunches && (
             <UpcomingLaunches launches={props.upcomingLaunches.docs} />
-          ) : null}
+          )}
         </div>
       </motion.div>
     </>
