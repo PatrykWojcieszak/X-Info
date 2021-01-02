@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 //COMPONENTS
 import Launch from "./Launch/Launch";
 import Button from "../../Shared/Button/Button";
-import RecentLaunchSkeleton from "../../Shared/Skeletons/RecentLaunchSkeleton/RecentLaunchSkeleton";
+import RecentLaunchSkeleton from "../../Shared/Skeletons/RecentLaunchSkeleton";
 
 //STYLES
 import styles from "./RecentLaunches.module.scss";

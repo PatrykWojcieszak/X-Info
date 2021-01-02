@@ -13,7 +13,7 @@ import styles from "./Home.module.scss";
 //OTHER
 import RandomQuote from "../../Other/ElonMuskQuotes";
 import { fetchNextLaunch } from "../../Store/NextLaunch/actions";
-import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/actions";
+
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 import NextLaunch from "./NextLaunch/NextLaunch";
 import Spinner from "../Shared/Spinner/Spinner";
@@ -47,10 +47,7 @@ const Home = (props) => {
         )}
         <div className={styles.Home__Content}>
           <RecentLaunches />
-
-          {!props.loadingUpcomingLaunches && (
-            <UpcomingLaunches launches={props.upcomingLaunches.docs} />
-          )}
+          <UpcomingLaunches />
         </div>
       </motion.div>
     </>
@@ -69,7 +66,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onFetchNextLaunch: () => dispatch(fetchNextLaunch()),
-    onFetchUpcomingLaunch: () => dispatch(fetchUpcomingLaunches()),
   };
 };
 

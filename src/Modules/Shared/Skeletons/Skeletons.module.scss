@@ -1,16 +1,28 @@
-@import "../../../../resources/styles/index.scss";
+@import "../../../resources/styles/index.scss";
 
 .SkeletonWrapper {
   position: relative;
   overflow: hidden;
   border-radius: 1rem;
   background-color: rgba($color: #090909, $alpha: 0.2);
-  display: inline-block;
 
   .RecentLaunchSkeleton {
     @include flex-center-column;
+    justify-content: space-evenly;
     width: 240px;
     height: 350px;
+  }
+
+  .LaunchShortInfoSkeleton {
+    @include flex-column;
+    align-items: flex-start;
     justify-content: space-evenly;
+    height: 160px;
+    padding: 0.5rem;
+
+    .Row {
+      width: 100%;
+      display: flex;
+    }
   }
 }
