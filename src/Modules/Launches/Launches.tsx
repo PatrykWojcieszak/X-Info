@@ -23,6 +23,7 @@ import { fetchPastLaunches } from "../../Store/PastLaunches/actions";
 import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/actions";
 import { connect } from "react-redux";
 import ScrollToTop from "../Shared/ScrollToTop/ScrollToTop";
+import LaunchShortInfoSkeleton from "../Shared/Skeletons/LaunchShortInfoSkeleton";
 
 const Launches = (props) => {
   const [showPastLaunches, setShowPastLaunches] = useState(false);
@@ -64,7 +65,19 @@ const Launches = (props) => {
     onFetchPastLaunches(props.pastLaunches.nextPage);
   };
 
-  let upcomingLaunchesArr = <></>;
+  let upcomingLaunchesArr = (
+    <motion.div
+      variants={showLaunchesList}
+      initial="initial"
+      animate="in"
+      exit="out"
+      className={styles.LaunchesWrapper}>
+      {[1, 2, 3, 4, 5].map((n) => (
+        <LaunchShortInfoSkeleton key={n} />
+      ))}
+    </motion.div>
+  );
+
   if (!props.loadingUpcomingLaunches) {
     upcomingLaunchesArr = (
       <motion.div
@@ -72,7 +85,7 @@ const Launches = (props) => {
         initial="initial"
         animate="in"
         exit="out"
-        style={{ width: "100%", position: "relative" }}>
+        className={styles.LaunchesWrapper}>
         {props.upcomingLaunches.docs.map((launch, index) => (
           <LaunchShortInfo
             key={index}
@@ -89,7 +102,19 @@ const Launches = (props) => {
     );
   }
 
-  let pastLaunchesArr = <></>;
+  let pastLaunchesArr = (
+    <motion.div
+      variants={showLaunchesList}
+      initial="initial"
+      animate="in"
+      exit="out"
+      className={styles.LaunchesWrapper}>
+      {[1, 2, 3, 4, 5].map((n) => (
+        <LaunchShortInfoSkeleton key={n} />
+      ))}
+    </motion.div>
+  );
+
   if (props.pastLaunches.docs.length > 0) {
     pastLaunchesArr = (
       <motion.div
@@ -97,14 +122,7 @@ const Launches = (props) => {
         initial="initial"
         animate="in"
         exit="out"
-        style={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "relative",
-        }}>
+        className={styles.LaunchesWrapper}>
         {props.pastLaunches.docs.map((launch, index) => (
           <LaunchShortInfo
             key={index}
