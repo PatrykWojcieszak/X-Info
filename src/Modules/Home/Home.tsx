@@ -1,29 +1,20 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import { connect } from "react-redux";
 import "moment-precise-range-plugin";
 
 //COMPONENTS
 import RecentLaunches from "./RecentLaunches/RecentLaunches";
 import UpcomingLaunches from "./UpcomingLaunches/UpcomingLaunches";
+import NextLaunch from "./NextLaunch/NextLaunch";
 
 //STYLES
 import styles from "./Home.module.scss";
+import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 //OTHER
 import RandomQuote from "../../Other/ElonMuskQuotes";
-import { fetchNextLaunch } from "../../Store/NextLaunch/actions";
 
-import { pageVariantsAnim } from "../../Animations/Animations_motion";
-import NextLaunch from "./NextLaunch/NextLaunch";
-
-const Home = (props) => {
-  const { onFetchNextLaunch, nextLaunch } = props;
-
-  useEffect(() => {
-    if (!nextLaunch.docs[0]) onFetchNextLaunch();
-  }, [onFetchNextLaunch, nextLaunch]);
-
+const Home = () => {
   return (
     <motion.div
       initial="initial"
@@ -31,9 +22,7 @@ const Home = (props) => {
       exit="out"
       variants={pageVariantsAnim}
       className={styles.Home}>
-      {!props.loadingNextLaunch && (
-        <NextLaunch elonMuskQuote={RandomQuote()} nextLaunch={nextLaunch} />
-      )}
+      <NextLaunch elonMuskQuote={RandomQuote()} />
       <div className={styles.Home__Content}>
         <RecentLaunches />
         <UpcomingLaunches />
@@ -42,17 +31,4 @@ const Home = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    nextLaunch: state.nextLaunch.nextLaunch,
-    loadingNextLaunch: state.nextLaunch.loading,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onFetchNextLaunch: () => dispatch(fetchNextLaunch()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;
