@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 //COMPONENTS
 import Button from "../Shared/Button/Button";
 import LaunchShortInfo from "../Shared/LaunchShortInfo/LaunchShortInfo";
-import LatestLaunch from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo";
+import LaunchExtendedInfo from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo";
 import Spinner from "../Shared/Spinner/Spinner";
 
 //STYLES
@@ -24,6 +24,7 @@ import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/actions";
 import { connect } from "react-redux";
 import ScrollToTop from "../Shared/ScrollToTop/ScrollToTop";
 import LaunchShortInfoSkeleton from "../Shared/Skeletons/LaunchShortInfoSkeleton";
+import LaunchExtendedInfoSkeleton from "../Shared/Skeletons/LaunchExtendedInfoSkeleton";
 
 const Launches = (props) => {
   const [showPastLaunches, setShowPastLaunches] = useState(false);
@@ -154,25 +155,25 @@ const Launches = (props) => {
       variants={pageVariantsAnim}
       className={styles.Launches}>
       <div className={styles.Latest}>
-        {props.latestLaunch.docs[0] ? (
-          <>
-            <h2>LATEST LAUNCH</h2>
-            <LatestLaunch
-              showMoreDetailsButton
-              details={props.latestLaunch.docs[0].details}
-              launchName={props.latestLaunch.docs[0].name}
-              date_local={props.latestLaunch.docs[0].date_local}
-              date_utc={props.latestLaunch.docs[0].date_utc}
-              rocketName={props.latestLaunch.docs[0].rocket.name}
-              launchSiteName={props.latestLaunch.docs[0].launchpad.full_name}
-              flightNumber={props.latestLaunch.docs[0].flight_number}
-              patchImg={props.latestLaunch.docs[0].links.patch.small}
-              success={props.latestLaunch.docs[0].success}
-              failures={props.latestLaunch.docs[0].failures}
-              launchId={props.latestLaunch.docs[0].id}
-            />
-          </>
-        ) : null}
+        <h2>LATEST LAUNCH</h2>
+        {props.loadingLatestLaunch ? (
+          <LaunchExtendedInfoSkeleton />
+        ) : (
+          <LaunchExtendedInfo
+            showMoreDetailsButton
+            details={props.latestLaunch.docs[0].details}
+            launchName={props.latestLaunch.docs[0].name}
+            date_local={props.latestLaunch.docs[0].date_local}
+            date_utc={props.latestLaunch.docs[0].date_utc}
+            rocketName={props.latestLaunch.docs[0].rocket.name}
+            launchSiteName={props.latestLaunch.docs[0].launchpad.full_name}
+            flightNumber={props.latestLaunch.docs[0].flight_number}
+            patchImg={props.latestLaunch.docs[0].links.patch.small}
+            success={props.latestLaunch.docs[0].success}
+            failures={props.latestLaunch.docs[0].failures}
+            launchId={props.latestLaunch.docs[0].id}
+          />
+        )}
       </div>
       <div className={styles.Content}>
         {!props.loadingUpcomingLaunches || !props.loadingPastLaunches ? (
