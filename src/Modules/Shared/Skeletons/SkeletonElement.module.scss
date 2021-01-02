@@ -1,9 +1,10 @@
 @import "../../../resources/styles/index.scss";
 
 .Skeleton {
-  background-color: #ddd;
+  background-color: $foreground;
   margin: 10px 0;
   border-radius: 1rem;
+  overflow: hidden;
 }
 
 .Text {

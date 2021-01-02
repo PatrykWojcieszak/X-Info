@@ -1,0 +1,16 @@
+@import "../../../../resources/styles/index.scss";
+
+.SkeletonWrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: rgba($color: #090909, $alpha: 0.2);
+  display: inline-block;
+
+  .RecentLaunchSkeleton {
+    @include flex-center-column;
+    width: 240px;
+    height: 350px;
+    justify-content: space-evenly;
+  }
+}

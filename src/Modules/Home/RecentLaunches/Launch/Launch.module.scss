@@ -44,8 +44,6 @@
 
 @include tablet {
   .Launch {
-    margin: 1rem 0;
-
     h3 {
       font-size: 1.3rem;
       min-height: 40px;
@@ -66,7 +64,6 @@
 
 @include mobile {
   .Launch {
-    margin: 1rem 0;
     width: 220px;
 
     h3 {

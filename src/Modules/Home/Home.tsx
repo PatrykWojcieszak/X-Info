@@ -13,7 +13,6 @@ import styles from "./Home.module.scss";
 //OTHER
 import RandomQuote from "../../Other/ElonMuskQuotes";
 import { fetchNextLaunch } from "../../Store/NextLaunch/actions";
-import { fetchRecentLaunches } from "../../Store/RecentLaunches/actions";
 import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/actions";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 import NextLaunch from "./NextLaunch/NextLaunch";
@@ -23,30 +22,20 @@ const Home = (props) => {
   const {
     onFetchNextLaunch,
     onFetchUpcomingLaunch,
-    onFetchRecentLaunch,
     nextLaunch,
     upcomingLaunches,
-    recentLaunches,
   } = props;
 
   useEffect(() => {
     if (!nextLaunch.docs[0]) onFetchNextLaunch();
     if (upcomingLaunches.docs.length === 0) onFetchUpcomingLaunch();
-    if (recentLaunches.docs.length === 0) onFetchRecentLaunch();
-  }, [
-    onFetchNextLaunch,
-    onFetchUpcomingLaunch,
-    onFetchRecentLaunch,
-    nextLaunch,
-    upcomingLaunches,
-    recentLaunches,
-  ]);
+  }, [onFetchNextLaunch, onFetchUpcomingLaunch, nextLaunch, upcomingLaunches]);
 
   return (
     <>
-      {(props.loadingNextLaunch ||
-        props.loadingUpcomingLaunches ||
-        props.loadingRecentLaunches) && <Spinner />}
+      {(props.loadingNextLaunch || props.loadingUpcomingLaunches) && (
+        <Spinner />
+      )}
       <motion.div
         initial="initial"
         animate="in"
@@ -57,9 +46,8 @@ const Home = (props) => {
           <NextLaunch elonMuskQuote={RandomQuote()} nextLaunch={nextLaunch} />
         )}
         <div className={styles.Home__Content}>
-          {!props.loadingRecentLaunches && (
-            <RecentLaunches launches={props.recentLaunches.docs} />
-          )}
+          <RecentLaunches />
+
           {!props.loadingUpcomingLaunches && (
             <UpcomingLaunches launches={props.upcomingLaunches.docs} />
           )}
@@ -75,8 +63,6 @@ const mapStateToProps = (state) => {
     loadingNextLaunch: state.nextLaunch.loading,
     upcomingLaunches: state.upcomingLaunches.upcomingLaunches,
     loadingUpcomingLaunches: state.upcomingLaunches.loading,
-    recentLaunches: state.recentLaunches.recentLaunches,
-    loadingRecentLaunches: state.recentLaunches.loading,
   };
 };
 
@@ -84,7 +70,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onFetchNextLaunch: () => dispatch(fetchNextLaunch()),
     onFetchUpcomingLaunch: () => dispatch(fetchUpcomingLaunches()),
-    onFetchRecentLaunch: () => dispatch(fetchRecentLaunches()),
   };
 };
 
