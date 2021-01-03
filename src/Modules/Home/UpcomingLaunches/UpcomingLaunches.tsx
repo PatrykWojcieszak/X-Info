@@ -10,7 +10,6 @@ import LaunchShortInfo from "../../Shared/LaunchShortInfo/LaunchShortInfo";
 import styles from "./UpcomingLaunches.module.scss";
 
 //MODELS
-import Launch_model from "../../../Models/ILaunch";
 import LaunchShortInfoSkeleton from "../../Shared/Skeletons/LaunchShortInfoSkeleton";
 
 //REDUX

@@ -10,13 +10,9 @@ import Countdown from "../Countdown/Countdown";
 
 //MODELS
 import { ITime } from "../../../Models/ITime";
-import ILaunch from "../../../Models/ILaunch";
-import IQueryResult from "../../../Models/IQueryResult";
 
 //STYLES
 import styles from "./NextLaunch.module.scss";
-
-//OTHER
 import { bottomToTopAnim } from "../../../Animations/Animations_motion";
 
 //REDUX
@@ -73,62 +69,59 @@ const NextLaunch = (props) => {
   let nextLaunchWrapper = <div className={styles.Top}></div>;
 
   if (
-    props.loadingNextLaunch
-      ? null
-      : (nextLaunchWrapper = (
-          <AnimatePresence>
-            <div className={styles.Top}>
-              <motion.div
-                variants={bottomToTopAnim}
-                initial="hidden"
-                animate="show"
-                exit="exit"
-                className={styles.Top__Content}>
-                <div className={styles.LaunchTitle}>
-                  <h2>NEXT LAUNCH: </h2>
-                  <h2 className={styles.LaunchName}>
-                    {nextLaunchData.docs[0].name}
-                  </h2>
-                </div>
-                {timer && (
-                  <Countdown
-                    days={timer.days}
-                    hours={timer.hours}
-                    minutes={timer.minutes}
-                    seconds={timer.seconds}
-                  />
-                )}
-                {!showLaunchDetails && (
-                  <div className={styles.ShowMore}>
-                    <FontAwesomeIcon
-                      icon="arrow-down"
-                      onClick={() => setShowLaunchDetails(!showLaunchDetails)}
-                    />
-                    <h4>SHOW DETAILS</h4>
-                  </div>
-                )}
-                <AnimatePresence>
-                  {showLaunchDetails && (
-                    <LaunchDetails
-                      flightNumber={nextLaunchData.docs[0].flight_number}
-                      dateLocal={nextLaunchData.docs[0].date_local}
-                      details={nextLaunchData.docs[0].details}
-                      rocketName={nextLaunchData.docs[0].rocket.name}
-                      launchpadFullName={
-                        nextLaunchData.docs[0].launchpad.full_name
-                      }
-                    />
-                  )}
-                </AnimatePresence>
-                <div className={styles.QuoteContainer}>
-                  <h2>
-                    {props.elonMuskQuote} - <span>Elon Musk</span>
-                  </h2>
-                </div>
-              </motion.div>
+    !props.loadingNextLaunch &&
+    (nextLaunchWrapper = (
+      <AnimatePresence>
+        <div className={styles.Top}>
+          <motion.div
+            variants={bottomToTopAnim}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            className={styles.Top__Content}>
+            <div className={styles.LaunchTitle}>
+              <h2>NEXT LAUNCH: </h2>
+              <h2 className={styles.LaunchName}>
+                {nextLaunchData.docs[0].name}
+              </h2>
             </div>
-          </AnimatePresence>
-        ))
+            {timer && (
+              <Countdown
+                days={timer.days}
+                hours={timer.hours}
+                minutes={timer.minutes}
+                seconds={timer.seconds}
+              />
+            )}
+            {!showLaunchDetails && (
+              <div className={styles.ShowMore}>
+                <FontAwesomeIcon
+                  icon="arrow-down"
+                  onClick={() => setShowLaunchDetails(!showLaunchDetails)}
+                />
+                <h4>SHOW DETAILS</h4>
+              </div>
+            )}
+            <AnimatePresence>
+              {showLaunchDetails && (
+                <LaunchDetails
+                  flightNumber={nextLaunchData.docs[0].flight_number}
+                  dateLocal={nextLaunchData.docs[0].date_local}
+                  details={nextLaunchData.docs[0].details}
+                  rocketName={nextLaunchData.docs[0].rocket.name}
+                  launchpadFullName={nextLaunchData.docs[0].launchpad.full_name}
+                />
+              )}
+            </AnimatePresence>
+            <div className={styles.QuoteContainer}>
+              <h2>
+                {props.elonMuskQuote} - <span>Elon Musk</span>
+              </h2>
+            </div>
+          </motion.div>
+        </div>
+      </AnimatePresence>
+    ))
   )
     if (timer.days === 0 && timer.hours === 0 && timer.minutes < 2)
       nextLaunchWrapper = (

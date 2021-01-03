@@ -1,5 +1,6 @@
 import React from "react";
 
+//STYLES
 import styles from "./Button.module.scss";
 
 const Button = ({ name, selected, clicked }: buttonProps) => {

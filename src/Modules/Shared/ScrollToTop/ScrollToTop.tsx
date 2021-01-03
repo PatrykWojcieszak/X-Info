@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+//STYLES
 import styles from "./ScrollToTop.module.scss";
 
 const ScrollToTop = () => {

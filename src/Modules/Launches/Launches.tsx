@@ -7,24 +7,24 @@ import Button from "../Shared/Button/Button";
 import LaunchShortInfo from "../Shared/LaunchShortInfo/LaunchShortInfo";
 import LaunchExtendedInfo from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo";
 import Spinner from "../Shared/Spinner/Spinner";
+import ScrollToTop from "../Shared/ScrollToTop/ScrollToTop";
 
 //STYLES
 import styles from "./Launches.module.scss";
-
-//OTHER
 import {
   pageVariantsAnim,
   showLaunchesList,
 } from "../../Animations/Animations_motion";
+
+//OTHER
+import LaunchShortInfoSkeleton from "../Shared/Skeletons/LaunchShortInfoSkeleton";
+import LaunchExtendedInfoSkeleton from "../Shared/Skeletons/LaunchExtendedInfoSkeleton";
 
 //REDUX
 import { fetchLatestLaunch } from "../../Store/LatestLaunch/actions";
 import { fetchPastLaunches } from "../../Store/PastLaunches/actions";
 import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/actions";
 import { connect } from "react-redux";
-import ScrollToTop from "../Shared/ScrollToTop/ScrollToTop";
-import LaunchShortInfoSkeleton from "../Shared/Skeletons/LaunchShortInfoSkeleton";
-import LaunchExtendedInfoSkeleton from "../Shared/Skeletons/LaunchExtendedInfoSkeleton";
 
 const Launches = (props) => {
   const [showPastLaunches, setShowPastLaunches] = useState(false);
@@ -192,15 +192,13 @@ const Launches = (props) => {
         ) : null}
 
         <AnimatePresence>
-          {showUpcomingLaunches ? upcomingLaunchesArr : null}
+          {showUpcomingLaunches && upcomingLaunchesArr}
         </AnimatePresence>
 
-        <AnimatePresence>
-          {showPastLaunches ? pastLaunchesArr : null}
-        </AnimatePresence>
+        <AnimatePresence>{showPastLaunches && pastLaunchesArr}</AnimatePresence>
       </div>
 
-      {showPastLaunches || showUpcomingLaunches ? <ScrollToTop /> : null}
+      {(showPastLaunches || showUpcomingLaunches) && <ScrollToTop />}
     </motion.div>
   );
 };

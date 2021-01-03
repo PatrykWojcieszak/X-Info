@@ -1,8 +1,11 @@
 import React from "react";
 
+//COMPONENTS
+import Button from "../Button/Button";
+
+//STYLES // IMAGES
 import styles from "./Page404.module.scss";
 import sadRocket from "../../resources/images/sadRocket.png";
-import Button from "../Button/Button";
 
 const Page404 = (props) => {
   return (

@@ -1,5 +1,6 @@
 import React from "react";
 
+//STYLES
 import styles from "./InfoLine.module.scss";
 
 const InfoLine = ({ title, value }: infoLineProps) => {
