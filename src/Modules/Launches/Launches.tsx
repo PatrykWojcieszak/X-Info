@@ -138,9 +138,19 @@ const Launches = (props) => {
           />
         ))}
         {props.pastLaunches.nextPage ? (
-          <div style={{ marginTop: "2rem", position: "relative" }}>
+          <div
+            style={{
+              marginTop: "2rem",
+              position: "relative",
+              display: "flex",
+              justifyContent: "center",
+            }}>
             {showPastLaunches && props.loadingPastLaunches ? <Spinner /> : null}
-            <Button name="LOAD MORE" clicked={FetchPastLaunches} />
+            <Button
+              disabled={props.loadingPastLaunches}
+              name="LOAD MORE"
+              clicked={FetchPastLaunches}
+            />
           </div>
         ) : null}
       </motion.div>
