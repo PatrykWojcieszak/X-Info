@@ -14,6 +14,14 @@
     }
   }
 
+  .Content {
+    @include flex-column;
+  }
+
+  .Content > * {
+    margin: 1rem 0;
+  }
+
   .ButtonWrapper {
     @include flex-center;
     margin-top: 2rem;

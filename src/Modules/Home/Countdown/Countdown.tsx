@@ -1,6 +1,7 @@
 import React from "react";
 import "moment-precise-range-plugin";
 
+//STYLES
 import styles from "./Countdown.module.scss";
 
 const Countdown = ({ days, hours, minutes, seconds }: countdownProps) => {

@@ -9,6 +9,11 @@ import InfoLine from "../Shared/InfoLine/InfoLine";
 
 //STYLES
 import styles from "./Rocket.module.scss";
+import {
+  bottomToTopAnim,
+  pageVariantsAnim,
+  rightToLeftAnim,
+} from "../../Animations/Animations_motion";
 
 //IMAGES
 import falconheavy_img from "../../resources/images/falconHeavy.png";
@@ -19,14 +24,12 @@ import falcon9_img from "../../resources/images/falcon9.png";
 //QUERIES
 import RocketQuotes from "../../Other/RocketQuotes";
 
-//OTHER
-import {
-  opacityAnim,
-  pageVariantsAnim,
-  rightToLeftAnim,
-} from "../../Animations/Animations_motion";
+//REDUX
 import { connect } from "react-redux";
 import { fetchRocket } from "../../Store/Rocket/actions";
+
+//OTHER
+import RocketSkeleton from "../Shared/Skeletons/RocketSkeleton";
 
 const Rocket = (props) => {
   const { vehicle } = useParams();
@@ -92,6 +95,8 @@ const Rocket = (props) => {
     rocketQuote = RocketQuotes[3];
   }
 
+  console.log(props.rocket);
+
   //OVERVIEW DETAILS
   let overViewDetails = <></>;
   if (!props.loadingRocket)
@@ -144,76 +149,81 @@ const Rocket = (props) => {
         animate="show"
         exit="exit"
         className={styles.Details}>
-        {props.rocket.docs[0].first_stage.engines ? (
+        {props.rocket.docs[0].first_stage.engines && (
           <InfoLine
             title="ENGINES"
             value={`${props.rocket.docs[0].first_stage.engines}`}
           />
-        ) : null}
+        )}
 
-        {props.rocket.docs[0].first_stage.thrust_sea_level.kN ||
-        props.rocket.docs[0].first_stage.thrust_sea_level.lbf ? (
+        {(props.rocket.docs[0].first_stage.thrust_sea_level.kN ||
+          props.rocket.docs[0].first_stage.thrust_sea_level.lbf) && (
           <InfoLine
             title="THRUST AT SEA LEVEL"
             value={`${props.rocket.docs[0].first_stage.thrust_sea_level.kN} kn | ${props.rocket.docs[0].first_stage.thrust_sea_level.lbf} lbf`}
           />
-        ) : null}
+        )}
 
-        {props.rocket.docs[0].first_stage.thrust_vacuum.kN ||
-        props.rocket.docs[0].first_stage.thrust_vacuum.lbf ? (
+        {(props.rocket.docs[0].first_stage.thrust_vacuum.kN ||
+          props.rocket.docs[0].first_stage.thrust_vacuum.lbf) && (
           <InfoLine
             title="THRUST VACUUM"
             value={`${props.rocket.docs[0].first_stage.thrust_vacuum.kN} kn | ${props.rocket.docs[0].first_stage.thrust_vacuum.lbf} lbf`}
           />
-        ) : null}
-        {props.rocket.docs[0].first_stage.fuel_amount_tons ? (
+        )}
+
+        {props.rocket.docs[0].first_stage.fuel_amount_tons && (
           <InfoLine
             title="FUEL AMOUNT"
             value={`${props.rocket.docs[0].first_stage.fuel_amount_tons} tons`}
           />
-        ) : null}
-        {props.rocket.docs[0].first_stage.burn_time_sec ? (
+        )}
+
+        {props.rocket.docs[0].first_stage.burn_time_sec && (
           <InfoLine
             title="BURN TIME"
             value={`${props.rocket.docs[0].first_stage.burn_time_sec} sec `}
           />
-        ) : null}
-        {props.rocket.docs[0].engines.type ? (
+        )}
+
+        {props.rocket.docs[0].engines.type && (
           <InfoLine
             title="TYPE"
             value={`${props.rocket.docs[0].engines.type} `}
           />
-        ) : null}
-        {props.rocket.docs[0].engines.version ? (
+        )}
+
+        {props.rocket.docs[0].engines.version && (
           <InfoLine
             title="VERSION"
             value={`${props.rocket.docs[0].engines.version}`}
           />
-        ) : null}
-        {props.rocket.docs[0].engines.layout ? (
+        )}
+
+        {props.rocket.docs[0].engines.layout && (
           <InfoLine
             title="LAYOUT"
             value={`${props.rocket.docs[0].engines.layout}`}
           />
-        ) : null}
+        )}
 
         <InfoLine
           title="REUSABLE"
           value={props.rocket.docs[0].first_stage.reusable ? "YES" : "NO"}
         />
-        {props.rocket.docs[0].engines.propellant_1 ? (
+        {props.rocket.docs[0].engines.propellant_1 && (
           <InfoLine
             title="PROPELLANT 1"
             value={`${props.rocket.docs[0].engines.propellant_1}`}
           />
-        ) : null}
+        )}
 
-        {props.rocket.docs[0].engines.propellant_2 ? (
+        {props.rocket.docs[0].engines.propellant_2 && (
           <InfoLine
             title="PROPELLANT 2"
             value={`${props.rocket.docs[0].engines.propellant_2}`}
           />
-        ) : null}
+        )}
       </motion.div>
     );
 
@@ -227,31 +237,34 @@ const Rocket = (props) => {
         animate="show"
         exit="exit"
         className={styles.Details}>
-        {props.rocket.docs[0].second_stage.engines ? (
+        {props.rocket.docs[0].second_stage.engines && (
           <InfoLine
             title="ENGINES"
             value={`${props.rocket.docs[0].second_stage.engines}`}
           />
-        ) : null}
-        {props.rocket.docs[0].second_stage.thrust.kN ||
-        props.rocket.docs[0].second_stage.thrust.lbf ? (
+        )}
+
+        {(props.rocket.docs[0].second_stage.thrust.kN ||
+          props.rocket.docs[0].second_stage.thrust.lbf) && (
           <InfoLine
             title="THRUST"
             value={`${props.rocket.docs[0].second_stage.thrust.kN} kn | ${props.rocket.docs[0].second_stage.thrust.lbf} lbf`}
           />
-        ) : null}
-        {props.rocket.docs[0].second_stage.fuel_amount_tons ? (
+        )}
+
+        {props.rocket.docs[0].second_stage.fuel_amount_tons && (
           <InfoLine
             title="FUEL AMOUNT"
             value={`${props.rocket.docs[0].second_stage.fuel_amount_tons} tons`}
           />
-        ) : null}
-        {props.rocket.docs[0].second_s ? (
+        )}
+
+        {props.rocket.docs[0].second_s && (
           <InfoLine
             title="BURN TIME"
             value={`${props.rocket.docs[0].second_stage.burn_time_sec} sec`}
           />
-        ) : null}
+        )}
       </motion.div>
     );
 
@@ -265,19 +278,19 @@ const Rocket = (props) => {
         animate="show"
         exit="exit"
         className={styles.Details}>
-        {props.rocket.docs[0].landing_legs.number ? (
+        {props.rocket.docs[0].landing_legs.number && (
           <InfoLine
             title="NUMBER"
             value={`${props.rocket.docs[0].landing_legs.number}`}
           />
-        ) : null}
+        )}
 
-        {props.rocket.docs[0].landing_legs.material ? (
+        {props.rocket.docs[0].landing_legs.material && (
           <InfoLine
             title="MATERIAL"
             value={`${props.rocket.docs[0].landing_legs.material} `}
           />
-        ) : null}
+        )}
       </motion.div>
     );
 
@@ -290,9 +303,10 @@ const Rocket = (props) => {
       className={styles.Rocket}>
       <div className={rocketHeroImg.join(" ")}>
         <motion.div
-          initial="initial"
-          animate="in"
-          variants={opacityAnim}
+          variants={bottomToTopAnim}
+          initial="hidden"
+          animate="show"
+          exit="exit"
           className={styles.HeroText}>
           <h2>{props.rocket.docs[0]?.name}</h2>
           <h4>
@@ -301,63 +315,71 @@ const Rocket = (props) => {
         </motion.div>
       </div>
       <div className={styles.Content}>
-        <div className={styles.Rocket}>
-          <img src={rocketImg} alt="falcon heavy" />
-        </div>
-        <div className={styles.InfoContainer}>
-          <p>{props.rocket.docs[0]?.description}</p>
-          <h3>
-            STATUS:{" "}
-            <span
-              style={{
-                color: props.rocket.docs[0]?.active ? "#4BB543" : "#FA113D",
-              }}>
-              {props.rocket.docs[0]?.active ? "ACTIVE" : "INACTIVE"}
-            </span>
-          </h3>
-          <div className={styles.RocketDetails}>
-            <div className={styles.BtnContainer}>
-              <Button
-                name="OVERVIEW"
-                clicked={showOverviewHandler}
-                selected={showOverview}
-              />
-              <Button
-                name="STAGE 1"
-                clicked={showFirstStageHandler}
-                selected={showFirstStage}
-              />
-              <Button
-                name="STAGE 2"
-                clicked={showSecondStageHandler}
-                selected={showSecondStage}
-              />
-              {!props.loadingRocket &&
-              (props.rocket.docs[0].landing_legs.number ||
-                props.rocket.docs[0].landing_legs.material) ? (
-                <Button
-                  name="LANDING LEGS"
-                  clicked={showLandingLegsHandler}
-                  selected={showLandingLegs}
-                />
-              ) : null}
-            </div>
-            <div className={styles.DetailsContainer}>
-              <AnimatePresence>
-                {showOverview ? overViewDetails : null}
-              </AnimatePresence>
-              <AnimatePresence>
-                {showFirstStage ? stageOneDetails : null}
-              </AnimatePresence>
-              <AnimatePresence>
-                {showSecondStage ? stageTwoDetails : null}
-              </AnimatePresence>
-              <AnimatePresence>
-                {showLandingLegs ? landingLegsDetails : null}
-              </AnimatePresence>
-            </div>
+        {props.loadingRocket ? (
+          <div style={{ width: "100%" }}>
+            <RocketSkeleton />
           </div>
-        </div>
+        ) : (
+          <>
+            <div className={styles.Rocket}>
+              <img src={rocketImg} alt="falcon heavy" />
+            </div>
+            <div className={styles.InfoContainer}>
+              <p>{props.rocket.docs[0]?.description}</p>
+              <h3>
+                STATUS:{" "}
+                <span
+                  style={{
+                    color: props.rocket.docs[0]?.active ? "#4BB543" : "#FA113D",
+                  }}>
+                  {props.rocket.docs[0]?.active ? "ACTIVE" : "INACTIVE"}
+                </span>
+              </h3>
+              <div className={styles.RocketDetails}>
+                <div className={styles.BtnContainer}>
+                  <Button
+                    name="OVERVIEW"
+                    clicked={showOverviewHandler}
+                    selected={showOverview}
+                  />
+                  <Button
+                    name="STAGE 1"
+                    clicked={showFirstStageHandler}
+                    selected={showFirstStage}
+                  />
+                  <Button
+                    name="STAGE 2"
+                    clicked={showSecondStageHandler}
+                    selected={showSecondStage}
+                  />
+                  {!props.loadingRocket &&
+                  (props.rocket.docs[0].landing_legs.number ||
+                    props.rocket.docs[0].landing_legs.material) ? (
+                    <Button
+                      name="LANDING LEGS"
+                      clicked={showLandingLegsHandler}
+                      selected={showLandingLegs}
+                    />
+                  ) : null}
+                </div>
+                <div className={styles.DetailsContainer}>
+                  <AnimatePresence>
+                    {showOverview ? overViewDetails : null}
+                  </AnimatePresence>
+                  <AnimatePresence>
+                    {showFirstStage ? stageOneDetails : null}
+                  </AnimatePresence>
+                  <AnimatePresence>
+                    {showSecondStage ? stageTwoDetails : null}
+                  </AnimatePresence>
+                  <AnimatePresence>
+                    {showLandingLegs ? landingLegsDetails : null}
+                  </AnimatePresence>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
       <div className={styles.GalleryWrapper}>
         {props.rocket.docs[0]?.flickr_images.length > 0 ? (

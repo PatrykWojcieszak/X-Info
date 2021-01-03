@@ -2,11 +2,14 @@ import React, { useEffect } from "react";
 import { getLatLngObj } from "tle.js";
 import Globe from "react-globe.gl";
 import { connect } from "react-redux";
-
-import styles from "./Starlink.module.scss";
 import { motion } from "framer-motion";
-import { pageVariantsAnim } from "../../Animations/Animations_motion";
+
+//QUERieS
 import { fetchStarlink } from "../../Store/Starlink/actions";
+
+//STYLES
+import styles from "./Starlink.module.scss";
+import { pageVariantsAnim } from "../../Animations/Animations_motion";
 interface IMapData {
   lat: number;
   lng: number;

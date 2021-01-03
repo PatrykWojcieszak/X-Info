@@ -1,5 +1,6 @@
 import React from "react";
 
+//STYLES
 import styles from "./Ship.module.scss";
 
 const Ship = ({ name, img }: shipProps) => {

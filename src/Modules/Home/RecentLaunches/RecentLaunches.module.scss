@@ -21,6 +21,10 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
   }
+
+  .Content > * {
+    margin: 1rem 0;
+  }
 }
 
 @include tablet {

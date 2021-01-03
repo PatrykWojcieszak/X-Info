@@ -1,5 +1,6 @@
 import React from "react";
 
+//STYLES
 import styles from "./CrewPerson.module.scss";
 
 const CrewPerson = ({ name, img, agency }: crewPersonProps) => {

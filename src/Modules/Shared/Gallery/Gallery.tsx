@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { wrap } from "popmotion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+//STYLES
 import styles from "./Gallery.module.scss";
 import { GalleryAnim } from "../../../Animations/Animations_motion";
 
