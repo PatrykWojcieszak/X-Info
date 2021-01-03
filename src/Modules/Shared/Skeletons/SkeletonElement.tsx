@@ -8,7 +8,7 @@ const SkeletonElement = ({ type }: skeletonElementProps) => {
   return <div className={`${styles.Skeleton} ${style}`}></div>;
 };
 
-type skeletonTypeEnum = "Text" | "Title" | "Avatar" | "Thumbnail";
+type skeletonTypeEnum = "Text" | "Title" | "Avatar" | "Thumbnail" | "Box";
 
 type skeletonElementProps = {
   type: skeletonTypeEnum;

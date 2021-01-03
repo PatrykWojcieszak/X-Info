@@ -10,7 +10,6 @@ import Gallery from "../Shared/Gallery/Gallery";
 import CrewPerson from "./CrewPerson/CrewPerson";
 import Ship from "./Ship/Ship";
 import MediaLink from "./MediaLink/MediaLink";
-import Button from "../Shared/Button/Button";
 
 //STYLE
 import fhheavy from "../../resources/images/falconHeavy.png";
@@ -18,12 +17,13 @@ import falcon1 from "../../resources/images/f1.png";
 import starship from "../../resources/images/st.png";
 import falcon9 from "../../resources/images/falcon9.png";
 import styles from "./Launch.module.scss";
-import sadRocket from "../../resources/images/sadRocket.png";
 
 //OTHER
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 import { connect } from "react-redux";
 import { fetchLaunch } from "../../Store/Launch/actions";
+import LaunchSkeleton from "../Shared/Skeletons/LaunchSkeleton";
+import LaunchExtendedInfoSkeleton from "../Shared/Skeletons/LaunchExtendedInfoSkeleton";
 
 const Launch = (props) => {
   const { flight_number } = useParams();
@@ -126,14 +126,12 @@ const Launch = (props) => {
   }
 
   let launchInformation = (
-    <div className={styles.NoLaunchInfo}>
-      <img src={sadRocket} alt="sad rocket" />
-      <h2>There is no info about the launch yet!</h2>
-      <Button name="GET BACK TO EARTH" />
+    <div className={styles.Launch}>
+      <LaunchSkeleton />
     </div>
   );
 
-  if (props.launch.docs[0]) {
+  if (!props.loadingLaunch) {
     launchInformation = (
       <>
         <div className={styles.Launch}>
@@ -151,6 +149,7 @@ const Launch = (props) => {
             failures={props.launch.docs[0].failures}
             launchId={props.launch.docs[0].id}
           />
+
           <div className={styles.Row}>
             <Link to={`/vehicles/${props.launch.docs[0]?.rocket.name}`}>
               <div className={styles.Rocket}>

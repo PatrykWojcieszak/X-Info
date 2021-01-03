@@ -47,7 +47,29 @@
     }
   }
 
-  .CountdownSkeleton {
+  .LaunchSkeleton {
+    @include flex-column;
+    margin-bottom: 3rem;
+
+    .Row {
+      display: flex;
+      height: 700px;
+      margin-top: 3rem;
+
+      .Left {
+        width: 200px;
+      }
+
+      .Right {
+        width: 100%;
+        margin-left: 4rem;
+
+        .InfoWrapper {
+          @include flex-column;
+          margin-top: 2rem;
+        }
+      }
+    }
   }
 }
 
