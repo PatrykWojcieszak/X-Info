@@ -71,6 +71,25 @@
       }
     }
   }
+
+  .RocketSkeleton {
+    display: flex;
+
+    .Left {
+      height: 700px;
+      width: 300px;
+    }
+
+    .Right {
+      @include flex-column;
+      width: 100%;
+      margin-left: 5rem;
+
+      .InfoElement {
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
 }
 
 @include tablet {

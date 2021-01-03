@@ -21,12 +21,13 @@ import RocketQuotes from "../../Other/RocketQuotes";
 
 //OTHER
 import {
-  opacityAnim,
+  bottomToTopAnim,
   pageVariantsAnim,
   rightToLeftAnim,
 } from "../../Animations/Animations_motion";
 import { connect } from "react-redux";
 import { fetchRocket } from "../../Store/Rocket/actions";
+import RocketSkeleton from "../Shared/Skeletons/RocketSkeleton";
 
 const Rocket = (props) => {
   const { vehicle } = useParams();
@@ -290,9 +291,10 @@ const Rocket = (props) => {
       className={styles.Rocket}>
       <div className={rocketHeroImg.join(" ")}>
         <motion.div
-          initial="initial"
-          animate="in"
-          variants={opacityAnim}
+          variants={bottomToTopAnim}
+          initial="hidden"
+          animate="show"
+          exit="exit"
           className={styles.HeroText}>
           <h2>{props.rocket.docs[0]?.name}</h2>
           <h4>
@@ -301,68 +303,76 @@ const Rocket = (props) => {
         </motion.div>
       </div>
       <div className={styles.Content}>
-        <div className={styles.Rocket}>
-          <img src={rocketImg} alt="falcon heavy" />
-        </div>
-        <div className={styles.InfoContainer}>
-          <p>{props.rocket.docs[0]?.description}</p>
-          <h3>
-            STATUS:{" "}
-            <span
-              style={{
-                color: props.rocket.docs[0]?.active ? "#4BB543" : "#FA113D",
-              }}>
-              {props.rocket.docs[0]?.active ? "ACTIVE" : "INACTIVE"}
-            </span>
-          </h3>
-          <div className={styles.RocketDetails}>
-            <div className={styles.BtnContainer}>
-              <Button
-                name="OVERVIEW"
-                clicked={showOverviewHandler}
-                selected={showOverview}
-              />
-              <Button
-                name="STAGE 1"
-                clicked={showFirstStageHandler}
-                selected={showFirstStage}
-              />
-              <Button
-                name="STAGE 2"
-                clicked={showSecondStageHandler}
-                selected={showSecondStage}
-              />
-              {!props.loadingRocket &&
-              (props.rocket.docs[0].landing_legs.number ||
-                props.rocket.docs[0].landing_legs.material) ? (
-                <Button
-                  name="LANDING LEGS"
-                  clicked={showLandingLegsHandler}
-                  selected={showLandingLegs}
-                />
+        {props.loadingRocket ? (
+          <div style={{ width: "100%" }}>
+            <RocketSkeleton />
+          </div>
+        ) : (
+          <>
+            <div className={styles.Rocket}>
+              <img src={rocketImg} alt="falcon heavy" />
+            </div>
+            <div className={styles.InfoContainer}>
+              <p>{props.rocket.docs[0]?.description}</p>
+              <h3>
+                STATUS:{" "}
+                <span
+                  style={{
+                    color: props.rocket.docs[0]?.active ? "#4BB543" : "#FA113D",
+                  }}>
+                  {props.rocket.docs[0]?.active ? "ACTIVE" : "INACTIVE"}
+                </span>
+              </h3>
+              <div className={styles.RocketDetails}>
+                <div className={styles.BtnContainer}>
+                  <Button
+                    name="OVERVIEW"
+                    clicked={showOverviewHandler}
+                    selected={showOverview}
+                  />
+                  <Button
+                    name="STAGE 1"
+                    clicked={showFirstStageHandler}
+                    selected={showFirstStage}
+                  />
+                  <Button
+                    name="STAGE 2"
+                    clicked={showSecondStageHandler}
+                    selected={showSecondStage}
+                  />
+                  {!props.loadingRocket &&
+                  (props.rocket.docs[0].landing_legs.number ||
+                    props.rocket.docs[0].landing_legs.material) ? (
+                    <Button
+                      name="LANDING LEGS"
+                      clicked={showLandingLegsHandler}
+                      selected={showLandingLegs}
+                    />
+                  ) : null}
+                </div>
+                <div className={styles.DetailsContainer}>
+                  <AnimatePresence>
+                    {showOverview ? overViewDetails : null}
+                  </AnimatePresence>
+                  <AnimatePresence>
+                    {showFirstStage ? stageOneDetails : null}
+                  </AnimatePresence>
+                  <AnimatePresence>
+                    {showSecondStage ? stageTwoDetails : null}
+                  </AnimatePresence>
+                  <AnimatePresence>
+                    {showLandingLegs ? landingLegsDetails : null}
+                  </AnimatePresence>
+                </div>
+              </div>
+            </div>
+            <div className={styles.GalleryWrapper}>
+              {props.rocket.docs[0]?.flickr_images.length > 0 ? (
+                <Gallery images={props.rocket.docs[0].flickr_images} />
               ) : null}
             </div>
-            <div className={styles.DetailsContainer}>
-              <AnimatePresence>
-                {showOverview ? overViewDetails : null}
-              </AnimatePresence>
-              <AnimatePresence>
-                {showFirstStage ? stageOneDetails : null}
-              </AnimatePresence>
-              <AnimatePresence>
-                {showSecondStage ? stageTwoDetails : null}
-              </AnimatePresence>
-              <AnimatePresence>
-                {showLandingLegs ? landingLegsDetails : null}
-              </AnimatePresence>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className={styles.GalleryWrapper}>
-        {props.rocket.docs[0]?.flickr_images.length > 0 ? (
-          <Gallery images={props.rocket.docs[0].flickr_images} />
-        ) : null}
+          </>
+        )}
       </div>
     </motion.div>
   );
