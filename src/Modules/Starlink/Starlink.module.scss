@@ -5,9 +5,9 @@
 }
 
 .StarlinkInfo {
-  z-index: 900;
+  z-index: 100;
   position: absolute;
-  top: 10%;
+  top: 6rem;
   left: 2%;
   @include flex-column;
   max-width: 400px;
@@ -38,4 +38,31 @@
 a {
   text-decoration: none;
   color: $blue;
+}
+
+@include tablet {
+  .StarlinkInfo {
+    z-index: 100;
+    position: absolute;
+    top: 10%;
+    left: 2%;
+    @include flex-column;
+    max-width: 400px;
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    h3,
+    h4 {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.SpinnerWrapper {
+  z-index: 999;
+  width: 100vh;
+  height: 100vh;
+  position: relative;
 }

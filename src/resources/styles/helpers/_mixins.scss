@@ -38,9 +38,16 @@
 }
 
 //MEDIA QUERIES
+$mobile: 481;
 $tablet: 768;
 $large: 1024;
 $desktop: 1280;
+
+@mixin mobile {
+  @media only screen and (max-width: $mobile * 1px) {
+    @content;
+  }
+}
 
 @mixin tablet {
   @media only screen and (max-width: $tablet * 1px) {

@@ -10,7 +10,6 @@ import Gallery from "../Shared/Gallery/Gallery";
 import CrewPerson from "./CrewPerson/CrewPerson";
 import Ship from "./Ship/Ship";
 import MediaLink from "./MediaLink/MediaLink";
-import Button from "../Shared/Button/Button";
 
 //STYLE
 import fhheavy from "../../resources/images/falconHeavy.png";
@@ -18,12 +17,12 @@ import falcon1 from "../../resources/images/f1.png";
 import starship from "../../resources/images/st.png";
 import falcon9 from "../../resources/images/falcon9.png";
 import styles from "./Launch.module.scss";
-import sadRocket from "../../resources/images/sadRocket.png";
 
 //OTHER
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 import { connect } from "react-redux";
 import { fetchLaunch } from "../../Store/Launch/actions";
+import LaunchSkeleton from "../Shared/Skeletons/LaunchSkeleton";
 
 const Launch = (props) => {
   const { flight_number } = useParams();
@@ -84,26 +83,27 @@ const Launch = (props) => {
   let cores = (
     <>
       <div className={styles.InfoWrapper}>
-        {props.launch.docs[0]?.cores.map((core, index) =>
-          core.landpad ? (
-            <div key={index}>
-              <h2>CORE #{index + 1}</h2>
-              <InfoLine
-                title="LANDING"
-                value={core.landing_success ? "SUCCESSFUL" : "FAILED"}
-              />
-              {core.landing_type ? (
-                <InfoLine title="LANDING TYPE" value={core.landing_type} />
-              ) : null}
-              {core.landpad.name ? (
-                <InfoLine title="LANDING PAD" value={core.landpad.name} />
-              ) : null}
-              <InfoLine title="REUSED" value={core.reused ? "YES" : "NO"} />
-              {core.flight ? (
-                <InfoLine title="FLIGHTS" value={`${core.flight}`} />
-              ) : null}
-            </div>
-          ) : null
+        {props.launch.docs[0]?.cores.map(
+          (core, index) =>
+            core.landpad && (
+              <div key={index}>
+                <h2>CORE #{index + 1}</h2>
+                <InfoLine
+                  title="LANDING"
+                  value={core.landing_success ? "SUCCESSFUL" : "FAILED"}
+                />
+                {core.landing_type && (
+                  <InfoLine title="LANDING TYPE" value={core.landing_type} />
+                )}
+                {core.landpad.name && (
+                  <InfoLine title="LANDING PAD" value={core.landpad.name} />
+                )}
+                <InfoLine title="REUSED" value={core.reused ? "YES" : "NO"} />
+                {core.flight && (
+                  <InfoLine title="FLIGHTS" value={`${core.flight}`} />
+                )}
+              </div>
+            )
         )}
       </div>
     </>
@@ -126,14 +126,12 @@ const Launch = (props) => {
   }
 
   let launchInformation = (
-    <div className={styles.NoLaunchInfo}>
-      <img src={sadRocket} alt="sad rocket" />
-      <h2>There is no info about the launch yet!</h2>
-      <Button name="GET BACK TO EARTH" />
+    <div className={styles.Launch}>
+      <LaunchSkeleton />
     </div>
   );
 
-  if (props.launch.docs[0]) {
+  if (!props.loadingLaunch) {
     launchInformation = (
       <>
         <div className={styles.Launch}>
@@ -151,6 +149,7 @@ const Launch = (props) => {
             failures={props.launch.docs[0].failures}
             launchId={props.launch.docs[0].id}
           />
+
           <div className={styles.Row}>
             <Link to={`/vehicles/${props.launch.docs[0]?.rocket.name}`}>
               <div className={styles.Rocket}>
@@ -163,33 +162,33 @@ const Launch = (props) => {
                 {props.launch.docs[0]?.payloads.map((payload, index) => (
                   <div key={index}>
                     <h2>PAYLOAD #{index + 1}</h2>
-                    {payload.name ? (
+                    {payload.name && (
                       <InfoLine title="NAME" value={`${payload.name}`} />
-                    ) : null}
-                    {payload.customers ? (
+                    )}
+                    {payload.customers && (
                       <InfoLine
                         title="CUSTOMER"
                         value={`${payload.customers}`}
                       />
-                    ) : null}
+                    )}
                     {payload.manufacturers.length !== 0 ? (
                       <InfoLine
                         title="MANUFACTURER"
                         value={`${payload.manufacturers[0]}`}
                       />
                     ) : null}
-                    {payload.type ? (
+                    {payload.type && (
                       <InfoLine title="TYPE" value={`${payload.type}`} />
-                    ) : null}
-                    {payload.mass_kg || payload.mass_lbs ? (
+                    )}
+                    {(payload.mass_kg || payload.mass_lbs) && (
                       <InfoLine
                         title="MASS"
                         value={`${payload.mass_kg} kg | ${payload.mass_lbs} lb`}
                       />
-                    ) : null}
-                    {payload.orbit ? (
+                    )}
+                    {payload.orbit && (
                       <InfoLine title="ORBIT" value={`${payload.orbit}`} />
-                    ) : null}
+                    )}
                   </div>
                 ))}
               </div>

@@ -7,12 +7,12 @@
 
   .Element {
     @include flex-center-column;
-    width: 244px;
 
     h2 {
-      font-family: "Orbitron";
+      font-family: "Roboto", monospace;
       color: $blue;
       font-size: 10rem;
+      font-weight: 400;
     }
 
     h4 {
@@ -31,8 +31,6 @@
 @include desktop {
   .Countdown {
     .Element {
-      width: 150px;
-
       h2 {
         font-size: 6rem;
       }
@@ -50,7 +48,23 @@
   .Countdown {
     .Element {
       h2 {
-        font-size: 2.5rem;
+        font-size: 4rem;
+      }
+      h4 {
+        font-size: 0.8rem;
+      }
+    }
+    .Colon {
+      font-size: 3rem;
+    }
+  }
+}
+
+@include mobile {
+  .Countdown {
+    .Element {
+      h2 {
+        font-size: 3rem;
       }
       h4 {
         font-size: 0.6rem;

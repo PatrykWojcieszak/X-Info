@@ -14,6 +14,14 @@
     }
   }
 
+  .Content {
+    @include flex-column;
+  }
+
+  .Content > * {
+    margin: 1rem 0;
+  }
+
   .ButtonWrapper {
     @include flex-center;
     margin-top: 2rem;
@@ -25,6 +33,16 @@
     .Top {
       h2 {
         font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+@include mobile {
+  .UpcomingLaunches {
+    .Top {
+      h2 {
+        font-size: 1rem;
       }
     }
   }

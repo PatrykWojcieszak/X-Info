@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
+//STYLES
 import styles from "./LaunchDetails.module.scss";
 import { launchDetailsAnim } from "../../../Animations/Animations_motion";
 
@@ -20,11 +21,11 @@ const LaunchDetails = ({
       animate="show"
       className={styles.LaunchDetails}>
       <div className={styles.TitleContainer}>
-        {flightNumber ? <h3>FLIGHT:</h3> : null}
-        {dateLocal ? <h3>LAUNCH DATE:</h3> : null}
-        {rocketName ? <h3>ROCKET:</h3> : null}
-        {launchpadFullName ? <h3>LAUNCH SITE:</h3> : null}
-        {details ? <h3>DETAILS:</h3> : null}
+        {flightNumber && <h3>FLIGHT:</h3>}
+        {dateLocal && <h3>LAUNCH DATE:</h3>}
+        {rocketName && <h3>ROCKET:</h3>}
+        {launchpadFullName && <h3>LAUNCH SITE:</h3>}
+        {details && <h3>DETAILS:</h3>}
       </div>
       <div className={styles.ValuesContainer}>
         <h3>{flightNumber}</h3>

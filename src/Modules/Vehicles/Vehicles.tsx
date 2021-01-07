@@ -6,13 +6,13 @@ import VehicleRocket from "./VehicleRocket/VehicleRocket";
 
 //STYLES
 import styles from "./Vehicles.module.scss";
+import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 //IMAGES
 import falcon1 from "../../resources/images/f1.png";
 import falcon9 from "../../resources/images/f9.png";
 import falconHeavy from "../../resources/images/fh2.png";
 import starship from "../../resources/images/st.png";
-import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 const Vehicles = () => {
   return (

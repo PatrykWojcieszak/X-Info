@@ -2,6 +2,15 @@
 
 .Rocket {
   .Top {
+    background-blend-mode: darken;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+
     .HeroText {
       @include flex-center-column;
       position: absolute;
@@ -38,7 +47,7 @@
   .Content {
     @include flex-center;
     margin-top: 2rem;
-    padding: 0 24rem;
+    padding: 0 20%;
     align-items: flex-start;
     position: relative;
 
@@ -103,6 +112,23 @@
   }
 }
 
+@include large {
+  .Rocket {
+    .Content {
+      padding: 0 10%;
+      .Rocket {
+        img {
+          height: 700px;
+        }
+      }
+
+      .InfoContainer {
+        margin-left: 4rem;
+      }
+    }
+  }
+}
+
 @include tablet {
   .Rocket {
     .Top {
@@ -123,7 +149,7 @@
         height: 40%;
 
         img {
-          height: 350px;
+          height: 450px;
         }
       }
 
@@ -160,18 +186,6 @@
       padding: 0 1rem;
     }
   }
-}
-
-.Falcon1,
-.Falcon9,
-.FalconHeavy,
-.Starship {
-  background-blend-mode: darken;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  height: 100vh;
-  position: relative;
 }
 
 .Falcon1 {

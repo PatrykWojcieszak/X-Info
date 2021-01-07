@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+//STYLES
 import styles from "./ScrollToTop.module.scss";
 
 const ScrollToTop = () => {
@@ -9,8 +10,8 @@ const ScrollToTop = () => {
   };
 
   return (
-    <div className={styles.ScrollToTop}>
-      <FontAwesomeIcon icon="arrow-down" onClick={scrollTop} />
+    <div className={styles.ScrollToTop} onClick={scrollTop}>
+      <FontAwesomeIcon icon="arrow-down" />
     </div>
   );
 };

@@ -4,8 +4,11 @@ import { AnimatePresence } from "framer-motion";
 
 import Nav from "./Modules/Shared/Nav/Nav";
 import Footer from "./Modules/Shared/Footer/Footer";
+import { useMediaQuery } from "./Hooks/useMediaQuery";
 
-import "./App.scss";
+import SideBar from "./Modules/Shared/Nav/SideBar/SideBar";
+
+import styles from "./App.module.scss";
 
 const Home = React.lazy(() => {
   return import("./Modules/Home/Home");
@@ -38,6 +41,8 @@ const Starlink = React.lazy(() => {
 function App() {
   let location = useLocation();
 
+  const isMobile = useMediaQuery("(max-width: 500px)");
+
   const routes = (
     <AnimatePresence exitBeforeEnter>
       <Switch location={location} key={location.pathname}>
@@ -54,8 +59,8 @@ function App() {
   );
 
   return (
-    <div className="App">
-      <Nav />
+    <div className={styles.App}>
+      {isMobile ? <SideBar /> : <Nav />}
       <Suspense fallback={<p>Loading...</p>}>{routes}</Suspense>
       {location.pathname !== "/about" ? <Footer /> : null}
     </div>
