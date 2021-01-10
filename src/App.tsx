@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import { Route, Switch, Redirect, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
 
 import Nav from "./Modules/Shared/Nav/Nav";
 import Footer from "./Modules/Shared/Footer/Footer";
@@ -44,24 +43,78 @@ function App() {
   const isMobile = useMediaQuery("(max-width: 500px)");
 
   const routes = (
-    <AnimatePresence exitBeforeEnter>
-      <Switch location={location} key={location.pathname}>
-        <Route path="/home" exact render={() => <Home />} />
-        <Route path="/launches/:launchType" exact render={() => <Launches />} />
-        <Route path="/launch/:flight_number" exact render={() => <Launch />} />
-        <Route path="/vehicles" exact render={() => <Vehicles />} />
-        <Route path="/vehicles/:vehicle" exact render={() => <Rocket />} />
-        <Route path="/starlink" exact render={() => <Starlink />} />
-        <Route path="/about" exact render={() => <About />} />
-        <Redirect to="/home" />
-      </Switch>
-    </AnimatePresence>
+    <Switch location={location} key={location.pathname}>
+      <Route
+        path="/home"
+        exact
+        render={() => (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Home />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="/launches/:launchType"
+        exact
+        render={() => (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Launches />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="/launch/:flight_number"
+        exact
+        render={() => (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Launch />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="/vehicles"
+        exact
+        render={() => (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Vehicles />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="/vehicles/:vehicle"
+        exact
+        render={() => (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Rocket />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="/starlink"
+        exact
+        render={() => (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Starlink />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="/about"
+        exact
+        render={() => (
+          <Suspense fallback={<p>Loading...</p>}>
+            <About />
+          </Suspense>
+        )}
+      />
+      <Redirect to="/home" />
+    </Switch>
   );
 
   return (
     <div className={styles.App}>
       {isMobile ? <SideBar /> : <Nav />}
-      <Suspense fallback={<p>Loading...</p>}>{routes}</Suspense>
+      {routes}
       {location.pathname !== "/about" ? <Footer /> : null}
     </div>
   );
