@@ -3,6 +3,7 @@ const RecentLaunchesQuery = {
     date_utc: {
       $lte: new Date(),
     },
+    success: 1,
   },
   options: {
     limit: 5,
