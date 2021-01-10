@@ -34,7 +34,7 @@ const Starlink = (props) => {
 
   const gData: IMapData[] = [];
   if (starlinks) {
-    starlinks.docs.map((starlink) => {
+    starlinks.docs.forEach((starlink) => {
       const TLE0 = starlink?.spaceTrack.TLE_LINE0.substring(
         2,
         starlink?.spaceTrack.TLE_LINE0.length
