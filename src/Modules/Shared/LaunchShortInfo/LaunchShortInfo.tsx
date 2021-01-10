@@ -58,6 +58,7 @@ const LaunchShortInfo = ({
           className={styles.Flag}
           src={`https://www.countryflags.io/${countryCode}/flat/64.png`}
           alt="flag"
+          loading="lazy"
         />
       </div>
     </Link>

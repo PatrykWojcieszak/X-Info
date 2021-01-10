@@ -4,7 +4,6 @@
   background-color: $foreground;
   border-radius: 0.6rem;
   width: 100%;
-  margin-top: 2rem;
   padding: 0.5rem;
   position: relative;
   box-sizing: border-box;
@@ -17,8 +16,8 @@
     .Name_Date {
       @include flex-column;
       align-items: flex-start;
-      min-width: 40%;
-      max-width: 40%;
+      min-width: 50%;
+      max-width: 50%;
 
       h2 {
         color: $blue;
@@ -94,7 +93,7 @@
   }
 
   &:hover {
-    background-color: #0f0f0f;
+    background-color: $dark;
   }
 }
 
@@ -106,10 +105,14 @@
 
       .Name_Date {
         margin-bottom: 0.7rem;
+        max-width: 60%;
+        min-width: 60%;
       }
 
       .Column {
-        font-size: 1rem;
+        .Row {
+          font-size: 1.2rem;
+        }
       }
 
       .LaunchNumber {
@@ -139,13 +142,58 @@
           font-size: 0.7rem;
         }
       }
+    }
+
+    .Content {
+      margin-top: 1rem;
+
+      &__Element {
+        .Title,
+        .Value {
+          font-size: 0.7rem;
+        }
+      }
+    }
+
+    .Flag {
+      width: 40px;
+      position: absolute;
+      right: 0;
+      bottom: -7px;
+      border-bottom-right-radius: 1.3rem;
+    }
+  }
+}
+
+@include mobile {
+  .Launch {
+    .Top {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .Name_Date {
+        align-items: flex-start;
+        margin-bottom: 0.7rem;
+        max-width: 90%;
+        min-width: 90%;
+
+        h2 {
+          font-size: 1.8rem;
+        }
+
+        h4 {
+          font-size: 0.7rem;
+        }
+      }
 
       .Column {
-        font-size: 0.8rem;
+        .Row {
+          font-size: 0.9rem;
+        }
       }
 
       .LaunchNumber {
-        font-size: 1.2rem;
+        font-size: 0.9rem;
       }
     }
 

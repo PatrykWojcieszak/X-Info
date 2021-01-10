@@ -164,3 +164,11 @@
     }
   }
 }
+
+@include mobile {
+  .LatestLaunch {
+    .LeftContainer > img {
+      width: 140px;
+    }
+  }
+}

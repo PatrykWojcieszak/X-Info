@@ -8,6 +8,8 @@ import {
   faArrowRight,
   faFileAlt,
   faNewspaper,
+  faBars,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
 import {
@@ -24,5 +26,7 @@ library.add(
   faWikipediaW,
   faRedditAlien,
   faFileAlt,
-  faNewspaper
+  faNewspaper,
+  faBars,
+  faTimes
 );

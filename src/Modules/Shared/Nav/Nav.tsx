@@ -1,7 +1,9 @@
 import React from "react";
 
+//COMPONENTS
 import NavElement from "./NavElement/NavElement";
 
+//STYLeS
 import styles from "./Nav.module.scss";
 
 const Nav = () => {

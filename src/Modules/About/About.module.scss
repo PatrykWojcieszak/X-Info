@@ -5,7 +5,11 @@
   background: rgba(0, 0, 0, 0.5) url("../../resources/images/about_bg.jpg");
   background-blend-mode: darken;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center;
   height: 100vh;
 
   .InfoContainer {
@@ -58,6 +62,24 @@
   .About {
     .InfoContainer {
       width: 350px;
+
+      h2 {
+        font-size: 2.6rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+@include mobile {
+  .About {
+    margin-top: 2rem;
+
+    .InfoContainer {
+      width: 90%;
 
       h2 {
         font-size: 2.6rem;

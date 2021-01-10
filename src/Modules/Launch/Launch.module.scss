@@ -2,7 +2,7 @@
 
 .Launch {
   margin-top: 8rem;
-  padding: 0 24rem;
+  padding: 0 20%;
 
   .Row {
     @include flex-center;
@@ -12,7 +12,7 @@
     .Rocket {
       @include flex-center-column;
       cursor: pointer;
-      padding: 0.6rem;
+      padding: 0 0.6rem 0.6rem 0.6rem;
       box-sizing: border-box;
       transition: all 0.4s ease-in-out;
       border: 1px solid transparent;
@@ -98,6 +98,10 @@
   margin: 3rem 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 @include desktop {
   .Launch {
     padding: 0 10rem;
@@ -155,24 +159,49 @@
   }
 }
 
-a {
-  text-decoration: none;
-}
+@include mobile {
+  .Launch {
+    padding: 0 1rem;
 
-.NoLaunchInfo {
-  @include flex-center-column;
-  height: 95vh;
+    .Row {
+      .Rocket {
+        text-align: center;
+        max-width: 100px;
+        min-width: 100px;
 
-  h2 {
-    font-weight: 100;
-    color: $fontPrimary;
-    margin-bottom: 2rem;
-  }
+        &:hover {
+          border: 1px solid $fontSecondary;
+        }
+        img {
+          height: 400px;
+        }
+      }
 
-  img {
-    position: absolute;
-    top: 15%;
-    left: 20%;
-    transform: rotate(30deg);
+      .InfoContainer {
+        margin-left: 0;
+
+        .InfoWrapper {
+          h2 {
+            font-size: 1.5rem;
+          }
+        }
+      }
+    }
+
+    .AdditionalInfo {
+      align-items: center;
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      &__Content {
+        justify-content: center;
+      }
+
+      &__Content > * {
+        margin: 1rem;
+      }
+    }
   }
 }

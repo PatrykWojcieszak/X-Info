@@ -18,14 +18,6 @@
   .Home {
     &__Content {
       padding: 0 4rem;
-
-      .LaunchTitle {
-        display: flex;
-
-        h2 {
-          font-size: 2rem;
-        }
-      }
     }
   }
 }
@@ -37,6 +29,14 @@
       flex-direction: column;
       align-items: center;
       padding: 0 2rem;
+    }
+  }
+}
+
+@include mobile {
+  .Home {
+    &__Content {
+      padding: 0 1rem;
     }
   }
 }

@@ -2,8 +2,7 @@ interface ISpaceTrack {
   CCSDS_OMM_VERS: string;
   COMMENT: string;
   CREATION_DATE: string;
-  ORIGINATOR;
-  string;
+  ORIGINATOR: string;
   OBJECT_NAME: string;
   OBJECT_ID: string;
   CENTER_NAME: string;

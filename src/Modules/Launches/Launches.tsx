@@ -5,24 +5,26 @@ import { motion, AnimatePresence } from "framer-motion";
 //COMPONENTS
 import Button from "../Shared/Button/Button";
 import LaunchShortInfo from "../Shared/LaunchShortInfo/LaunchShortInfo";
-import LatestLaunch from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo";
+import LaunchExtendedInfo from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo";
 import Spinner from "../Shared/Spinner/Spinner";
+import ScrollToTop from "../Shared/ScrollToTop/ScrollToTop";
 
 //STYLES
 import styles from "./Launches.module.scss";
-
-//OTHER
 import {
   pageVariantsAnim,
   showLaunchesList,
 } from "../../Animations/Animations_motion";
+
+//OTHER
+import LaunchShortInfoSkeleton from "../Shared/Skeletons/LaunchShortInfoSkeleton";
+import LaunchExtendedInfoSkeleton from "../Shared/Skeletons/LaunchExtendedInfoSkeleton";
 
 //REDUX
 import { fetchLatestLaunch } from "../../Store/LatestLaunch/actions";
 import { fetchPastLaunches } from "../../Store/PastLaunches/actions";
 import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/actions";
 import { connect } from "react-redux";
-import ScrollToTop from "../Shared/ScrollToTop/ScrollToTop";
 
 const Launches = (props) => {
   const [showPastLaunches, setShowPastLaunches] = useState(false);
@@ -64,7 +66,19 @@ const Launches = (props) => {
     onFetchPastLaunches(props.pastLaunches.nextPage);
   };
 
-  let upcomingLaunchesArr = <></>;
+  let upcomingLaunchesArr = (
+    <motion.div
+      variants={showLaunchesList}
+      initial="initial"
+      animate="in"
+      exit="out"
+      className={styles.LaunchesWrapper}>
+      {[1, 2, 3, 4, 5].map((n) => (
+        <LaunchShortInfoSkeleton key={n} />
+      ))}
+    </motion.div>
+  );
+
   if (!props.loadingUpcomingLaunches) {
     upcomingLaunchesArr = (
       <motion.div
@@ -72,7 +86,7 @@ const Launches = (props) => {
         initial="initial"
         animate="in"
         exit="out"
-        style={{ width: "100%", position: "relative" }}>
+        className={styles.LaunchesWrapper}>
         {props.upcomingLaunches.docs.map((launch, index) => (
           <LaunchShortInfo
             key={index}
@@ -89,7 +103,19 @@ const Launches = (props) => {
     );
   }
 
-  let pastLaunchesArr = <></>;
+  let pastLaunchesArr = (
+    <motion.div
+      variants={showLaunchesList}
+      initial="initial"
+      animate="in"
+      exit="out"
+      className={styles.LaunchesWrapper}>
+      {[1, 2, 3, 4, 5].map((n) => (
+        <LaunchShortInfoSkeleton key={n} />
+      ))}
+    </motion.div>
+  );
+
   if (props.pastLaunches.docs.length > 0) {
     pastLaunchesArr = (
       <motion.div
@@ -97,14 +123,7 @@ const Launches = (props) => {
         initial="initial"
         animate="in"
         exit="out"
-        style={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "relative",
-        }}>
+        className={styles.LaunchesWrapper}>
         {props.pastLaunches.docs.map((launch, index) => (
           <LaunchShortInfo
             key={index}
@@ -119,9 +138,19 @@ const Launches = (props) => {
           />
         ))}
         {props.pastLaunches.nextPage ? (
-          <div style={{ marginTop: "2rem", position: "relative" }}>
+          <div
+            style={{
+              marginTop: "2rem",
+              position: "relative",
+              display: "flex",
+              justifyContent: "center",
+            }}>
             {showPastLaunches && props.loadingPastLaunches ? <Spinner /> : null}
-            <Button name="LOAD MORE" clicked={FetchPastLaunches} />
+            <Button
+              disabled={props.loadingPastLaunches}
+              name="LOAD MORE"
+              clicked={FetchPastLaunches}
+            />
           </div>
         ) : null}
       </motion.div>
@@ -136,25 +165,25 @@ const Launches = (props) => {
       variants={pageVariantsAnim}
       className={styles.Launches}>
       <div className={styles.Latest}>
-        {props.latestLaunch.docs[0] ? (
-          <>
-            <h2>LATEST LAUNCH</h2>
-            <LatestLaunch
-              showMoreDetailsButton
-              details={props.latestLaunch.docs[0].details}
-              launchName={props.latestLaunch.docs[0].name}
-              date_local={props.latestLaunch.docs[0].date_local}
-              date_utc={props.latestLaunch.docs[0].date_utc}
-              rocketName={props.latestLaunch.docs[0].rocket.name}
-              launchSiteName={props.latestLaunch.docs[0].launchpad.full_name}
-              flightNumber={props.latestLaunch.docs[0].flight_number}
-              patchImg={props.latestLaunch.docs[0].links.patch.small}
-              success={props.latestLaunch.docs[0].success}
-              failures={props.latestLaunch.docs[0].failures}
-              launchId={props.latestLaunch.docs[0].id}
-            />
-          </>
-        ) : null}
+        <h2>LATEST LAUNCH</h2>
+        {props.loadingLatestLaunch ? (
+          <LaunchExtendedInfoSkeleton />
+        ) : (
+          <LaunchExtendedInfo
+            showMoreDetailsButton
+            details={props.latestLaunch.docs[0].details}
+            launchName={props.latestLaunch.docs[0].name}
+            date_local={props.latestLaunch.docs[0].date_local}
+            date_utc={props.latestLaunch.docs[0].date_utc}
+            rocketName={props.latestLaunch.docs[0].rocket.name}
+            launchSiteName={props.latestLaunch.docs[0].launchpad.full_name}
+            flightNumber={props.latestLaunch.docs[0].flight_number}
+            patchImg={props.latestLaunch.docs[0].links.patch.small}
+            success={props.latestLaunch.docs[0].success}
+            failures={props.latestLaunch.docs[0].failures}
+            launchId={props.latestLaunch.docs[0].id}
+          />
+        )}
       </div>
       <div className={styles.Content}>
         {!props.loadingUpcomingLaunches || !props.loadingPastLaunches ? (
@@ -173,15 +202,13 @@ const Launches = (props) => {
         ) : null}
 
         <AnimatePresence>
-          {showUpcomingLaunches ? upcomingLaunchesArr : null}
+          {showUpcomingLaunches && upcomingLaunchesArr}
         </AnimatePresence>
 
-        <AnimatePresence>
-          {showPastLaunches ? pastLaunchesArr : null}
-        </AnimatePresence>
+        <AnimatePresence>{showPastLaunches && pastLaunchesArr}</AnimatePresence>
       </div>
 
-      {showPastLaunches || showUpcomingLaunches ? <ScrollToTop /> : null}
+      {(showPastLaunches || showUpcomingLaunches) && <ScrollToTop />}
     </motion.div>
   );
 };

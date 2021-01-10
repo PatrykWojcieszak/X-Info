@@ -30,3 +30,11 @@
     font-weight: 300;
   }
 }
+
+@include mobile {
+  .Button {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.6rem;
+  }
+}

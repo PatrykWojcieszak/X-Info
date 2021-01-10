@@ -21,6 +21,10 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
   }
+
+  .Content > * {
+    margin: 1rem 0;
+  }
 }
 
 @include tablet {
@@ -30,6 +34,18 @@
     .Top {
       h2 {
         font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+@include mobile {
+  .RecentLaunches {
+    margin-top: 1rem;
+
+    .Top {
+      h2 {
+        font-size: 1rem;
       }
     }
   }

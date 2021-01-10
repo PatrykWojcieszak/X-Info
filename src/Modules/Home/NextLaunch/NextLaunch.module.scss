@@ -4,7 +4,11 @@
   background: rgba(0, 0, 0, 0.5) url("../../../resources/images/home_bg.jpg");
   background-blend-mode: darken;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center;
   height: 100vh;
   @include flex-column;
 
@@ -95,13 +99,13 @@
 @include tablet {
   .Top {
     &__Content {
-      padding: 0 1rem;
+      padding: 0 3rem;
 
       .LaunchTitle {
         flex-direction: column;
         h2 {
           margin-right: 1rem;
-          font-size: 2rem;
+          font-size: 2.5rem;
         }
       }
 
@@ -113,6 +117,19 @@
         h4 {
           font-size: 0.9rem;
         }
+      }
+    }
+  }
+}
+
+@include mobile {
+  .Top {
+    &__Content {
+      padding: 0 1rem;
+
+      .QuoteContainer {
+        font-size: 0.5rem;
+        bottom: 0.2rem;
       }
     }
   }
