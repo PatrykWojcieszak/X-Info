@@ -24,12 +24,17 @@ const LaunchExtendedInfo = ({
   success,
   failures,
   launchId,
+  date_precision,
 }: LaunchExtendedInfoProps) => {
   const dateParsed = new Date(date_utc);
 
   let launch = success ? "SUCCESSFUL" : "FAILURE";
 
-  if (dateParsed > new Date()) launch = "NOT LAUNCHED YET";
+  if (
+    dateParsed > new Date() ||
+    ["quarter", "half", "year", "month"].includes(date_precision)
+  )
+    launch = "NOT LAUNCHED YET";
 
   return (
     <Link
@@ -91,6 +96,7 @@ type LaunchExtendedInfoProps = {
   success: boolean;
   failures: IFailure[];
   launchId: string;
+  date_precision: string;
 };
 
 export default React.memo(LaunchExtendedInfo);

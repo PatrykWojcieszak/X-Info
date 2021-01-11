@@ -13,6 +13,7 @@ const LaunchQuery = {
       links: 1,
       success: 1,
       failures: 1,
+      date_precision: 1,
     },
     populate: [
       {

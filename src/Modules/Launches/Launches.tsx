@@ -182,6 +182,7 @@ const Launches = (props) => {
             success={props.latestLaunch.docs[0].success}
             failures={props.latestLaunch.docs[0].failures}
             launchId={props.latestLaunch.docs[0].id}
+            date_precision={props.latestLaunch.docs[0].date_precision}
           />
         )}
       </div>
