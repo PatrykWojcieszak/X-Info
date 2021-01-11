@@ -7,7 +7,9 @@ Photos used on this website are property of SpaceX and can be found on the [Spac
 
 This project was built using [React JS](https://pl.reactjs.org/), and the [SpaceX-API](https://github.com/r-spacex/SpaceX-APIe).
 
-You can see live preview of this website through GitHub pages. [X-Info Preview](https://patrykwojcieszak.github.io/X-Info/#/home)
+You can see live preview of this website through:
+GitHub pages. [X-Info Preview](https://patrykwojcieszak.github.io/X-Info/#/home)
+Official website. [X-Info Official](https://x-info.eu/home)
 
 ## Installation
 
