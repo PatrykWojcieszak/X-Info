@@ -43,6 +43,7 @@ export const fetchLaunch = (flightNumber: number) => {
         query
       )
       .then((res) => {
+        console.log(res.data);
         dispatch(fetchLaunchSuccess(res.data));
       })
       .catch((err) => {
