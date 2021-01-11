@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import { Route, Switch, Redirect, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
 
 import Nav from "./Modules/Shared/Nav/Nav";
 import Footer from "./Modules/Shared/Footer/Footer";
