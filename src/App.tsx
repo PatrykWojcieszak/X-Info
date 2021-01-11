@@ -44,18 +44,16 @@ function App() {
   const isMobile = useMediaQuery("(max-width: 500px)");
 
   const routes = (
-    <AnimatePresence exitBeforeEnter>
-      <Switch location={location} key={location.pathname}>
-        <Route path="/home" exact render={() => <Home />} />
-        <Route path="/launches/:launchType" exact render={() => <Launches />} />
-        <Route path="/launch/:flight_number" exact render={() => <Launch />} />
-        <Route path="/vehicles" exact render={() => <Vehicles />} />
-        <Route path="/vehicles/:vehicle" exact render={() => <Rocket />} />
-        <Route path="/starlink" exact render={() => <Starlink />} />
-        <Route path="/about" exact render={() => <About />} />
-        <Redirect to="/home" />
-      </Switch>
-    </AnimatePresence>
+    <Switch location={location} key={location.pathname}>
+      <Route path="/home" exact render={() => <Home />} />
+      <Route path="/launches/:launchType" exact render={() => <Launches />} />
+      <Route path="/launch/:flight_number" exact render={() => <Launch />} />
+      <Route path="/vehicles" exact render={() => <Vehicles />} />
+      <Route path="/vehicles/:vehicle" exact render={() => <Rocket />} />
+      <Route path="/starlink" exact render={() => <Starlink />} />
+      <Route path="/about" exact render={() => <About />} />
+      <Redirect to="/home" />
+    </Switch>
   );
 
   return (
