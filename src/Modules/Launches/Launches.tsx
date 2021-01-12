@@ -8,6 +8,7 @@ import LaunchShortInfo from "../Shared/LaunchShortInfo/LaunchShortInfo";
 import LaunchExtendedInfo from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo";
 import Spinner from "../Shared/Spinner/Spinner";
 import ScrollToTop from "../Shared/ScrollToTop/ScrollToTop";
+import BoosterLaunchesInfo from "../Shared/BoosterLaunchesInfo/BoosterLaunchesInfo";
 
 //STYLES
 import styles from "./Launches.module.scss";
@@ -87,6 +88,8 @@ const Launches = (props) => {
         animate="in"
         exit="out"
         className={styles.LaunchesWrapper}>
+        <BoosterLaunchesInfo />
+
         {props.upcomingLaunches.docs.map((launch, index) => (
           <LaunchShortInfo
             key={index}
