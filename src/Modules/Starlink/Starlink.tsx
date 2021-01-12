@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { getLatLngObj } from "tle.js";
 import Globe from "react-globe.gl";
 import { connect } from "react-redux";
@@ -10,6 +10,7 @@ import { fetchStarlink } from "../../Store/Starlink/actions";
 //STYLES
 import styles from "./Starlink.module.scss";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
+import StarlinkInfo from "./StarlinkInfo/StarlinkInfo";
 interface IMapData {
   lat: number;
   lng: number;
@@ -21,6 +22,7 @@ interface IMapData {
 
 const Starlink = (props) => {
   const { onFetchStarlink, starlinks } = props;
+  const [showStarlinkInfo, setShowStarlinkInfo] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,34 +35,37 @@ const Starlink = (props) => {
   }, [onFetchStarlink]);
 
   const gData: IMapData[] = [];
-  if (starlinks) {
-    starlinks.docs.foreach((starlink) => {
-      const TLE0 = starlink?.spaceTrack.TLE_LINE0.substring(
-        2,
-        starlink?.spaceTrack.TLE_LINE0.length
-      );
 
-      const tle =
-        TLE0 +
-        " \n" +
-        starlink?.spaceTrack.TLE_LINE1 +
-        "\n" +
-        starlink?.spaceTrack.TLE_LINE2;
+  starlinks.docs.forEach((starlink) => {
+    const TLE0 = starlink?.spaceTrack.TLE_LINE0.substring(
+      2,
+      starlink?.spaceTrack.TLE_LINE0.length
+    );
 
-      const latLonObj = getLatLngObj(tle);
+    const tle =
+      TLE0 +
+      " \n" +
+      starlink?.spaceTrack.TLE_LINE1 +
+      "\n" +
+      starlink?.spaceTrack.TLE_LINE2;
 
-      gData.push({
-        lat: latLonObj.lat,
-        lng: latLonObj.lng,
-        alt: 0.9,
-        radius: 0.01,
-        color: "white",
-        label: starlink.spaceTrack.OBJECT_NAME,
-      });
+    const latLonObj = getLatLngObj(tle);
+
+    gData.push({
+      lat: latLonObj.lat,
+      lng: latLonObj.lng,
+      alt: 0.9,
+      radius: 0.01,
+      color: "white",
+      label: starlink.spaceTrack.OBJECT_NAME,
     });
-  }
+  });
 
   let globe = <></>;
+
+  const showStarlinkInfoHandler = useCallback(() => {
+    setShowStarlinkInfo(true);
+  }, []);
 
   if (gData) {
     globe = (
@@ -72,6 +77,7 @@ const Starlink = (props) => {
         pointLabel="label"
         showGraticules
         pointRadius={0.35}
+        onPointClick={(point, event) => showStarlinkInfoHandler()}
       />
     );
   }
@@ -96,6 +102,7 @@ const Starlink = (props) => {
         <h4>Starlinks on the orbit: {props.starlinks.docs.length}</h4>
       </div>
       {globe}
+      {showStarlinkInfo && <StarlinkInfo starlink="test" />}
     </motion.div>
   );
 };

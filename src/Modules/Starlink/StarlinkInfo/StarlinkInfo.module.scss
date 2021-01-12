@@ -1,0 +1,12 @@
+@import "../../../resources/styles/index.scss";
+
+.StarlinkInfo {
+  background-color: $background;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 1rem;
+  z-index: 999;
+  width: 300px;
+  height: 300px;
+}
