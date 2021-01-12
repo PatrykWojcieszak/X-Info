@@ -1,5 +1,6 @@
-import React, { useRef } from "react";
-import { motion, useCycle } from "framer-motion";
+import React, { useRef, useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useLocation } from "react-router-dom";
 
 //COMPONENTS
 import NavElement from "../NavElement/NavElement";
@@ -16,17 +17,23 @@ import styles from "./SideBar.module.scss";
 import { sideBarAnim } from "../../../../Animations/Animations_motion";
 
 const SideBar = () => {
-  const [isOpen, toggleOpen] = useCycle(false, true);
+  // const [isOpen, toggleOpen] = useCycle(false, true);
+  const [isOpen, toggleOpen] = useState(false);
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
 
   const bgStyles: string[] = [];
+  let location = useLocation();
 
   if (isOpen) bgStyles.push(styles.Background);
 
   const toggleOpenHandler = () => {
-    if (isOpen) toggleOpen();
+    if (isOpen) toggleOpen(!isOpen);
   };
+
+  useEffect(() => {
+    toggleOpen(false);
+  }, [location]);
 
   const wrapperRef = useRef(null);
   useClickOutside(wrapperRef, toggleOpenHandler);
@@ -42,7 +49,7 @@ const SideBar = () => {
         ref={wrapperRef}
         variants={sideBarAnim}
         className={styles.Menu}>
-        <MenuToggle toggle={() => toggleOpen()} />
+        <MenuToggle toggle={() => toggleOpen(!isOpen)} />
         <NavElement name="HOME" link="/home" exact={true}></NavElement>
         <NavElement
           name="LAUNCHES"
