@@ -7,19 +7,19 @@ const BoosterLaunchesInfo = (props) => {
   return (
     <div className={styles.Booster}>
       <div className={styles.BoosterInfoContainer}>
-        <div className={styles.InfoElement}>
+        <div className={[styles.InfoElement, styles.One].join(" ")}>
           <h3>Block</h3>
           <h4>5</h4>
         </div>
-        <div className={styles.InfoElement}>
-          <h3>Launches</h3>
-          <h4>4</h4>
-        </div>
-        <div className={styles.InfoElement}>
+        <div className={[styles.InfoElement, styles.Two].join(" ")}>
           <h3>Serial Number</h3>
           <h4>B1060</h4>
         </div>
-        <div className={styles.InfoElement}>
+        <div className={[styles.InfoElement, styles.Three].join(" ")}>
+          <h3>Launches</h3>
+          <h4>4</h4>
+        </div>
+        <div className={[styles.InfoElement, styles.Four].join(" ")}>
           <h3>Status</h3>
           <h4>Unknown</h4>
         </div>
