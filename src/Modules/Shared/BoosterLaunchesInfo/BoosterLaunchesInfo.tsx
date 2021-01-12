@@ -1,4 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+//MODELS
 import ILaunch from "../../../Models/ILaunch";
 
 //STYLES
@@ -35,13 +38,15 @@ const BoosterLaunchesInfo = ({
         <h3 style={{ marginLeft: "1.1rem" }}>Missions</h3>
         <div className={styles.MissionListWrapper}>
           {launches.map((launch, index) => (
-            <div className={styles.Mission} key={index}>
-              <h3>{launch.name}</h3>
-              <h4>
-                {new Date(launch.date_utc).toDateString()} | #
-                {launch.flight_number}
-              </h4>
-            </div>
+            <Link key={index} to={`/launch/${launch.flight_number}`}>
+              <div className={styles.Mission}>
+                <h3>{launch.name}</h3>
+                <h4>
+                  {new Date(launch.date_utc).toDateString()} | #
+                  {launch.flight_number}
+                </h4>
+              </div>
+            </Link>
           ))}
         </div>
       </div>

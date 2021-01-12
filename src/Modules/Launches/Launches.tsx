@@ -111,7 +111,7 @@ const Launches = (props) => {
             block={booster.block}
             serial={booster.serial}
             status={booster.status}
-            reuse_count={booster.resuse_count}
+            reuse_count={booster.reuse_count}
             launches={booster.launches}
           />
         ))}
