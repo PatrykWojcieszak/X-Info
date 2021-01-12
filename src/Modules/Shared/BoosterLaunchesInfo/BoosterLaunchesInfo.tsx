@@ -24,7 +24,7 @@ const BoosterLaunchesInfo = ({
         </div>
         <div className={[styles.InfoElement, styles.Three].join(" ")}>
           <h3>Launches</h3>
-          <h4>{reuse_count + 1}</h4>
+          <h4>{reuse_count ? reuse_count + 1 : 1}</h4>
         </div>
         <div className={[styles.InfoElement, styles.Four].join(" ")}>
           <h3>Status</h3>
@@ -38,7 +38,8 @@ const BoosterLaunchesInfo = ({
             <div className={styles.Mission} key={index}>
               <h3>{launch.name}</h3>
               <h4>
-                {launch.date_utc} | #{launch.flight_number}
+                {new Date(launch.date_utc).toDateString()} | #
+                {launch.flight_number}
               </h4>
             </div>
           ))}

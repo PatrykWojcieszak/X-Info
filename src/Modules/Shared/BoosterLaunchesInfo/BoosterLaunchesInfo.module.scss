@@ -10,7 +10,7 @@
     border-radius: 1rem;
     background-color: $foreground;
     box-shadow: 0px 0px 16px 25px rgba(0, 0, 0, 0.55);
-
+    width: 300px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
@@ -96,5 +96,9 @@
 @include tablet {
   .Booster {
     @include flex-column;
+
+    .BoosterInfoContainer {
+      width: 100%;
+    }
   }
 }

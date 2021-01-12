@@ -10,6 +10,9 @@ const BoostersQuery = {
       serial: 1,
       reuse_count: 1,
     },
+    sort: {
+      block: "desc",
+    },
     populate: [
       {
         path: "launches",
