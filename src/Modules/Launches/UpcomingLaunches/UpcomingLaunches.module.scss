@@ -1,0 +1,12 @@
+@import "../../../resources/styles/index.scss";
+
+.LaunchesWrapper {
+  @include flex-center-column;
+  width: 100%;
+  position: relative;
+}
+
+.LaunchesWrapper > * {
+  margin: 1rem 0;
+  width: 100%;
+}
