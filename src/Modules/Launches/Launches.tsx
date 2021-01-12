@@ -24,34 +24,46 @@ import LaunchExtendedInfoSkeleton from "../Shared/Skeletons/LaunchExtendedInfoSk
 //REDUX
 import { fetchLatestLaunch } from "../../Store/LatestLaunch/actions";
 import { fetchPastLaunches } from "../../Store/PastLaunches/actions";
+import { fetchBoosters } from "../../Store/Boosters/actions";
 import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/actions";
 import { connect } from "react-redux";
 
 const Launches = (props) => {
   const [showPastLaunches, setShowPastLaunches] = useState(false);
   const [showUpcomingLaunches, setShowUpcomingLaunches] = useState(true);
+  const [showBoosters, setShowBoosters] = useState(false);
   const { launchType } = useParams();
 
   const {
     onFetchLatestLaunch,
     onFetchPastLaunches,
     onFetchUpcomingLaunches,
+    onFetchBoosters,
   } = props;
 
   const showPastLaunchesHandler = () => {
     setShowPastLaunches(true);
     setShowUpcomingLaunches(false);
+    setShowBoosters(false);
   };
 
   const showUpcomingLaunchesHandler = () => {
     setShowPastLaunches(false);
     setShowUpcomingLaunches(true);
+    setShowBoosters(false);
+  };
+
+  const showBoostersHandler = () => {
+    setShowPastLaunches(false);
+    setShowUpcomingLaunches(false);
+    setShowBoosters(true);
   };
 
   useEffect(() => {
     onFetchPastLaunches(1);
     onFetchLatestLaunch();
     onFetchUpcomingLaunches();
+    onFetchBoosters(1);
 
     if (launchType === "past") {
       showPastLaunchesHandler();
@@ -60,12 +72,68 @@ const Launches = (props) => {
     onFetchLatestLaunch,
     onFetchPastLaunches,
     onFetchUpcomingLaunches,
+    onFetchBoosters,
     launchType,
   ]);
 
   const FetchPastLaunches = () => {
     onFetchPastLaunches(props.pastLaunches.nextPage);
   };
+
+  const FetchBoosters = () => {
+    onFetchBoosters(props.boosters.nextPage);
+  };
+
+  let boostersArr = (
+    <motion.div
+      variants={showLaunchesList}
+      initial="initial"
+      animate="in"
+      exit="out"
+      className={styles.LaunchesWrapper}>
+      {[1, 2, 3, 4, 5].map((n) => (
+        <LaunchShortInfoSkeleton key={n} />
+      ))}
+    </motion.div>
+  );
+
+  if (props.boosters.docs.length > 0) {
+    boostersArr = (
+      <motion.div
+        variants={showLaunchesList}
+        initial="initial"
+        animate="in"
+        exit="out"
+        className={styles.LaunchesWrapper}>
+        {props.boosters.docs.map((booster, index) => (
+          <BoosterLaunchesInfo
+            key={index}
+            block={booster.block}
+            serial={booster.serial}
+            status={booster.status}
+            reuse_count={booster.resuse_count}
+            launches={booster.launches}
+          />
+        ))}
+        {props.boosters.nextPage ? (
+          <div
+            style={{
+              marginTop: "2rem",
+              position: "relative",
+              display: "flex",
+              justifyContent: "center",
+            }}>
+            {showBoosters && props.loadingBoosters ? <Spinner /> : null}
+            <Button
+              disabled={props.loadingBoosters}
+              name="LOAD MORE"
+              clicked={FetchBoosters}
+            />
+          </div>
+        ) : null}
+      </motion.div>
+    );
+  }
 
   let upcomingLaunchesArr = (
     <motion.div
@@ -88,8 +156,6 @@ const Launches = (props) => {
         animate="in"
         exit="out"
         className={styles.LaunchesWrapper}>
-        <BoosterLaunchesInfo />
-
         {props.upcomingLaunches.docs.map((launch, index) => (
           <LaunchShortInfo
             key={index}
@@ -202,6 +268,11 @@ const Launches = (props) => {
               clicked={showPastLaunchesHandler}
               name="PAST LAUNCHES"
             />
+            <Button
+              selected={showBoosters}
+              clicked={showBoostersHandler}
+              name="BOOSTERS"
+            />
           </div>
         ) : null}
 
@@ -210,9 +281,10 @@ const Launches = (props) => {
         </AnimatePresence>
 
         <AnimatePresence>{showPastLaunches && pastLaunchesArr}</AnimatePresence>
+        <AnimatePresence>{showBoosters && boostersArr}</AnimatePresence>
       </div>
 
-      {(showPastLaunches || showUpcomingLaunches) && <ScrollToTop />}
+      <ScrollToTop />
     </motion.div>
   );
 };
@@ -225,6 +297,8 @@ const mapStateToProps = (state) => {
     loadingPastLaunches: state.pastLaunches.loading,
     upcomingLaunches: state.upcomingLaunches.upcomingLaunches,
     loadingUpcomingLaunches: state.upcomingLaunches.loading,
+    boosters: state.boosters.boosters,
+    loadingBoosters: state.boosters.loading,
   };
 };
 
@@ -233,6 +307,7 @@ const mapDispatchToProps = (dispatch) => {
     onFetchLatestLaunch: () => dispatch(fetchLatestLaunch()),
     onFetchPastLaunches: (page: number) => dispatch(fetchPastLaunches(page)),
     onFetchUpcomingLaunches: () => dispatch(fetchUpcomingLaunches()),
+    onFetchBoosters: (page: number) => dispatch(fetchBoosters(page)),
   };
 };
 

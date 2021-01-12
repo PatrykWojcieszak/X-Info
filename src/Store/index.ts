@@ -8,6 +8,7 @@ import { rocketReducer } from "./Rocket/reducers";
 import { launchReducer } from "./Launch/reducers";
 import { latestLaunchReducer } from "./LatestLaunch/reducers";
 import { starlinkReducer } from "./Starlink/reducers";
+import { boostersReducer } from "./Boosters/reducers";
 
 export const rootReducer = combineReducers({
   nextLaunch: nextLaunchReducer,
@@ -18,6 +19,7 @@ export const rootReducer = combineReducers({
   launch: launchReducer,
   latestLaunch: latestLaunchReducer,
   starlink: starlinkReducer,
+  boosters: boostersReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
