@@ -4,158 +4,56 @@ import { motion, AnimatePresence } from "framer-motion";
 
 //COMPONENTS
 import Button from "../Shared/Button/Button";
-import LaunchShortInfo from "../Shared/LaunchShortInfo/LaunchShortInfo";
 import LaunchExtendedInfo from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo";
-import Spinner from "../Shared/Spinner/Spinner";
 import ScrollToTop from "../Shared/ScrollToTop/ScrollToTop";
+import UpcomingLaunches from "./UpcomingLaunches/UpcomingLaunches";
+import PastLaunches from "./PastLaunches/PastLaunches";
 
 //STYLES
 import styles from "./Launches.module.scss";
-import {
-  pageVariantsAnim,
-  showLaunchesList,
-} from "../../Animations/Animations_motion";
+import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 //OTHER
-import LaunchShortInfoSkeleton from "../Shared/Skeletons/LaunchShortInfoSkeleton";
 import LaunchExtendedInfoSkeleton from "../Shared/Skeletons/LaunchExtendedInfoSkeleton";
 
 //REDUX
 import { fetchLatestLaunch } from "../../Store/LatestLaunch/actions";
-import { fetchPastLaunches } from "../../Store/PastLaunches/actions";
-import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/actions";
 import { connect } from "react-redux";
+import Boosters from "./Boosters/Boosters";
 
 const Launches = (props) => {
   const [showPastLaunches, setShowPastLaunches] = useState(false);
   const [showUpcomingLaunches, setShowUpcomingLaunches] = useState(true);
+  const [showBoosters, setShowBoosters] = useState(false);
   const { launchType } = useParams();
 
-  const {
-    onFetchLatestLaunch,
-    onFetchPastLaunches,
-    onFetchUpcomingLaunches,
-  } = props;
+  const { onFetchLatestLaunch } = props;
 
   const showPastLaunchesHandler = () => {
     setShowPastLaunches(true);
     setShowUpcomingLaunches(false);
+    setShowBoosters(false);
   };
 
   const showUpcomingLaunchesHandler = () => {
     setShowPastLaunches(false);
     setShowUpcomingLaunches(true);
+    setShowBoosters(false);
+  };
+
+  const showBoostersHandler = () => {
+    setShowPastLaunches(false);
+    setShowUpcomingLaunches(false);
+    setShowBoosters(true);
   };
 
   useEffect(() => {
-    onFetchPastLaunches(1);
     onFetchLatestLaunch();
-    onFetchUpcomingLaunches();
 
     if (launchType === "past") {
       showPastLaunchesHandler();
     }
-  }, [
-    onFetchLatestLaunch,
-    onFetchPastLaunches,
-    onFetchUpcomingLaunches,
-    launchType,
-  ]);
-
-  const FetchPastLaunches = () => {
-    onFetchPastLaunches(props.pastLaunches.nextPage);
-  };
-
-  let upcomingLaunchesArr = (
-    <motion.div
-      variants={showLaunchesList}
-      initial="initial"
-      animate="in"
-      exit="out"
-      className={styles.LaunchesWrapper}>
-      {[1, 2, 3, 4, 5].map((n) => (
-        <LaunchShortInfoSkeleton key={n} />
-      ))}
-    </motion.div>
-  );
-
-  if (!props.loadingUpcomingLaunches) {
-    upcomingLaunchesArr = (
-      <motion.div
-        variants={showLaunchesList}
-        initial="initial"
-        animate="in"
-        exit="out"
-        className={styles.LaunchesWrapper}>
-        {props.upcomingLaunches.docs.map((launch, index) => (
-          <LaunchShortInfo
-            key={index}
-            launchName={launch?.name}
-            launchDateUtc={launch?.date_utc}
-            rocketName={launch?.rocket.name}
-            launchSiteName={launch?.launchpad.full_name}
-            customer={launch.payloads[0].customers[0]}
-            flightNumber={launch?.flight_number}
-            nationality={launch.payloads[0].nationalities[0]}
-          />
-        ))}
-      </motion.div>
-    );
-  }
-
-  let pastLaunchesArr = (
-    <motion.div
-      variants={showLaunchesList}
-      initial="initial"
-      animate="in"
-      exit="out"
-      className={styles.LaunchesWrapper}>
-      {[1, 2, 3, 4, 5].map((n) => (
-        <LaunchShortInfoSkeleton key={n} />
-      ))}
-    </motion.div>
-  );
-
-  if (props.pastLaunches.docs.length > 0) {
-    pastLaunchesArr = (
-      <motion.div
-        variants={showLaunchesList}
-        initial="initial"
-        animate="in"
-        exit="out"
-        className={styles.LaunchesWrapper}>
-        {props.pastLaunches.docs.map((launch, index) => (
-          <LaunchShortInfo
-            key={index}
-            launchName={launch.name}
-            launchDateUtc={launch.date_utc}
-            rocketName={launch.rocket.name}
-            launchSiteName={launch.launchpad.full_name}
-            customer={launch.payloads[0].customers[0]}
-            flightNumber={launch.flight_number}
-            success={launch.success}
-            nationality={launch.payloads[0].nationalities[0]}
-          />
-        ))}
-        {props.pastLaunches.nextPage ? (
-          <div
-            style={{
-              marginTop: "2rem",
-              position: "relative",
-              display: "flex",
-              justifyContent: "center",
-            }}>
-            {showPastLaunches && props.loadingPastLaunches ? <Spinner /> : null}
-            <Button
-              disabled={props.loadingPastLaunches}
-              name="LOAD MORE"
-              clicked={FetchPastLaunches}
-            />
-          </div>
-        ) : null}
-      </motion.div>
-    );
-  }
+  }, [onFetchLatestLaunch, launchType]);
 
   return (
     <motion.div
@@ -199,17 +97,26 @@ const Launches = (props) => {
               clicked={showPastLaunchesHandler}
               name="PAST LAUNCHES"
             />
+            <Button
+              selected={showBoosters}
+              clicked={showBoostersHandler}
+              name="BOOSTERS"
+            />
           </div>
         ) : null}
 
         <AnimatePresence>
-          {showUpcomingLaunches && upcomingLaunchesArr}
+          {showUpcomingLaunches && <UpcomingLaunches />}
         </AnimatePresence>
 
-        <AnimatePresence>{showPastLaunches && pastLaunchesArr}</AnimatePresence>
+        <AnimatePresence>
+          {showPastLaunches && <PastLaunches />}
+        </AnimatePresence>
+
+        <AnimatePresence>{showBoosters && <Boosters />}</AnimatePresence>
       </div>
 
-      {(showPastLaunches || showUpcomingLaunches) && <ScrollToTop />}
+      <ScrollToTop />
     </motion.div>
   );
 };
@@ -218,18 +125,12 @@ const mapStateToProps = (state) => {
   return {
     latestLaunch: state.latestLaunch.latestLaunch,
     loadingLatestLaunch: state.latestLaunch.loading,
-    pastLaunches: state.pastLaunches.pastLaunches,
-    loadingPastLaunches: state.pastLaunches.loading,
-    upcomingLaunches: state.upcomingLaunches.upcomingLaunches,
-    loadingUpcomingLaunches: state.upcomingLaunches.loading,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onFetchLatestLaunch: () => dispatch(fetchLatestLaunch()),
-    onFetchPastLaunches: (page: number) => dispatch(fetchPastLaunches(page)),
-    onFetchUpcomingLaunches: () => dispatch(fetchUpcomingLaunches()),
   };
 };
 

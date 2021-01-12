@@ -90,6 +90,23 @@
       }
     }
   }
+
+  .BoostersSkeleton {
+    display: flex;
+
+    .Left {
+      display: flex;
+    }
+
+    .Left > * {
+      @include flex-center-column;
+      width: 150px;
+    }
+
+    .Right {
+      width: 100%;
+    }
+  }
 }
 
 @include tablet {
@@ -102,6 +119,10 @@
           width: 70%;
         }
       }
+    }
+
+    .BoostersSkeleton {
+      @include flex-column;
     }
   }
 }
