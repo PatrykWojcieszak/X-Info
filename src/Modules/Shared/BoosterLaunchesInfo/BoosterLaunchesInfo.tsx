@@ -27,7 +27,7 @@ const BoosterLaunchesInfo = ({
         </div>
         <div className={[styles.InfoElement, styles.Three].join(" ")}>
           <h3>Launches</h3>
-          <h4>{reuse_count ? reuse_count + 1 : 1}</h4>
+          <h4>{reuse_count ? reuse_count + 1 : launches.length > 0 ? 1 : 0}</h4>
         </div>
         <div className={[styles.InfoElement, styles.Four].join(" ")}>
           <h3>Status</h3>
