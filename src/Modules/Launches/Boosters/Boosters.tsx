@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 //COMPONENTS
 import BoosterLaunchesInfo from "../../Shared/BoosterLaunchesInfo/BoosterLaunchesInfo";
 import Button from "../../Shared/Button/Button";
-import LaunchShortInfoSkeleton from "../../Shared/Skeletons/LaunchShortInfoSkeleton";
 import Spinner from "../../Shared/Spinner/Spinner";
+import BoostersSkeleton from "../../Shared/Skeletons/BoostersSkeleton";
 
 //STYLES
 import styles from "./Boosters.module.scss";
@@ -34,7 +34,7 @@ const Boosters = (props) => {
       exit="out"
       className={styles.LaunchesWrapper}>
       {[1, 2, 3, 4, 5].map((n) => (
-        <LaunchShortInfoSkeleton key={n} />
+        <BoostersSkeleton key={n} />
       ))}
     </motion.div>
   );
