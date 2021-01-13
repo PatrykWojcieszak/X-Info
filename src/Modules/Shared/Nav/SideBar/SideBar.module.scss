@@ -23,21 +23,20 @@
   padding-top: 5rem;
 
   button {
-    z-index: 999;
-    outline: none;
-    border: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    @include flex-center;
+    background: $blue;
+    border-radius: 50%;
     cursor: pointer;
     position: absolute;
     top: 14px;
     right: 14px;
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    background: $blue;
-    padding-top: 11px;
-    padding-left: 6px;
+    z-index: 999;
+    outline: none;
+    border: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
   }
 }

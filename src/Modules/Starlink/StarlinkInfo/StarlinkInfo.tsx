@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { motion } from "framer-motion";
 
 //MODELS
 import IGlobePoint from "../../../Models/IGlobePoint";
@@ -10,7 +11,7 @@ import styles from "./StarlinkInfo.module.scss";
 
 const StarlinkInfo = ({ starlink, close }: starlinkProps) => {
   return (
-    <div className={styles.StarlinkInfo}>
+    <motion.div className={styles.StarlinkInfo}>
       <FontAwesomeIcon onClick={close} icon="times" />
       <div className={styles.Left}>
         <h2>STARLINK</h2>
@@ -41,7 +42,7 @@ const StarlinkInfo = ({ starlink, close }: starlinkProps) => {
           </div>
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
