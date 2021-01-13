@@ -8,10 +8,16 @@ import IGlobePoint from "../../../Models/IGlobePoint";
 
 //STYLES
 import styles from "./StarlinkInfo.module.scss";
+import { pageVariantsAnim } from "../../../Animations/Animations_motion";
 
 const StarlinkInfo = ({ starlink, close }: starlinkProps) => {
   return (
-    <motion.div className={styles.StarlinkInfo}>
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariantsAnim}
+      className={styles.StarlinkInfo}>
       <FontAwesomeIcon onClick={close} icon="times" />
       <div className={styles.Left}>
         <h2>STARLINK</h2>

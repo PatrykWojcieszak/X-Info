@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getLatLngObj } from "tle.js";
 import Globe from "react-globe.gl";
 import { connect } from "react-redux";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 //QUERieS
 import { fetchStarlink } from "../../Store/Starlink/actions";
@@ -108,12 +108,14 @@ const Starlink = (props) => {
         <h4>Starlinks on the orbit: {props.starlinks.docs.length}</h4>
       </div>
       {globe}
-      {showStarlinkInfo && (
-        <StarlinkInfo
-          starlink={starlinkInfoData}
-          close={closeStarlinkInfoHandler}
-        />
-      )}
+      <AnimatePresence>
+        {showStarlinkInfo && (
+          <StarlinkInfo
+            starlink={starlinkInfoData}
+            close={closeStarlinkInfoHandler}
+          />
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };
