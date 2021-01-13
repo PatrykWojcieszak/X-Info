@@ -77,6 +77,7 @@ const Starlink = (props) => {
     globe = (
       <Globe
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
+        backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
         pointsData={gData}
         pointAltitude={0.001}
         pointColor="color"
