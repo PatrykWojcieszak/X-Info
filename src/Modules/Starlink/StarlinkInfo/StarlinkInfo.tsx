@@ -1,15 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import IGlobePoint from "../../../Models/IGlobePoint";
 
 //STYLES
 import styles from "./StarlinkInfo.module.scss";
 
-const StarlinkInfo = ({ starlink }: starlinkProps) => {
+const StarlinkInfo = ({ starlink, close }: starlinkProps) => {
   console.log(starlink);
   return (
     <div className={styles.StarlinkInfo}>
+      <FontAwesomeIcon onClick={close} icon="times" />
       <div className={styles.Left}>
         <h2>STARLINK</h2>
         <div className={styles.InfoContainer}>
@@ -45,6 +47,7 @@ const StarlinkInfo = ({ starlink }: starlinkProps) => {
 
 type starlinkProps = {
   starlink: IGlobePoint;
+  close: () => void;
 };
 
 export default React.memo(StarlinkInfo);

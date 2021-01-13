@@ -11,6 +11,17 @@
   border-radius: 1rem;
   display: flex;
 
+  svg {
+    position: absolute;
+    top: -10px;
+    text-align: center;
+    background-color: $background;
+    right: 10px;
+    color: $red;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
   h2 {
     color: $fontPrimary;
     font-weight: 300;

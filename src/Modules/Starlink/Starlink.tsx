@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { getLatLngObj } from "tle.js";
 import Globe from "react-globe.gl";
 import { connect } from "react-redux";
@@ -6,12 +6,13 @@ import { motion } from "framer-motion";
 
 //QUERieS
 import { fetchStarlink } from "../../Store/Starlink/actions";
+import StarlinkInfo from "./StarlinkInfo/StarlinkInfo";
 
 //STYLES
 import styles from "./Starlink.module.scss";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
-import StarlinkInfo from "./StarlinkInfo/StarlinkInfo";
-import ILaunch from "../../Models/ILaunch";
+
+//MODELS
 import IGlobePoint from "../../Models/IGlobePoint";
 
 const Starlink = (props) => {
@@ -20,15 +21,18 @@ const Starlink = (props) => {
   const [starlinkInfoData, setStarlinkInfoData] = useState<any>({});
 
   useEffect(() => {
-    onFetchStarlink();
-    // const interval = setInterval(() => {
-    //   onFetchStarlink();
-    // }, 3000);
+    const interval = setInterval(() => {
+      onFetchStarlink();
+    }, 3000);
 
-    // return () => {
-    //   clearInterval(interval);
-    // };
+    return () => {
+      clearInterval(interval);
+    };
   }, [onFetchStarlink]);
+
+  const closeStarlinkInfoHandler = () => {
+    setShowStarlinkInfo(false);
+  };
 
   const gData: IGlobePoint[] = [];
 
@@ -104,7 +108,12 @@ const Starlink = (props) => {
         <h4>Starlinks on the orbit: {props.starlinks.docs.length}</h4>
       </div>
       {globe}
-      {showStarlinkInfo && <StarlinkInfo starlink={starlinkInfoData} />}
+      {showStarlinkInfo && (
+        <StarlinkInfo
+          starlink={starlinkInfoData}
+          close={closeStarlinkInfoHandler}
+        />
+      )}
     </motion.div>
   );
 };
