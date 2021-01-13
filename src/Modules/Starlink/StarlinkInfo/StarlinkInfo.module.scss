@@ -1,0 +1,81 @@
+@import "../../../resources/styles/index.scss";
+
+.StarlinkInfo {
+  background-color: $background;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 1rem;
+  z-index: 999;
+  padding: 1rem;
+  border-radius: 1rem;
+  display: flex;
+
+  svg {
+    position: absolute;
+    top: -10px;
+    text-align: center;
+    background-color: $background;
+    right: 10px;
+    color: $red;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  h2 {
+    color: $fontPrimary;
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+
+  h4 {
+    color: $fontSecondary;
+    font-weight: 300;
+    margin-bottom: 0.4rem;
+  }
+
+  .Left {
+    .InfoContainer {
+      display: flex;
+
+      .NameWrapper {
+        margin-right: 0.4rem;
+      }
+
+      .NameWrapper,
+      .ValuesWrapper {
+        @include flex-column;
+      }
+    }
+  }
+
+  .Right {
+    margin-left: 4rem;
+
+    .LaunchInfoWrapper {
+      cursor: pointer;
+
+      h3 {
+        color: $blue;
+        font-weight: 300;
+      }
+    }
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+@include mobile {
+  .StarlinkInfo {
+    @include flex-column;
+    width: 100%;
+    align-items: flex-start;
+
+    .Right {
+      margin-top: 2rem;
+      margin-left: 0;
+    }
+  }
+}
