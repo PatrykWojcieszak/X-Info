@@ -11,30 +11,26 @@ import { fetchStarlink } from "../../Store/Starlink/actions";
 import styles from "./Starlink.module.scss";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 import StarlinkInfo from "./StarlinkInfo/StarlinkInfo";
-interface IMapData {
-  lat: number;
-  lng: number;
-  alt: number;
-  radius: number;
-  color: string;
-  label: string;
-}
+import ILaunch from "../../Models/ILaunch";
+import IGlobePoint from "../../Models/IGlobePoint";
 
 const Starlink = (props) => {
   const { onFetchStarlink, starlinks } = props;
   const [showStarlinkInfo, setShowStarlinkInfo] = useState(false);
+  const [starlinkInfoData, setStarlinkInfoData] = useState<any>({});
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      onFetchStarlink();
-    }, 3000);
+    onFetchStarlink();
+    // const interval = setInterval(() => {
+    //   onFetchStarlink();
+    // }, 3000);
 
-    return () => {
-      clearInterval(interval);
-    };
+    // return () => {
+    //   clearInterval(interval);
+    // };
   }, [onFetchStarlink]);
 
-  const gData: IMapData[] = [];
+  const gData: IGlobePoint[] = [];
 
   starlinks.docs.forEach((starlink) => {
     const TLE0 = starlink?.spaceTrack.TLE_LINE0.substring(
@@ -58,14 +54,20 @@ const Starlink = (props) => {
       radius: 0.01,
       color: "white",
       label: starlink.spaceTrack.OBJECT_NAME,
+      launch: starlink.launch,
+      version: starlink.version,
+      velocity_kms: starlink.velocity_kms,
+      height_km: starlink.height_km,
     });
   });
 
   let globe = <></>;
 
-  const showStarlinkInfoHandler = useCallback(() => {
+  const showStarlinkInfoHandler = (point: any) => {
+    console.log(point);
+    setStarlinkInfoData(point);
     setShowStarlinkInfo(true);
-  }, []);
+  };
 
   if (gData) {
     globe = (
@@ -77,7 +79,7 @@ const Starlink = (props) => {
         pointLabel="label"
         showGraticules
         pointRadius={0.35}
-        onPointClick={(point, event) => showStarlinkInfoHandler()}
+        onPointClick={(point, event) => showStarlinkInfoHandler(point)}
       />
     );
   }
@@ -102,7 +104,7 @@ const Starlink = (props) => {
         <h4>Starlinks on the orbit: {props.starlinks.docs.length}</h4>
       </div>
       {globe}
-      {showStarlinkInfo && <StarlinkInfo starlink="test" />}
+      {showStarlinkInfo && <StarlinkInfo starlink={starlinkInfoData} />}
     </motion.div>
   );
 };

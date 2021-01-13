@@ -1,8 +1,9 @@
+import ILaunch from "./ILaunch";
 import ISpaceTrack from "./ISpaceTrack";
 
 interface IStarlink {
   version: string;
-  launch: string;
+  launch: ILaunch;
   longitude: number;
   latitude: number;
   height_km: number;
