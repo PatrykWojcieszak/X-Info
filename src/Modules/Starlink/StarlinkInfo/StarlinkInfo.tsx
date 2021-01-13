@@ -2,13 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+//MODELS
 import IGlobePoint from "../../../Models/IGlobePoint";
 
 //STYLES
 import styles from "./StarlinkInfo.module.scss";
 
 const StarlinkInfo = ({ starlink, close }: starlinkProps) => {
-  console.log(starlink);
   return (
     <div className={styles.StarlinkInfo}>
       <FontAwesomeIcon onClick={close} icon="times" />
