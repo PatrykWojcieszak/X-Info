@@ -44,6 +44,15 @@ const Rocket = (props) => {
   const [showSecondStage, setShowSecondStage] = useState(false);
   const [showLandingLegs, setShowLandingLegs] = useState(false);
 
+  let rocketStatus = { name: "ACTIVE", color: "#4BB543" };
+
+  if (!props.rocket.docs[0]?.active)
+    rocketStatus = { name: "INACTIVE", color: "#FA113D" };
+  if (vehicle === "Falcon 1")
+    rocketStatus = { name: "RETIRED", color: "#005288" };
+  if (vehicle === "Starship")
+    rocketStatus = { name: "IN DEVELOPMENT", color: "#005288" };
+
   const showOverviewHandler = () => {
     setShowOverview(true);
     setShowFirstStage(false);
@@ -94,8 +103,6 @@ const Rocket = (props) => {
     rocketImg = starship_img;
     rocketQuote = RocketQuotes[3];
   }
-
-  console.log(props.rocket);
 
   //OVERVIEW DETAILS
   let overViewDetails = <></>;
@@ -330,9 +337,9 @@ const Rocket = (props) => {
                 STATUS:{" "}
                 <span
                   style={{
-                    color: props.rocket.docs[0]?.active ? "#4BB543" : "#FA113D",
+                    color: rocketStatus.color,
                   }}>
-                  {props.rocket.docs[0]?.active ? "ACTIVE" : "INACTIVE"}
+                  {rocketStatus.name}
                 </span>
               </h3>
               <div className={styles.RocketDetails}>

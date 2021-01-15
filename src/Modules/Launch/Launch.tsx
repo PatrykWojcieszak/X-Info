@@ -148,6 +148,7 @@ const Launch = (props) => {
             success={props.launch.docs[0].success}
             failures={props.launch.docs[0].failures}
             launchId={props.launch.docs[0].id}
+            date_precision={props.launch.docs[0].date_precision}
           />
 
           <div className={styles.Row}>

@@ -1,0 +1,110 @@
+@import "../../../resources/styles/index.scss";
+
+.Booster {
+  display: flex;
+  background-color: $foreground;
+  border-radius: 1rem;
+
+  .BoosterInfoContainer {
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: $foreground;
+    box-shadow: 0px 0px 16px 25px rgba(0, 0, 0, 0.55);
+    width: 300px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(80px, 20px);
+
+    .One {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .Two {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .Three {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .Four {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .InfoElement {
+      @include flex-column;
+      margin: 0 1rem;
+
+      h3 {
+        color: $fontPrimary;
+        white-space: nowrap;
+        font-weight: 300;
+        margin-bottom: 0.5rem;
+      }
+
+      h4 {
+        font-weight: 300;
+        color: $fontSecondary;
+      }
+    }
+  }
+
+  .MissionsContainer {
+    @include flex-column;
+    padding: 1rem;
+
+    h3 {
+      color: $fontPrimary;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+
+    .MissionListWrapper {
+      display: flex;
+      flex-wrap: wrap;
+
+      .Mission {
+        border-radius: 0.7rem;
+        transition: all 0.4s ease-in-out;
+        cursor: pointer;
+        padding: 0.6rem;
+        margin: 0.5rem;
+
+        h3 {
+          color: $blue;
+          margin-bottom: 0.5rem;
+          font-size: 1.3rem;
+        }
+
+        h4 {
+          color: $fontSecondary;
+          font-weight: 300;
+          font-size: 0.9rem;
+        }
+
+        &:hover {
+          background-color: $background;
+        }
+      }
+    }
+  }
+}
+
+@include tablet {
+  .Booster {
+    @include flex-column;
+
+    .BoosterInfoContainer {
+      width: 100%;
+    }
+  }
+}
+
+a {
+  text-decoration: none;
+}
