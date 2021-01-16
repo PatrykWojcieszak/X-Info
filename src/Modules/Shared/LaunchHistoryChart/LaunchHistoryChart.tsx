@@ -19,7 +19,7 @@ const LaunchHistoryChart = (props) => {
 
   useEffect(() => {
     onFetchUpcomingLaunches();
-    onFetchPastLaunches(1);
+    onFetchPastLaunches();
   }, [onFetchUpcomingLaunches, onFetchPastLaunches]);
 
   const launchesYearStart: number = 2006;
@@ -155,7 +155,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFetchPastLaunches: (page: number) => dispatch(fetchPastLaunches(page)),
+    onFetchPastLaunches: () => dispatch(fetchPastLaunches()),
     onFetchUpcomingLaunches: () => dispatch(fetchUpcomingLaunches()),
   };
 };

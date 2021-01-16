@@ -32,15 +32,13 @@ export function fetchPastLaunchesFail(error: string): PastLaunchesTypes {
   };
 }
 
-export const fetchPastLaunches = (page: number) => (dispatch, getState) => {
+export const fetchPastLaunches = () => (dispatch, getState) => {
   const isCacheValid = checkCacheValid(getState, "pastLaunches");
-  if (isCacheValid && page === 1) {
+  if (isCacheValid) {
     return null;
   }
 
   dispatch(fetchPastLaunchesStart());
-  const query = PastLaunchesQuery;
-  // query.options.page = page;
 
   axios
     .post<IQueryResult<ILaunch>>(
