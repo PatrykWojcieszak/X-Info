@@ -1,7 +1,9 @@
 import axios from "axios";
 import { checkCacheValid } from "redux-cache";
 import { Launch, QueryResult } from "../../Types";
-import UpcomingLaunchesQuery from "../../Queries/UpcomingLaunchesQuery";
+
+import { UpcomingLaunchesQuery } from "../../Queries";
+
 import {
   FETCH_UPCOMING_LAUNCHES_START,
   FETCH_UPCOMING_LAUNCHES_SUCCESS,

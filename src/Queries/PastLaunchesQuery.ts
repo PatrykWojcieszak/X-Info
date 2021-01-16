@@ -1,4 +1,4 @@
-const PastLaunchesQuery = {
+export const PastLaunchesQuery = {
   query: {
     upcoming: false,
   },
@@ -47,5 +47,3 @@ const PastLaunchesQuery = {
     ],
   },
 };
-
-export default PastLaunchesQuery;

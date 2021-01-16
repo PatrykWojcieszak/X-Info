@@ -1,4 +1,4 @@
-const StarlinkQuery = {
+export const StarlinkQuery = {
   query: {
     longitude: {
       $ne: null,
@@ -18,5 +18,3 @@ const StarlinkQuery = {
     ],
   },
 };
-
-export default StarlinkQuery;

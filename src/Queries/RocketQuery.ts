@@ -1,8 +1,6 @@
-const RocketQuery = {
+export const RocketQuery = {
   query: {
     name: "",
   },
   options: {},
 };
-
-export default RocketQuery;

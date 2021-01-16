@@ -1,4 +1,4 @@
-const LaunchQuery = {
+export const LaunchQuery = {
   query: {
     flight_number: 0,
   },
@@ -61,5 +61,3 @@ const LaunchQuery = {
     ],
   },
 };
-
-export default LaunchQuery;

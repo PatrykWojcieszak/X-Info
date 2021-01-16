@@ -2,7 +2,8 @@ import axios from "axios";
 import { checkCacheValid } from "redux-cache";
 import { Booster, QueryResult } from "../../Types";
 
-import BoostersQuery from "../../Queries/BoostersQuery";
+import { BoostersQuery } from "../../Queries/";
+
 import {
   FETCH_BOOSTERS_START,
   FETCH_BOOSTERS_SUCCESS,

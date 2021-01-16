@@ -1,6 +1,8 @@
 import axios from "axios";
 import { Launch, QueryResult } from "../../Types";
-import LaunchQuery from "../../Queries/LaunchQuery";
+
+import { LaunchQuery } from "../../Queries";
+
 import {
   FETCH_LAUNCH_START,
   FETCH_LAUNCH_SUCCESS,

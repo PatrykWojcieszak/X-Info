@@ -1,4 +1,4 @@
-const UpcomingLaunchesQuery = {
+export const UpcomingLaunchesQuery = {
   query: {
     upcoming: true,
   },
@@ -36,5 +36,3 @@ const UpcomingLaunchesQuery = {
     ],
   },
 };
-
-export default UpcomingLaunchesQuery;

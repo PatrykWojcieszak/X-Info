@@ -1,4 +1,4 @@
-const RecentLaunchesQuery = {
+export const RecentLaunchesQuery = {
   query: {
     date_utc: {
       $lte: new Date(),
@@ -20,5 +20,3 @@ const RecentLaunchesQuery = {
     },
   },
 };
-
-export default RecentLaunchesQuery;

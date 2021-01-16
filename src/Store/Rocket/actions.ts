@@ -1,6 +1,8 @@
 import axios from "axios";
 import { Rocket, QueryResult } from "../../Types";
-import RocketQuery from "../../Queries/RocketQuery";
+
+import { RocketQuery } from "../../Queries";
+
 import {
   FETCH_ROCKET_START,
   FETCH_ROCKET_SUCCESS,

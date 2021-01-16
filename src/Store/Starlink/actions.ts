@@ -1,6 +1,8 @@
 import axios from "axios";
 import { Starlink, QueryResult } from "../../Types";
-import StarlinkQuery from "../../Queries/StarlinkQuery";
+
+import { StarlinkQuery } from "../../Queries";
+
 import {
   FETCH_STARLINK_START,
   FETCH_STARLINK_SUCCESS,
