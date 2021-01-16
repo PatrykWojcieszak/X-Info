@@ -3,6 +3,7 @@ import "moment-precise-range-plugin";
 import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import LaunchDetails from "../LaunchDetails/LaunchDetails";
@@ -29,6 +30,8 @@ const initialTime: Time = {
 };
 
 const NextLaunch = (props) => {
+  const { t } = useTranslation();
+
   const [showLaunchDetails, setShowLaunchDetails] = useState(false);
   const [timer, setTimer] = useState<Time>(initialTime);
   const { onFetchNextLaunch, nextLaunchData } = props;
@@ -80,7 +83,7 @@ const NextLaunch = (props) => {
             exit="exit"
             className={styles.Top__Content}>
             <div className={styles.LaunchTitle}>
-              <h2>NEXT LAUNCH: </h2>
+              <h2>{t("nextLaunchTitle")}</h2>
               <h2 className={styles.LaunchName}>
                 {nextLaunchData.docs[0].name}
               </h2>
