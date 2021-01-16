@@ -40,12 +40,12 @@ export const fetchPastLaunches = (page: number) => (dispatch, getState) => {
 
   dispatch(fetchPastLaunchesStart());
   const query = PastLaunchesQuery;
-  query.options.page = page;
+  // query.options.page = page;
 
   axios
     .post<IQueryResult<ILaunch>>(
       "https://api.spacexdata.com/v4/launches/query",
-      query
+      PastLaunchesQuery
     )
     .then((res) => {
       dispatch(fetchPastLaunchesSuccess(res.data));
