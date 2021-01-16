@@ -44,13 +44,69 @@ function App() {
 
   const routes = (
     <Switch location={location} key={location.pathname}>
-      <Route path="/home" exact render={() => <Home />} />
-      <Route path="/launches/:launchType" exact render={() => <Launches />} />
-      <Route path="/launch/:flight_number" exact render={() => <Launch />} />
-      <Route path="/vehicles" exact render={() => <Vehicles />} />
-      <Route path="/vehicles/:vehicle" exact render={() => <Rocket />} />
-      <Route path="/starlink" exact render={() => <Starlink />} />
-      <Route path="/about" exact render={() => <About />} />
+      <Route
+        path="/home"
+        exact
+        render={() => (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Home />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="/launches/:launchType"
+        exact
+        render={() => (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Launches />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="/launch/:flight_number"
+        exact
+        render={() => (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Launch />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="/vehicles"
+        exact
+        render={() => (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Vehicles />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="/vehicles/:vehicle"
+        exact
+        render={() => (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Rocket />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="/starlink"
+        exact
+        render={() => (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Starlink />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="/about"
+        exact
+        render={() => (
+          <Suspense fallback={<p>Loading...</p>}>
+            <About />
+          </Suspense>
+        )}
+      />
       <Redirect to="/home" />
     </Switch>
   );
@@ -58,7 +114,7 @@ function App() {
   return (
     <div className={styles.App}>
       {isMobile ? <SideBar /> : <Nav />}
-      <Suspense fallback={<p>Loading...</p>}>{routes}</Suspense>
+      {routes}
       {location.pathname !== "/about" ? <Footer /> : null}
     </div>
   );
