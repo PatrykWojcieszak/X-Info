@@ -3,8 +3,9 @@ const PastLaunchesQuery = {
     upcoming: false,
   },
   options: {
-    page: 1,
-    limit: 10,
+    // page: 1,
+    // limit: 10,
+    pagination: false,
     select: {
       name: 1,
       date_local: 1,
@@ -35,6 +36,12 @@ const PastLaunchesQuery = {
         select: {
           customers: 1,
           nationalities: 1,
+        },
+      },
+      {
+        path: "cores",
+        select: {
+          reused: 1,
         },
       },
     ],

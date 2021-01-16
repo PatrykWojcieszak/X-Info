@@ -6,6 +6,7 @@ import "moment-precise-range-plugin";
 import RecentLaunches from "./RecentLaunches/RecentLaunches";
 import UpcomingLaunches from "./UpcomingLaunches/UpcomingLaunches";
 import NextLaunch from "./NextLaunch/NextLaunch";
+import LaunchHistoryChart from "../Shared/LaunchHistoryChart/LaunchHistoryChart";
 
 //STYLES
 import styles from "./Home.module.scss";
@@ -26,6 +27,7 @@ const Home = () => {
       <div className={styles.Home__Content}>
         <RecentLaunches />
         <UpcomingLaunches />
+        <LaunchHistoryChart />
       </div>
     </motion.div>
   );

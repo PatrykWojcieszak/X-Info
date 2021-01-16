@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 //COMPONENTS
 import Button from "../../Shared/Button/Button";
 import LaunchShortInfo from "../../Shared/LaunchShortInfo/LaunchShortInfo";
 import LaunchShortInfoSkeleton from "../../Shared/Skeletons/LaunchShortInfoSkeleton";
-import Spinner from "../../Shared/Spinner/Spinner";
 
 //STYLES
 import styles from "./PastLaunches.module.scss";
@@ -16,14 +15,12 @@ import { motion } from "framer-motion";
 import { showLaunchesList } from "../../../Animations/Animations_motion";
 
 const PastLaunches = (props) => {
+  const [numberOfLaunches, setNumberOfLaunches] = useState(5);
+
   const { onFetchPastLaunches } = props;
 
-  const FetchPastLaunches = () => {
-    onFetchPastLaunches(props.pastLaunches.nextPage);
-  };
-
   useEffect(() => {
-    onFetchPastLaunches(1);
+    onFetchPastLaunches();
   }, [onFetchPastLaunches]);
 
   let pastLaunchesArr = (
@@ -47,20 +44,22 @@ const PastLaunches = (props) => {
         animate="in"
         exit="out"
         className={styles.LaunchesWrapper}>
-        {props.pastLaunches.docs.map((launch, index) => (
-          <LaunchShortInfo
-            key={index}
-            launchName={launch.name}
-            launchDateUtc={launch.date_utc}
-            rocketName={launch.rocket.name}
-            launchSiteName={launch.launchpad.full_name}
-            customer={launch.payloads[0].customers[0]}
-            flightNumber={launch.flight_number}
-            success={launch.success}
-            nationality={launch.payloads[0].nationalities[0]}
-          />
-        ))}
-        {props.pastLaunches.nextPage ? (
+        {props.pastLaunches.docs
+          .slice(0, numberOfLaunches)
+          .map((launch, index) => (
+            <LaunchShortInfo
+              key={index}
+              launchName={launch.name}
+              launchDateUtc={launch.date_utc}
+              rocketName={launch.rocket.name}
+              launchSiteName={launch.launchpad.full_name}
+              customer={launch.payloads[0].customers[0]}
+              flightNumber={launch.flight_number}
+              success={launch.success}
+              nationality={launch.payloads[0].nationalities[0]}
+            />
+          ))}
+        {props.pastLaunches.docs.length >= numberOfLaunches && (
           <div
             style={{
               marginTop: "2rem",
@@ -68,14 +67,13 @@ const PastLaunches = (props) => {
               display: "flex",
               justifyContent: "center",
             }}>
-            {props.loadingPastLaunches ? <Spinner /> : null}
             <Button
               disabled={props.loadingPastLaunches}
               name="LOAD MORE"
-              clicked={FetchPastLaunches}
+              clicked={() => setNumberOfLaunches(numberOfLaunches + 5)}
             />
           </div>
-        ) : null}
+        )}
       </motion.div>
     );
   }
@@ -92,7 +90,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFetchPastLaunches: (page: number) => dispatch(fetchPastLaunches(page)),
+    onFetchPastLaunches: () => dispatch(fetchPastLaunches()),
   };
 };
 
