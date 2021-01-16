@@ -1,6 +1,5 @@
 import axios from "axios";
-import ILaunch from "../../Types/ILaunch";
-import IQueryResult from "../../Types/IQueryResult";
+import { Launch, QueryResult } from "../../Types";
 import LaunchQuery from "../../Queries/LaunchQuery";
 import {
   FETCH_LAUNCH_START,
@@ -16,7 +15,7 @@ export function fetchLaunchStart(): LaunchTypes {
 }
 
 export function fetchLaunchSuccess(
-  newLaunch: IQueryResult<ILaunch>
+  newLaunch: QueryResult<Launch>
 ): LaunchTypes {
   return {
     type: FETCH_LAUNCH_SUCCESS,
@@ -38,7 +37,7 @@ export const fetchLaunch = (flightNumber: number) => {
     query.query.flight_number = flightNumber;
 
     axios
-      .post<IQueryResult<ILaunch>>(
+      .post<QueryResult<Launch>>(
         "https://api.spacexdata.com/v4/launches/query",
         query
       )

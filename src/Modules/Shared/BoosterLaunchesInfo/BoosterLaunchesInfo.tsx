@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 //MODELS
-import ILaunch from "../../../Types/ILaunch";
+import { Launch } from "../../../Types";
 
 //STYLES
 import styles from "./BoosterLaunchesInfo.module.scss";
@@ -59,7 +59,7 @@ type boostersType = {
   serial: string;
   status: string;
   reuse_count: number;
-  launches: ILaunch[];
+  launches: Launch[];
 };
 
 export default BoosterLaunchesInfo;

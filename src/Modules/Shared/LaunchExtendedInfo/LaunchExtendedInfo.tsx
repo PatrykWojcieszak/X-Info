@@ -8,8 +8,8 @@ import Button from "../Button/Button";
 import styles from "./LaunchExtendedInfo.module.scss";
 import noImage from "../../../resources/images/noImage.png";
 
-//MODELS
-import IFailure from "../../../Types/IFailure";
+//TYPES
+import { Failure } from "../../../Types";
 
 const LaunchExtendedInfo = ({
   showMoreDetailsButton,
@@ -94,7 +94,7 @@ type LaunchExtendedInfoProps = {
   flightNumber: Number;
   patchImg: string;
   success: boolean;
-  failures: IFailure[];
+  failures: Failure[];
   launchId: string;
   date_precision: string;
 };

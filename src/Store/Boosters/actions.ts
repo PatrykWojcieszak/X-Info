@@ -1,7 +1,7 @@
 import axios from "axios";
 import { checkCacheValid } from "redux-cache";
-import IBooster from "../../Types/IBooster";
-import IQueryResult from "../../Types/IQueryResult";
+import { Booster, QueryResult } from "../../Types";
+
 import BoostersQuery from "../../Queries/BoostersQuery";
 import {
   FETCH_BOOSTERS_START,
@@ -17,7 +17,7 @@ export function fetchBoostersStart(): BoosterTypes {
 }
 
 export function fetchBoostersSuccess(
-  boosters: IQueryResult<IBooster>
+  boosters: QueryResult<Booster>
 ): BoosterTypes {
   return {
     type: FETCH_BOOSTERS_SUCCESS,
@@ -43,7 +43,7 @@ export const fetchBoosters = (page: number) => (dispatch, getState) => {
   query.options.page = page;
 
   axios
-    .post<IQueryResult<IBooster>>(
+    .post<QueryResult<Booster>>(
       "https://api.spacexdata.com/v4/cores/query",
       query
     )

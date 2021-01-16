@@ -1,8 +1,7 @@
-import ILaunch from "../../Types/ILaunch";
-import IQueryResult from "../../Types/IQueryResult";
+import { Launch, QueryResult } from "../../Types";
 
 export interface NextLaunchState {
-  nextLaunch: IQueryResult<ILaunch>;
+  nextLaunch: QueryResult<Launch>;
   loading: boolean;
 }
 
@@ -16,7 +15,7 @@ interface FetchNextLaunchStartAction {
 
 interface FetchNextLaunchSuccessAction {
   type: typeof FETCH_NEXT_LAUNCH_SUCCESS;
-  payload: IQueryResult<ILaunch>;
+  payload: QueryResult<Launch>;
 }
 
 interface FetchNextLaunchFailAction {

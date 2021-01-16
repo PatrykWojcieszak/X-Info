@@ -1,4 +1,4 @@
-interface IPayload {
+export interface Payload {
   name: string;
   type: string;
   reused: boolean;
@@ -35,5 +35,3 @@ interface IPayload {
     land_landing: boolean;
   };
 }
-
-export default IPayload;

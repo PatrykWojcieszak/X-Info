@@ -1,4 +1,4 @@
-interface IShip {
+export interface Ship {
   name: string;
   legacy_id: string;
   model: string;
@@ -23,5 +23,3 @@ interface IShip {
   image: string;
   launches: [];
 }
-
-export default IShip;

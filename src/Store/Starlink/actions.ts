@@ -1,6 +1,5 @@
 import axios from "axios";
-import IQueryResult from "../../Types/IQueryResult";
-import IStarlink from "../../Types/IStarlink";
+import { Starlink, QueryResult } from "../../Types";
 import StarlinkQuery from "../../Queries/StarlinkQuery";
 import {
   FETCH_STARLINK_START,
@@ -16,7 +15,7 @@ export function fetchStarlinkStart(): StarlinkTypes {
 }
 
 export function fetchStarlinkSuccess(
-  newStarlink: IQueryResult<IStarlink>
+  newStarlink: QueryResult<Starlink>
 ): StarlinkTypes {
   return {
     type: FETCH_STARLINK_SUCCESS,
@@ -36,7 +35,7 @@ export const fetchStarlink = () => {
     dispatch(fetchStarlinkStart());
 
     axios
-      .post<IQueryResult<IStarlink>>(
+      .post<QueryResult<Starlink>>(
         "https://api.spacexdata.com/v4/starlink/query",
         StarlinkQuery
       )

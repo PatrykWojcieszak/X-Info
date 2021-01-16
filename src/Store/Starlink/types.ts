@@ -1,8 +1,6 @@
-import IQueryResult from "../../Types/IQueryResult";
-import IStarlink from "../../Types/IStarlink";
-
+import { Starlink, QueryResult } from "../../Types";
 export interface StarlinkState {
-  starlinks: IQueryResult<IStarlink>;
+  starlinks: QueryResult<Starlink>;
   loading: boolean;
 }
 
@@ -16,7 +14,7 @@ interface FetchStarlinkStartAction {
 
 interface FetchStarlinkSuccessAction {
   type: typeof FETCH_STARLINK_SUCCESS;
-  payload: IQueryResult<IStarlink>;
+  payload: QueryResult<Starlink>;
 }
 
 interface FetchStarlinkFailAction {

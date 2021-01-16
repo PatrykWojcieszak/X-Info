@@ -1,4 +1,4 @@
-import ILaunch from "../Types/ILaunch";
+import { Launch } from "../Types";
 
 export const updateObject = (oldObject, updatedProperties) => {
   return {
@@ -7,7 +7,7 @@ export const updateObject = (oldObject, updatedProperties) => {
   };
 };
 
-export const getYear = (launch: ILaunch): number => {
+export const getYear = (launch: Launch): number => {
   const date = new Date(launch.date_utc);
   return date.getFullYear();
 };

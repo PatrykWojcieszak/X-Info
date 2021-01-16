@@ -9,7 +9,7 @@ import LaunchDetails from "../LaunchDetails/LaunchDetails";
 import Countdown from "../Countdown/Countdown";
 
 //MODELS
-import { ITime } from "../../../Types/ITime";
+import { Time } from "../../../Types";
 
 //STYLES
 import styles from "./NextLaunch.module.scss";
@@ -18,7 +18,7 @@ import { bottomToTopAnim } from "../../../Animations/Animations_motion";
 //REDUX
 import { fetchNextLaunch } from "../../../Store/NextLaunch/actions";
 
-const initialTime: ITime = {
+const initialTime: Time = {
   days: 0,
   firstDateWasLater: true,
   hours: 4,
@@ -30,7 +30,7 @@ const initialTime: ITime = {
 
 const NextLaunch = (props) => {
   const [showLaunchDetails, setShowLaunchDetails] = useState(false);
-  const [timer, setTimer] = useState<ITime>(initialTime);
+  const [timer, setTimer] = useState<Time>(initialTime);
   const { onFetchNextLaunch, nextLaunchData } = props;
 
   useEffect(() => {

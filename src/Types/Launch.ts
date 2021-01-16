@@ -1,12 +1,12 @@
-import ICore from "./ICore";
-import ICrew from "./ICrew";
-import IFailure from "./IFailure";
-import ILaunchpad from "./ILaunchpad";
-import IPayload from "./IPayload";
-import IRocket from "./IRocket";
-import IShip from "./IShip";
+import { Core } from "./Core";
+import { Crew } from "./Crew";
+import { Failure } from "./Failure";
+import { Launchpad } from "./Launchpad";
+import { Payload } from "./Payload";
+import { Rocket } from "./Rocket";
+import { Ship } from "./Ship";
 
-interface ILaunch {
+export interface Launch {
   id: string;
   flight: number;
   name: string;
@@ -20,9 +20,9 @@ interface ILaunch {
   tdb: boolean;
   net: boolean;
   window: number;
-  rocket: IRocket;
+  rocket: Rocket;
   success: boolean;
-  failures: IFailure[];
+  failures: Failure[];
   upcoming: boolean;
   details: string;
   fairings: {
@@ -31,12 +31,12 @@ interface ILaunch {
     recovered: boolean;
     ships: [];
   };
-  crew: ICrew[];
-  ships: IShip[];
+  crew: Crew[];
+  ships: Ship[];
   capsules: [];
-  payloads: IPayload[];
-  launchpad: ILaunchpad;
-  cores: ICore[];
+  payloads: Payload[];
+  launchpad: Launchpad;
+  cores: Core[];
   links: {
     patch: {
       small: string;
@@ -60,5 +60,3 @@ interface ILaunch {
   };
   auto_update: boolean;
 }
-
-export default ILaunch;

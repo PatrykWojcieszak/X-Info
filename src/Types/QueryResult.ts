@@ -1,4 +1,4 @@
-interface IQueryResult<T> {
+export interface QueryResult<T> {
   docs: T[];
   totalDocs: number;
   offset: number;
@@ -11,5 +11,3 @@ interface IQueryResult<T> {
   prevPage: number;
   nextPage: number;
 }
-
-export default IQueryResult;

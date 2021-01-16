@@ -1,8 +1,6 @@
-import ILaunch from "../../Types/ILaunch";
-import IQueryResult from "../../Types/IQueryResult";
-
+import { Launch, QueryResult } from "../../Types";
 export interface LaunchState {
-  launch: IQueryResult<ILaunch>;
+  launch: QueryResult<Launch>;
   loading: boolean;
 }
 
@@ -16,7 +14,7 @@ interface FetchLaunchStartAction {
 
 interface FetchLaunchSuccessAction {
   type: typeof FETCH_LAUNCH_SUCCESS;
-  payload: IQueryResult<ILaunch>;
+  payload: QueryResult<Launch>;
 }
 
 interface FetchLaunchFailAction {

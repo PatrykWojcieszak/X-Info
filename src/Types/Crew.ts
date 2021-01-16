@@ -1,4 +1,4 @@
-interface ICrew {
+export interface Crew {
   name: string;
   status: string;
   agency: string;
@@ -6,5 +6,3 @@ interface ICrew {
   wikipedia: string;
   launches: [];
 }
-
-export default ICrew;

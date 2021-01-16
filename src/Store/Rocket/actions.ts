@@ -1,6 +1,5 @@
 import axios from "axios";
-import IQueryResult from "../../Types/IQueryResult";
-import IRocket from "../../Types/IRocket";
+import { Rocket, QueryResult } from "../../Types";
 import RocketQuery from "../../Queries/RocketQuery";
 import {
   FETCH_ROCKET_START,
@@ -16,7 +15,7 @@ export function fetchRocketStart(): RocketTypes {
 }
 
 export function fetchRocketSuccess(
-  newRocket: IQueryResult<IRocket>
+  newRocket: QueryResult<Rocket>
 ): RocketTypes {
   return {
     type: FETCH_ROCKET_SUCCESS,
@@ -38,7 +37,7 @@ export const fetchRocket = (rocketName: string) => {
     query.query.name = rocketName;
 
     axios
-      .post<IQueryResult<IRocket>>(
+      .post<QueryResult<Rocket>>(
         "https://api.spacexdata.com/v4/rockets/query",
         query
       )

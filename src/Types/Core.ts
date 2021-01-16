@@ -1,6 +1,6 @@
-import ILandpad from "./ILandpads";
+import { Landpad } from "./Landpad";
 
-interface ICore {
+export interface Core {
   core: string;
   flight: number;
   gridfins: boolean;
@@ -9,7 +9,5 @@ interface ICore {
   landing_attempt: boolean;
   landing_success: boolean;
   landing_type: string;
-  landpad: ILandpad;
+  landpad: Landpad;
 }
-
-export default ICore;

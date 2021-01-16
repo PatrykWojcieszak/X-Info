@@ -1,8 +1,6 @@
-import ILaunch from "../../Types/ILaunch";
-import IQueryResult from "../../Types/IQueryResult";
-
+import { Launch, QueryResult } from "../../Types";
 export interface LatestLaunchState {
-  latestLaunch: IQueryResult<ILaunch>;
+  latestLaunch: QueryResult<Launch>;
   loading: boolean;
 }
 
@@ -16,7 +14,7 @@ interface FetchLatestLaunchStartAction {
 
 interface FetchLatestLaunchSuccessAction {
   type: typeof FETCH_LATEST_LAUNCH_SUCCESS;
-  payload: IQueryResult<ILaunch>;
+  payload: QueryResult<Launch>;
 }
 
 interface FetchLatestLaunchFailAction {

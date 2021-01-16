@@ -1,4 +1,4 @@
-interface ILaunchpad {
+export interface Launchpad {
   name: string;
   full_name: string;
   status: string;
@@ -12,5 +12,3 @@ interface ILaunchpad {
   rockets: [];
   launches: [];
 }
-
-export default ILaunchpad;

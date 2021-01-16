@@ -1,6 +1,6 @@
-import ILaunch from "./ILaunch";
+import { Launch } from "./Launch";
 
-interface IGlobePoint {
+export interface GlobePoint {
   lat: number;
   lng: number;
   alt: number;
@@ -10,7 +10,5 @@ interface IGlobePoint {
   version: string;
   velocity_kms: number;
   height_km: number;
-  launch: ILaunch;
+  launch: Launch;
 }
-
-export default IGlobePoint;
