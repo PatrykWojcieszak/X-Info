@@ -13,7 +13,7 @@ import styles from "./Starlink.module.scss";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 //MODELS
-import IGlobePoint from "../../Models/IGlobePoint";
+import IGlobePoint from "../../Types/IGlobePoint";
 
 const Starlink = (props) => {
   const { onFetchStarlink, starlinks } = props;

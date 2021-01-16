@@ -1,6 +1,6 @@
 import axios from "axios";
-import IQueryResult from "../../Models/IQueryResult";
-import IStarlink from "../../Models/IStarlink";
+import IQueryResult from "../../Types/IQueryResult";
+import IStarlink from "../../Types/IStarlink";
 import StarlinkQuery from "../../Queries/StarlinkQuery";
 import {
   FETCH_STARLINK_START,

@@ -1,5 +1,5 @@
-import IQueryResult from "../../Models/IQueryResult";
-import IRocket from "../../Models/IRocket";
+import IQueryResult from "../../Types/IQueryResult";
+import IRocket from "../../Types/IRocket";
 
 export interface RocketState {
   rocket: IQueryResult<IRocket>;

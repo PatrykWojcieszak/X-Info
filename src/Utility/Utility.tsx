@@ -1,4 +1,4 @@
-import ILaunch from "../Models/ILaunch";
+import ILaunch from "../Types/ILaunch";
 
 export const updateObject = (oldObject, updatedProperties) => {
   return {

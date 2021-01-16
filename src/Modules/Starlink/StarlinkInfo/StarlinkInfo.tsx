@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 
 //MODELS
-import IGlobePoint from "../../../Models/IGlobePoint";
+import IGlobePoint from "../../../Types/IGlobePoint";
 
 //STYLES
 import styles from "./StarlinkInfo.module.scss";

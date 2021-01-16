@@ -1,7 +1,7 @@
 import axios from "axios";
 import { checkCacheValid } from "redux-cache";
-import IBooster from "../../Models/IBooster";
-import IQueryResult from "../../Models/IQueryResult";
+import IBooster from "../../Types/IBooster";
+import IQueryResult from "../../Types/IQueryResult";
 import BoostersQuery from "../../Queries/BoostersQuery";
 import {
   FETCH_BOOSTERS_START,

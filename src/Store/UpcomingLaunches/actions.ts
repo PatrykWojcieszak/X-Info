@@ -1,7 +1,7 @@
 import axios from "axios";
 import { checkCacheValid } from "redux-cache";
-import ILaunch from "../../Models/ILaunch";
-import IQueryResult from "../../Models/IQueryResult";
+import ILaunch from "../../Types/ILaunch";
+import IQueryResult from "../../Types/IQueryResult";
 import UpcomingLaunchesQuery from "../../Queries/UpcomingLaunchesQuery";
 import {
   FETCH_UPCOMING_LAUNCHES_START,

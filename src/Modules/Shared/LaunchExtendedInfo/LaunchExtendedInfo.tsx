@@ -9,7 +9,7 @@ import styles from "./LaunchExtendedInfo.module.scss";
 import noImage from "../../../resources/images/noImage.png";
 
 //MODELS
-import IFailure from "../../../Models/IFailure";
+import IFailure from "../../../Types/IFailure";
 
 const LaunchExtendedInfo = ({
   showMoreDetailsButton,

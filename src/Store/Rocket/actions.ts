@@ -1,6 +1,6 @@
 import axios from "axios";
-import IQueryResult from "../../Models/IQueryResult";
-import IRocket from "../../Models/IRocket";
+import IQueryResult from "../../Types/IQueryResult";
+import IRocket from "../../Types/IRocket";
 import RocketQuery from "../../Queries/RocketQuery";
 import {
   FETCH_ROCKET_START,

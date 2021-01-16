@@ -1,5 +1,5 @@
-import IQueryResult from "../../Models/IQueryResult";
-import IStarlink from "../../Models/IStarlink";
+import IQueryResult from "../../Types/IQueryResult";
+import IStarlink from "../../Types/IStarlink";
 
 export interface StarlinkState {
   starlinks: IQueryResult<IStarlink>;

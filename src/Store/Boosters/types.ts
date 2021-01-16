@@ -1,5 +1,5 @@
-import IBooster from "../../Models/IBooster";
-import IQueryResult from "../../Models/IQueryResult";
+import IBooster from "../../Types/IBooster";
+import IQueryResult from "../../Types/IQueryResult";
 
 export interface BoosterState {
   boosters: IQueryResult<IBooster>;

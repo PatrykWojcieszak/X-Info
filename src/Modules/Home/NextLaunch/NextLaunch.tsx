@@ -9,7 +9,7 @@ import LaunchDetails from "../LaunchDetails/LaunchDetails";
 import Countdown from "../Countdown/Countdown";
 
 //MODELS
-import { ITime } from "../../../Models/ITime";
+import { ITime } from "../../../Types/ITime";
 
 //STYLES
 import styles from "./NextLaunch.module.scss";

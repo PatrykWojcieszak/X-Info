@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 //MODELS
-import ILaunch from "../../../Models/ILaunch";
+import ILaunch from "../../../Types/ILaunch";
 
 //STYLES
 import styles from "./BoosterLaunchesInfo.module.scss";
