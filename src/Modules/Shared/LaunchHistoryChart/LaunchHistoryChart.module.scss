@@ -2,4 +2,15 @@
 
 .ChartContainer {
   width: 100%;
+  margin-bottom: 3rem;
+
+  .Top {
+    margin-bottom: 2rem;
+
+    h2 {
+      color: $fontPrimary;
+      font-weight: 100;
+      font-size: 2.5rem;
+    }
+  }
 }

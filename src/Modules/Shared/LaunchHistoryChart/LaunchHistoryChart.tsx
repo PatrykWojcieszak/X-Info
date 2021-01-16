@@ -43,7 +43,7 @@ const LaunchHistoryChart = (props) => {
       datasets: [
         {
           label: "Falcon 1",
-          backgroundColor: "rgb(255, 99, 132)",
+          backgroundColor: "rgb(255, 51, 204)",
           data: years.map(
             (year) =>
               props.pastLaunches.docs.filter(
@@ -56,7 +56,7 @@ const LaunchHistoryChart = (props) => {
         },
         {
           label: "New Falcon 9",
-          backgroundColor: "rgb(120, 99, 132)",
+          backgroundColor: "rgb(0, 0, 204)",
           data: years.map(
             (year) =>
               props.pastLaunches.docs.filter(
@@ -70,7 +70,7 @@ const LaunchHistoryChart = (props) => {
         },
         {
           label: "Used Falcon 9",
-          backgroundColor: "rgb(255, 99, 0)",
+          backgroundColor: "rgb(0, 102, 255)",
           data: years.map(
             (year) =>
               props.pastLaunches.docs.filter(
@@ -84,7 +84,7 @@ const LaunchHistoryChart = (props) => {
         },
         {
           label: "Falcon Heavy",
-          backgroundColor: "rgb(255, 0, 132)",
+          backgroundColor: "rgb(51, 204, 51)",
           data: years.map(
             (year) =>
               props.pastLaunches.docs.filter(
@@ -139,6 +139,9 @@ const LaunchHistoryChart = (props) => {
 
   return (
     <div className={styles.ChartContainer}>
+      <div className={styles.Top}>
+        <h2>LAUNCH HISTORY</h2>
+      </div>
       <Bar data={data} options={options} />
     </div>
   );
