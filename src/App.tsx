@@ -115,7 +115,11 @@ function App() {
     <div className={styles.App}>
       {isMobile ? <SideBar /> : <Nav />}
       {routes}
-      {location.pathname !== "/about" ? <Footer /> : null}
+      {location.pathname !== "/about" ? (
+        <Suspense fallback={<p>Loading...</p>}>
+          <Footer />
+        </Suspense>
+      ) : null}
     </div>
   );
 }

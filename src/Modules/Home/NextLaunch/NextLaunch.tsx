@@ -136,7 +136,7 @@ const NextLaunch = (props) => {
             animate="show"
             exit="exit">
             <iframe
-              title="spacex video"
+              title="SpaceX video"
               width="100%"
               height="100%"
               src={`https://www.youtube.com/embed/${nextLaunchData.docs[0]?.links.youtube_id}`}

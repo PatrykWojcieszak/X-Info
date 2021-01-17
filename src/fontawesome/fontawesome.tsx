@@ -10,6 +10,7 @@ import {
   faNewspaper,
   faBars,
   faTimes,
+  faGlobeAmericas,
 } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
 import {
@@ -28,5 +29,6 @@ library.add(
   faFileAlt,
   faNewspaper,
   faBars,
-  faTimes
+  faTimes,
+  faGlobeAmericas
 );

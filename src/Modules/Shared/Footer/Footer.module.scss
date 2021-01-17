@@ -16,6 +16,46 @@
     cursor: pointer;
     font-weight: 300;
   }
+
+  .LanguageSelector {
+    @include flex-center;
+    margin-left: 1.5rem;
+    color: $fontPrimary;
+    cursor: pointer;
+    position: relative;
+    width: 120px;
+
+    svg {
+      font-size: 1.4rem;
+      margin-right: 0.6rem;
+    }
+
+    .LanguagesWrapper {
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      top: -70px;
+      background-color: $foreground;
+      border-radius: 0.5rem;
+
+      h4 {
+        color: $fontPrimary;
+        padding: 0.4rem 0.8rem;
+        border-radius: 0.2rem;
+        cursor: pointer;
+      }
+
+      .Selected {
+        background-color: $background;
+        color: $blue;
+      }
+    }
+
+    .Show {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
 }
 
 @include tablet {
