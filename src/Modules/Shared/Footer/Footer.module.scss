@@ -18,12 +18,10 @@
   }
 
   .LanguageSelector {
-    @include flex-center;
     margin-left: 1.5rem;
     color: $fontPrimary;
     cursor: pointer;
     position: relative;
-    width: 120px;
 
     svg {
       font-size: 1.4rem;
@@ -37,17 +35,21 @@
       top: -70px;
       background-color: $foreground;
       border-radius: 0.5rem;
+      width: 120px;
 
       h4 {
         color: $fontPrimary;
         padding: 0.4rem 0.8rem;
         border-radius: 0.2rem;
-        cursor: pointer;
       }
 
       .Selected {
         background-color: $background;
         color: $blue;
+
+        h4 {
+          cursor: pointer;
+        }
       }
     }
 

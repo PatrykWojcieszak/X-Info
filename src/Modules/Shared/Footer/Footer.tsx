@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
 
 //STYLES
 import styles from "./Footer.module.scss";
+import { useClickOutside } from "../../../Hooks/useClickOutside";
 
 const Footer = () => {
   const { i18n } = useTranslation();
@@ -14,7 +15,15 @@ const Footer = () => {
   const changeLanguageHandler = (lng) => {
     setSelectedLang(lng);
     i18n.changeLanguage(lng);
+    setShowLngSelector(false);
   };
+
+  const closeShowLngSelectorHandler = () => {
+    setShowLngSelector(false);
+  };
+
+  const wrapperRef = useRef(null);
+  useClickOutside(wrapperRef, closeShowLngSelectorHandler);
 
   return (
     <div className={styles.Footer}>
@@ -35,11 +44,13 @@ const Footer = () => {
           Spacex-Api
         </a>
       </h3>
-      <div className={styles.LanguageSelector}>
-        <FontAwesomeIcon
-          icon="globe-americas"
-          onClick={() => setShowLngSelector(!showLngSelector)}
-        />
+      <div ref={wrapperRef} className={styles.LanguageSelector}>
+        <div
+          style={{ display: "flex", alignItems: "center" }}
+          onClick={() => setShowLngSelector(!showLngSelector)}>
+          <FontAwesomeIcon icon="globe-americas" />
+          {selectedLang}
+        </div>
         <div
           className={
             showLngSelector
@@ -57,7 +68,6 @@ const Footer = () => {
             Polish - PL
           </h4>
         </div>
-        {selectedLang}
       </div>
     </div>
   );
