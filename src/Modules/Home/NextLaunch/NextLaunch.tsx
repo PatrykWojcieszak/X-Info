@@ -102,7 +102,7 @@ const NextLaunch = (props) => {
                   icon="arrow-down"
                   onClick={() => setShowLaunchDetails(!showLaunchDetails)}
                 />
-                <h4>SHOW DETAILS</h4>
+                <h4>{t("showDetails")}</h4>
               </div>
             )}
             <AnimatePresence>

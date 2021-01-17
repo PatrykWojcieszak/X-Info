@@ -41,7 +41,7 @@ const Footer = () => {
           href="https://github.com/r-spacex/SpaceX-API"
           target="_blank"
           rel="noopener noreferrer">
-          Spacex-Api
+          SpaceX-Api
         </a>
       </h3>
       <div ref={wrapperRef} className={styles.LanguageSelector}>

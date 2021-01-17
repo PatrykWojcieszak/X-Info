@@ -1,11 +1,24 @@
 {
+  "nextLaunchTitle": "NEXT LAUNCH:",
+  "countdownDays": "DAYS",
+  "countdownHours": "HOURS",
+  "countdownMinutes": "MINUTES",
+  "countdownSeconds": "SECONDS",
+
+  "showDetails": "SHOW DETAILS",
+  "flight": "FLIGHT",
+  "launchDate": "LAUNCH DATE",
+  "rocket": "ROCKET",
+  "launchSite": "LAUNCH SITE",
+  "details": "DETAILS",
+
+  
   "homeNav": "LAUNCH",
   "launchesNav": "LAUNCHES",
   "vehiclesNav": "VEHICLES",
   "starlinkNav": "STARLINK",
   "aboutNav": "ABOUT",
 
-  "nextLaunchTitle": "NEXT LAUNCH:",
   "recentLaunchesTitle": "RECENT LAUNCHES",
   "upcomingLaunchesTitle": "UPCOMING LAUNCHES",
   "launchHistoryTitle": "LAUNCH HISTORY",
@@ -14,22 +27,11 @@
   "upcomingLaunchesBtn": "UPCOMING LAUNCHES",
   "pastLaunchesBtn": "PAST LAUNCHES",
   "boostersBtn": "BOOSTERS",
-  "showDetails": "SHOW DETAILS",
   "loadMore": "LOAD MORE",
   "showMore": "SHOW MORE",
   "showAll": "SHOW ALL",
   "moreDetails": "MORE DETAILS",
   
-  "countdownDays": "DAYS",
-  "countdownHours": "HOURS",
-  "countdownMinutes": "MINUTES",
-  "countdownSeconds": "SECONDS",
-  
-  "flight": "FLIGHT",
-  "launchDate": "LAUNCH DATE",
-  "rocket": "ROCKET",
-  "launchSite": "LAUNCH SITE",
-  "details": "DETAILS",
   "customer": "CUSTOMER",
   "date": "DATE",
   "launch": "LAUNCH",
