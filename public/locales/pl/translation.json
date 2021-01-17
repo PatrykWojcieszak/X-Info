@@ -1,6 +1,6 @@
 {
   "homeNav": "STRONA GŁÓWNA",
-  "launchesNav": "STARTY",
+  "launchesNav": "MISJE",
   "vehiclesNav": "POJAZDY",
   "starlinkNav": "STARLINK",
   "aboutNav": "O STRONIE",
@@ -14,6 +14,11 @@
   "upcomingLaunchesBtn": "PRZYSZŁE LOTY",
   "pastLaunchesBtn": "PRZESZŁE LOTY",
   "boostersBtn": "PIERWSZY STOPIEŃ",
+  "showDetails": "WIĘCEJ SZCZEGÓŁOW",
+  "loadMore": "WCZYTAJ WIĘCEJ",
+  "showMore": "POKAŻ WIĘCEJ",
+  "showAll": "POKAŻ WSZYSTKIE",
+  "moreDetails": "WIĘCEJ SZCZEGÓŁÓW",
 
   "countdownDays": "DNI",
   "countdownHours": "GODZINY",
@@ -22,8 +27,8 @@
 
   "flight": "LOT",
   "launchDate": "DATA STARTU",
-  "launchSite": "PLATFORMA STARTOWA",
   "rocket": "RAKIETA",
+  "launchSite": "PLATFORMA STARTOWA",
   "details": "SZCZEGÓŁY",
   "customer": "KLIENT",
   "date": "DATA",
@@ -36,21 +41,10 @@
   "serialNumber": "Numer Seryjny",
   "launches": "Ilość startów",
   "status": "Status",
-  "MISSIONS": "Misje",
-
-  "showDetails": "WIĘCEJ SZCZEGÓŁOW",
-  "loadMore": "WCZYTAJ WIĘCEJ",
-  "showMore": "POKAŻ WIĘCEJ",
+  "missions": "Misje",
 
   "createdBy": "Stworzone przez",
   "using": "używając",
-
-  "rocketsDescription": "Rakiety, które są widoczne poniżej zostały stworzone przez SpaceX. Proporcje pomiędzy rakietami są mniej więcej poprawne. Kliknij w rakietę aby dowiedzieć się o niej więcej.",
-  
-  "starlinkDescription": "Starlink jest konstelacją satelit stworzoną przez <span>SpaceX<span>, zapewniają dostęp do internetu.",
-  "starlinkOnTheOrbit": "Ilość starlinków na orbicie",
-
-  "aboutTitle": "O STRONIE",
 
   "payload": "ŁADUNEK",
   "name": "NAZWA",
@@ -66,14 +60,25 @@
   "flights": "ILOŚĆ LOTÓW",
   "usedShips": "UŻYTE STATKI",
   "campaign": "KAMPANIA",
+  "media": "MEDIA",
   "wikipedia": "WIKIPEDIA",
   "article": "ARTICLE",
-
+  
+  "rockets": "RAKIETY",
+  "rocketsDescription": "Rakiety, które są widoczne poniżej zostały stworzone przez SpaceX. Proporcje pomiędzy rakietami są mniej więcej poprawne. Kliknij w rakietę aby dowiedzieć się o niej więcej.",
+  "statusActive": "AKTYWNY",
+  "statusRetired": "WYCOFANE Z UŻYTKU",
+  "statusInDevelopment": "W TRAKCIE PRAC",
+  "overview": "OVERVIEW",
+  "stage": "STOPIEŃ",
+  "landingLegs": "LANDING LEGS",
   "height": "WYSOKOŚĆ",
   "diameter": "ŚREDNICA",
   "leo": "LEO",
   "gto": "GTO",
+  "moon": "KSIĘŻYC",
   "mars": "MARS",
+  "pluto": "PLUTON",
   "engines": "ILOŚĆ SILNIKÓW",
   "thrustAtSeaLevel": "CIĄG NA POZIOMIE MORZA",
   "thrustVacuum": "CIĄG W PRÓŻNI",
@@ -85,5 +90,14 @@
   "propellant": "PROPELLANT",
   "thrust": "CIĄG",
   "number": "ILOŚĆ",
-  "material": "MATERIAŁ"
+  "material": "MATERIAŁ",
+
+  "starlinkDescription": "Starlink jest konstelacją satelit stworzoną przez <span>SpaceX<span>, zapewniają dostęp do internetu.",
+  "starlinkOnTheOrbit": "Ilość starlinków na orbicie",
+  "velocity": "PRĘDKOŚĆ",
+
+  "aboutTitle": "O STRONIE",
+  "aboutDescription1": "Strona stworzona jest przez fana SpaceX dla fanów SpaceX. Stona zapewnia odliczanie do następnego startu, a także informację na temat przeszłych, przyszłych lotach, a także informacje o pojazdach SpaceX takie jak np. rakiety.",
+  "aboutDescription2": "Strona została stworzona i jest utrzymywana przez Patryka Wojcieszaka. Dane na stronie pobierane są z SpaceX-API. Jeśli interesuje Cię kod źródłowy i/lub chcesz pomóc w tym projekcie, zajrzyj na moje repozytorium GitHub.",
+  "aboutDescription3": "Twórca strony nie jest powiązany z SpaceX. Zawartość strony służą jedynie celom edukacyjnym. Zdjęcia użyte na stronei są własnością SpaceX i można je znaleźć na stronie SpaceX Flickr "
 }

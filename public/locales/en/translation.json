@@ -14,7 +14,12 @@
   "upcomingLaunchesBtn": "UPCOMING LAUNCHES",
   "pastLaunchesBtn": "PAST LAUNCHES",
   "boostersBtn": "BOOSTERS",
-
+  "showDetails": "SHOW DETAILS",
+  "loadMore": "LOAD MORE",
+  "showMore": "SHOW MORE",
+  "showAll": "SHOW ALL",
+  "moreDetails": "MORE DETAILS",
+  
   "countdownDays": "DAYS",
   "countdownHours": "HOURS",
   "countdownMinutes": "MINUTES",
@@ -22,8 +27,8 @@
   
   "flight": "FLIGHT",
   "launchDate": "LAUNCH DATE",
-  "launchSite": "LAUNCH SITE",
   "rocket": "ROCKET",
+  "launchSite": "LAUNCH SITE",
   "details": "DETAILS",
   "customer": "CUSTOMER",
   "date": "DATE",
@@ -36,22 +41,11 @@
   "serialNumber": "Serial Number",
   "launches": "Launches",
   "status": "Status",
-  "MISSIONS": "Missions",
-
-  "showDetails": "SHOW DETAILS",
-  "loadMore": "LOAD MORE",
-  "showMore": "SHOW MORE",
+  "missions": "Missions",
 
   "createdBy": "Created by",
   "using": "using",
-
-  "rocketsDescription": "Rockets that are shown below were created by SpaceX. Proportions between rockets are somewhat accurate. Click on the rocket to learn more about it.",
   
-  "starlinkDescription": "Starlink is a satellite internet constellation being constructed by SpaceX providing satellite Internet access.",
-  "starlinkOnTheOrbit": "Starlinks on the orbit",
-
-  "aboutTitle": "ABOUT",
-
   "payload": "PAYLOAD",
   "name": "NAME",
   "manufacturer": "MANUFACTURER",
@@ -66,14 +60,25 @@
   "flights": "FLIGHTS",
   "usedShips": "USED SHIPS",
   "campaign": "CAMPAIGN",
+  "media": "MEDIA",
   "wikipedia": "WIKIPEDIA",
   "article": "ARTICLE",
-
+  
+  "rockets": "ROCKETS",
+  "rocketsDescription": "Rockets that are shown below were created by SpaceX. Proportions between rockets are somewhat accurate. Click on the rocket to learn more about it.",
+  "statusActive": "ACTIVE",
+  "statusRetired": "RETIRED",
+  "statusInDevelopment": "IN DEVELOPMENT",
+  "overview": "OVERVIEW",
+  "stage": "STAGE",
+  "landingLegs": "LANDING LEGS",
   "height": "HEIGHT",
   "diameter": "DIAMETER",
   "leo": "LEO",
   "gto": "GTO",
+  "moon": "MOON",
   "mars": "MARS",
+  "pluto": "PLUTO",
   "engines": "ENGINES",
   "thrustAtSeaLevel": "THRUST AT SEA LEVEL",
   "thrustVacuum": "THRUST VACUUM",
@@ -85,5 +90,14 @@
   "propellant": "PROPELLANT",
   "thrust": "THRUST",
   "number": "NUMBER",
-  "material": "MATERIAL"
+  "material": "MATERIAL",
+
+  "starlinkDescription": "Starlink is a satellite internet constellation being constructed by SpaceX providing satellite Internet access.",
+  "starlinkOnTheOrbit": "Starlinks on the orbit",
+  "velocity": "VELOCITY",
+
+  "aboutTitle": "ABOUT",
+  "aboutDescription1": "This website is a fun project from SpaceX fan for SpaceX fans. Website provides countdown timer for next launch as well as information about previous, upcoming launches and also information about SpaceX vehicles such as rockets.",
+  "aboutDescription2": "This website was developed and is maintained by Patryk Wojcieszak. Data for this site is provided by SpaceX-API. If you’re interested in source code and/or contributing to this project, check my github page.",
+  "aboutDescription3": "The creator of this website has no affiliation with SpaceX. The content on the website is for educational purposes only. Photos used on this website are property of SpaceX and can be found on the SpaceX Flickr Page."
 }
