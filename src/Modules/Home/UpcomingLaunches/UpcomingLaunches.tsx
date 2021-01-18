@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import Button from "../../Shared/Button/Button";
@@ -16,6 +17,7 @@ import LaunchShortInfoSkeleton from "../../Shared/Skeletons/LaunchShortInfoSkele
 import { fetchUpcomingLaunches } from "../../../Store/UpcomingLaunches/actions";
 
 const UpcomingLaunches = (props) => {
+  const { t } = useTranslation();
   const { onFetchUpcomingLaunch, upcomingLaunches } = props;
 
   useEffect(() => {
@@ -25,7 +27,7 @@ const UpcomingLaunches = (props) => {
   return (
     <div className={styles.UpcomingLaunches}>
       <div className={styles.Top}>
-        <h2>UPCOMING LAUNCHES</h2>
+        <h2>{t("upcomingLaunchesTitle")}</h2>
       </div>
       <div className={styles.Content}>
         {props.loadingUpcomingLaunches
@@ -47,7 +49,7 @@ const UpcomingLaunches = (props) => {
       </div>
       <div className={styles.ButtonWrapper}>
         <Link to="/launches/upcoming">
-          <Button name="SHOW ALL" />
+          <Button name={t("showAll")} />
         </Link>
       </div>
     </div>
