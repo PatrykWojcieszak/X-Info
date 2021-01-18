@@ -17,7 +17,13 @@
   "failure": "Failure",
   "used": "Used",
   "new": "New",
-
+  
+  "homeNav": "LAUNCH",
+  "launchesNav": "LAUNCHES",
+  "vehiclesNav": "VEHICLES",
+  "starlinkNav": "STARLINK",
+  "aboutNav": "ABOUT",
+  
   "showDetails": "SHOW DETAILS",
   "flight": "FLIGHT",
   "launchDate": "LAUNCH DATE",
@@ -31,11 +37,6 @@
 
 
   
-  "homeNav": "LAUNCH",
-  "launchesNav": "LAUNCHES",
-  "vehiclesNav": "VEHICLES",
-  "starlinkNav": "STARLINK",
-  "aboutNav": "ABOUT",
 
   "latestLaunchTitle": "LATEST LAUNCH",
 
