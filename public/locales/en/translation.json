@@ -4,6 +4,9 @@
   "countdownHours": "HOURS",
   "countdownMinutes": "MINUTES",
   "countdownSeconds": "SECONDS",
+  
+  "recentLaunchesTitle": "RECENT LAUNCHES",
+  "showMore": "SHOW MORE",
 
   "showDetails": "SHOW DETAILS",
   "flight": "FLIGHT",
@@ -12,6 +15,7 @@
   "launchSite": "LAUNCH SITE",
   "details": "DETAILS",
 
+
   
   "homeNav": "LAUNCH",
   "launchesNav": "LAUNCHES",
@@ -19,7 +23,6 @@
   "starlinkNav": "STARLINK",
   "aboutNav": "ABOUT",
 
-  "recentLaunchesTitle": "RECENT LAUNCHES",
   "upcomingLaunchesTitle": "UPCOMING LAUNCHES",
   "launchHistoryTitle": "LAUNCH HISTORY",
   "latestLaunchTitle": "LATEST LAUNCH",
@@ -28,7 +31,6 @@
   "pastLaunchesBtn": "PAST LAUNCHES",
   "boostersBtn": "BOOSTERS",
   "loadMore": "LOAD MORE",
-  "showMore": "SHOW MORE",
   "showAll": "SHOW ALL",
   "moreDetails": "MORE DETAILS",
   

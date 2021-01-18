@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import Launch from "./Launch/Launch";
@@ -15,6 +16,7 @@ import { fetchRecentLaunches } from "../../../Store/RecentLaunches/actions";
 
 const RecentLaunches = (props) => {
   const { onFetchRecentLaunch, recentLaunches } = props;
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (recentLaunches.docs.length === 0) onFetchRecentLaunch();
@@ -23,9 +25,9 @@ const RecentLaunches = (props) => {
   return (
     <div className={styles.RecentLaunches}>
       <div className={styles.Top}>
-        <h2>RECENT LAUNCHES</h2>
+        <h2>{t("recentLaunchesTitle")}</h2>
         <Link to="/launches/past">
-          <Button name="SHOW MORE" />
+          <Button name={t("showMore")} />
         </Link>
       </div>
 

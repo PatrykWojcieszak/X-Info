@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import Button from "../../../Shared/Button/Button";
@@ -10,6 +11,7 @@ import styles from "./Launch.module.scss";
 import noImage from "../../../../resources/images/noImage.png";
 
 const Launch = ({ flightNumber, name, patch, date, success }: launchProps) => {
+  const { t } = useTranslation();
   const dateParsed = new Date(date);
 
   return (
@@ -24,7 +26,7 @@ const Launch = ({ flightNumber, name, patch, date, success }: launchProps) => {
             icon={success ? "check-circle" : "times-circle"}
           />
         </div>
-        <Button name="SHOW DETAILS" />
+        <Button name={t("showDetails")} />
       </div>
     </Link>
   );
