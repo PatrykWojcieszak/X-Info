@@ -11,9 +11,14 @@
   "starlinkNav": "STARLINK",
   "aboutNav": "O STRONIE",
 
+  "launchHistoryTitle": "LAUNCH HISTORY",
+  "planned": "Zaplanowane",
+  "failure": "Niepowodzenie",
+  "used": "Używany",
+  "new": "Nowy",
+
   "recentLaunchesTitle": "OSTATNIE LOTY",
   "upcomingLaunchesTitle": "PRZYSZŁE LOTY",
-  "launchHistoryTitle": "HISTORIA LOTÓW",
   "latestLaunchTitle": "OSTATNI LOT",
 
   "upcomingLaunchesBtn": "PRZYSZŁE LOTY",

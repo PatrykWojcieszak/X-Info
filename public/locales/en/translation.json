@@ -12,6 +12,12 @@
 
   "launch": "LAUNCH",
   
+  "launchHistoryTitle": "LAUNCH HISTORY",
+  "planned": "Planned",
+  "failure": "Failure",
+  "used": "Used",
+  "new": "New",
+
   "showDetails": "SHOW DETAILS",
   "flight": "FLIGHT",
   "launchDate": "LAUNCH DATE",
@@ -31,7 +37,6 @@
   "starlinkNav": "STARLINK",
   "aboutNav": "ABOUT",
 
-  "launchHistoryTitle": "LAUNCH HISTORY",
   "latestLaunchTitle": "LATEST LAUNCH",
 
   "upcomingLaunchesBtn": "UPCOMING LAUNCHES",
