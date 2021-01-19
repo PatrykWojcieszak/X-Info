@@ -26,6 +26,7 @@
   
   "date": "DATE",
   "failures": "FAILURES",
+  "launchNotLaunchedYet": "NOT LAUNCHED YET",
 
   "showDetails": "SHOW DETAILS",
   "flight": "FLIGHT",
@@ -49,7 +50,6 @@
   "boostersBtn": "BOOSTERS",
   "loadMore": "LOAD MORE",
   
-  "launchNotLaunchedYet": "NOT LAUNCHED YET",
   
   "block": "Block",
   "serialNumber": "Serial Number",

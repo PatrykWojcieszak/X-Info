@@ -30,13 +30,13 @@ const LaunchExtendedInfo = ({
   const { t } = useTranslation();
   const dateParsed = new Date(date_utc);
 
-  let launch = success ? "SUCCESSFUL" : "FAILURE";
+  let launch = success ? t("launchSuccessful") : t("launchFailure");
 
   if (
     dateParsed > new Date() ||
     ["quarter", "half", "year", "month"].includes(date_precision)
   )
-    launch = "NOT LAUNCHED YET";
+    launch = t("launchNotLaunchedYet");
 
   return (
     <Link
