@@ -24,6 +24,9 @@
   "starlinkNav": "STARLINK",
   "aboutNav": "ABOUT",
   
+  "date": "DATE",
+  "failures": "FAILURES",
+
   "showDetails": "SHOW DETAILS",
   "flight": "FLIGHT",
   "launchDate": "LAUNCH DATE",
@@ -34,6 +37,7 @@
   "launchSuccessful": "SUCCESSFUL",
   "launchFailure": "FAILURE",
   "customer": "CUSTOMER",
+  "moreDetails": "MORE DETAILS",
 
 
   
@@ -44,9 +48,7 @@
   "pastLaunchesBtn": "PAST LAUNCHES",
   "boostersBtn": "BOOSTERS",
   "loadMore": "LOAD MORE",
-  "moreDetails": "MORE DETAILS",
   
-  "date": "DATE",
   "launchNotLaunchedYet": "NOT LAUNCHED YET",
   
   "block": "Block",

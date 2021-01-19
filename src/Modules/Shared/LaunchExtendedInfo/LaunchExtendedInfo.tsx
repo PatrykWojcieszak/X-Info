@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import Button from "../Button/Button";
@@ -26,6 +27,7 @@ const LaunchExtendedInfo = ({
   launchId,
   date_precision,
 }: LaunchExtendedInfoProps) => {
+  const { t } = useTranslation();
   const dateParsed = new Date(date_utc);
 
   let launch = success ? "SUCCESSFUL" : "FAILURE";
@@ -43,7 +45,7 @@ const LaunchExtendedInfo = ({
       <div className={styles.LatestLaunch}>
         <div className={styles.LeftContainer}>
           <img src={patchImg ? patchImg : noImage} alt="mission patch" />
-          {showMoreDetailsButton ? <Button name="MORE DETAILS" /> : null}
+          {showMoreDetailsButton ? <Button name={t("moreDetails")} /> : null}
         </div>
         <div className={styles.RightContainer}>
           <div className={styles.MainInfoContainer}>
@@ -52,10 +54,10 @@ const LaunchExtendedInfo = ({
             <h4 className={styles.LaunchNumber}>#{flightNumber}</h4>
             <div className={styles.DetailsWrapper}>
               <div className={styles.TitlesContainer}>
-                <h4>LAUNCH SITE:</h4>
-                <h4>ROCKET:</h4>
-                <h4>DATE:</h4>
-                <h4>LAUNCH:</h4>
+                <h4>{t("launchSite")}:</h4>
+                <h4>{t("rocket")}:</h4>
+                <h4>{t("date")}:</h4>
+                <h4>{t("launch")}:</h4>
               </div>
               <div className={styles.ValuesContainer}>
                 <h4>{launchSiteName}</h4>
@@ -69,7 +71,7 @@ const LaunchExtendedInfo = ({
           </div>
           {!success && failures.length > 0 ? (
             <div className={styles.FailureContainer}>
-              <h4>FAILURES:</h4>
+              <h4>{t("failures")}:</h4>
               <ul>
                 {failures.map((failure, index) => (
                   <li key={index}>{failure.reason}</li>
