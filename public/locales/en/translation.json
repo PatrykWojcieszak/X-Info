@@ -28,6 +28,11 @@
   "failures": "FAILURES",
   "launchNotLaunchedYet": "NOT LAUNCHED YET",
 
+  "upcomingLaunchesBtn": "UPCOMING LAUNCHES",
+  "pastLaunchesBtn": "PAST LAUNCHES",
+  "boostersBtn": "BOOSTERS",
+  "loadMore": "LOAD MORE",
+  
   "showDetails": "SHOW DETAILS",
   "flight": "FLIGHT",
   "launchDate": "LAUNCH DATE",
@@ -39,16 +44,12 @@
   "launchFailure": "FAILURE",
   "customer": "CUSTOMER",
   "moreDetails": "MORE DETAILS",
+  "latestLaunchTitle": "LATEST LAUNCH",
 
 
   
 
-  "latestLaunchTitle": "LATEST LAUNCH",
 
-  "upcomingLaunchesBtn": "UPCOMING LAUNCHES",
-  "pastLaunchesBtn": "PAST LAUNCHES",
-  "boostersBtn": "BOOSTERS",
-  "loadMore": "LOAD MORE",
   
   
   "block": "Block",

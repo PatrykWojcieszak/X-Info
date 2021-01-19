@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import Button from "../Shared/Button/Button";
@@ -22,6 +23,7 @@ import { connect } from "react-redux";
 import Boosters from "./Boosters/Boosters";
 
 const Launches = (props) => {
+  const { t } = useTranslation();
   const [showPastLaunches, setShowPastLaunches] = useState(false);
   const [showUpcomingLaunches, setShowUpcomingLaunches] = useState(true);
   const [showBoosters, setShowBoosters] = useState(false);
@@ -63,7 +65,7 @@ const Launches = (props) => {
       variants={pageVariantsAnim}
       className={styles.Launches}>
       <div className={styles.Latest}>
-        <h2>LATEST LAUNCH</h2>
+        <h2>{t("latestLaunchTitle")}</h2>
         {props.loadingLatestLaunch ? (
           <LaunchExtendedInfoSkeleton />
         ) : (
@@ -90,17 +92,17 @@ const Launches = (props) => {
             <Button
               selected={showUpcomingLaunches}
               clicked={showUpcomingLaunchesHandler}
-              name="UPCOMING LAUNCHES"
+              name={t("upcomingLaunchesBtn")}
             />
             <Button
               selected={showPastLaunches}
               clicked={showPastLaunchesHandler}
-              name="PAST LAUNCHES"
+              name={t("pastLaunchesBtn")}
             />
             <Button
               selected={showBoosters}
               clicked={showBoostersHandler}
-              name="BOOSTERS"
+              name={t("boostersBtn")}
             />
           </div>
         ) : null}

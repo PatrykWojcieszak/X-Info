@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import Button from "../../Shared/Button/Button";
@@ -15,6 +16,7 @@ import { motion } from "framer-motion";
 import { showLaunchesList } from "../../../Animations/Animations_motion";
 
 const PastLaunches = (props) => {
+  const { t } = useTranslation();
   const [numberOfLaunches, setNumberOfLaunches] = useState(5);
 
   const { onFetchPastLaunches } = props;
@@ -69,7 +71,7 @@ const PastLaunches = (props) => {
             }}>
             <Button
               disabled={props.loadingPastLaunches}
-              name="LOAD MORE"
+              name={t("loadMore")}
               clicked={() => setNumberOfLaunches(numberOfLaunches + 5)}
             />
           </div>
