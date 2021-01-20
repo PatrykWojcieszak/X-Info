@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useClickOutside } from "../../../Hooks/useClickOutside";
 
@@ -20,6 +20,10 @@ const Dropdown = ({
   const closeListHandler = () => {
     toggleList(false);
   };
+
+  useEffect(() => {
+    setHeaderTitle(list.find((x) => x.selected)?.title);
+  }, [list]);
 
   const wrapperRef = useRef(null);
   useClickOutside(wrapperRef, closeListHandler);
@@ -63,7 +67,7 @@ const Dropdown = ({
 };
 
 type dropdownProps = {
-  title: string;
+  title?: string;
   list: DropdownElement[];
   isListOpen: boolean;
   toggleList: (isOpen: boolean) => void;

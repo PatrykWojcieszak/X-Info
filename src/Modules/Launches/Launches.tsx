@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -24,7 +24,7 @@ import { connect } from "react-redux";
 //TYPES
 import { DropdownElement } from "../../Types";
 
-const launchesFilter = [
+const launchesFilterUpcoming = [
   {
     id: 0,
     title: "UPCOMING LAUNCHES",
@@ -45,40 +45,55 @@ const launchesFilter = [
   },
 ];
 
+const launchesFilterPast = [
+  {
+    id: 0,
+    title: "UPCOMING LAUNCHES",
+    selected: false,
+    key: "launchesType",
+  },
+  {
+    id: 1,
+    title: "PAST LAUNCHES",
+    selected: true,
+    key: "launchesType",
+  },
+  {
+    id: 2,
+    title: "BOOSTERS",
+    selected: false,
+    key: "launchesType",
+  },
+];
+
 const Launches = (props) => {
   const [isLaunchesTypeDDOpen, setIsLaunchesTypeDDOpen] = useState(false);
-  const [launchTypeFilter, setLaunchTypeFilter] = useState(launchesFilter);
+  const [launchTypeFilter, setLaunchTypeFilter] = useState(
+    launchesFilterUpcoming
+  );
   const { launchType } = useParams();
 
   const { onFetchLatestLaunch } = props;
-
-  const launchTypeFilterSelectedHandler = useCallback(
-    (element: DropdownElement) => {
-      const temp = [...launchTypeFilter];
-
-      temp.forEach((element) => (element.selected = false));
-      temp[element.id].selected = true;
-
-      setLaunchTypeFilter(temp);
-    },
-    [launchTypeFilter]
-  );
 
   useEffect(() => {
     onFetchLatestLaunch();
 
     if (launchType === "past") {
-      launchTypeFilterSelectedHandler({
-        id: 1,
-        title: "PAST LAUNCHES",
-        selected: false,
-        key: "launchesType",
-      });
+      setLaunchTypeFilter(launchesFilterPast);
     }
-  }, [onFetchLatestLaunch, launchType, launchTypeFilterSelectedHandler]);
+  }, [onFetchLatestLaunch, launchType]);
 
   const toggleLaunchTypeHandler = (isOpen: boolean) => {
     setIsLaunchesTypeDDOpen(isOpen);
+  };
+
+  const launchTypeFilterSelectedHandler = (element: DropdownElement) => {
+    const temp = [...launchTypeFilter];
+
+    temp.forEach((element) => (element.selected = false));
+    temp[element.id].selected = true;
+
+    setLaunchTypeFilter(temp);
   };
 
   return (
@@ -113,7 +128,7 @@ const Launches = (props) => {
       <div className={styles.Content}>
         <div className={styles.ButtonsWrapper}>
           <Dropdown
-            title="UPCOMING LAUNCHES"
+            title={launchTypeFilter.find((x) => x.selected)?.title}
             list={launchTypeFilter}
             isListOpen={isLaunchesTypeDDOpen}
             toggleList={(isOpen: boolean) => toggleLaunchTypeHandler(isOpen)}
