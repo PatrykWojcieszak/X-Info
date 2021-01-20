@@ -1,0 +1,58 @@
+@import "../../../resources/styles/index.scss";
+
+.DropdownWrapper {
+  @include flex-column;
+  padding: 0.5rem;
+  border: 1px solid $blue;
+  border-radius: 0.5rem;
+  background-color: $background;
+  position: relative;
+  min-width: 240px;
+
+  .HeaderWrapper {
+    @include flex-center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+
+    svg,
+    h4 {
+      color: $blue;
+    }
+
+    svg {
+      margin-left: 1rem;
+      font-size: 1.5rem;
+    }
+  }
+
+  .DropdownListWrapper {
+    z-index: 900;
+    width: 100%;
+    position: absolute;
+    background-color: $blue;
+    border-radius: 0.5rem;
+    padding: 0.4rem;
+    bottom: -175px;
+    left: 0;
+
+    .ListElement {
+      padding: 0.7rem 0.5rem;
+      border-radius: 0.4rem;
+      margin: 0.4rem 0;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background-color: $foreground;
+        color: $blue;
+      }
+    }
+
+    .Selected {
+      background-color: $background;
+      color: $blue;
+    }
+  }
+}

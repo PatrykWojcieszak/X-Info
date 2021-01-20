@@ -8,6 +8,8 @@ import LaunchExtendedInfo from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo"
 import ScrollToTop from "../Shared/ScrollToTop/ScrollToTop";
 import UpcomingLaunches from "./UpcomingLaunches/UpcomingLaunches";
 import PastLaunches from "./PastLaunches/PastLaunches";
+import Dropdown from "../Shared/Dropdown/Dropdown";
+import Boosters from "./Boosters/Boosters";
 
 //STYLES
 import styles from "./Launches.module.scss";
@@ -19,12 +21,37 @@ import LaunchExtendedInfoSkeleton from "../Shared/Skeletons/LaunchExtendedInfoSk
 //REDUX
 import { fetchLatestLaunch } from "../../Store/LatestLaunch/actions";
 import { connect } from "react-redux";
-import Boosters from "./Boosters/Boosters";
+
+//TYPES
+import { DropdownElement } from "../../Types";
+
+const launchesFilter = [
+  {
+    id: 0,
+    title: "UPCOMING LAUNCHES",
+    selected: true,
+    key: "launchesType",
+  },
+  {
+    id: 1,
+    title: "PAST LAUNCHES",
+    selected: false,
+    key: "launchesType",
+  },
+  {
+    id: 2,
+    title: "BOOSTERS",
+    selected: false,
+    key: "launchesType",
+  },
+];
 
 const Launches = (props) => {
   const [showPastLaunches, setShowPastLaunches] = useState(false);
   const [showUpcomingLaunches, setShowUpcomingLaunches] = useState(true);
   const [showBoosters, setShowBoosters] = useState(false);
+  const [isLaunchesTypeDDOpen, setIsLaunchesTypeDDOpen] = useState(false);
+  const [launchTypeFilter, setLaunchTypeFilter] = useState(launchesFilter);
   const { launchType } = useParams();
 
   const { onFetchLatestLaunch } = props;
@@ -54,6 +81,20 @@ const Launches = (props) => {
       showPastLaunchesHandler();
     }
   }, [onFetchLatestLaunch, launchType]);
+
+  const toggleLaunchTypeHandler = (isOpen: boolean) => {
+    setIsLaunchesTypeDDOpen(isOpen);
+  };
+
+  const launchTypeFilterSelectedHandler = (element: DropdownElement) => {
+    const temp = [...launchTypeFilter];
+
+    temp.forEach((element) => (element.selected = false));
+    temp[element.id].selected = true;
+
+    console.log(temp);
+    // setLaunchTypeFilter(temp);
+  };
 
   return (
     <motion.div
@@ -101,6 +142,15 @@ const Launches = (props) => {
               selected={showBoosters}
               clicked={showBoostersHandler}
               name="BOOSTERS"
+            />
+            <Dropdown
+              title="UPCOMING LAUNCHES"
+              list={launchTypeFilter}
+              isListOpen={isLaunchesTypeDDOpen}
+              toggleList={(isOpen: boolean) => toggleLaunchTypeHandler(isOpen)}
+              selectedElement={(element: DropdownElement) =>
+                launchTypeFilterSelectedHandler(element)
+              }
             />
           </div>
         ) : null}
