@@ -50,7 +50,6 @@ const NextLaunch = (props) => {
 
   useEffect(() => {
     const timeDifference = timeDiff;
-
     const interval = setInterval(() => setTimer(timeDifference), 1000);
 
     if (
@@ -68,6 +67,17 @@ const NextLaunch = (props) => {
 
   let nextLaunchWrapper = <div className={styles.Top}></div>;
 
+  const isAfterLaunch = (): boolean => {
+    if (
+      timer.days === 0 &&
+      timer.hours === 0 &&
+      timer.minutes === 0 &&
+      timer.seconds === 0
+    )
+      return true;
+    else return false;
+  };
+
   if (
     !props.loadingNextLaunch &&
     (nextLaunchWrapper = (
@@ -80,7 +90,7 @@ const NextLaunch = (props) => {
             exit="exit"
             className={styles.Top__Content}>
             <div className={styles.LaunchTitle}>
-              <h2>NEXT LAUNCH: </h2>
+              <h2>{isAfterLaunch() ? "CURRENT LAUNCH" : "NEXT LAUNCH"}: </h2>
               <h2 className={styles.LaunchName}>
                 {nextLaunchData.docs[0].name}
               </h2>
@@ -123,7 +133,12 @@ const NextLaunch = (props) => {
       </AnimatePresence>
     ))
   )
-    if (timer.days === 0 && timer.hours === 0 && timer.minutes < 2)
+    if (
+      timer.days === 0 &&
+      timer.hours === 0 &&
+      timer.minutes < 2 &&
+      nextLaunchData.docs[0]?.links.youtube_id
+    )
       nextLaunchWrapper = (
         <AnimatePresence>
           <motion.div
