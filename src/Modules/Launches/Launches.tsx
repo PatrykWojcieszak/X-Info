@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 //COMPONENTS
-import Button from "../Shared/Button/Button";
 import LaunchExtendedInfo from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo";
 import ScrollToTop from "../Shared/ScrollToTop/ScrollToTop";
 import UpcomingLaunches from "./UpcomingLaunches/UpcomingLaunches";
@@ -47,53 +46,39 @@ const launchesFilter = [
 ];
 
 const Launches = (props) => {
-  const [showPastLaunches, setShowPastLaunches] = useState(false);
-  const [showUpcomingLaunches, setShowUpcomingLaunches] = useState(true);
-  const [showBoosters, setShowBoosters] = useState(false);
   const [isLaunchesTypeDDOpen, setIsLaunchesTypeDDOpen] = useState(false);
   const [launchTypeFilter, setLaunchTypeFilter] = useState(launchesFilter);
   const { launchType } = useParams();
 
   const { onFetchLatestLaunch } = props;
 
-  const showPastLaunchesHandler = () => {
-    setShowPastLaunches(true);
-    setShowUpcomingLaunches(false);
-    setShowBoosters(false);
-  };
+  const launchTypeFilterSelectedHandler = useCallback(
+    (element: DropdownElement) => {
+      const temp = [...launchTypeFilter];
 
-  const showUpcomingLaunchesHandler = () => {
-    setShowPastLaunches(false);
-    setShowUpcomingLaunches(true);
-    setShowBoosters(false);
-  };
+      temp.forEach((element) => (element.selected = false));
+      temp[element.id].selected = true;
 
-  const showBoostersHandler = () => {
-    setShowPastLaunches(false);
-    setShowUpcomingLaunches(false);
-    setShowBoosters(true);
-  };
+      setLaunchTypeFilter(temp);
+    },
+    [launchTypeFilter]
+  );
 
   useEffect(() => {
     onFetchLatestLaunch();
 
     if (launchType === "past") {
-      showPastLaunchesHandler();
+      launchTypeFilterSelectedHandler({
+        id: 1,
+        title: "PAST LAUNCHES",
+        selected: false,
+        key: "launchesType",
+      });
     }
-  }, [onFetchLatestLaunch, launchType]);
+  }, [onFetchLatestLaunch, launchType, launchTypeFilterSelectedHandler]);
 
   const toggleLaunchTypeHandler = (isOpen: boolean) => {
     setIsLaunchesTypeDDOpen(isOpen);
-  };
-
-  const launchTypeFilterSelectedHandler = (element: DropdownElement) => {
-    const temp = [...launchTypeFilter];
-
-    temp.forEach((element) => (element.selected = false));
-    temp[element.id].selected = true;
-
-    console.log(temp);
-    // setLaunchTypeFilter(temp);
   };
 
   return (
@@ -126,44 +111,29 @@ const Launches = (props) => {
         )}
       </div>
       <div className={styles.Content}>
-        {!props.loadingUpcomingLaunches || !props.loadingPastLaunches ? (
-          <div className={styles.ButtonsWrapper}>
-            <Button
-              selected={showUpcomingLaunches}
-              clicked={showUpcomingLaunchesHandler}
-              name="UPCOMING LAUNCHES"
-            />
-            <Button
-              selected={showPastLaunches}
-              clicked={showPastLaunchesHandler}
-              name="PAST LAUNCHES"
-            />
-            <Button
-              selected={showBoosters}
-              clicked={showBoostersHandler}
-              name="BOOSTERS"
-            />
-            <Dropdown
-              title="UPCOMING LAUNCHES"
-              list={launchTypeFilter}
-              isListOpen={isLaunchesTypeDDOpen}
-              toggleList={(isOpen: boolean) => toggleLaunchTypeHandler(isOpen)}
-              selectedElement={(element: DropdownElement) =>
-                launchTypeFilterSelectedHandler(element)
-              }
-            />
-          </div>
-        ) : null}
+        <div className={styles.ButtonsWrapper}>
+          <Dropdown
+            title="UPCOMING LAUNCHES"
+            list={launchTypeFilter}
+            isListOpen={isLaunchesTypeDDOpen}
+            toggleList={(isOpen: boolean) => toggleLaunchTypeHandler(isOpen)}
+            selectedElement={(element: DropdownElement) =>
+              launchTypeFilterSelectedHandler(element)
+            }
+          />
+        </div>
 
         <AnimatePresence>
-          {showUpcomingLaunches && <UpcomingLaunches />}
+          {launchTypeFilter[0].selected && <UpcomingLaunches />}
         </AnimatePresence>
 
         <AnimatePresence>
-          {showPastLaunches && <PastLaunches />}
+          {launchTypeFilter[1].selected && <PastLaunches />}
         </AnimatePresence>
 
-        <AnimatePresence>{showBoosters && <Boosters />}</AnimatePresence>
+        <AnimatePresence>
+          {launchTypeFilter[2].selected && <Boosters />}
+        </AnimatePresence>
       </div>
 
       <ScrollToTop />

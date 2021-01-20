@@ -2,7 +2,7 @@
 
 .DropdownWrapper {
   @include flex-column;
-  padding: 0.5rem;
+  padding: 1rem;
   border: 1px solid $blue;
   border-radius: 0.5rem;
   background-color: $background;
