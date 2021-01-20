@@ -43,7 +43,7 @@ const LaunchHistoryChart = (props) => {
       datasets: [
         {
           label: "Falcon 1",
-          backgroundColor: "rgb(255, 51, 204)",
+          backgroundColor: "rgb(255,142,48)",
           data: years.map(
             (year) =>
               props.pastLaunches.docs.filter(
@@ -56,7 +56,7 @@ const LaunchHistoryChart = (props) => {
         },
         {
           label: "New Falcon 9",
-          backgroundColor: "rgb(0, 0, 204)",
+          backgroundColor: "rgb(0,102,255)",
           data: years.map(
             (year) =>
               props.pastLaunches.docs.filter(
@@ -70,7 +70,7 @@ const LaunchHistoryChart = (props) => {
         },
         {
           label: "Used Falcon 9",
-          backgroundColor: "rgb(0, 102, 255)",
+          backgroundColor: "rgb(68,149,208)",
           data: years.map(
             (year) =>
               props.pastLaunches.docs.filter(
@@ -84,7 +84,7 @@ const LaunchHistoryChart = (props) => {
         },
         {
           label: "Falcon Heavy",
-          backgroundColor: "rgb(51, 204, 51)",
+          backgroundColor: "rgb(126,237,148)",
           data: years.map(
             (year) =>
               props.pastLaunches.docs.filter(
@@ -120,18 +120,41 @@ const LaunchHistoryChart = (props) => {
   }
 
   const options = {
+    defaultFontColor: "white",
+    defaultColor: "white",
+    title: {
+      display: false,
+    },
+    legend: {
+      position: "bottom",
+      labels: {
+        fontColor: "white",
+      },
+    },
+    responsive: true,
     scales: {
-      yAxes: [
-        {
-          stacked: true,
-          ticks: {
-            beginAtZero: true,
-          },
-        },
-      ],
       xAxes: [
         {
           stacked: true,
+          gridLines: {
+            display: false,
+          },
+          ticks: {
+            fontColor: "white",
+          },
+        },
+      ],
+      yAxes: [
+        {
+          stacked: true,
+          gridLines: {
+            display: true,
+            color: "white",
+            zeroLineColor: "white",
+          },
+          ticks: {
+            fontColor: "white",
+          },
         },
       ],
     },
