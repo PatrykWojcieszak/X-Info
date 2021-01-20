@@ -140,7 +140,7 @@ const Rocket = (props) => {
           <InfoLine
             key={index}
             title={payload.id}
-            value={`${payload.kg} kg | ${payload.lb} lb}`}
+            value={`${payload.kg} kg | ${payload.lb} lb`}
           />
         ))}
       </motion.div>

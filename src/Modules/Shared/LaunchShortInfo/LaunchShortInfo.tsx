@@ -33,14 +33,14 @@ const LaunchShortInfo = ({
               <h4>ROCKET: </h4>
               <h3>{rocketName}</h3>
             </div>
-            {success !== undefined ? (
+            {success && (
               <div className={styles.Row}>
                 <h4>LAUNCH: </h4>
                 <h3 style={{ color: success ? "#4BB543" : "#FA113D" }}>
                   {success ? "SUCCESSFUL" : "FAILURE"}
                 </h3>
               </div>
-            ) : null}
+            )}
           </div>
           <h4 className={styles.LaunchNumber}>#{flightNumber}</h4>
         </div>
