@@ -43,7 +43,9 @@ const LaunchExtendedInfo = ({
       <div className={styles.LatestLaunch}>
         <div className={styles.LeftContainer}>
           <img src={patchImg ? patchImg : noImage} alt="mission patch" />
-          {showMoreDetailsButton ? <Button name="MORE DETAILS" /> : null}
+          {showMoreDetailsButton && (
+            <Button styleType="primary" name="MORE DETAILS" />
+          )}
         </div>
         <div className={styles.RightContainer}>
           <div className={styles.MainInfoContainer}>

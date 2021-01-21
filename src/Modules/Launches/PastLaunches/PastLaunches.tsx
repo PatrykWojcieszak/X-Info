@@ -70,6 +70,7 @@ const PastLaunches = (props) => {
             <Button
               disabled={props.loadingPastLaunches}
               name="LOAD MORE"
+              styleType="primary"
               clicked={() => setNumberOfLaunches(numberOfLaunches + 5)}
             />
           </div>

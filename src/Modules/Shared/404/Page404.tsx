@@ -12,7 +12,7 @@ const Page404 = (props) => {
     <div className={styles.Page404}>
       <img src={sadRocket} alt="sad rocket" />
       <h2>There is no info about the launch yet!</h2>
-      <Button name="GET BACK TO EARTH" />
+      <Button name="GET BACK TO EARTH" styleType="primary" />
     </div>
   );
 };

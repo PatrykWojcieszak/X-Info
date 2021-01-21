@@ -144,6 +144,10 @@ const Launches = (props) => {
     launchesFilterUpcoming
   );
   const [showFilterModal, setShowFilterModal] = useState(false);
+  const [rocketTypeFilter, setRocketTypeFilter] = useState(filterRockets);
+  const [launchSiteFilter, setLaunchSiteFilter] = useState(filterLaunchSite);
+  const [launchStatusFilter, setLaunchStatusFilter] = useState(filterStatus);
+
   const { launchType } = useParams();
 
   const { onFetchLatestLaunch } = props;
@@ -167,6 +171,33 @@ const Launches = (props) => {
     temp[element.id].selected = true;
 
     setLaunchTypeFilter(temp);
+  };
+
+  const rocketTypeFilterHandler = (element: DropdownElement) => {
+    const temp = [...rocketTypeFilter];
+
+    temp.forEach((element) => (element.selected = false));
+    temp[element.id].selected = true;
+
+    setRocketTypeFilter(temp);
+  };
+
+  const launchSiteFilterHandler = (element: DropdownElement) => {
+    const temp = [...launchSiteFilter];
+
+    temp.forEach((element) => (element.selected = false));
+    temp[element.id].selected = true;
+
+    setLaunchSiteFilter(temp);
+  };
+
+  const launchStatusFilterHandler = (element: DropdownElement) => {
+    const temp = [...launchStatusFilter];
+
+    temp.forEach((element) => (element.selected = false));
+    temp[element.id].selected = true;
+
+    setLaunchStatusFilter(temp);
   };
 
   return (
@@ -212,6 +243,7 @@ const Launches = (props) => {
           />
           <Button
             name="FILTER"
+            styleType="primary"
             clicked={() => setShowFilterModal(!showFilterModal)}
           />
         </div>
@@ -222,8 +254,17 @@ const Launches = (props) => {
             closeModal={() => setShowFilterModal(false)}>
             <Filter
               rocketsFilterList={filterRockets}
+              rocketSelected={(element: DropdownElement) =>
+                rocketTypeFilterHandler(element)
+              }
               launchSitesFilterList={filterLaunchSite}
+              launchSiteSelected={(element: DropdownElement) =>
+                launchSiteFilterHandler(element)
+              }
               statusesFilterList={filterStatus}
+              launchStatusSelected={(element: DropdownElement) =>
+                launchStatusFilterHandler(element)
+              }
             />
           </Modal>
         )}

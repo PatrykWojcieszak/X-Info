@@ -25,7 +25,7 @@ const RecentLaunches = (props) => {
       <div className={styles.Top}>
         <h2>RECENT LAUNCHES</h2>
         <Link to="/launches/past">
-          <Button name="SHOW MORE" />
+          <Button name="SHOW MORE" styleType="primary" />
         </Link>
       </div>
 

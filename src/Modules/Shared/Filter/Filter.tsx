@@ -9,6 +9,9 @@ const Filter = ({
   rocketsFilterList,
   launchSitesFilterList,
   statusesFilterList,
+  rocketSelected,
+  launchSiteSelected,
+  launchStatusSelected,
 }: filterProps) => {
   const [showDDRockets, setShowDDRockets] = useState(false);
   const [showDDLaunchSites, setShowDDLaunchSites] = useState(false);
@@ -28,7 +31,7 @@ const Filter = ({
           styleType="secondary"
           toggleList={(isOpen: boolean) => setShowDDRockets(isOpen)}
           selectedElement={(element: DropdownElement) =>
-            launchTypeFilterSelectedHandler(element)
+            rocketSelected(element)
           }
         />
       </div>
@@ -67,7 +70,7 @@ const Filter = ({
           styleType="secondary"
           toggleList={(isOpen: boolean) => setShowDDLaunchSites(isOpen)}
           selectedElement={(element: DropdownElement) =>
-            launchTypeFilterSelectedHandler(element)
+            launchSiteSelected(element)
           }
         />
       </div>
@@ -80,12 +83,12 @@ const Filter = ({
           styleType="secondary"
           toggleList={(isOpen: boolean) => setShowDDStatuses(isOpen)}
           selectedElement={(element: DropdownElement) =>
-            launchTypeFilterSelectedHandler(element)
+            launchStatusSelected(element)
           }
         />
       </div>
       <div className={styles.BtnWrapper}>
-        <Button name="CLEAR FILTER" />
+        <Button name="CLEAR FILTER" styleType="secondary" />
       </div>
     </div>
   );
@@ -95,6 +98,9 @@ type filterProps = {
   rocketsFilterList: DropdownElement[];
   launchSitesFilterList: DropdownElement[];
   statusesFilterList: DropdownElement[];
+  rocketSelected: (element: DropdownElement) => void;
+  launchSiteSelected: (element: DropdownElement) => void;
+  launchStatusSelected: (element: DropdownElement) => void;
 };
 
 export default Filter;
