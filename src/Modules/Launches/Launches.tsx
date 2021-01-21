@@ -23,6 +23,8 @@ import { connect } from "react-redux";
 
 //TYPES
 import { DropdownElement } from "../../Types";
+import Button from "../Shared/Button/Button";
+import Modal from "../Shared/Modal/Modal";
 
 const launchesFilterUpcoming = [
   {
@@ -71,6 +73,7 @@ const Launches = (props) => {
   const [launchTypeFilter, setLaunchTypeFilter] = useState(
     launchesFilterUpcoming
   );
+  const [showFilterModal, setShowFilterModal] = useState(false);
   const { launchType } = useParams();
 
   const { onFetchLatestLaunch } = props;
@@ -131,12 +134,24 @@ const Launches = (props) => {
             title={launchTypeFilter.find((x) => x.selected)?.title}
             list={launchTypeFilter}
             isListOpen={isLaunchesTypeDDOpen}
+            styleType="primary"
             toggleList={(isOpen: boolean) => toggleLaunchTypeHandler(isOpen)}
             selectedElement={(element: DropdownElement) =>
               launchTypeFilterSelectedHandler(element)
             }
           />
+          <Button
+            name="FILTER"
+            clicked={() => setShowFilterModal(!showFilterModal)}
+          />
         </div>
+
+        {showFilterModal && (
+          <Modal
+            show={showFilterModal}
+            closeModal={() => setShowFilterModal(false)}
+          />
+        )}
 
         <AnimatePresence>
           {launchTypeFilter[0].selected && <UpcomingLaunches />}

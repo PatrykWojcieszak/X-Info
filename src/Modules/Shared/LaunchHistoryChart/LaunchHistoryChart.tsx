@@ -101,7 +101,10 @@ const LaunchHistoryChart = (props) => {
           data: years.map(
             (year) =>
               props.pastLaunches.docs.filter(
-                (launch) => getYear(launch) === year && !launch.success
+                (launch) =>
+                  getYear(launch) === year &&
+                  launch.success !== null &&
+                  !launch.success
               ).length
           ),
         },

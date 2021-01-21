@@ -14,6 +14,7 @@ const Dropdown = ({
   isListOpen,
   toggleList,
   selectedElement,
+  styleType,
 }: dropdownProps) => {
   const [headerTitle, setHeaderTitle] = useState(title);
 
@@ -34,8 +35,13 @@ const Dropdown = ({
     selectedElement(selectedEl);
   };
 
+  const ddStyles = [styles.DropdownWrapper];
+
+  if (styleType === "primary") ddStyles.push(styles.Primary);
+  if (styleType === "secondary") ddStyles.push(styles.Secondary);
+
   return (
-    <div className={styles.DropdownWrapper} ref={wrapperRef}>
+    <div className={ddStyles.join(" ")} ref={wrapperRef}>
       <div
         className={styles.HeaderWrapper}
         onClick={() => toggleList(!isListOpen)}>
@@ -72,6 +78,7 @@ type dropdownProps = {
   isListOpen: boolean;
   toggleList: (isOpen: boolean) => void;
   selectedElement: (element: DropdownElement) => void;
+  styleType: string;
 };
 
 export default Dropdown;

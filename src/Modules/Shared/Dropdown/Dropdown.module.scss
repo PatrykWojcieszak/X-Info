@@ -2,15 +2,13 @@
 
 .DropdownWrapper {
   @include flex-column;
-  padding: 1rem;
-  border: 1px solid $blue;
   border-radius: 0.5rem;
-  background-color: $background;
   position: relative;
-  min-width: 240px;
+  min-width: 280px;
 
   .HeaderWrapper {
     @include flex-center;
+    padding: 1rem;
     justify-content: space-between;
     width: 100%;
     height: 100%;
@@ -18,12 +16,12 @@
 
     svg,
     h4 {
-      color: $blue;
+      font-size: 1.3rem;
+      font-weight: 400;
     }
 
     svg {
       margin-left: 1rem;
-      font-size: 1.5rem;
     }
   }
 
@@ -31,7 +29,7 @@
     z-index: 900;
     width: 100%;
     position: absolute;
-    background-color: $blue;
+
     border-radius: 0.5rem;
     padding: 0.4rem;
     bottom: -175px;
@@ -43,7 +41,25 @@
       margin: 0.4rem 0;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
+    }
+  }
+}
 
+.Primary {
+  border: 1px solid $blue;
+  background-color: transparent;
+
+  .HeaderWrapper {
+    svg,
+    h4 {
+      color: $blue;
+    }
+  }
+
+  .DropdownListWrapper {
+    background-color: $blue;
+
+    .ListElement {
       &:hover {
         background-color: $foreground;
         color: $blue;
@@ -53,6 +69,35 @@
     .Selected {
       background-color: $background;
       color: $blue;
+    }
+  }
+}
+
+.Secondary {
+  border: 1px solid $background;
+  background-color: transparent;
+
+  .HeaderWrapper {
+    svg,
+    h4 {
+      color: $background;
+    }
+  }
+
+  .DropdownListWrapper {
+    background-color: $background;
+    color: $blue;
+
+    .ListElement {
+      &:hover {
+        background-color: $foreground;
+        color: $background;
+      }
+    }
+
+    .Selected {
+      background-color: $blue;
+      color: $background;
     }
   }
 }
