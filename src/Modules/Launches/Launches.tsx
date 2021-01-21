@@ -9,6 +9,9 @@ import UpcomingLaunches from "./UpcomingLaunches/UpcomingLaunches";
 import PastLaunches from "./PastLaunches/PastLaunches";
 import Dropdown from "../Shared/Dropdown/Dropdown";
 import Boosters from "./Boosters/Boosters";
+import Button from "../Shared/Button/Button";
+import Modal from "../Shared/Modal/Modal";
+import Filter from "../Shared/Filter/Filter";
 
 //STYLES
 import styles from "./Launches.module.scss";
@@ -23,8 +26,6 @@ import { connect } from "react-redux";
 
 //TYPES
 import { DropdownElement } from "../../Types";
-import Button from "../Shared/Button/Button";
-import Modal from "../Shared/Modal/Modal";
 
 const launchesFilterUpcoming = [
   {
@@ -65,6 +66,75 @@ const launchesFilterPast = [
     title: "BOOSTERS",
     selected: false,
     key: "launchesType",
+  },
+];
+
+const filterRockets = [
+  {
+    id: 0,
+    title: "All",
+    selected: true,
+    key: "rockets",
+  },
+  {
+    id: 1,
+    title: "Falcon 1",
+    selected: false,
+    key: "rockets",
+  },
+  {
+    id: 2,
+    title: "Falcon 9",
+    selected: false,
+    key: "rockets",
+  },
+  {
+    id: 3,
+    title: "Falcon Heavy",
+    selected: false,
+    key: "rockets",
+  },
+  {
+    id: 4,
+    title: "Starship",
+    selected: false,
+    key: "rockets",
+  },
+];
+
+const filterLaunchSite = [
+  {
+    id: 0,
+    title: "All",
+    selected: true,
+    key: "launchSite",
+  },
+  {
+    id: 1,
+    title: "Canaveral",
+    selected: false,
+    key: "launchSite",
+  },
+];
+
+const filterStatus = [
+  {
+    id: 0,
+    title: "All",
+    selected: true,
+    key: "status",
+  },
+  {
+    id: 1,
+    title: "Success",
+    selected: false,
+    key: "status",
+  },
+  {
+    id: 1,
+    title: "Failure",
+    selected: false,
+    key: "status",
   },
 ];
 
@@ -149,8 +219,13 @@ const Launches = (props) => {
         {showFilterModal && (
           <Modal
             show={showFilterModal}
-            closeModal={() => setShowFilterModal(false)}
-          />
+            closeModal={() => setShowFilterModal(false)}>
+            <Filter
+              rocketsFilterList={filterRockets}
+              launchSitesFilterList={filterLaunchSite}
+              statusesFilterList={filterStatus}
+            />
+          </Modal>
         )}
 
         <AnimatePresence>

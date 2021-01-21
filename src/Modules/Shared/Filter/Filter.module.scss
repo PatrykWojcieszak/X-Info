@@ -1,42 +1,27 @@
 @import "../../../resources/styles/index.scss";
 
 .Filter {
-  position: relative;
+  @include flex-column;
+  background-color: $blue;
+  border-radius: 0.5rem;
+  z-index: 900;
+  padding: 0.7rem;
 
-  .HeaderWrapper {
+  .OptionWrapper {
     @include flex-center;
-    background-color: $background;
-    border: 1px solid $blue;
-    color: $blue;
-    cursor: pointer;
-    border-radius: 0.5rem;
-    padding: 1rem;
+    justify-content: space-between;
+    margin: 1rem 0;
 
-    h4 {
-      font-size: 1.3rem;
+    h3 {
+      color: $background;
       font-weight: 400;
+      min-width: 160px;
+      font-size: 1.4rem;
     }
   }
 
-  .OptionsContainer {
-    position: absolute;
-    background-color: $blue;
-    border-radius: 0.5rem;
-    bottom: -430px;
-    left: 0;
-    z-index: 900;
-    padding: 0.7rem;
-
-    .OptionWrapper {
-      @include flex-center;
-      justify-content: space-between;
-      margin: 1rem 0;
-
-      h3 {
-        color: $background;
-        font-weight: 400;
-        min-width: 150px;
-      }
-    }
+  .BtnWrapper {
+    margin-top: 1rem;
+    @include flex-center;
   }
 }

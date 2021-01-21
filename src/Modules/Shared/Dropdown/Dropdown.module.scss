@@ -32,7 +32,7 @@
 
     border-radius: 0.5rem;
     padding: 0.4rem;
-    bottom: -175px;
+    margin-top: 65px;
     left: 0;
 
     .ListElement {
@@ -91,7 +91,7 @@
     .ListElement {
       &:hover {
         background-color: $foreground;
-        color: $background;
+        color: $blue;
       }
     }
 

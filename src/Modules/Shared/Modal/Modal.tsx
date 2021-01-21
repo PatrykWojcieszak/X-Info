@@ -1,13 +1,16 @@
 import React from "react";
+
+//COMPONENTS
 import Backdrop from "../Backdrop/Backdrop";
 
+//STYLES
 import styles from "./Modal.module.scss";
 
-const Modal = ({ closeModal, show }: modalProps) => {
+const Modal = ({ closeModal, show, children }: modalProps) => {
   return (
     <>
       <Backdrop clicked={closeModal} show={show} />
-      <div className={styles.Content}>asdfuasdf</div>
+      <div className={styles.Content}>{children}</div>
     </>
   );
 };
@@ -15,6 +18,7 @@ const Modal = ({ closeModal, show }: modalProps) => {
 type modalProps = {
   closeModal: () => void;
   show: boolean;
+  children: React.ReactNode;
 };
 
 export default Modal;
