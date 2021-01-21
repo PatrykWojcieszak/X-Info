@@ -132,7 +132,7 @@ const filterStatus = [
     key: "status",
   },
   {
-    id: 1,
+    id: 2,
     title: "Failure",
     selected: false,
     key: "status",

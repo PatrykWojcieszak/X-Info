@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { DropdownElement } from "../../../Types";
 import Button from "../Button/Button";
+import CustomDatePicker from "../DatePicker/CustomDatePicker";
 import Dropdown from "../Dropdown/Dropdown";
-import DatePicker from "react-datepicker";
 
 //STYLES
 import styles from "./Filter.module.scss";
-import "react-datepicker/dist/react-datepicker.css";
 
 const Filter = ({
   rocketsFilterList,
@@ -23,19 +22,6 @@ const Filter = ({
   const [showDDRockets, setShowDDRockets] = useState(false);
   const [showDDLaunchSites, setShowDDLaunchSites] = useState(false);
   const [showDDStatuses, setShowDDStatuses] = useState(false);
-  const [startDate, setStartDate] = useState(new Date());
-
-  const DateFromInput = ({ value, onClick }) => (
-    <div className={styles.DatePicker} onClick={onClick}>
-      <h3>{value}</h3>
-    </div>
-  );
-
-  const DateToInput = ({ value, onClick }) => (
-    <div className={styles.DatePicker} onClick={onClick}>
-      <h3>{value}</h3>
-    </div>
-  );
 
   return (
     <div className={styles.Filter}>
@@ -54,18 +40,16 @@ const Filter = ({
       </div>
       <div className={styles.OptionWrapper}>
         <h3>DATE FROM:</h3>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          customInput={<DateFromInput value={startDate} onClick={() => {}} />}
+        <CustomDatePicker
+          date={dateFrom}
+          dateChanged={(date) => setDateFrom(date)}
         />
       </div>
       <div className={styles.OptionWrapper}>
         <h3>DATE TO:</h3>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          customInput={<DateToInput value={startDate} onClick={() => {}} />}
+        <CustomDatePicker
+          date={dateTo}
+          dateChanged={(date) => setDateTo(date)}
         />
       </div>
       <div className={styles.OptionWrapper}>
