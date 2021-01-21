@@ -26,6 +26,7 @@ import { connect } from "react-redux";
 
 //TYPES
 import { DropdownElement } from "../../Types";
+import { changeDDElementToTrue } from "../../Utility/Utility";
 
 const launchesFilterUpcoming = [
   {
@@ -165,39 +166,23 @@ const Launches = (props) => {
   };
 
   const launchTypeFilterSelectedHandler = (element: DropdownElement) => {
-    const temp = [...launchTypeFilter];
-
-    temp.forEach((element) => (element.selected = false));
-    temp[element.id].selected = true;
-
-    setLaunchTypeFilter(temp);
+    const newArr = changeDDElementToTrue(launchTypeFilter, element);
+    setLaunchTypeFilter(newArr);
   };
 
   const rocketTypeFilterHandler = (element: DropdownElement) => {
-    const temp = [...rocketTypeFilter];
-
-    temp.forEach((element) => (element.selected = false));
-    temp[element.id].selected = true;
-
-    setRocketTypeFilter(temp);
+    const newArr = changeDDElementToTrue(rocketTypeFilter, element);
+    setRocketTypeFilter(newArr);
   };
 
   const launchSiteFilterHandler = (element: DropdownElement) => {
-    const temp = [...launchSiteFilter];
-
-    temp.forEach((element) => (element.selected = false));
-    temp[element.id].selected = true;
-
-    setLaunchSiteFilter(temp);
+    const newArr = changeDDElementToTrue(launchSiteFilter, element);
+    setLaunchSiteFilter(newArr);
   };
 
   const launchStatusFilterHandler = (element: DropdownElement) => {
-    const temp = [...launchStatusFilter];
-
-    temp.forEach((element) => (element.selected = false));
-    temp[element.id].selected = true;
-
-    setLaunchStatusFilter(temp);
+    const newArr = changeDDElementToTrue(launchStatusFilter, element);
+    setLaunchStatusFilter(newArr);
   };
 
   return (
