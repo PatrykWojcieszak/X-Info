@@ -237,30 +237,32 @@ const Launches = (props) => {
           />
         </div>
 
-        {showFilterModal && (
-          <Modal
-            show={showFilterModal}
-            closeModal={() => setShowFilterModal(false)}>
-            <Filter
-              rocketsFilterList={filterRockets}
-              rocketSelected={(element: DropdownElement) =>
-                rocketTypeFilterHandler(element)
-              }
-              launchSitesFilterList={filterLaunchSite}
-              launchSiteSelected={(element: DropdownElement) =>
-                launchSiteFilterHandler(element)
-              }
-              statusesFilterList={filterStatus}
-              launchStatusSelected={(element: DropdownElement) =>
-                launchStatusFilterHandler(element)
-              }
-              dateFrom={dateFromFilter}
-              setDateFrom={(dateFrom: Date) => setDateFromFilter(dateFrom)}
-              setDateTo={(dateTo: Date) => setDateToFilter(dateTo)}
-              dateTo={dateToFilter}
-            />
-          </Modal>
-        )}
+        <AnimatePresence>
+          {showFilterModal && (
+            <Modal
+              show={showFilterModal}
+              closeModal={() => setShowFilterModal(false)}>
+              <Filter
+                rocketsFilterList={filterRockets}
+                rocketSelected={(element: DropdownElement) =>
+                  rocketTypeFilterHandler(element)
+                }
+                launchSitesFilterList={filterLaunchSite}
+                launchSiteSelected={(element: DropdownElement) =>
+                  launchSiteFilterHandler(element)
+                }
+                statusesFilterList={filterStatus}
+                launchStatusSelected={(element: DropdownElement) =>
+                  launchStatusFilterHandler(element)
+                }
+                dateFrom={dateFromFilter}
+                setDateFrom={(dateFrom: Date) => setDateFromFilter(dateFrom)}
+                setDateTo={(dateTo: Date) => setDateToFilter(dateTo)}
+                dateTo={dateToFilter}
+              />
+            </Modal>
+          )}
+        </AnimatePresence>
 
         <AnimatePresence>
           {launchTypeFilter[0].selected && <UpcomingLaunches />}

@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React from "react";
 
 //COMPONENTS
@@ -5,12 +6,20 @@ import Backdrop from "../Backdrop/Backdrop";
 
 //STYLES
 import styles from "./Modal.module.scss";
+import { pageVariantsAnim } from "../../../Animations/Animations_motion";
 
 const Modal = ({ closeModal, show, children }: modalProps) => {
   return (
     <>
       <Backdrop clicked={closeModal} show={show} />
-      <div className={styles.Content}>{children}</div>
+      <motion.div
+        initial="initial"
+        animate="in"
+        exit="out"
+        variants={pageVariantsAnim}
+        className={styles.Content}>
+        {children}
+      </motion.div>
     </>
   );
 };
