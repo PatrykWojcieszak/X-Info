@@ -21,7 +21,20 @@
   }
 
   .BtnWrapper {
-    margin-top: 1rem;
+    margin-top: 2rem;
     @include flex-center;
+  }
+}
+
+.DatePicker {
+  min-width: 280px;
+  border: 1px solid $background;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+
+  h3 {
+    color: $background;
+    font-weight: 400;
   }
 }

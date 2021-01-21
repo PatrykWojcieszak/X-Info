@@ -148,6 +148,10 @@ const Launches = (props) => {
   const [rocketTypeFilter, setRocketTypeFilter] = useState(filterRockets);
   const [launchSiteFilter, setLaunchSiteFilter] = useState(filterLaunchSite);
   const [launchStatusFilter, setLaunchStatusFilter] = useState(filterStatus);
+  const [dateFromFilter, setDateFromFilter] = useState(new Date("2006"));
+  const [dateToFilter, setDateToFilter] = useState(
+    new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+  );
 
   const { launchType } = useParams();
 
@@ -250,6 +254,10 @@ const Launches = (props) => {
               launchStatusSelected={(element: DropdownElement) =>
                 launchStatusFilterHandler(element)
               }
+              dateFrom={dateFromFilter}
+              setDateFrom={(dateFrom: Date) => setDateFromFilter(dateFrom)}
+              setDateTo={(dateTo: Date) => setDateToFilter(dateTo)}
+              dateTo={dateToFilter}
             />
           </Modal>
         )}
