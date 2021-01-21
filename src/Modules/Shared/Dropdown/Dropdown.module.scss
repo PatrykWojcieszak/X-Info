@@ -101,3 +101,45 @@
     }
   }
 }
+
+@include tablet {
+  .DropdownWrapper {
+    min-width: 220px;
+
+    .HeaderWrapper {
+      padding: 1rem;
+
+      svg,
+      h4 {
+        font-size: 1rem;
+      }
+    }
+
+    .DropdownListWrapper {
+      .ListElement {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+@include mobile {
+  .DropdownWrapper {
+    min-width: 200px;
+
+    .HeaderWrapper {
+      padding: 1rem;
+
+      svg,
+      h4 {
+        font-size: 0.8rem;
+      }
+    }
+
+    .DropdownListWrapper {
+      .ListElement {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

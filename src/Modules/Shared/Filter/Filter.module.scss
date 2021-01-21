@@ -38,3 +38,25 @@
     font-weight: 400;
   }
 }
+
+@include tablet {
+  .Filter {
+    .OptionWrapper {
+      h3 {
+        min-width: 120px;
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+@include mobile {
+  .Filter {
+    .OptionWrapper {
+      h3 {
+        min-width: 100px;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
