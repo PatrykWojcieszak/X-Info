@@ -23,6 +23,14 @@ const Filter = ({
   const [showDDLaunchSites, setShowDDLaunchSites] = useState(false);
   const [showDDStatuses, setShowDDStatuses] = useState(false);
 
+  const clearFilterHandler = () => {
+    rocketSelected(0);
+    launchSiteSelected(0);
+    launchStatusSelected(0);
+    setDateFrom(new Date("2006"));
+    setDateTo(new Date(new Date().setFullYear(new Date().getFullYear() + 1)));
+  };
+
   return (
     <div className={styles.Filter}>
       <div className={styles.OptionWrapper}>
@@ -33,9 +41,7 @@ const Filter = ({
           isListOpen={showDDRockets}
           styleType="secondary"
           toggleList={(isOpen: boolean) => setShowDDRockets(isOpen)}
-          selectedElement={(element: DropdownElement) =>
-            rocketSelected(element)
-          }
+          selectedElement={(id: number) => rocketSelected(id)}
         />
       </div>
       <div className={styles.OptionWrapper}>
@@ -60,9 +66,7 @@ const Filter = ({
           isListOpen={showDDLaunchSites}
           styleType="secondary"
           toggleList={(isOpen: boolean) => setShowDDLaunchSites(isOpen)}
-          selectedElement={(element: DropdownElement) =>
-            launchSiteSelected(element)
-          }
+          selectedElement={(id: number) => launchSiteSelected(id)}
         />
       </div>
       <div className={styles.OptionWrapper}>
@@ -73,13 +77,15 @@ const Filter = ({
           isListOpen={showDDStatuses}
           styleType="secondary"
           toggleList={(isOpen: boolean) => setShowDDStatuses(isOpen)}
-          selectedElement={(element: DropdownElement) =>
-            launchStatusSelected(element)
-          }
+          selectedElement={(id: number) => launchStatusSelected(id)}
         />
       </div>
       <div className={styles.BtnWrapper}>
-        <Button name="CLEAR FILTER" styleType="secondary" />
+        <Button
+          clicked={clearFilterHandler}
+          name="CLEAR FILTER"
+          styleType="secondary"
+        />
       </div>
     </div>
   );
@@ -89,9 +95,9 @@ type filterProps = {
   rocketsFilterList: DropdownElement[];
   launchSitesFilterList: DropdownElement[];
   statusesFilterList: DropdownElement[];
-  rocketSelected: (element: DropdownElement) => void;
-  launchSiteSelected: (element: DropdownElement) => void;
-  launchStatusSelected: (element: DropdownElement) => void;
+  rocketSelected: (id: number) => void;
+  launchSiteSelected: (id: number) => void;
+  launchStatusSelected: (id: number) => void;
   setDateFrom: (dateFrom: Date) => void;
   setDateTo: (dateTo: Date) => void;
   dateFrom: Date;

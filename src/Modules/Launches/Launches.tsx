@@ -169,23 +169,23 @@ const Launches = (props) => {
     setIsLaunchesTypeDDOpen(isOpen);
   };
 
-  const launchTypeFilterSelectedHandler = (element: DropdownElement) => {
-    const newArr = changeDDElementToTrue(launchTypeFilter, element);
+  const launchTypeFilterSelectedHandler = (id: number) => {
+    const newArr = changeDDElementToTrue(launchTypeFilter, id);
     setLaunchTypeFilter(newArr);
   };
 
-  const rocketTypeFilterHandler = (element: DropdownElement) => {
-    const newArr = changeDDElementToTrue(rocketTypeFilter, element);
+  const rocketTypeFilterHandler = (id: number) => {
+    const newArr = changeDDElementToTrue(rocketTypeFilter, id);
     setRocketTypeFilter(newArr);
   };
 
-  const launchSiteFilterHandler = (element: DropdownElement) => {
-    const newArr = changeDDElementToTrue(launchSiteFilter, element);
+  const launchSiteFilterHandler = (id: number) => {
+    const newArr = changeDDElementToTrue(launchSiteFilter, id);
     setLaunchSiteFilter(newArr);
   };
 
-  const launchStatusFilterHandler = (element: DropdownElement) => {
-    const newArr = changeDDElementToTrue(launchStatusFilter, element);
+  const launchStatusFilterHandler = (id: number) => {
+    const newArr = changeDDElementToTrue(launchStatusFilter, id);
     setLaunchStatusFilter(newArr);
   };
 
@@ -226,8 +226,8 @@ const Launches = (props) => {
             isListOpen={isLaunchesTypeDDOpen}
             styleType="primary"
             toggleList={(isOpen: boolean) => toggleLaunchTypeHandler(isOpen)}
-            selectedElement={(element: DropdownElement) =>
-              launchTypeFilterSelectedHandler(element)
+            selectedElement={(id: number) =>
+              launchTypeFilterSelectedHandler(id)
             }
           />
           <Button
@@ -243,17 +243,13 @@ const Launches = (props) => {
               show={showFilterModal}
               closeModal={() => setShowFilterModal(false)}>
               <Filter
-                rocketsFilterList={filterRockets}
-                rocketSelected={(element: DropdownElement) =>
-                  rocketTypeFilterHandler(element)
-                }
-                launchSitesFilterList={filterLaunchSite}
-                launchSiteSelected={(element: DropdownElement) =>
-                  launchSiteFilterHandler(element)
-                }
-                statusesFilterList={filterStatus}
-                launchStatusSelected={(element: DropdownElement) =>
-                  launchStatusFilterHandler(element)
+                rocketsFilterList={rocketTypeFilter}
+                rocketSelected={(id: number) => rocketTypeFilterHandler(id)}
+                launchSitesFilterList={launchSiteFilter}
+                launchSiteSelected={(id: number) => launchSiteFilterHandler(id)}
+                statusesFilterList={launchStatusFilter}
+                launchStatusSelected={(id: number) =>
+                  launchStatusFilterHandler(id)
                 }
                 dateFrom={dateFromFilter}
                 setDateFrom={(dateFrom: Date) => setDateFromFilter(dateFrom)}

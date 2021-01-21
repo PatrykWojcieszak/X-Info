@@ -32,7 +32,7 @@ const Dropdown = ({
   const selectItemHandler = (selectedEl: DropdownElement) => {
     setHeaderTitle(selectedEl.title);
     toggleList(false);
-    selectedElement(selectedEl);
+    selectedElement(selectedEl.id);
   };
 
   const ddStyles = [styles.DropdownWrapper];
@@ -77,7 +77,7 @@ type dropdownProps = {
   list: DropdownElement[];
   isListOpen: boolean;
   toggleList: (isOpen: boolean) => void;
-  selectedElement: (element: DropdownElement) => void;
+  selectedElement: (id: number) => void;
   styleType: string;
 };
 

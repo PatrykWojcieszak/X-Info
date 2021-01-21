@@ -14,12 +14,12 @@ export const getYear = (launch: Launch): number => {
 
 export const changeDDElementToTrue = (
   arr: DropdownElement[],
-  element: DropdownElement
+  id: number
 ): DropdownElement[] => {
   const temp = [...arr];
 
   temp.forEach((element) => (element.selected = false));
-  temp[element.id].selected = true;
+  temp[id].selected = true;
 
   return temp;
 };
