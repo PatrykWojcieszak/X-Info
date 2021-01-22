@@ -46,12 +46,14 @@ const LaunchShortInfo = ({
         </div>
         <div className={styles.Content}>
           <div className={styles.Content__Element}>
-            <h4 className={styles.Title}>LAUNCH SITE: </h4>
-            <h4 className={styles.Title}>CUSTOMER: </h4>
+            {launchSiteName && <h4 className={styles.Title}>LAUNCH SITE: </h4>}
+            {customer && <h4 className={styles.Title}>CUSTOMER: </h4>}
           </div>
           <div className={styles.Content__Element}>
-            <h4 className={styles.Value}>{launchSiteName}</h4>
-            <h4 className={styles.Value}>{customer}</h4>
+            {launchSiteName && (
+              <h4 className={styles.Value}>{launchSiteName}</h4>
+            )}
+            {customer && <h4 className={styles.Value}>{customer}</h4>}
           </div>
         </div>
         <img

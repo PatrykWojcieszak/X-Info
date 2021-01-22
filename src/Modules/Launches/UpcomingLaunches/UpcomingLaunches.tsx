@@ -3,11 +3,14 @@ import React from "react";
 //COMPONENTS
 import LaunchShortInfo from "../../Shared/LaunchShortInfo/LaunchShortInfo";
 import LaunchShortInfoSkeleton from "../../Shared/Skeletons/LaunchShortInfoSkeleton";
+import NotFoundLaunches from "../../Shared/NotFoundLaunches/NotFoundLaunches";
 
 //STYLES
 import styles from "./UpcomingLaunches.module.scss";
 import { motion } from "framer-motion";
 import { showLaunchesList } from "../../../Animations/Animations_motion";
+
+//TYPES
 import { Launch } from "../../../Types";
 
 const UpcomingLaunches = ({ launches, loading }: upcomingLaunchesProps) => {
@@ -47,6 +50,18 @@ const UpcomingLaunches = ({ launches, loading }: upcomingLaunchesProps) => {
       </motion.div>
     );
   }
+
+  if (launches.length === 0)
+    upcomingLaunchesArr = (
+      <motion.div
+        variants={showLaunchesList}
+        initial="initial"
+        animate="in"
+        exit="out"
+        className={styles.LaunchesWrapper}>
+        <NotFoundLaunches />
+      </motion.div>
+    );
 
   return <>{upcomingLaunchesArr}</>;
 };

@@ -5,13 +5,13 @@ import { motion } from "framer-motion";
 import Button from "../../Shared/Button/Button";
 import LaunchShortInfo from "../../Shared/LaunchShortInfo/LaunchShortInfo";
 import LaunchShortInfoSkeleton from "../../Shared/Skeletons/LaunchShortInfoSkeleton";
+import NotFoundLaunches from "../../Shared/NotFoundLaunches/NotFoundLaunches";
 
 //STYLES
 import styles from "./PastLaunches.module.scss";
 import { showLaunchesList } from "../../../Animations/Animations_motion";
-import sadRocket from "../../../resources/images/sadRocket.png";
 
-//OTHER
+//TYPES
 import { Launch } from "../../../Types";
 
 const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
@@ -79,10 +79,7 @@ const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
         animate="in"
         exit="out"
         className={styles.LaunchesWrapper}>
-        <div className={styles.NotFound}>
-          <img src={sadRocket} alt="sad rocket" />
-          <h2>There is no launches!</h2>
-        </div>
+        <NotFoundLaunches />
       </motion.div>
     );
 

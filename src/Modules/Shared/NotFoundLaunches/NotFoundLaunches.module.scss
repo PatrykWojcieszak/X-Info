@@ -1,0 +1,16 @@
+@import "../../../resources/styles/index.scss";
+
+.NotFound {
+  @include flex-center-column;
+
+  h2 {
+    font-weight: 100;
+    color: $fontPrimary;
+    margin-top: 2rem;
+  }
+
+  img {
+    width: 200px;
+    transform: rotate(30deg);
+  }
+}
