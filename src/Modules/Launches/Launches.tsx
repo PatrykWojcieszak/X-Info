@@ -302,11 +302,13 @@ const Launches = (props) => {
               launchTypeFilterSelectedHandler(id)
             }
           />
-          <Button
-            name="FILTER"
-            styleType="primary"
-            clicked={() => setShowFilterModal(!showFilterModal)}
-          />
+          {!launchTypeFilter[2].selected && (
+            <Button
+              name="FILTER"
+              styleType="primary"
+              clicked={() => setShowFilterModal(!showFilterModal)}
+            />
+          )}
         </div>
 
         <AnimatePresence>

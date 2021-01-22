@@ -6,7 +6,7 @@ import Backdrop from "../Backdrop/Backdrop";
 
 //STYLES
 import styles from "./Modal.module.scss";
-import { pageVariantsAnim } from "../../../Animations/Animations_motion";
+import { modalAnim } from "../../../Animations/Animations_motion";
 
 const Modal = ({ closeModal, show, children }: modalProps) => {
   return (
@@ -16,7 +16,7 @@ const Modal = ({ closeModal, show, children }: modalProps) => {
         initial="initial"
         animate="in"
         exit="out"
-        variants={pageVariantsAnim}
+        variants={modalAnim}
         className={styles.Content}>
         {children}
       </motion.div>
