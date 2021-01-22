@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 //COMPONENTS
 import Button from "../../Shared/Button/Button";
@@ -7,21 +8,11 @@ import LaunchShortInfoSkeleton from "../../Shared/Skeletons/LaunchShortInfoSkele
 
 //STYLES
 import styles from "./PastLaunches.module.scss";
-
-//REDUX
-import { fetchPastLaunches } from "../../../Store/PastLaunches/actions";
-import { connect } from "react-redux";
-import { motion } from "framer-motion";
 import { showLaunchesList } from "../../../Animations/Animations_motion";
+import { Launch } from "../../../Types";
 
-const PastLaunches = (props) => {
+const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
   const [numberOfLaunches, setNumberOfLaunches] = useState(5);
-
-  const { onFetchPastLaunches } = props;
-
-  useEffect(() => {
-    onFetchPastLaunches();
-  }, [onFetchPastLaunches]);
 
   let pastLaunchesArr = (
     <motion.div
@@ -36,7 +27,7 @@ const PastLaunches = (props) => {
     </motion.div>
   );
 
-  if (props.pastLaunches.docs.length > 0) {
+  if (launches.length > 0) {
     pastLaunchesArr = (
       <motion.div
         variants={showLaunchesList}
@@ -44,22 +35,20 @@ const PastLaunches = (props) => {
         animate="in"
         exit="out"
         className={styles.LaunchesWrapper}>
-        {props.pastLaunches.docs
-          .slice(0, numberOfLaunches)
-          .map((launch, index) => (
-            <LaunchShortInfo
-              key={index}
-              launchName={launch.name}
-              launchDateUtc={launch.date_utc}
-              rocketName={launch.rocket.name}
-              launchSiteName={launch.launchpad.full_name}
-              customer={launch.payloads[0].customers[0]}
-              flightNumber={launch.flight_number}
-              success={launch.success}
-              nationality={launch.payloads[0].nationalities[0]}
-            />
-          ))}
-        {props.pastLaunches.docs.length >= numberOfLaunches && (
+        {launches.slice(0, numberOfLaunches).map((launch, index) => (
+          <LaunchShortInfo
+            key={index}
+            launchName={launch.name}
+            launchDateUtc={launch.date_utc}
+            rocketName={launch.rocket.name}
+            launchSiteName={launch.launchpad.full_name}
+            customer={launch.payloads[0].customers[0]}
+            flightNumber={launch.flight_number}
+            success={launch.success}
+            nationality={launch.payloads[0].nationalities[0]}
+          />
+        ))}
+        {launches.length >= numberOfLaunches && (
           <div
             style={{
               marginTop: "2rem",
@@ -68,7 +57,7 @@ const PastLaunches = (props) => {
               justifyContent: "center",
             }}>
             <Button
-              disabled={props.loadingPastLaunches}
+              disabled={loading}
               name="LOAD MORE"
               styleType="primary"
               clicked={() => setNumberOfLaunches(numberOfLaunches + 5)}
@@ -82,17 +71,9 @@ const PastLaunches = (props) => {
   return <>{pastLaunchesArr}</>;
 };
 
-const mapStateToProps = (state) => {
-  return {
-    pastLaunches: state.pastLaunches.pastLaunches,
-    loadingPastLaunches: state.pastLaunches.loading,
-  };
+type pastLaunchesProps = {
+  launches: Launch[];
+  loading: boolean;
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onFetchPastLaunches: () => dispatch(fetchPastLaunches()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(PastLaunches);
+export default PastLaunches;

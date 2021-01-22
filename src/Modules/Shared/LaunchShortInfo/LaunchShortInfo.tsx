@@ -20,6 +20,8 @@ const LaunchShortInfo = ({
   const countryCode = getCountryCode(nationality);
   const dateParsed = new Date(launchDateUtc);
 
+  console.log(success);
+
   return (
     <Link to={`/launch/${flightNumber}`}>
       <div className={styles.Launch}>
@@ -33,14 +35,14 @@ const LaunchShortInfo = ({
               <h4>ROCKET: </h4>
               <h3>{rocketName}</h3>
             </div>
-            {success && (
+            {success !== null && success !== undefined ? (
               <div className={styles.Row}>
                 <h4>LAUNCH: </h4>
                 <h3 style={{ color: success ? "#4BB543" : "#FA113D" }}>
                   {success ? "SUCCESSFUL" : "FAILURE"}
                 </h3>
               </div>
-            )}
+            ) : null}
           </div>
           <h4 className={styles.LaunchNumber}>#{flightNumber}</h4>
         </div>

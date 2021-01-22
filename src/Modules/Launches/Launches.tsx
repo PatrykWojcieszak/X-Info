@@ -22,10 +22,11 @@ import LaunchExtendedInfoSkeleton from "../Shared/Skeletons/LaunchExtendedInfoSk
 
 //REDUX
 import { fetchLatestLaunch } from "../../Store/LatestLaunch/actions";
+import { fetchPastLaunches } from "../../Store/PastLaunches/actions";
 import { connect } from "react-redux";
 
 //TYPES
-import { DropdownElement } from "../../Types";
+import { Launch, QueryResult } from "../../Types";
 import { changeDDElementToTrue } from "../../Utility/Utility";
 
 const launchesFilterUpcoming = [
@@ -154,16 +155,28 @@ const Launches = (props) => {
   );
 
   const { launchType } = useParams();
+  const { onFetchLatestLaunch, onFetchPastLaunches } = props;
 
-  const { onFetchLatestLaunch } = props;
+  const filter = (arr: QueryResult<Launch>): Launch[] => {
+    let temp = { ...arr };
+
+    if (rocketTypeFilter[0].selected) return temp.docs;
+
+    temp.docs = temp.docs.filter(
+      (x) => x.rocket.name === rocketTypeFilter.find((t) => t.selected)?.title
+    );
+
+    return temp.docs;
+  };
 
   useEffect(() => {
     onFetchLatestLaunch();
+    onFetchPastLaunches();
 
     if (launchType === "past") {
       setLaunchTypeFilter(launchesFilterPast);
     }
-  }, [onFetchLatestLaunch, launchType]);
+  }, [onFetchLatestLaunch, launchType, onFetchPastLaunches]);
 
   const toggleLaunchTypeHandler = (isOpen: boolean) => {
     setIsLaunchesTypeDDOpen(isOpen);
@@ -265,7 +278,12 @@ const Launches = (props) => {
         </AnimatePresence>
 
         <AnimatePresence>
-          {launchTypeFilter[1].selected && <PastLaunches />}
+          {launchTypeFilter[1].selected && (
+            <PastLaunches
+              launches={filter(props.pastLaunches)}
+              loading={props.loadingPastLaunches}
+            />
+          )}
         </AnimatePresence>
 
         <AnimatePresence>
@@ -282,12 +300,15 @@ const mapStateToProps = (state) => {
   return {
     latestLaunch: state.latestLaunch.latestLaunch,
     loadingLatestLaunch: state.latestLaunch.loading,
+    pastLaunches: state.pastLaunches.pastLaunches,
+    loadingPastLaunches: state.pastLaunches.loading,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onFetchLatestLaunch: () => dispatch(fetchLatestLaunch()),
+    onFetchPastLaunches: () => dispatch(fetchPastLaunches()),
   };
 };
 
