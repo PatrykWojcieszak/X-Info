@@ -166,6 +166,12 @@ const Launches = (props) => {
       (x) => x.rocket.name === rocketTypeFilter.find((t) => t.selected)?.title
     );
 
+    temp.docs = temp.docs.filter(
+      (x) =>
+        new Date(x.date_utc) >= dateFromFilter &&
+        new Date(x.date_utc) <= dateToFilter
+    );
+
     return temp.docs;
   };
 

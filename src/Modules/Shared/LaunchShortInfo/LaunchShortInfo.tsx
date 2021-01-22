@@ -20,8 +20,6 @@ const LaunchShortInfo = ({
   const countryCode = getCountryCode(nationality);
   const dateParsed = new Date(launchDateUtc);
 
-  console.log(success);
-
   return (
     <Link to={`/launch/${flightNumber}`}>
       <div className={styles.Launch}>
