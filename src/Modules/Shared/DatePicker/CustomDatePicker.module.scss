@@ -6,45 +6,26 @@
   padding: 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
-
-  h3 {
-    color: $background;
-    font-weight: 400;
-  }
-
-  input {
-    background: transparent;
-    width: 100%;
-    outline: none;
-    border: none;
-    font-size: 1.2rem;
-  }
+  background: transparent;
+  width: 100%;
+  outline: none;
+  font-size: 1.2rem;
 }
 
 @include tablet {
   .DatePicker {
     min-width: 220px;
+    padding: 0.8rem;
 
-    h3 {
-      font-size: 1rem;
-    }
-
-    input {
-      font-size: 1rem;
-    }
+    font-size: 1rem;
   }
 }
 
 @include mobile {
   .DatePicker {
     min-width: 200px;
+    padding: 0.5rem;
 
-    h3 {
-      font-size: 0.8rem;
-    }
-
-    input {
-      font-size: 0.8rem;
-    }
+    font-size: 0.8rem;
   }
 }

@@ -4,24 +4,19 @@ import DatePicker from "react-datepicker";
 //STYLES
 import styles from "./CustomDatePicker.module.scss";
 import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 
 const CustomDatePicker = ({ date, dateChanged }: datePickerProps) => {
-  const CustomInput = (
-    props: React.HTMLProps<HTMLInputElement>,
-    ref: React.Ref<HTMLInputElement>
-  ) => {
-    return (
-      <div className={styles.DatePicker}>
-        <input {...props} ref={props.ref} />
-      </div>
-    );
+  const validation = (date: any) => {
+    const isValid = moment(date, "MM/DD/YYYY", true).isValid();
+    if (isValid) dateChanged(date);
   };
 
   return (
     <DatePicker
       selected={date}
-      onChange={(date) => dateChanged(date)}
-      customInput={React.createElement(React.forwardRef(CustomInput))}
+      onChange={(date) => validation(date)}
+      className={styles.DatePicker}
     />
   );
 };
