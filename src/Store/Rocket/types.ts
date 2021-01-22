@@ -1,8 +1,7 @@
-import IQueryResult from "../../Models/IQueryResult";
-import IRocket from "../../Models/IRocket";
+import { Rocket, QueryResult } from "../../Types";
 
 export interface RocketState {
-  rocket: IQueryResult<IRocket>;
+  rocket: QueryResult<Rocket>;
   loading: boolean;
 }
 
@@ -16,7 +15,7 @@ interface FetchRocketStartAction {
 
 interface FetchRocketSuccessAction {
   type: typeof FETCH_ROCKET_SUCCESS;
-  payload: IQueryResult<IRocket>;
+  payload: QueryResult<Rocket>;
 }
 
 interface FetchRocketFailAction {

@@ -2,6 +2,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 
 import {
   faArrowDown,
+  faArrowUp,
   faCheckCircle,
   faTimesCircle,
   faArrowLeft,
@@ -10,6 +11,8 @@ import {
   faNewspaper,
   faBars,
   faTimes,
+  faAngleUp,
+  faAngleDown,
 } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
 import {
@@ -19,6 +22,7 @@ import {
 
 library.add(
   faArrowDown,
+  faArrowUp,
   faCheckCircle,
   faTimesCircle,
   faArrowLeft,
@@ -28,5 +32,7 @@ library.add(
   faFileAlt,
   faNewspaper,
   faBars,
-  faTimes
+  faTimes,
+  faAngleUp,
+  faAngleDown
 );

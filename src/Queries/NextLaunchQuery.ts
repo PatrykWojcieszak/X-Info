@@ -1,4 +1,4 @@
-const NextLaunchQuery = {
+export const NextLaunchQuery = {
   query: {
     upcoming: true,
   },
@@ -31,5 +31,3 @@ const NextLaunchQuery = {
     ],
   },
 };
-
-export default NextLaunchQuery;

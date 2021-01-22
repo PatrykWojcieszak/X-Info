@@ -1,4 +1,4 @@
-interface ILandpad {
+export interface Landpad {
   name: string;
   full_name: string;
   status: string;
@@ -13,5 +13,3 @@ interface ILandpad {
   details: string;
   launches: [];
 }
-
-export default ILandpad;

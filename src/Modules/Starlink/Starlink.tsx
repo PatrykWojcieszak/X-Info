@@ -12,8 +12,8 @@ import StarlinkInfo from "./StarlinkInfo/StarlinkInfo";
 import styles from "./Starlink.module.scss";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
-//MODELS
-import IGlobePoint from "../../Models/IGlobePoint";
+//TYPES
+import { GlobePoint } from "../../Types";
 
 const Starlink = (props) => {
   const { onFetchStarlink, starlinks } = props;
@@ -34,7 +34,7 @@ const Starlink = (props) => {
     setShowStarlinkInfo(false);
   };
 
-  const gData: IGlobePoint[] = [];
+  const gData: GlobePoint[] = [];
 
   starlinks.docs.forEach((starlink) => {
     const TLE0 = starlink?.spaceTrack.TLE_LINE0.substring(
@@ -101,7 +101,10 @@ const Starlink = (props) => {
         <h3>
           <b>Starlink</b> is a satellite internet constellation being
           constructed by{" "}
-          <a target="_blank" rel="noopener noreferrer" href="www.spacex.com">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.spacex.com/">
             SpaceX
           </a>{" "}
           providing satellite Internet access.

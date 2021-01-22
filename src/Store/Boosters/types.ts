@@ -1,8 +1,7 @@
-import IBooster from "../../Models/IBooster";
-import IQueryResult from "../../Models/IQueryResult";
+import { Booster, QueryResult } from "../../Types";
 
 export interface BoosterState {
-  boosters: IQueryResult<IBooster>;
+  boosters: QueryResult<Booster>;
   loading: boolean;
 }
 
@@ -16,7 +15,7 @@ interface FetchBoosterStartAction {
 
 interface FetchBoosterSuccessAction {
   type: typeof FETCH_BOOSTERS_SUCCESS;
-  payload: IQueryResult<IBooster>;
+  payload: QueryResult<Booster>;
 }
 
 interface FetchBoosterFailAction {

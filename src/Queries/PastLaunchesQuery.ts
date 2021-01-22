@@ -1,10 +1,11 @@
-const PastLaunchesQuery = {
+export const PastLaunchesQuery = {
   query: {
     upcoming: false,
   },
   options: {
-    page: 1,
-    limit: 10,
+    // page: 1,
+    // limit: 10,
+    pagination: false,
     select: {
       name: 1,
       date_local: 1,
@@ -37,8 +38,12 @@ const PastLaunchesQuery = {
           nationalities: 1,
         },
       },
+      {
+        path: "cores",
+        select: {
+          reused: 1,
+        },
+      },
     ],
   },
 };
-
-export default PastLaunchesQuery;

@@ -1,30 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 //COMPONENTS
 import Button from "../../Shared/Button/Button";
 import LaunchShortInfo from "../../Shared/LaunchShortInfo/LaunchShortInfo";
 import LaunchShortInfoSkeleton from "../../Shared/Skeletons/LaunchShortInfoSkeleton";
-import Spinner from "../../Shared/Spinner/Spinner";
+import NotFoundLaunches from "../../Shared/NotFoundLaunches/NotFoundLaunches";
 
 //STYLES
 import styles from "./PastLaunches.module.scss";
-
-//REDUX
-import { fetchPastLaunches } from "../../../Store/PastLaunches/actions";
-import { connect } from "react-redux";
-import { motion } from "framer-motion";
 import { showLaunchesList } from "../../../Animations/Animations_motion";
 
-const PastLaunches = (props) => {
-  const { onFetchPastLaunches } = props;
+//TYPES
+import { Launch } from "../../../Types";
 
-  const FetchPastLaunches = () => {
-    onFetchPastLaunches(props.pastLaunches.nextPage);
-  };
-
-  useEffect(() => {
-    onFetchPastLaunches(1);
-  }, [onFetchPastLaunches]);
+const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
+  const [numberOfLaunches, setNumberOfLaunches] = useState(5);
 
   let pastLaunchesArr = (
     <motion.div
@@ -39,7 +30,7 @@ const PastLaunches = (props) => {
     </motion.div>
   );
 
-  if (props.pastLaunches.docs.length > 0) {
+  if (!loading) {
     pastLaunchesArr = (
       <motion.div
         variants={showLaunchesList}
@@ -47,7 +38,7 @@ const PastLaunches = (props) => {
         animate="in"
         exit="out"
         className={styles.LaunchesWrapper}>
-        {props.pastLaunches.docs.map((launch, index) => (
+        {launches.slice(0, numberOfLaunches).map((launch, index) => (
           <LaunchShortInfo
             key={index}
             launchName={launch.name}
@@ -60,7 +51,7 @@ const PastLaunches = (props) => {
             nationality={launch.payloads[0].nationalities[0]}
           />
         ))}
-        {props.pastLaunches.nextPage ? (
+        {launches.length >= numberOfLaunches && (
           <div
             style={{
               marginTop: "2rem",
@@ -68,32 +59,36 @@ const PastLaunches = (props) => {
               display: "flex",
               justifyContent: "center",
             }}>
-            {props.loadingPastLaunches ? <Spinner /> : null}
             <Button
-              disabled={props.loadingPastLaunches}
+              disabled={loading}
               name="LOAD MORE"
-              clicked={FetchPastLaunches}
+              styleType="primary"
+              clicked={() => setNumberOfLaunches(numberOfLaunches + 5)}
             />
           </div>
-        ) : null}
+        )}
       </motion.div>
     );
   }
 
+  if (launches.length === 0)
+    pastLaunchesArr = (
+      <motion.div
+        variants={showLaunchesList}
+        initial="initial"
+        animate="in"
+        exit="out"
+        className={styles.LaunchesWrapper}>
+        <NotFoundLaunches />
+      </motion.div>
+    );
+
   return <>{pastLaunchesArr}</>;
 };
 
-const mapStateToProps = (state) => {
-  return {
-    pastLaunches: state.pastLaunches.pastLaunches,
-    loadingPastLaunches: state.pastLaunches.loading,
-  };
+type pastLaunchesProps = {
+  launches: Launch[];
+  loading: boolean;
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onFetchPastLaunches: (page: number) => dispatch(fetchPastLaunches(page)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(PastLaunches);
+export default PastLaunches;

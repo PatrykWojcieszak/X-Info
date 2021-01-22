@@ -1,8 +1,9 @@
 import axios from "axios";
 import { checkCacheValid } from "redux-cache";
-import ILaunch from "../../Models/ILaunch";
-import IQueryResult from "../../Models/IQueryResult";
-import PastLaunchesQuery from "../../Queries/PastLaunchesQuery";
+import { Launch, QueryResult } from "../../Types";
+
+import { PastLaunchesQuery } from "../../Queries";
+
 import {
   FETCH_PAST_LAUNCHES_START,
   FETCH_PAST_LAUNCHES_SUCCESS,
@@ -17,7 +18,7 @@ export function fetchPastLaunchesStart(): PastLaunchesTypes {
 }
 
 export function fetchPastLaunchesSuccess(
-  newPastLaunches: IQueryResult<ILaunch>
+  newPastLaunches: QueryResult<Launch>
 ): PastLaunchesTypes {
   return {
     type: FETCH_PAST_LAUNCHES_SUCCESS,
@@ -32,20 +33,18 @@ export function fetchPastLaunchesFail(error: string): PastLaunchesTypes {
   };
 }
 
-export const fetchPastLaunches = (page: number) => (dispatch, getState) => {
+export const fetchPastLaunches = () => (dispatch, getState) => {
   const isCacheValid = checkCacheValid(getState, "pastLaunches");
-  if (isCacheValid && page === 1) {
+  if (isCacheValid) {
     return null;
   }
 
   dispatch(fetchPastLaunchesStart());
-  const query = PastLaunchesQuery;
-  query.options.page = page;
 
   axios
-    .post<IQueryResult<ILaunch>>(
+    .post<QueryResult<Launch>>(
       "https://api.spacexdata.com/v4/launches/query",
-      query
+      PastLaunchesQuery
     )
     .then((res) => {
       dispatch(fetchPastLaunchesSuccess(res.data));

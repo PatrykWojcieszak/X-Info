@@ -1,8 +1,6 @@
-import ILaunch from "../../Models/ILaunch";
-import IQueryResult from "../../Models/IQueryResult";
-
+import { Launch, QueryResult } from "../../Types";
 export interface PastLaunchesState {
-  pastLaunches: IQueryResult<ILaunch>;
+  pastLaunches: QueryResult<Launch>;
   loading: boolean;
 }
 
@@ -16,7 +14,7 @@ interface FetchPastLaunchesStartAction {
 
 interface FetchPastLaunchesSuccessAction {
   type: typeof FETCH_PAST_LAUNCHES_SUCCESS;
-  payload: IQueryResult<ILaunch>;
+  payload: QueryResult<Launch>;
 }
 
 interface FetchPastLaunchesFailAction {

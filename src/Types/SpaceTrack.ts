@@ -1,4 +1,4 @@
-interface ISpaceTrack {
+export interface SpaceTrack {
   CCSDS_OMM_VERS: string;
   COMMENT: string;
   CREATION_DATE: string;
@@ -41,5 +41,3 @@ interface ISpaceTrack {
   TLE_LINE1: string;
   TLE_LINE2: string;
 }
-
-export default ISpaceTrack;

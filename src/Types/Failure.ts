@@ -1,7 +1,5 @@
-interface IFailure {
+export interface Failure {
   time: number;
   altitude: number;
   reason: string;
 }
-
-export default IFailure;

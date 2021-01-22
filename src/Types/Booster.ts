@@ -1,6 +1,6 @@
-import ILaunch from "./ILaunch";
+import { Launch } from "./Launch";
 
-interface IBooster {
+export interface Booster {
   serial: string;
   block: number;
   status: string;
@@ -10,7 +10,5 @@ interface IBooster {
   asds_attempts: number;
   asds_landings: number;
   last_update: string;
-  launches: ILaunch[];
+  launches: Launch[];
 }
-
-export default IBooster;

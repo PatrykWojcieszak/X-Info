@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 
-//MODELS
-import IGlobePoint from "../../../Models/IGlobePoint";
+//TYPES
+import { GlobePoint } from "../../../Types";
 
 //STYLES
 import styles from "./StarlinkInfo.module.scss";
@@ -53,7 +53,7 @@ const StarlinkInfo = ({ starlink, close }: starlinkProps) => {
 };
 
 type starlinkProps = {
-  starlink: IGlobePoint;
+  starlink: GlobePoint;
   close: () => void;
 };
 

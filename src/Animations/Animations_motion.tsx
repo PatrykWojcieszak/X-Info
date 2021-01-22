@@ -13,6 +13,21 @@ export const pageVariantsAnim = {
   },
 };
 
+export const modalAnim = {
+  initial: {
+    opacity: 0,
+  },
+  in: {
+    transition: { duration: 0.5, ease: "easeOut" },
+    opacity: 1,
+    staggerChildren: 1,
+  },
+  out: {
+    opacity: 0,
+    transition: { duration: 0.25, ease: "easeOut" },
+  },
+};
+
 export const bottomToTopAnim = {
   hidden: {
     opacity: 0,

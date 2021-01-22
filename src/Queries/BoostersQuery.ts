@@ -1,4 +1,4 @@
-const BoostersQuery = {
+export const BoostersQuery = {
   query: {},
   options: {
     limit: 10,
@@ -25,5 +25,3 @@ const BoostersQuery = {
     ],
   },
 };
-
-export default BoostersQuery;

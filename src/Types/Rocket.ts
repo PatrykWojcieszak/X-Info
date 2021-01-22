@@ -1,6 +1,13 @@
-import IPayloadWeights from "./IPayloadWeights";
+import { PayloadWeights } from "./PayloadWeights";
 
-interface IRocket {
+export const enum RocketType {
+  f1 = "5e9d0d95eda69955f709d1eb",
+  f9 = "5e9d0d95eda69973a809d1ec",
+  fh = "5e9d0d95eda69974db09d1ed",
+  starship = "5e9d0d96eda699382d09d1ee",
+}
+
+export interface Rocket {
   id: string;
   name: string;
   type: string;
@@ -24,7 +31,7 @@ interface IRocket {
     kg: number;
     lb: number;
   };
-  payload_weights: IPayloadWeights[];
+  payload_weights: PayloadWeights[];
   first_stage: {
     reusable: boolean;
     engines: number;
@@ -92,5 +99,3 @@ interface IRocket {
   wikipedia: string;
   description: string;
 }
-
-export default IRocket;

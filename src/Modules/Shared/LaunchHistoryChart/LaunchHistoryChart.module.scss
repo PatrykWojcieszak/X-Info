@@ -1,0 +1,36 @@
+@import "../../../resources/styles/index.scss";
+
+.ChartContainer {
+  width: 100%;
+  margin-bottom: 3rem;
+
+  .Top {
+    margin-bottom: 2rem;
+
+    h2 {
+      color: $fontPrimary;
+      font-weight: 100;
+      font-size: 2.5rem;
+    }
+  }
+}
+
+@include tablet {
+  .ChartContainer {
+    .Top {
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+@include mobile {
+  .ChartContainer {
+    .Top {
+      h2 {
+        font-size: 1.1rem;
+      }
+    }
+  }
+}

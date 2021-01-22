@@ -69,6 +69,7 @@ const Boosters = (props) => {
             <Button
               disabled={props.loadingBoosters}
               name="LOAD MORE"
+              styleType="primary"
               clicked={FetchBoosters}
             />
           </div>

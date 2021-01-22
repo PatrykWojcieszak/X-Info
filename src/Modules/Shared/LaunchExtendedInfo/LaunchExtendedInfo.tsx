@@ -8,8 +8,8 @@ import Button from "../Button/Button";
 import styles from "./LaunchExtendedInfo.module.scss";
 import noImage from "../../../resources/images/noImage.png";
 
-//MODELS
-import IFailure from "../../../Models/IFailure";
+//TYPES
+import { Failure } from "../../../Types";
 
 const LaunchExtendedInfo = ({
   showMoreDetailsButton,
@@ -43,7 +43,9 @@ const LaunchExtendedInfo = ({
       <div className={styles.LatestLaunch}>
         <div className={styles.LeftContainer}>
           <img src={patchImg ? patchImg : noImage} alt="mission patch" />
-          {showMoreDetailsButton ? <Button name="MORE DETAILS" /> : null}
+          {showMoreDetailsButton && (
+            <Button styleType="primary" name="MORE DETAILS" />
+          )}
         </div>
         <div className={styles.RightContainer}>
           <div className={styles.MainInfoContainer}>
@@ -55,15 +57,17 @@ const LaunchExtendedInfo = ({
                 <h4>LAUNCH SITE:</h4>
                 <h4>ROCKET:</h4>
                 <h4>DATE:</h4>
-                <h4>LAUNCH:</h4>
+                {success !== null && <h4>LAUNCH:</h4>}
               </div>
               <div className={styles.ValuesContainer}>
                 <h4>{launchSiteName}</h4>
                 <h4>{rocketName}</h4>
                 <h4>{dateParsed.toDateString()}</h4>
-                <h4 style={{ color: success ? "#4BB543" : "#FA113D" }}>
-                  {launch}
-                </h4>
+                {success !== null && (
+                  <h4 style={{ color: success ? "#4BB543" : "#FA113D" }}>
+                    {launch}
+                  </h4>
+                )}
               </div>
             </div>
           </div>
@@ -94,7 +98,7 @@ type LaunchExtendedInfoProps = {
   flightNumber: Number;
   patchImg: string;
   success: boolean;
-  failures: IFailure[];
+  failures: Failure[];
   launchId: string;
   date_precision: string;
 };

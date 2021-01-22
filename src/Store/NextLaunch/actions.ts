@@ -1,8 +1,9 @@
 import axios from "axios";
 import { checkCacheValid } from "redux-cache";
-import ILaunch from "../../Models/ILaunch";
-import IQueryResult from "../../Models/IQueryResult";
-import NextLaunchQuery from "../../Queries/NextLaunchQuery";
+import { Launch, QueryResult } from "../../Types";
+
+import { NextLaunchQuery } from "../../Queries";
+
 import {
   FETCH_NEXT_LAUNCH_START,
   FETCH_NEXT_LAUNCH_SUCCESS,
@@ -17,7 +18,7 @@ export function fetchNextLaunchStart(): NextLaunchTypes {
 }
 
 export function fetchNextLaunchSuccess(
-  newNextLaunch: IQueryResult<ILaunch>
+  newNextLaunch: QueryResult<Launch>
 ): NextLaunchTypes {
   return {
     type: FETCH_NEXT_LAUNCH_SUCCESS,
@@ -41,7 +42,7 @@ export const fetchNextLaunch = () => (dispatch, getState) => {
   dispatch(fetchNextLaunchStart());
 
   axios
-    .post<IQueryResult<ILaunch>>(
+    .post<QueryResult<Launch>>(
       "https://api.spacexdata.com/v4/launches/query",
       NextLaunchQuery
     )

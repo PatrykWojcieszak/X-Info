@@ -1,4 +1,4 @@
-const LatestLaunchQuery = {
+export const LatestLaunchQuery = {
   query: {
     upcoming: false,
   },
@@ -35,5 +35,3 @@ const LatestLaunchQuery = {
     ],
   },
 };
-
-export default LatestLaunchQuery;
