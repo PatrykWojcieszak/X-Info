@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //COMPONENTS
 import Backdrop from "../Backdrop/Backdrop";
@@ -18,6 +19,11 @@ const Modal = ({ closeModal, show, children }: modalProps) => {
         exit="out"
         variants={modalAnim}
         className={styles.Content}>
+        <FontAwesomeIcon
+          icon="times"
+          className={styles.CloseBtn}
+          onClick={closeModal}
+        />
         {children}
       </motion.div>
     </>
