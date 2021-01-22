@@ -23,6 +23,7 @@ import LaunchExtendedInfoSkeleton from "../Shared/Skeletons/LaunchExtendedInfoSk
 //REDUX
 import { fetchLatestLaunch } from "../../Store/LatestLaunch/actions";
 import { fetchPastLaunches } from "../../Store/PastLaunches/actions";
+import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/actions";
 import { connect } from "react-redux";
 
 //TYPES
@@ -113,9 +114,39 @@ const filterLaunchSite = [
   },
   {
     id: 1,
-    title: "Canaveral",
+    title: "VAFB SLC 3W",
     selected: false,
-    key: "launchSite",
+    key: "5e9e4501f5090910d4566f83",
+  },
+  {
+    id: 2,
+    title: "CCSFS SLC 40",
+    selected: false,
+    key: "5e9e4501f509094ba4566f84",
+  },
+  {
+    id: 3,
+    title: "STLS",
+    selected: false,
+    key: "5e9e4502f5090927f8566f85",
+  },
+  {
+    id: 4,
+    title: "Kwajalein Atoll",
+    selected: false,
+    key: "5e9e4502f5090995de566f86",
+  },
+  {
+    id: 5,
+    title: "VAFB SLC 4E",
+    selected: false,
+    key: "5e9e4502f509092b78566f87",
+  },
+  {
+    id: 6,
+    title: "KSC LC 39A",
+    selected: false,
+    key: "5e9e4502f509094188566f88",
   },
 ];
 
@@ -130,13 +161,13 @@ const filterStatus = [
     id: 1,
     title: "Success",
     selected: false,
-    key: "status",
+    key: "true",
   },
   {
     id: 2,
     title: "Failure",
     selected: false,
-    key: "status",
+    key: "false",
   },
 ];
 
@@ -155,16 +186,14 @@ const Launches = (props) => {
   );
 
   const { launchType } = useParams();
-  const { onFetchLatestLaunch, onFetchPastLaunches } = props;
+  const {
+    onFetchLatestLaunch,
+    onFetchPastLaunches,
+    onFetchUpcomingLaunches,
+  } = props;
 
   const filter = (arr: QueryResult<Launch>): Launch[] => {
     let temp = { ...arr };
-
-    if (rocketTypeFilter[0].selected) return temp.docs;
-
-    temp.docs = temp.docs.filter(
-      (x) => x.rocket.name === rocketTypeFilter.find((t) => t.selected)?.title
-    );
 
     temp.docs = temp.docs.filter(
       (x) =>
@@ -172,17 +201,41 @@ const Launches = (props) => {
         new Date(x.date_utc) <= dateToFilter
     );
 
+    if (!rocketTypeFilter[0].selected)
+      temp.docs = temp.docs.filter(
+        (x) => x.rocket.name === rocketTypeFilter.find((t) => t.selected)?.title
+      );
+
+    if (!launchStatusFilter[0].selected) {
+      temp.docs = temp.docs.filter(
+        (x) =>
+          String(x.success) === launchStatusFilter.find((t) => t.selected)?.key
+      );
+    }
+
+    if (!launchSiteFilter[0].selected) {
+      temp.docs = temp.docs.filter(
+        (x) => x.launchpad.id === launchSiteFilter.find((t) => t.selected)?.key
+      );
+    }
+
     return temp.docs;
   };
 
   useEffect(() => {
     onFetchLatestLaunch();
     onFetchPastLaunches();
+    onFetchUpcomingLaunches();
 
     if (launchType === "past") {
       setLaunchTypeFilter(launchesFilterPast);
     }
-  }, [onFetchLatestLaunch, launchType, onFetchPastLaunches]);
+  }, [
+    onFetchLatestLaunch,
+    launchType,
+    onFetchPastLaunches,
+    onFetchUpcomingLaunches,
+  ]);
 
   const toggleLaunchTypeHandler = (isOpen: boolean) => {
     setIsLaunchesTypeDDOpen(isOpen);
@@ -280,7 +333,12 @@ const Launches = (props) => {
         </AnimatePresence>
 
         <AnimatePresence>
-          {launchTypeFilter[0].selected && <UpcomingLaunches />}
+          {launchTypeFilter[0].selected && (
+            <UpcomingLaunches
+              launches={filter(props.upcomingLaunches)}
+              loading={props.loadingUpcomingLaunches}
+            />
+          )}
         </AnimatePresence>
 
         <AnimatePresence>
@@ -308,6 +366,8 @@ const mapStateToProps = (state) => {
     loadingLatestLaunch: state.latestLaunch.loading,
     pastLaunches: state.pastLaunches.pastLaunches,
     loadingPastLaunches: state.pastLaunches.loading,
+    upcomingLaunches: state.upcomingLaunches.upcomingLaunches,
+    loadingUpcomingLaunches: state.upcomingLaunches.loading,
   };
 };
 
@@ -315,6 +375,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onFetchLatestLaunch: () => dispatch(fetchLatestLaunch()),
     onFetchPastLaunches: () => dispatch(fetchPastLaunches()),
+    onFetchUpcomingLaunches: () => dispatch(fetchUpcomingLaunches()),
   };
 };
 

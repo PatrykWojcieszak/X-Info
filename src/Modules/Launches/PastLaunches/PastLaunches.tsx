@@ -9,6 +9,9 @@ import LaunchShortInfoSkeleton from "../../Shared/Skeletons/LaunchShortInfoSkele
 //STYLES
 import styles from "./PastLaunches.module.scss";
 import { showLaunchesList } from "../../../Animations/Animations_motion";
+import sadRocket from "../../../resources/images/sadRocket.png";
+
+//OTHER
 import { Launch } from "../../../Types";
 
 const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
@@ -27,7 +30,7 @@ const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
     </motion.div>
   );
 
-  if (launches.length > 0) {
+  if (!loading) {
     pastLaunchesArr = (
       <motion.div
         variants={showLaunchesList}
@@ -67,6 +70,21 @@ const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
       </motion.div>
     );
   }
+
+  if (launches.length === 0)
+    pastLaunchesArr = (
+      <motion.div
+        variants={showLaunchesList}
+        initial="initial"
+        animate="in"
+        exit="out"
+        className={styles.LaunchesWrapper}>
+        <div className={styles.NotFound}>
+          <img src={sadRocket} alt="sad rocket" />
+          <h2>There is no launches!</h2>
+        </div>
+      </motion.div>
+    );
 
   return <>{pastLaunchesArr}</>;
 };

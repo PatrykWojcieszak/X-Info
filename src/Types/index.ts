@@ -5,7 +5,7 @@ export type { Failure } from "./Failure";
 export type { GlobePoint } from "./GlobePoint";
 export type { Landpad } from "./Landpad";
 export type { Launch } from "./Launch";
-export type { Launchpad } from "./Launchpad";
+export type { Launchpad, Launchpads } from "./Launchpad";
 export type { Payload } from "./Payload";
 export type { PayloadWeights } from "./PayloadWeights";
 export type { QueryResult } from "./QueryResult";
