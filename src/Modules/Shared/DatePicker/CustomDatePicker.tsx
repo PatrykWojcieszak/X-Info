@@ -15,6 +15,7 @@ const CustomDatePicker = ({ date, dateChanged }: datePickerProps) => {
   return (
     <DatePicker
       selected={date}
+      dateFormat="dd/MM/yyyy"
       onChange={(date) => validation(date)}
       className={styles.DatePicker}
     />
