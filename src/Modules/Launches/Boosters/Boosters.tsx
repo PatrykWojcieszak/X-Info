@@ -70,7 +70,8 @@ const Boosters = (props) => {
             {props.loadingBoosters && <Spinner />}
             <Button
               disabled={props.loadingBoosters}
-              name={t("loadMore")}
+              name="LOAD MORE"
+              styleType="primary"
               clicked={FetchBoosters}
             />
           </div>

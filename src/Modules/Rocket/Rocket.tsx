@@ -140,7 +140,7 @@ const Rocket = (props) => {
           <InfoLine
             key={index}
             title={payload.id}
-            value={`${payload.kg} kg | ${payload.lb} lb}`}
+            value={`${payload.kg} kg | ${payload.lb} lb`}
           />
         ))}
       </motion.div>
@@ -346,16 +346,19 @@ const Rocket = (props) => {
                 <div className={styles.BtnContainer}>
                   <Button
                     name="OVERVIEW"
+                    styleType="primary"
                     clicked={showOverviewHandler}
                     selected={showOverview}
                   />
                   <Button
                     name="STAGE 1"
+                    styleType="primary"
                     clicked={showFirstStageHandler}
                     selected={showFirstStage}
                   />
                   <Button
                     name="STAGE 2"
+                    styleType="primary"
                     clicked={showSecondStageHandler}
                     selected={showSecondStage}
                   />
@@ -364,6 +367,7 @@ const Rocket = (props) => {
                     props.rocket.docs[0].landing_legs.material) ? (
                     <Button
                       name="LANDING LEGS"
+                      styleType="primary"
                       clicked={showLandingLegsHandler}
                       selected={showLandingLegs}
                     />

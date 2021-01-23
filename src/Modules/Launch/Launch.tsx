@@ -205,59 +205,59 @@ const Launch = (props) => {
             <Gallery images={props.launch.docs[0].links.flickr.original} />
           ) : null}
           <div className={styles.MediaContainer}>
-            {props.launch.docs[0]?.links.reddit.campaign ? (
+            {props.launch.docs[0]?.links.reddit.campaign && (
               <MediaLink
                 name="CAMPAIGN"
                 icon="reddit-alien"
                 brand
                 link={props.launch.docs[0]?.links.reddit.campaign}
               />
-            ) : null}
+            )}
 
-            {props.launch.docs[0]?.links.reddit.launch ? (
+            {props.launch.docs[0]?.links.reddit.launch && (
               <MediaLink
                 name="LAUNCH"
                 icon="reddit-alien"
                 brand
                 link={props.launch.docs[0]?.links.reddit.launch}
               />
-            ) : null}
+            )}
 
-            {props.launch.docs[0]?.links.reddit.media ? (
+            {props.launch.docs[0]?.links.reddit.media && (
               <MediaLink
                 name="MEDIA"
                 icon="reddit-alien"
                 brand
                 link={props.launch.docs[0]?.links.reddit.media}
               />
-            ) : null}
+            )}
 
-            {props.launch.docs[0]?.links.wikipedia ? (
+            {props.launch.docs[0]?.links.wikipedia && (
               <MediaLink
                 name="WIKIPEDIA"
                 icon="wikipedia-w"
                 brand
                 link={props.launch.docs[0]?.links.wikipedia}
               />
-            ) : null}
+            )}
 
-            {props.launch.docs[0]?.links.article ? (
+            {props.launch.docs[0]?.links.article && (
               <MediaLink
                 name="ARTICLE"
                 icon="file-alt"
                 brand={false}
                 link={props.launch.docs[0]?.links.article}
               />
-            ) : null}
+            )}
 
-            {props.launch.docs[0]?.links.presskit ? (
+            {props.launch.docs[0]?.links.presskit && (
               <MediaLink
                 name="PRESS KIT"
                 icon="newspaper"
                 brand={false}
                 link={props.launch.docs[0]?.links.presskit}
               />
-            ) : null}
+            )}
           </div>
         </div>
       </>

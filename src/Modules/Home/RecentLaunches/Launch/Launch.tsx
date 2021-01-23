@@ -26,7 +26,7 @@ const Launch = ({ flightNumber, name, patch, date, success }: launchProps) => {
             icon={success ? "check-circle" : "times-circle"}
           />
         </div>
-        <Button name={t("showDetails")} />
+        <Button name="SHOW DETAILS" styleType="primary" />
       </div>
     </Link>
   );

@@ -27,7 +27,7 @@ const RecentLaunches = (props) => {
       <div className={styles.Top}>
         <h2>{t("recentLaunchesTitle")}</h2>
         <Link to="/launches/past">
-          <Button name={t("showMore")} />
+          <Button name="SHOW MORE" styleType="primary" />
         </Link>
       </div>
 

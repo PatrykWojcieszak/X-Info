@@ -101,7 +101,10 @@ const Starlink = (props) => {
         <h3>
           <b>Starlink</b> is a satellite internet constellation being
           constructed by{" "}
-          <a target="_blank" rel="noopener noreferrer" href="www.spacex.com">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.spacex.com/">
             SpaceX
           </a>{" "}
           providing satellite Internet access.

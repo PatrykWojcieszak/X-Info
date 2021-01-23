@@ -1,25 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 //COMPONENTS
 import LaunchShortInfo from "../../Shared/LaunchShortInfo/LaunchShortInfo";
 import LaunchShortInfoSkeleton from "../../Shared/Skeletons/LaunchShortInfoSkeleton";
+import NotFoundLaunches from "../../Shared/NotFoundLaunches/NotFoundLaunches";
 
 //STYLES
 import styles from "./UpcomingLaunches.module.scss";
 import { motion } from "framer-motion";
 import { showLaunchesList } from "../../../Animations/Animations_motion";
 
-//REDUX
-import { fetchUpcomingLaunches } from "../../../Store/UpcomingLaunches/actions";
-import { connect } from "react-redux";
+//TYPES
+import { Launch } from "../../../Types";
 
-const UpcomingLaunches = (props) => {
-  const { onFetchUpcomingLaunches } = props;
-
-  useEffect(() => {
-    onFetchUpcomingLaunches();
-  }, [onFetchUpcomingLaunches]);
-
+const UpcomingLaunches = ({ launches, loading }: upcomingLaunchesProps) => {
   let upcomingLaunchesArr = (
     <motion.div
       variants={showLaunchesList}
@@ -33,7 +27,7 @@ const UpcomingLaunches = (props) => {
     </motion.div>
   );
 
-  if (!props.loadingUpcomingLaunches) {
+  if (!loading) {
     upcomingLaunchesArr = (
       <motion.div
         variants={showLaunchesList}
@@ -41,7 +35,7 @@ const UpcomingLaunches = (props) => {
         animate="in"
         exit="out"
         className={styles.LaunchesWrapper}>
-        {props.upcomingLaunches.docs.map((launch, index) => (
+        {launches.map((launch, index) => (
           <LaunchShortInfo
             key={index}
             launchName={launch?.name}
@@ -57,20 +51,24 @@ const UpcomingLaunches = (props) => {
     );
   }
 
+  if (launches.length === 0)
+    upcomingLaunchesArr = (
+      <motion.div
+        variants={showLaunchesList}
+        initial="initial"
+        animate="in"
+        exit="out"
+        className={styles.LaunchesWrapper}>
+        <NotFoundLaunches />
+      </motion.div>
+    );
+
   return <>{upcomingLaunchesArr}</>;
 };
 
-const mapStateToProps = (state) => {
-  return {
-    upcomingLaunches: state.upcomingLaunches.upcomingLaunches,
-    loadingUpcomingLaunches: state.upcomingLaunches.loading,
-  };
+type upcomingLaunchesProps = {
+  launches: Launch[];
+  loading: boolean;
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onFetchUpcomingLaunches: () => dispatch(fetchUpcomingLaunches()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(UpcomingLaunches);
+export default UpcomingLaunches;

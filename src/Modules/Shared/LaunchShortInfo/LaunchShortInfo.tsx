@@ -35,7 +35,7 @@ const LaunchShortInfo = ({
               <h4>{t("rocket")}: </h4>
               <h3>{rocketName}</h3>
             </div>
-            {success !== undefined ? (
+            {success !== null && success !== undefined ? (
               <div className={styles.Row}>
                 <h4>{t("launch")}: </h4>
                 <h3 style={{ color: success ? "#4BB543" : "#FA113D" }}>
@@ -48,12 +48,14 @@ const LaunchShortInfo = ({
         </div>
         <div className={styles.Content}>
           <div className={styles.Content__Element}>
-            <h4 className={styles.Title}>t('launchSite'): </h4>
-            <h4 className={styles.Title}>t('customer'): </h4>
+            {launchSiteName && <h4 className={styles.Title}>LAUNCH SITE: </h4>}
+            {customer && <h4 className={styles.Title}>CUSTOMER: </h4>}
           </div>
           <div className={styles.Content__Element}>
-            <h4 className={styles.Value}>{launchSiteName}</h4>
-            <h4 className={styles.Value}>{customer}</h4>
+            {launchSiteName && (
+              <h4 className={styles.Value}>{launchSiteName}</h4>
+            )}
+            {customer && <h4 className={styles.Value}>{customer}</h4>}
           </div>
         </div>
         <img
