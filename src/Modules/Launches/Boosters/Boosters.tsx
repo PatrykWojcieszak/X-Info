@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import BoosterLaunchesInfo from "../../Shared/BoosterLaunchesInfo/BoosterLaunchesInfo";
@@ -16,6 +17,7 @@ import { fetchBoosters } from "../../../Store/Boosters/actions";
 import { connect } from "react-redux";
 
 const Boosters = (props) => {
+  const { t } = useTranslation();
   const { onFetchBoosters } = props;
 
   useEffect(() => {

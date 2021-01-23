@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import LaunchExtendedInfo from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo";
@@ -135,7 +136,7 @@ const Launches = (props) => {
       variants={pageVariantsAnim}
       className={styles.Launches}>
       <div className={styles.Latest}>
-        <h2>LATEST LAUNCH</h2>
+        <h2>{t("latestLaunchTitle")}</h2>
         {props.loadingLatestLaunch ? (
           <LaunchExtendedInfoSkeleton />
         ) : (

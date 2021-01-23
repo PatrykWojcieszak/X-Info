@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import configureStore from "./Store/configureStore";
 import "./fontawesome/fontawesome";
 import { useScrollToTop as ScrollToTOp } from "./Hooks/index";
+import "./i18n";
 
 const store = configureStore();
 

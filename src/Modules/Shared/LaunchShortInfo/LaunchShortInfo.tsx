@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 //STYLES
 import styles from "./LaunchShortInfo.module.scss";
@@ -17,6 +18,7 @@ const LaunchShortInfo = ({
   success,
   nationality,
 }: launchShortInfoProps) => {
+  const { t } = useTranslation();
   const countryCode = getCountryCode(nationality);
   const dateParsed = new Date(launchDateUtc);
 
@@ -30,14 +32,14 @@ const LaunchShortInfo = ({
           </div>
           <div className={styles.Column}>
             <div className={styles.Row}>
-              <h4>ROCKET: </h4>
+              <h4>{t("rocket")}: </h4>
               <h3>{rocketName}</h3>
             </div>
             {success !== null && success !== undefined ? (
               <div className={styles.Row}>
-                <h4>LAUNCH: </h4>
+                <h4>{t("launch")}: </h4>
                 <h3 style={{ color: success ? "#4BB543" : "#FA113D" }}>
-                  {success ? "SUCCESSFUL" : "FAILURE"}
+                  {success ? t("launchSuccessful") : t("launchFailure")}
                 </h3>
               </div>
             ) : null}

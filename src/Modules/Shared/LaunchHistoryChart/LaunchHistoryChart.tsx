@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import last from "lodash/last";
 import range from "lodash/range";
 import { Bar } from "react-chartjs-2";
+import { useTranslation } from "react-i18next";
 
 //STYLES
 import styles from "./LaunchHistoryChart.module.scss";
@@ -15,6 +16,7 @@ import { fetchUpcomingLaunches } from "../../../Store/UpcomingLaunches/actions";
 import { getYear } from "../../../Utility/Utility";
 
 const LaunchHistoryChart = (props) => {
+  const { t } = useTranslation();
   const { onFetchUpcomingLaunches, onFetchPastLaunches } = props;
 
   useEffect(() => {
@@ -96,7 +98,7 @@ const LaunchHistoryChart = (props) => {
           ),
         },
         {
-          label: "Failure",
+          label: t("failure"),
           backgroundColor: "rgb(255, 0, 0)",
           data: years.map(
             (year) =>
@@ -109,7 +111,7 @@ const LaunchHistoryChart = (props) => {
           ),
         },
         {
-          label: "Planned",
+          label: t("planned"),
           backgroundColor: "rgb(255, 255, 255)",
           data: years.map(
             (year) =>
@@ -166,7 +168,7 @@ const LaunchHistoryChart = (props) => {
   return (
     <div className={styles.ChartContainer}>
       <div className={styles.Top}>
-        <h2>LAUNCH HISTORY</h2>
+        <h2>{t("launchHistoryTitle")}</h2>
       </div>
       <Bar data={data} options={options} />
     </div>

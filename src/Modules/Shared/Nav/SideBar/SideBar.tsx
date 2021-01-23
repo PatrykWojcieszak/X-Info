@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import NavElement from "../NavElement/NavElement";
@@ -12,8 +13,6 @@ import { useClickOutside } from "../../../../Hooks";
 
 //STYLES
 import styles from "./SideBar.module.scss";
-
-//ANIM
 import { sideBarAnim } from "../../../../Animations/Animations_motion";
 
 const SideBar = () => {
@@ -49,14 +48,23 @@ const SideBar = () => {
         variants={sideBarAnim}
         className={styles.Menu}>
         <MenuToggle toggle={() => toggleOpen(!isOpen)} />
-        <NavElement name="HOME" link="/home" exact={true}></NavElement>
+        <NavElement name={t("homeNav")} link="/home" exact={true}></NavElement>
         <NavElement
-          name="LAUNCHES"
+          name={t("launchesNav")}
           link="/launches/upcoming"
           exact={true}></NavElement>
-        <NavElement name="VEHICLES" link="/vehicles" exact={true}></NavElement>
-        <NavElement name="STARLINK" link="/starlink" exact={true}></NavElement>
-        <NavElement name="ABOUT" link="/about" exact={true}></NavElement>
+        <NavElement
+          name={t("vehiclesNav")}
+          link="/vehicles"
+          exact={true}></NavElement>
+        <NavElement
+          name={t("starlinkNav")}
+          link="/starlink"
+          exact={true}></NavElement>
+        <NavElement
+          name={t("aboutNav")}
+          link="/about"
+          exact={true}></NavElement>
       </motion.div>
     </motion.div>
   );

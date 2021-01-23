@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import Button from "../Button/Button";
@@ -26,15 +27,16 @@ const LaunchExtendedInfo = ({
   launchId,
   date_precision,
 }: LaunchExtendedInfoProps) => {
+  const { t } = useTranslation();
   const dateParsed = new Date(date_utc);
 
-  let launch = success ? "SUCCESSFUL" : "FAILURE";
+  let launch = success ? t("launchSuccessful") : t("launchFailure");
 
   if (
     dateParsed > new Date() ||
     ["quarter", "half", "year", "month"].includes(date_precision)
   )
-    launch = "NOT LAUNCHED YET";
+    launch = t("launchNotLaunchedYet");
 
   return (
     <Link
@@ -73,7 +75,7 @@ const LaunchExtendedInfo = ({
           </div>
           {!success && failures.length > 0 ? (
             <div className={styles.FailureContainer}>
-              <h4>FAILURES:</h4>
+              <h4>{t("failures")}:</h4>
               <ul>
                 {failures.map((failure, index) => (
                   <li key={index}>{failure.reason}</li>
