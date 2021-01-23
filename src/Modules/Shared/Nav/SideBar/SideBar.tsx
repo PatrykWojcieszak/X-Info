@@ -7,8 +7,8 @@ import NavElement from "../NavElement/NavElement";
 import { MenuToggle } from "./MenuToggle/MenuToggle";
 
 //HOOKS
-import { useDimensions } from "../../../../Hooks/useDimmensions";
-import { useClickOutside } from "../../../../Hooks/useClickOutside";
+import { useDimensions } from "../../../../Hooks";
+import { useClickOutside } from "../../../../Hooks";
 
 //STYLES
 import styles from "./SideBar.module.scss";
@@ -17,7 +17,6 @@ import styles from "./SideBar.module.scss";
 import { sideBarAnim } from "../../../../Animations/Animations_motion";
 
 const SideBar = () => {
-  // const [isOpen, toggleOpen] = useCycle(false, true);
   const [isOpen, toggleOpen] = useState(false);
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
