@@ -93,7 +93,9 @@ const NextLaunch = (props) => {
             exit="exit"
             className={styles.Top__Content}>
             <div className={styles.LaunchTitle}>
-              <h2>{isAfterLaunch() ? "CURRENT LAUNCH" : "NEXT LAUNCH"}: </h2>
+              <h2>
+                {isAfterLaunch() ? t("currentLaunch") : t("nextLaunchTitle")}:{" "}
+              </h2>
               <h2 className={styles.LaunchName}>
                 {nextLaunchData.docs[0].name}
               </h2>

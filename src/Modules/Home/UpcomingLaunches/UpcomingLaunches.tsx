@@ -49,7 +49,7 @@ const UpcomingLaunches = (props) => {
       </div>
       <div className={styles.ButtonWrapper}>
         <Link to="/launches/upcoming">
-          <Button name="SHOW ALL" styleType="primary" />
+          <Button name={t("showAll")} styleType="primary" />
         </Link>
       </div>
     </div>

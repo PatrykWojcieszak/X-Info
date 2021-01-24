@@ -52,6 +52,8 @@ const Launches = (props) => {
     new Date(new Date().setFullYear(new Date().getFullYear() + 1))
   );
 
+  const { t } = useTranslation();
+
   const { launchType } = useParams();
   const {
     onFetchLatestLaunch,

@@ -27,10 +27,9 @@ const RecentLaunches = (props) => {
       <div className={styles.Top}>
         <h2>{t("recentLaunchesTitle")}</h2>
         <Link to="/launches/past">
-          <Button name="SHOW MORE" styleType="primary" />
+          <Button name={t("showMore")} styleType="primary" />
         </Link>
       </div>
-
       <div className={styles.Content}>
         {props.loadingRecentLaunches
           ? [1, 2, 3, 4, 5].map((n) => <RecentLaunchSkeleton key={n} />)
