@@ -7,7 +7,7 @@ import styles from "./Footer.module.scss";
 import { useClickOutside } from "../../../Hooks/useClickOutside";
 
 const Footer = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   const [selectedLang, setSelectedLang] = useState(i18n.language);
   const [showLngSelector, setShowLngSelector] = useState(false);
@@ -28,7 +28,7 @@ const Footer = () => {
   return (
     <div className={styles.Footer}>
       <h3>
-        Created by:{" "}
+        {t("createdBy")}:{" "}
         <a
           href="https://github.com/PatrykWojcieszak"
           target="_blank"
@@ -36,7 +36,7 @@ const Footer = () => {
           {" "}
           Patryk Wojcieszak
         </a>{" "}
-        using{" "}
+        {t("using")}{" "}
         <a
           href="https://github.com/r-spacex/SpaceX-API"
           target="_blank"

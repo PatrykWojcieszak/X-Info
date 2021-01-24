@@ -57,7 +57,7 @@ const LaunchHistoryChart = (props) => {
           ),
         },
         {
-          label: "New Falcon 9",
+          label: t("new") + " Falcon 9",
           backgroundColor: "rgb(0,102,255)",
           data: years.map(
             (year) =>
@@ -71,7 +71,7 @@ const LaunchHistoryChart = (props) => {
           ),
         },
         {
-          label: "Used Falcon 9",
+          label: t("used") + " Falcon 9",
           backgroundColor: "rgb(68,149,208)",
           data: years.map(
             (year) =>

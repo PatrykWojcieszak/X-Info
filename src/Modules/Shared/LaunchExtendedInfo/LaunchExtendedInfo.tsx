@@ -46,7 +46,7 @@ const LaunchExtendedInfo = ({
         <div className={styles.LeftContainer}>
           <img src={patchImg ? patchImg : noImage} alt="mission patch" />
           {showMoreDetailsButton && (
-            <Button styleType="primary" name="MORE DETAILS" />
+            <Button styleType="primary" name={t("moreDetails")} />
           )}
         </div>
         <div className={styles.RightContainer}>
@@ -56,15 +56,15 @@ const LaunchExtendedInfo = ({
             <h4 className={styles.LaunchNumber}>#{flightNumber}</h4>
             <div className={styles.DetailsWrapper}>
               <div className={styles.TitlesContainer}>
-                <h4>LAUNCH SITE:</h4>
-                <h4>ROCKET:</h4>
-                <h4>DATE:</h4>
-                {success !== null && <h4>LAUNCH:</h4>}
+                {launchSiteName && <h4>{t("launchSite")}:</h4>}
+                {rocketName && <h4>{t("rocket")}:</h4>}
+                {dateParsed && <h4>{t("date")}:</h4>}
+                {success !== null && <h4>{t("launch")}:</h4>}
               </div>
               <div className={styles.ValuesContainer}>
-                <h4>{launchSiteName}</h4>
-                <h4>{rocketName}</h4>
-                <h4>{dateParsed.toDateString()}</h4>
+                {launchSiteName && <h4>{launchSiteName}</h4>}
+                {rocketName && <h4>{rocketName}</h4>}
+                {dateParsed && <h4>{dateParsed.toDateString()}</h4>}
                 {success !== null && (
                   <h4 style={{ color: success ? "#4BB543" : "#FA113D" }}>
                     {launch}

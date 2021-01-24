@@ -48,7 +48,9 @@
   "customer": "CUSTOMER",
   "moreDetails": "MORE DETAILS",
 
-
+  "dateFrom": "DATE FROM",
+  "dateTo": "DATE TO",
+  "clearFilter": "CLEAR FILTER",
   
 
 
@@ -115,6 +117,8 @@
   "starlinkDescriptionPart2": " providing satellite Internet access.",
   "starlinkOnTheOrbit": "Starlinks on the orbit",
   "velocity": "VELOCITY",
+
+  "launchesNotFound": "There is no launches!",
 
   "aboutTitle": "ABOUT",
   "aboutDescription1": "This website is a fun project from SpaceX fan for SpaceX fans. Website provides countdown timer for next launch as well as information about previous, upcoming launches and also information about SpaceX vehicles such as rockets.",
