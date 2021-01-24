@@ -46,14 +46,14 @@ const Rocket = (props) => {
   const [showSecondStage, setShowSecondStage] = useState(false);
   const [showLandingLegs, setShowLandingLegs] = useState(false);
 
-  let rocketStatus = { name: "ACTIVE", color: "#4BB543" };
+  let rocketStatus = { name: t("statusActive"), color: "#4BB543" };
 
   if (!props.rocket.docs[0]?.active)
-    rocketStatus = { name: "INACTIVE", color: "#FA113D" };
+    rocketStatus = { name: t("statusInactive"), color: "#FA113D" };
   if (vehicle === "Falcon 1")
-    rocketStatus = { name: "RETIRED", color: "#005288" };
+    rocketStatus = { name: t("statusRetired"), color: "#005288" };
   if (vehicle === "Starship")
-    rocketStatus = { name: "IN DEVELOPMENT", color: "#005288" };
+    rocketStatus = { name: t("statusInDevelopment"), color: "#005288" };
 
   const showOverviewHandler = () => {
     setShowOverview(true);
@@ -335,8 +335,8 @@ const Rocket = (props) => {
             </div>
             <div className={styles.InfoContainer}>
               <p>{props.rocket.docs[0]?.description}</p>
-              <h3>
-                STATUS:{" "}
+              <h3 style={{ textTransform: "uppercase" }}>
+                {t("status")}:{" "}
                 <span
                   style={{
                     color: rocketStatus.color,

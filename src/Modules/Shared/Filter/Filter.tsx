@@ -76,7 +76,7 @@ const Filter = ({
         />
       </div>
       <div className={styles.OptionWrapper}>
-        <h3>{t("status")}:</h3>
+        <h3 style={{ textTransform: "uppercase" }}>{t("status")}:</h3>
         <Dropdown
           title={statusesFilterList.find((x) => x.selected)?.title}
           list={statusesFilterList}

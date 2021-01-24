@@ -83,7 +83,7 @@
   "statusInDevelopment": "W TRAKCIE PRAC",
   "overview": "OGÓLNE",
   "stage": "STOPIEŃ",
-  "landingLegs": "NÓŻKI DO LĄDOWANIA",
+  "landingLegs": "NOGI DO LĄDOWANIA",
   "height": "WYSOKOŚĆ",
   "diameter": "ŚREDNICA",
   "leo": "LEO",
@@ -105,7 +105,10 @@
   "material": "MATERIAŁ",
   "yes": "TAK",
   "no": "NIE",
-
+  "statusInactive": "NIE UŻYWANY",
+  "all": "Wszystkie",
+  "success": "Sukces",
+  
   "dateFrom": "DATA OD",
   "dateTo": "DATA DO",
   "clearFilter": "WYCZYŚĆ FILTROWANIE",

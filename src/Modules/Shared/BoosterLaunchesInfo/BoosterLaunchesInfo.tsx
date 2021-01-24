@@ -38,7 +38,7 @@ const BoosterLaunchesInfo = ({
         </div>
       </div>
       <div className={styles.MissionsContainer}>
-        <h3 style={{ marginLeft: "1.1rem" }}>Missions</h3>
+        <h3 style={{ marginLeft: "1.1rem" }}>{t("missions")}</h3>
         <div className={styles.MissionListWrapper}>
           {launches.map((launch, index) => (
             <Link key={index} to={`/launch/${launch.flight_number}`}>
