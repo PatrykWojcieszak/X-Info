@@ -128,7 +128,12 @@
   "launchesNotFound": "There is no launches!",
 
   "aboutTitle": "ABOUT",
-  "aboutDescription1": "This website is a fun project from SpaceX fan for SpaceX fans. Website provides countdown timer for next launch as well as information about previous, upcoming launches and also information about SpaceX vehicles such as rockets.",
-  "aboutDescription2": "This website was developed and is maintained by Patryk Wojcieszak. Data for this site is provided by SpaceX-API. If you’re interested in source code and/or contributing to this project, check my github page.",
-  "aboutDescription3": "The creator of this website has no affiliation with SpaceX. The content on the website is for educational purposes only. Photos used on this website are property of SpaceX and can be found on the SpaceX Flickr Page."
+  "aboutDescription1": "This website is a fun project from",
+  "aboutDescription2": "fan for",
+  "aboutDescription3": "fans. Website provides countdown timer for next launch as well as information about previous, upcoming launches and also information about SpaceX vehicles such as rockets.",
+  "aboutDescription4": "This website was developed and is maintained by",
+  "aboutDescription5": ". Data for this site is provided by",
+  "aboutDescription6": " If you’re interested in source code and/or contributing to this project, check my github page.",
+  "aboutDescription7": "The creator of this website has no affiliation with",
+  "aboutDescription8": ". The content on the website is for educational purposes only. Photos used on this website are property of SpaceX and can be found on the"
 }

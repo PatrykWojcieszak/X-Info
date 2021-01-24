@@ -121,7 +121,12 @@
   "launchesNotFound": "Nie znaleziono lotów!",
 
   "aboutTitle": "O STRONIE",
-  "aboutDescription1": "Strona tworzona jest przez fana SpaceX dla fanów SpaceX. Stona zapewnia odliczanie do następnego startu, a także informację na temat przeszłych, przyszłych lotach, a także informacje o pojazdach SpaceX takie jak np. rakiety.",
-  "aboutDescription2": "Strona została stworzona i jest utrzymywana przez Patryka Wojcieszaka. Dane na stronie pobierane są z SpaceX-API. Jeśli interesuje Cię kod źródłowy i/lub chcesz pomóc w tym projekcie, zajrzyj na moje repozytorium GitHub.",
-  "aboutDescription3": "Twórca strony nie jest powiązany ze SpaceX. Zawartość strony służy jedynie celom edukacyjnym. Zdjęcia użyte na stronie są własnością SpaceX i można je znaleźć na stronie SpaceX Flickr "
+  "aboutDescription1": "Strona tworzona jest przez fana",
+  "aboutDescription2": " dla fanów",
+  "aboutDescription3": ". Stona zapewnia odliczanie do następnego startu, a także informację na temat przeszłych, przyszłych lotach, a także informacje o pojazdach SpaceX takie jak np. rakiety.",
+  "aboutDescription4": "Strona została stworzona i jest utrzymywana przez",
+  "aboutDescription5": ". Dane na stronie pobierane są z ",
+  "aboutDescription6": ". Jeśli interesuje Cię kod źródłowy i/lub chcesz pomóc w tym projekcie, zajrzyj na moje repozytorium GitHub.",
+  "aboutDescription7": "Twórca strony nie jest powiązany ze",
+  "aboutDescription8": ". Zawartość strony służy jedynie celom edukacyjnym. Zdjęcia użyte na stronie są własnością SpaceX i można je znaleźć na stronie "
 }

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 //STYLES
 import styles from "./About.module.scss";
@@ -8,6 +9,8 @@ import styles from "./About.module.scss";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 const About = () => {
+  const { t } = useTranslation();
+
   return (
     <motion.div
       initial="initial"
@@ -16,59 +19,55 @@ const About = () => {
       variants={pageVariantsAnim}
       className={styles.About}>
       <div className={styles.InfoContainer}>
-        <h2>ABOUT</h2>
+        <h2>{t("aboutTitle")}</h2>
         <p>
-          This website is a fun project from{" "}
+          {t("aboutDescription1")}{" "}
           <a
             href="https://www.spacex.com/"
             target="_blank"
             rel="noopener noreferrer">
             SpaceX
           </a>{" "}
-          fan for{" "}
+          {t("aboutDescription2")}{" "}
           <a
             href="https://www.spacex.com/"
             target="_blank"
             rel="noopener noreferrer">
             SpaceX
           </a>{" "}
-          fans. Website provides countdown timer for next launch, previous and
-          as well upcoming launches and also information about SpaceX vehicles
-          such as rockets.
+          {t("aboutDescription3")}
         </p>
         <p>
-          This website was developed and is maintained by{" "}
+          {t("aboutDescription4")}{" "}
           <a
             href="https://github.com/PatrykWojcieszak"
             target="_blank"
             rel="noopener noreferrer">
             Patryk Wojcieszak
           </a>
-          . Data for this site is provided by{" "}
+          {t("aboutDescription5")}
           <a
             href="https://github.com/r-spacex/SpaceX-API"
             target="_blank"
             rel="noopener noreferrer">
             SpaceX-API
           </a>
-          . If you’re intrested in source code and/or contributing to this
-          project, check my <span>github page</span>.
+          {t("aboutDescription6")}
         </p>
         <p>
-          The creator of this website has no affiliation with{" "}
+          {t("aboutDescription7")}{" "}
           <a
             href="https://www.spacex.com/"
             target="_blank"
             rel="noopener noreferrer">
             SpaceX
           </a>
-          . The content on the website is for educational purposes only. Photos
-          used on this website are property of SpaceX and can be found on the{" "}
+          {t("aboutDescription8")}{" "}
           <a
             href="https://www.flickr.com/photos/spacex/"
             target="_blank"
             rel="noopener noreferrer">
-            SpaceX Flickr Page
+            SpaceX Flickr
           </a>
           .
         </p>
