@@ -1,5 +1,6 @@
 {
   "nextLaunchTitle": "NEXT LAUNCH:",
+  "currentLaunch": "CURRENT LAUNCH",
   "countdownDays": "DAYS",
   "countdownHours": "HOURS",
   "countdownMinutes": "MINUTES",
@@ -32,6 +33,8 @@
   "pastLaunchesBtn": "PAST LAUNCHES",
   "boostersBtn": "BOOSTERS",
   "loadMore": "LOAD MORE",
+  "latestLaunchTitle": "LATEST LAUNCH",
+  "filter": "FILTER",
   
   "showDetails": "SHOW DETAILS",
   "flight": "FLIGHT",
@@ -44,7 +47,6 @@
   "launchFailure": "FAILURE",
   "customer": "CUSTOMER",
   "moreDetails": "MORE DETAILS",
-  "latestLaunchTitle": "LATEST LAUNCH",
 
 
   

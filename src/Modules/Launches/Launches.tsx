@@ -173,7 +173,7 @@ const Launches = (props) => {
           />
           {!launchTypeFilter[2].selected && (
             <Button
-              name="FILTER"
+              name={t("filter")}
               styleType="primary"
               clicked={() => setShowFilterModal(!showFilterModal)}
             />
