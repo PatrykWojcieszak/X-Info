@@ -82,7 +82,9 @@
   "article": "ARTICLE",
   
   "rockets": "ROCKETS",
-  "rocketsDescription": "Rockets that are shown below were created by SpaceX. Proportions between rockets are somewhat accurate. Click on the rocket to learn more about it.",
+  "rocketsDescriptionPart1": "Rockets that are shown below were created by",
+  "rocketsDescriptionPart2": ". Proportions between rockets are somewhat accurate. Click on the rocket to learn more about it.",
+  
   "statusActive": "ACTIVE",
   "statusRetired": "RETIRED",
   "statusInDevelopment": "IN DEVELOPMENT",

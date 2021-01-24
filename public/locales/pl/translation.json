@@ -74,7 +74,9 @@
   "article": "ARTYKUŁ",
   
   "rockets": "RAKIETY",
-  "rocketsDescription": "Rakiety, które są widoczne poniżej zostały stworzone przez SpaceX. Proporcje pomiędzy rakietami są mniej więcej poprawne. Kliknij w rakietę aby dowiedzieć się o niej więcej.",
+  "rocketsDescriptionPart1": "Rakiety, które są widoczne poniżej zostały stworzone przez",
+  "rocketsDescriptionPart2": ". Proporcje pomiędzy rakietami są mniej więcej poprawne. Kliknij w rakietę aby dowiedzieć się o niej więcej.",
+  
   "statusActive": "AKTYWNY",
   "statusRetired": "WYCOFANE Z UŻYTKU",
   "statusInDevelopment": "W TRAKCIE PRAC",

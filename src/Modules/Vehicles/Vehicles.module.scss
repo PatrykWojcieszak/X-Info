@@ -30,6 +30,11 @@
   }
 }
 
+a {
+  text-decoration: none;
+  color: $blue;
+}
+
 @include tablet {
   .Vehicles {
     @include flex-center-column;

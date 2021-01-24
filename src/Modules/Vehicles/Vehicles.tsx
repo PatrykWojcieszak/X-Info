@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import VehicleRocket from "./VehicleRocket/VehicleRocket";
@@ -15,6 +16,8 @@ import falconHeavy from "../../resources/images/fh2.png";
 import starship from "../../resources/images/st.png";
 
 const Vehicles = () => {
+  const { t } = useTranslation();
+
   return (
     <motion.div
       initial="initial"
@@ -23,11 +26,16 @@ const Vehicles = () => {
       variants={pageVariantsAnim}
       className={styles.Vehicles}>
       <div className={styles.InfoContainer}>
-        <h2>ROCKETS</h2>
+        <h2>{t("rockets")}</h2>
         <h4>
-          Rockets that are shown below were created by SpaceX. Proportions
-          between rockets are somewhat accurate. Click on the rocket to learn
-          more about it.
+          {t("rocketsDescriptionPart1")}{" "}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.spacex.com/">
+            SpaceX
+          </a>
+          {t("rocketsDescriptionPart2")}
         </h4>
       </div>
 
