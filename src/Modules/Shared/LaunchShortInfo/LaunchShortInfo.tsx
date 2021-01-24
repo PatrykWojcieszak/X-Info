@@ -48,8 +48,10 @@ const LaunchShortInfo = ({
         </div>
         <div className={styles.Content}>
           <div className={styles.Content__Element}>
-            {launchSiteName && <h4 className={styles.Title}>LAUNCH SITE: </h4>}
-            {customer && <h4 className={styles.Title}>CUSTOMER: </h4>}
+            {launchSiteName && (
+              <h4 className={styles.Title}>{t("launchSite")}: </h4>
+            )}
+            {customer && <h4 className={styles.Title}>{t("customer")}: </h4>}
           </div>
           <div className={styles.Content__Element}>
             {launchSiteName && (

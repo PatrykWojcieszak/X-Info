@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import Button from "../../Shared/Button/Button";
@@ -16,28 +17,19 @@ import { Launch } from "../../../Types";
 
 const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
   const [numberOfLaunches, setNumberOfLaunches] = useState(5);
+  const { t } = useTranslation();
 
   let pastLaunchesArr = (
-    <motion.div
-      variants={showLaunchesList}
-      initial="initial"
-      animate="in"
-      exit="out"
-      className={styles.LaunchesWrapper}>
+    <>
       {[1, 2, 3, 4, 5].map((n) => (
         <LaunchShortInfoSkeleton key={n} />
       ))}
-    </motion.div>
+    </>
   );
 
   if (!loading) {
     pastLaunchesArr = (
-      <motion.div
-        variants={showLaunchesList}
-        initial="initial"
-        animate="in"
-        exit="out"
-        className={styles.LaunchesWrapper}>
+      <>
         {launches.slice(0, numberOfLaunches).map((launch, index) => (
           <LaunchShortInfo
             key={index}
@@ -61,29 +53,30 @@ const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
             }}>
             <Button
               disabled={loading}
-              name="LOAD MORE"
+              name={t("loadMore")}
               styleType="primary"
               clicked={() => setNumberOfLaunches(numberOfLaunches + 5)}
             />
           </div>
         )}
-      </motion.div>
+      </>
     );
   }
 
-  if (launches.length === 0)
-    pastLaunchesArr = (
+  if (launches.length === 0) pastLaunchesArr = <NotFoundLaunches />;
+
+  return (
+    <>
       <motion.div
         variants={showLaunchesList}
         initial="initial"
         animate="in"
         exit="out"
         className={styles.LaunchesWrapper}>
-        <NotFoundLaunches />
+        {pastLaunchesArr}
       </motion.div>
-    );
-
-  return <>{pastLaunchesArr}</>;
+    </>
+  );
 };
 
 type pastLaunchesProps = {

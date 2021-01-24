@@ -20,6 +20,8 @@ const SideBar = () => {
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
 
+  const { t } = useTranslation();
+
   const bgStyles: string[] = [];
   let location = useLocation();
 

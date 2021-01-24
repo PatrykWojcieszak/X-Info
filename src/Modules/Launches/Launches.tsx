@@ -52,6 +52,8 @@ const Launches = (props) => {
     new Date(new Date().setFullYear(new Date().getFullYear() + 1))
   );
 
+  const { t } = useTranslation();
+
   const { launchType } = useParams();
   const {
     onFetchLatestLaunch,
@@ -171,7 +173,7 @@ const Launches = (props) => {
           />
           {!launchTypeFilter[2].selected && (
             <Button
-              name="FILTER"
+              name={t("filter")}
               styleType="primary"
               clicked={() => setShowFilterModal(!showFilterModal)}
             />

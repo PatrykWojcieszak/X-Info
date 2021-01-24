@@ -113,7 +113,9 @@ function App() {
 
   return (
     <div className={styles.App}>
-      {isMobile ? <SideBar /> : <Nav />}
+      <Suspense fallback={<p>Loading...</p>}>
+        {isMobile ? <SideBar /> : <Nav />}
+      </Suspense>
       {routes}
       {location.pathname !== "/about" ? (
         <Suspense fallback={<p>Loading...</p>}>

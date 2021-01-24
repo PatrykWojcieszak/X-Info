@@ -1,19 +1,21 @@
+import i18n from "../i18n";
+
 export const launchesFilterUpcoming = [
   {
     id: 0,
-    title: "UPCOMING LAUNCHES",
+    title: i18n.t("upcomingLaunchesBtn"),
     selected: true,
     key: "launchesType",
   },
   {
     id: 1,
-    title: "PAST LAUNCHES",
+    title: i18n.t("pastLaunchesBtn"),
     selected: false,
     key: "launchesType",
   },
   {
     id: 2,
-    title: "BOOSTERS",
+    title: i18n.t("boostersBtn"),
     selected: false,
     key: "launchesType",
   },
@@ -22,19 +24,19 @@ export const launchesFilterUpcoming = [
 export const launchesFilterPast = [
   {
     id: 0,
-    title: "UPCOMING LAUNCHES",
+    title: i18n.t("upcomingLaunchesBtn"),
     selected: false,
     key: "launchesType",
   },
   {
     id: 1,
-    title: "PAST LAUNCHES",
+    title: i18n.t("pastLaunchesBtn"),
     selected: true,
     key: "launchesType",
   },
   {
     id: 2,
-    title: "BOOSTERS",
+    title: i18n.t("boostersBtn"),
     selected: false,
     key: "launchesType",
   },
@@ -43,7 +45,7 @@ export const launchesFilterPast = [
 export const filterRockets = [
   {
     id: 0,
-    title: "All",
+    title: i18n.t("all"),
     selected: true,
     key: "rockets",
   },
@@ -76,7 +78,7 @@ export const filterRockets = [
 export const filterLaunchSite = [
   {
     id: 0,
-    title: "All",
+    title: i18n.t("all"),
     selected: true,
     key: "launchSite",
   },
@@ -121,19 +123,19 @@ export const filterLaunchSite = [
 export const filterStatus = [
   {
     id: 0,
-    title: "All",
+    title: i18n.t("all"),
     selected: true,
     key: "status",
   },
   {
     id: 1,
-    title: "Success",
+    title: i18n.t("success"),
     selected: false,
     key: "true",
   },
   {
     id: 2,
-    title: "Failure",
+    title: i18n.t("failure"),
     selected: false,
     key: "false",
   },

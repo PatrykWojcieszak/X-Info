@@ -3,6 +3,7 @@ import { getLatLngObj } from "tle.js";
 import Globe from "react-globe.gl";
 import { connect } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 //QUERieS
 import { fetchStarlink } from "../../Store/Starlink/actions";
@@ -19,6 +20,7 @@ const Starlink = (props) => {
   const { onFetchStarlink, starlinks } = props;
   const [showStarlinkInfo, setShowStarlinkInfo] = useState(false);
   const [starlinkInfoData, setStarlinkInfoData] = useState<any>({});
+  const { t } = useTranslation();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -68,7 +70,6 @@ const Starlink = (props) => {
   let globe = <></>;
 
   const showStarlinkInfoHandler = (point: any) => {
-    console.log(point);
     setStarlinkInfoData(point);
     setShowStarlinkInfo(true);
   };
@@ -99,17 +100,18 @@ const Starlink = (props) => {
       <div className={styles.StarlinkInfo}>
         <h2>STARLINK</h2>
         <h3>
-          <b>Starlink</b> is a satellite internet constellation being
-          constructed by{" "}
+          <b>Starlink</b> {t("starlinkDescriptionPart1")}{" "}
           <a
             target="_blank"
             rel="noopener noreferrer"
             href="https://www.spacex.com/">
             SpaceX
           </a>{" "}
-          providing satellite Internet access.
+          {t("starlinkDescriptionPart2")}
         </h3>
-        <h4>Starlinks on the orbit: {props.starlinks.docs.length}</h4>
+        <h4>
+          {t("starlinkOnTheOrbit")}: {props.starlinks.docs.length}
+        </h4>
       </div>
       {globe}
       <AnimatePresence>

@@ -35,6 +35,6 @@ library.add(
   faBars,
   faTimes,
   faAngleUp,
-  faAngleDown
+  faAngleDown,
   faGlobeAmericas
 );

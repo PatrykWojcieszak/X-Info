@@ -21,12 +21,14 @@ const Launch = ({ flightNumber, name, patch, date, success }: launchProps) => {
         <h3>{name}</h3>
         <div className={styles.Column}>
           <h4>{dateParsed.toDateString()}</h4>
-          <FontAwesomeIcon
-            style={{ color: success ? "#4BB543" : "#FA113D" }}
-            icon={success ? "check-circle" : "times-circle"}
-          />
+          {success != null ? (
+            <FontAwesomeIcon
+              style={{ color: success ? "#4BB543" : "#FA113D" }}
+              icon={success ? "check-circle" : "times-circle"}
+            />
+          ) : null}
         </div>
-        <Button name="SHOW DETAILS" styleType="primary" />
+        <Button name={t("showDetails")} styleType="primary" />
       </div>
     </Link>
   );
