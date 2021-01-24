@@ -111,7 +111,8 @@
   "number": "NUMBER",
   "material": "MATERIAL",
 
-  "starlinkDescription": "Starlink is a satellite internet constellation being constructed by SpaceX providing satellite Internet access.",
+  "starlinkDescriptionPart1": "is a satellite internet constellation being constructed by",
+  "starlinkDescriptionPart2": " providing satellite Internet access.",
   "starlinkOnTheOrbit": "Starlinks on the orbit",
   "velocity": "VELOCITY",
 

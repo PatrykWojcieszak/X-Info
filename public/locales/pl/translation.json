@@ -103,7 +103,8 @@
   "number": "ILOŚĆ",
   "material": "MATERIAŁ",
 
-  "starlinkDescription": "Starlink jest konstelacją satelit stworzoną przez <span>SpaceX<span>. Zapewniają one dostęp do internetu.",
+  "starlinkDescriptionPart1": "jest konstelacją satelit stworzoną przez ",
+  "starlinkDescriptionPart2": ". Zapewniają one dostęp do internetu.",
   "starlinkOnTheOrbit": "Ilość starlinków na orbicie",
   "velocity": "PRĘDKOŚĆ",
 
