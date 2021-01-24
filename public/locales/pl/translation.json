@@ -102,6 +102,8 @@
   "thrust": "CIĄG",
   "number": "ILOŚĆ",
   "material": "MATERIAŁ",
+  "yes": "TAK",
+  "no": "NIE",
 
   "dateFrom": "DATA OD",
   "dateTo": "DATA DO",

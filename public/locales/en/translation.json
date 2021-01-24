@@ -83,6 +83,8 @@
   "wikipedia": "WIKIPEDIA",
   "article": "ARTICLE",
   
+
+  
   "rockets": "ROCKETS",
   "rocketsDescriptionPart1": "Rockets that are shown below were created by",
   "rocketsDescriptionPart2": ". Proportions between rockets are somewhat accurate. Click on the rocket to learn more about it.",
@@ -112,7 +114,9 @@
   "thrust": "THRUST",
   "number": "NUMBER",
   "material": "MATERIAL",
-
+  "yes": "YES",
+  "no": "NO",
+  
   "starlinkDescriptionPart1": "is a satellite internet constellation being constructed by",
   "starlinkDescriptionPart2": " providing satellite Internet access.",
   "starlinkOnTheOrbit": "Starlinks on the orbit",

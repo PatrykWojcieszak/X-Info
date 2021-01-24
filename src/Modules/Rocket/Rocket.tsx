@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import Button from "../Shared/Button/Button";
@@ -34,6 +35,7 @@ import RocketSkeleton from "../Shared/Skeletons/RocketSkeleton";
 const Rocket = (props) => {
   const { vehicle } = useParams();
   const { onFetchRocket } = props;
+  const { t } = useTranslation();
 
   useEffect(() => {
     onFetchRocket(vehicle);
@@ -117,21 +119,21 @@ const Rocket = (props) => {
         {props.rocket.docs[0].height.meters ||
         props.rocket.docs[0].height.feet ? (
           <InfoLine
-            title="HEIGHT"
-            value={`${props.rocket.docs[0].height.meters} m | ${props.rocket.docs[0].height.feet} feet`}
+            title={t("height")}
+            value={`${props.rocket.docs[0].height.meters} m | ${props.rocket.docs[0].height.feet} ft`}
           />
         ) : null}
 
         {props.rocket.docs[0].diameter.meters ||
         props.rocket.docs[0].diameter.feet ? (
           <InfoLine
-            title="DIAMETER"
-            value={`${props.rocket.docs[0].diameter.meters} m | ${props.rocket.docs[0].diameter.feet} feet`}
+            title={t("diameter")}
+            value={`${props.rocket.docs[0].diameter.meters} m | ${props.rocket.docs[0].diameter.feet} ft`}
           />
         ) : null}
         {props.rocket.docs[0].mass.kg || props.rocket.docs[0].mass.lb ? (
           <InfoLine
-            title="MASS"
+            title={t("mass")}
             value={`${props.rocket.docs[0].mass.kg} kg | ${props.rocket.docs[0].mass.lb} lb`}
           />
         ) : null}
@@ -158,7 +160,7 @@ const Rocket = (props) => {
         className={styles.Details}>
         {props.rocket.docs[0].first_stage.engines && (
           <InfoLine
-            title="ENGINES"
+            title={t("engines")}
             value={`${props.rocket.docs[0].first_stage.engines}`}
           />
         )}
@@ -166,7 +168,7 @@ const Rocket = (props) => {
         {(props.rocket.docs[0].first_stage.thrust_sea_level.kN ||
           props.rocket.docs[0].first_stage.thrust_sea_level.lbf) && (
           <InfoLine
-            title="THRUST AT SEA LEVEL"
+            title={t("thrustAtSeaLevel")}
             value={`${props.rocket.docs[0].first_stage.thrust_sea_level.kN} kn | ${props.rocket.docs[0].first_stage.thrust_sea_level.lbf} lbf`}
           />
         )}
@@ -174,60 +176,60 @@ const Rocket = (props) => {
         {(props.rocket.docs[0].first_stage.thrust_vacuum.kN ||
           props.rocket.docs[0].first_stage.thrust_vacuum.lbf) && (
           <InfoLine
-            title="THRUST VACUUM"
+            title={t("thrustVacuum")}
             value={`${props.rocket.docs[0].first_stage.thrust_vacuum.kN} kn | ${props.rocket.docs[0].first_stage.thrust_vacuum.lbf} lbf`}
           />
         )}
 
         {props.rocket.docs[0].first_stage.fuel_amount_tons && (
           <InfoLine
-            title="FUEL AMOUNT"
+            title={t("fuelAmount")}
             value={`${props.rocket.docs[0].first_stage.fuel_amount_tons} tons`}
           />
         )}
 
         {props.rocket.docs[0].first_stage.burn_time_sec && (
           <InfoLine
-            title="BURN TIME"
+            title={t("burnTime")}
             value={`${props.rocket.docs[0].first_stage.burn_time_sec} sec `}
           />
         )}
 
         {props.rocket.docs[0].engines.type && (
           <InfoLine
-            title="TYPE"
+            title={t("type")}
             value={`${props.rocket.docs[0].engines.type} `}
           />
         )}
 
         {props.rocket.docs[0].engines.version && (
           <InfoLine
-            title="VERSION"
+            title={t("version")}
             value={`${props.rocket.docs[0].engines.version}`}
           />
         )}
 
         {props.rocket.docs[0].engines.layout && (
           <InfoLine
-            title="LAYOUT"
+            title={t("layout")}
             value={`${props.rocket.docs[0].engines.layout}`}
           />
         )}
 
         <InfoLine
-          title="REUSABLE"
+          title={t("reusable")}
           value={props.rocket.docs[0].first_stage.reusable ? "YES" : "NO"}
         />
         {props.rocket.docs[0].engines.propellant_1 && (
           <InfoLine
-            title="PROPELLANT 1"
+            title={`${t("propellant")} 1`}
             value={`${props.rocket.docs[0].engines.propellant_1}`}
           />
         )}
 
         {props.rocket.docs[0].engines.propellant_2 && (
           <InfoLine
-            title="PROPELLANT 2"
+            title={`${t("propellant")} 2`}
             value={`${props.rocket.docs[0].engines.propellant_2}`}
           />
         )}
@@ -246,7 +248,7 @@ const Rocket = (props) => {
         className={styles.Details}>
         {props.rocket.docs[0].second_stage.engines && (
           <InfoLine
-            title="ENGINES"
+            title={t("engines")}
             value={`${props.rocket.docs[0].second_stage.engines}`}
           />
         )}
@@ -254,21 +256,21 @@ const Rocket = (props) => {
         {(props.rocket.docs[0].second_stage.thrust.kN ||
           props.rocket.docs[0].second_stage.thrust.lbf) && (
           <InfoLine
-            title="THRUST"
+            title={t("thrust")}
             value={`${props.rocket.docs[0].second_stage.thrust.kN} kn | ${props.rocket.docs[0].second_stage.thrust.lbf} lbf`}
           />
         )}
 
         {props.rocket.docs[0].second_stage.fuel_amount_tons && (
           <InfoLine
-            title="FUEL AMOUNT"
+            title={t("fuelAmount")}
             value={`${props.rocket.docs[0].second_stage.fuel_amount_tons} tons`}
           />
         )}
 
         {props.rocket.docs[0].second_s && (
           <InfoLine
-            title="BURN TIME"
+            title={t("burnTime")}
             value={`${props.rocket.docs[0].second_stage.burn_time_sec} sec`}
           />
         )}
@@ -287,14 +289,14 @@ const Rocket = (props) => {
         className={styles.Details}>
         {props.rocket.docs[0].landing_legs.number && (
           <InfoLine
-            title="NUMBER"
+            title={t("number")}
             value={`${props.rocket.docs[0].landing_legs.number}`}
           />
         )}
 
         {props.rocket.docs[0].landing_legs.material && (
           <InfoLine
-            title="MATERIAL"
+            title={t("material")}
             value={`${props.rocket.docs[0].landing_legs.material} `}
           />
         )}
@@ -329,7 +331,7 @@ const Rocket = (props) => {
         ) : (
           <>
             <div className={styles.Rocket}>
-              <img src={rocketImg} alt="falcon heavy" />
+              <img src={rocketImg} alt="rocket" />
             </div>
             <div className={styles.InfoContainer}>
               <p>{props.rocket.docs[0]?.description}</p>
@@ -345,19 +347,19 @@ const Rocket = (props) => {
               <div className={styles.RocketDetails}>
                 <div className={styles.BtnContainer}>
                   <Button
-                    name="OVERVIEW"
+                    name={t("overview")}
                     styleType="primary"
                     clicked={showOverviewHandler}
                     selected={showOverview}
                   />
                   <Button
-                    name="STAGE 1"
+                    name={`${t("stage")} 1`}
                     styleType="primary"
                     clicked={showFirstStageHandler}
                     selected={showFirstStage}
                   />
                   <Button
-                    name="STAGE 2"
+                    name={`${t("stage")} 2`}
                     styleType="primary"
                     clicked={showSecondStageHandler}
                     selected={showSecondStage}
@@ -366,7 +368,7 @@ const Rocket = (props) => {
                   (props.rocket.docs[0].landing_legs.number ||
                     props.rocket.docs[0].landing_legs.material) ? (
                     <Button
-                      name="LANDING LEGS"
+                      name={t("landingLegs")}
                       styleType="primary"
                       clicked={showLandingLegsHandler}
                       selected={showLandingLegs}
@@ -375,16 +377,16 @@ const Rocket = (props) => {
                 </div>
                 <div className={styles.DetailsContainer}>
                   <AnimatePresence>
-                    {showOverview ? overViewDetails : null}
+                    {showOverview && overViewDetails}
                   </AnimatePresence>
                   <AnimatePresence>
-                    {showFirstStage ? stageOneDetails : null}
+                    {showFirstStage && stageOneDetails}
                   </AnimatePresence>
                   <AnimatePresence>
-                    {showSecondStage ? stageTwoDetails : null}
+                    {showSecondStage && stageTwoDetails}
                   </AnimatePresence>
                   <AnimatePresence>
-                    {showLandingLegs ? landingLegsDetails : null}
+                    {showLandingLegs && landingLegsDetails}
                   </AnimatePresence>
                 </div>
               </div>
