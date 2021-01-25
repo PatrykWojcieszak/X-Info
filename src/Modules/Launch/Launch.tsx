@@ -24,6 +24,8 @@ import { pageVariantsAnim } from "../../Animations/Animations_motion";
 import { connect } from "react-redux";
 import { fetchLaunch } from "../../Store/Launch/actions";
 import LaunchSkeleton from "../Shared/Skeletons/LaunchSkeleton";
+import SEO from "../Shared/SEO/SEO";
+import { launchPageTitle, launchPageDescription } from "../Shared/SEO/Tags";
 
 const Launch = (props) => {
   const { flight_number } = useParams();
@@ -281,6 +283,10 @@ const Launch = (props) => {
 
   return (
     <>
+      <SEO
+        title={`${launchPageTitle} - ${props.launch.docs[0].flight_number}`}
+        description={launchPageDescription}
+      />
       <motion.div
         initial="initial"
         animate="in"

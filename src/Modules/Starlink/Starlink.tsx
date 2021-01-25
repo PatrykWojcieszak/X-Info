@@ -15,6 +15,8 @@ import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 //TYPES
 import { GlobePoint } from "../../Types";
+import SEO from "../Shared/SEO/SEO";
+import { starlinkPageTitle, starlinkPageDescription } from "../Shared/SEO/Tags";
 
 const Starlink = (props) => {
   const { onFetchStarlink, starlinks } = props;
@@ -91,38 +93,41 @@ const Starlink = (props) => {
   }
 
   return (
-    <motion.div
-      initial="initial"
-      animate="in"
-      exit="out"
-      variants={pageVariantsAnim}
-      className={styles.Starlink}>
-      <div className={styles.StarlinkInfo}>
-        <h2>STARLINK</h2>
-        <h3>
-          <b>Starlink</b> {t("starlinkDescriptionPart1")}{" "}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.spacex.com/">
-            SpaceX
-          </a>{" "}
-          {t("starlinkDescriptionPart2")}
-        </h3>
-        <h4>
-          {t("starlinkOnTheOrbit")}: {props.starlinks.docs.length}
-        </h4>
-      </div>
-      {globe}
-      <AnimatePresence>
-        {showStarlinkInfo && (
-          <StarlinkInfo
-            starlink={starlinkInfoData}
-            close={closeStarlinkInfoHandler}
-          />
-        )}
-      </AnimatePresence>
-    </motion.div>
+    <>
+      <SEO title={starlinkPageTitle} description={starlinkPageDescription} />
+      <motion.div
+        initial="initial"
+        animate="in"
+        exit="out"
+        variants={pageVariantsAnim}
+        className={styles.Starlink}>
+        <div className={styles.StarlinkInfo}>
+          <h2>STARLINK</h2>
+          <h3>
+            <b>Starlink</b> {t("starlinkDescriptionPart1")}{" "}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.spacex.com/">
+              SpaceX
+            </a>{" "}
+            {t("starlinkDescriptionPart2")}
+          </h3>
+          <h4>
+            {t("starlinkOnTheOrbit")}: {props.starlinks.docs.length}
+          </h4>
+        </div>
+        {globe}
+        <AnimatePresence>
+          {showStarlinkInfo && (
+            <StarlinkInfo
+              starlink={starlinkInfoData}
+              close={closeStarlinkInfoHandler}
+            />
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </>
   );
 };
 
