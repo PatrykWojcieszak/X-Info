@@ -31,6 +31,8 @@ import { fetchRocket } from "../../Store/Rocket/actions";
 
 //OTHER
 import RocketSkeleton from "../Shared/Skeletons/RocketSkeleton";
+import SEO from "../Shared/SEO/SEO";
+import { rocketPageTitle, rocketPageDescription } from "../Shared/SEO/Tags";
 
 const Rocket = (props) => {
   const { vehicle } = useParams();
@@ -304,102 +306,108 @@ const Rocket = (props) => {
     );
 
   return (
-    <motion.div
-      initial="initial"
-      animate="in"
-      exit="out"
-      variants={pageVariantsAnim}
-      className={styles.Rocket}>
-      <div className={rocketHeroImg.join(" ")}>
-        <motion.div
-          variants={bottomToTopAnim}
-          initial="hidden"
-          animate="show"
-          exit="exit"
-          className={styles.HeroText}>
-          <h2>{props.rocket.docs[0]?.name}</h2>
-          <h4>
-            {rocketQuote} - <span>Elon Musk</span>
-          </h4>
-        </motion.div>
-      </div>
-      <div className={styles.Content}>
-        {props.loadingRocket ? (
-          <div style={{ width: "100%" }}>
-            <RocketSkeleton />
-          </div>
-        ) : (
-          <>
-            <div className={styles.Rocket}>
-              <img src={rocketImg} alt="rocket" />
+    <>
+      <SEO
+        title={`${rocketPageTitle} - ${vehicle}`}
+        description={rocketPageDescription}
+      />
+      <motion.div
+        initial="initial"
+        animate="in"
+        exit="out"
+        variants={pageVariantsAnim}
+        className={styles.Rocket}>
+        <div className={rocketHeroImg.join(" ")}>
+          <motion.div
+            variants={bottomToTopAnim}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            className={styles.HeroText}>
+            <h2>{props.rocket.docs[0]?.name}</h2>
+            <h4>
+              {rocketQuote} - <span>Elon Musk</span>
+            </h4>
+          </motion.div>
+        </div>
+        <div className={styles.Content}>
+          {props.loadingRocket ? (
+            <div style={{ width: "100%" }}>
+              <RocketSkeleton />
             </div>
-            <div className={styles.InfoContainer}>
-              <p>{props.rocket.docs[0]?.description}</p>
-              <h3 style={{ textTransform: "uppercase" }}>
-                {t("status")}:{" "}
-                <span
-                  style={{
-                    color: rocketStatus.color,
-                  }}>
-                  {rocketStatus.name}
-                </span>
-              </h3>
-              <div className={styles.RocketDetails}>
-                <div className={styles.BtnContainer}>
-                  <Button
-                    name={t("overview")}
-                    styleType="primary"
-                    clicked={showOverviewHandler}
-                    selected={showOverview}
-                  />
-                  <Button
-                    name={`${t("stage")} 1`}
-                    styleType="primary"
-                    clicked={showFirstStageHandler}
-                    selected={showFirstStage}
-                  />
-                  <Button
-                    name={`${t("stage")} 2`}
-                    styleType="primary"
-                    clicked={showSecondStageHandler}
-                    selected={showSecondStage}
-                  />
-                  {!props.loadingRocket &&
-                  (props.rocket.docs[0].landing_legs.number ||
-                    props.rocket.docs[0].landing_legs.material) ? (
+          ) : (
+            <>
+              <div className={styles.Rocket}>
+                <img src={rocketImg} alt="rocket" />
+              </div>
+              <div className={styles.InfoContainer}>
+                <p>{props.rocket.docs[0]?.description}</p>
+                <h3 style={{ textTransform: "uppercase" }}>
+                  {t("status")}:{" "}
+                  <span
+                    style={{
+                      color: rocketStatus.color,
+                    }}>
+                    {rocketStatus.name}
+                  </span>
+                </h3>
+                <div className={styles.RocketDetails}>
+                  <div className={styles.BtnContainer}>
                     <Button
-                      name={t("landingLegs")}
+                      name={t("overview")}
                       styleType="primary"
-                      clicked={showLandingLegsHandler}
-                      selected={showLandingLegs}
+                      clicked={showOverviewHandler}
+                      selected={showOverview}
                     />
-                  ) : null}
-                </div>
-                <div className={styles.DetailsContainer}>
-                  <AnimatePresence>
-                    {showOverview && overViewDetails}
-                  </AnimatePresence>
-                  <AnimatePresence>
-                    {showFirstStage && stageOneDetails}
-                  </AnimatePresence>
-                  <AnimatePresence>
-                    {showSecondStage && stageTwoDetails}
-                  </AnimatePresence>
-                  <AnimatePresence>
-                    {showLandingLegs && landingLegsDetails}
-                  </AnimatePresence>
+                    <Button
+                      name={`${t("stage")} 1`}
+                      styleType="primary"
+                      clicked={showFirstStageHandler}
+                      selected={showFirstStage}
+                    />
+                    <Button
+                      name={`${t("stage")} 2`}
+                      styleType="primary"
+                      clicked={showSecondStageHandler}
+                      selected={showSecondStage}
+                    />
+                    {!props.loadingRocket &&
+                    (props.rocket.docs[0].landing_legs.number ||
+                      props.rocket.docs[0].landing_legs.material) ? (
+                      <Button
+                        name={t("landingLegs")}
+                        styleType="primary"
+                        clicked={showLandingLegsHandler}
+                        selected={showLandingLegs}
+                      />
+                    ) : null}
+                  </div>
+                  <div className={styles.DetailsContainer}>
+                    <AnimatePresence>
+                      {showOverview && overViewDetails}
+                    </AnimatePresence>
+                    <AnimatePresence>
+                      {showFirstStage && stageOneDetails}
+                    </AnimatePresence>
+                    <AnimatePresence>
+                      {showSecondStage && stageTwoDetails}
+                    </AnimatePresence>
+                    <AnimatePresence>
+                      {showLandingLegs && landingLegsDetails}
+                    </AnimatePresence>
+                  </div>
                 </div>
               </div>
-            </div>
-          </>
-        )}
-      </div>
-      <div className={styles.GalleryWrapper}>
-        {props.rocket.docs[0]?.flickr_images.length > 0 ? (
-          <Gallery images={props.rocket.docs[0].flickr_images} />
-        ) : null}
-      </div>
-    </motion.div>
+            </>
+          )}
+        </div>
+        <div className={styles.GalleryWrapper}>
+          {props.rocket.docs[0]?.flickr_images.length > 0 ? (
+            <Gallery images={props.rocket.docs[0].flickr_images} />
+          ) : null}
+        </div>
+      </motion.div>
+    </>
   );
 };
 
