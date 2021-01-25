@@ -7,6 +7,10 @@ const SEO = ({ description, title }: seoProps) => {
       <html lang="en" />
       <title>{title}</title>
       <meta name="description" content={description} />
+      <meta
+        name="keywords"
+        content="x-info, SpaceX, info, launches, Starlink, Falcon, Starship, stats"
+      />
       <meta property="og:site_name" content={title} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
