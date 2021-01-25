@@ -117,11 +117,9 @@ function App() {
         {isMobile ? <SideBar /> : <Nav />}
       </Suspense>
       {routes}
-      {location.pathname !== "/about" ? (
-        <Suspense fallback={<p>Loading...</p>}>
-          <Footer />
-        </Suspense>
-      ) : null}
+      <Suspense fallback={<p>Loading...</p>}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }
