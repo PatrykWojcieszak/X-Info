@@ -183,7 +183,7 @@ const Launch = (props) => {
                     {payload.name && (
                       <InfoLine title={t("name")} value={`${payload.name}`} />
                     )}
-                    {payload.customers && (
+                    {payload.customers[0] && (
                       <InfoLine
                         title={t("customer")}
                         value={`${payload.customers}`}
@@ -284,7 +284,7 @@ const Launch = (props) => {
   return (
     <>
       <SEO
-        title={`${launchPageTitle} - ${props.launch.docs[0].flight_number}`}
+        title={`${launchPageTitle} - ${props.launch.docs[0]?.flight_number}`}
         description={launchPageDescription}
       />
       <motion.div

@@ -40,7 +40,7 @@ const StarlinkInfo = ({ starlink, close }: starlinkProps) => {
         </div>
       </div>
       <div className={styles.Right}>
-        <h2>{t("launch")}</h2>
+        <h2>{t("flight")}</h2>
         <Link to={`launch/${starlink.launch?.flight_number}`}>
           <div className={styles.LaunchInfoWrapper}>
             <h3>{starlink.launch?.name}</h3>
