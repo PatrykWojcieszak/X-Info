@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import BoosterLaunchesInfo from "../../Shared/BoosterLaunchesInfo/BoosterLaunchesInfo";
@@ -17,7 +16,6 @@ import { fetchBoosters } from "../../../Store/Boosters/actions";
 import { connect } from "react-redux";
 
 const Boosters = (props) => {
-  const { t } = useTranslation();
   const { onFetchBoosters } = props;
 
   useEffect(() => {
@@ -70,7 +68,7 @@ const Boosters = (props) => {
             {props.loadingBoosters && <Spinner />}
             <Button
               disabled={props.loadingBoosters}
-              name={t("loadMore")}
+              name="LOAD MORE"
               styleType="primary"
               clicked={FetchBoosters}
             />

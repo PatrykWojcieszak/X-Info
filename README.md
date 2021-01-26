@@ -23,7 +23,7 @@ npm install
 
 3. Start project
 ```bash
-npm run
+npm start
 ```
 
 X-Info is now running at http://localhost:3000!

@@ -7,8 +7,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import configureStore from "./Store/configureStore";
 import "./fontawesome/fontawesome";
-import { useScrollToTop as ScrollToTOp } from "./Hooks/index";
-import "./i18n";
+import ScrollToTop from "./Utility/ScrollToTop";
 
 const store = configureStore();
 
@@ -16,7 +15,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <React.StrictMode>
-        <ScrollToTOp />
+        <ScrollToTop />
         <App />
       </React.StrictMode>
     </Router>
