@@ -1,10 +1,10 @@
 import React from "react";
 import DatePicker from "react-datepicker";
+import moment from "moment";
 
 //STYLES
 import styles from "./CustomDatePicker.module.scss";
 import "react-datepicker/dist/react-datepicker.css";
-import moment from "moment";
 
 const CustomDatePicker = ({ date, dateChanged }: datePickerProps) => {
   const validation = (date: any) => {

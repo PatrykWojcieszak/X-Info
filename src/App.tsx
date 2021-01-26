@@ -3,7 +3,7 @@ import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 
 import Nav from "./Modules/Shared/Nav/Nav";
 import Footer from "./Modules/Shared/Footer/Footer";
-import { useMediaQuery } from "./Hooks/useMediaQuery";
+import { useMediaQuery } from "./Hooks/";
 
 import SideBar from "./Modules/Shared/Nav/SideBar/SideBar";
 
@@ -113,9 +113,13 @@ function App() {
 
   return (
     <div className={styles.App}>
-      {isMobile ? <SideBar /> : <Nav />}
+      <Suspense fallback={<p>Loading...</p>}>
+        {isMobile ? <SideBar /> : <Nav />}
+      </Suspense>
       {routes}
-      {location.pathname !== "/about" ? <Footer /> : null}
+      <Suspense fallback={<p>Loading...</p>}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }
