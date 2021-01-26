@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import Button from "../Button/Button";
@@ -27,16 +26,15 @@ const LaunchExtendedInfo = ({
   launchId,
   date_precision,
 }: LaunchExtendedInfoProps) => {
-  const { t } = useTranslation();
   const dateParsed = new Date(date_utc);
 
-  let launch = success ? t("launchSuccessful") : t("launchFailure");
+  let launch = success ? "SUCCESSFUL" : "FAILURE";
 
   if (
     dateParsed > new Date() ||
     ["quarter", "half", "year", "month"].includes(date_precision)
   )
-    launch = t("launchNotLaunchedYet");
+    launch = "NOT LAUNCHED YET";
 
   return (
     <Link
@@ -46,7 +44,7 @@ const LaunchExtendedInfo = ({
         <div className={styles.LeftContainer}>
           <img src={patchImg ? patchImg : noImage} alt="mission patch" />
           {showMoreDetailsButton && (
-            <Button styleType="primary" name={t("moreDetails")} />
+            <Button styleType="primary" name="MORE DETAILS" />
           )}
         </div>
         <div className={styles.RightContainer}>
@@ -56,15 +54,15 @@ const LaunchExtendedInfo = ({
             <h4 className={styles.LaunchNumber}>#{flightNumber}</h4>
             <div className={styles.DetailsWrapper}>
               <div className={styles.TitlesContainer}>
-                {launchSiteName && <h4>{t("launchSite")}:</h4>}
-                {rocketName && <h4>{t("rocket")}:</h4>}
-                {dateParsed && <h4>{t("date")}:</h4>}
-                {success !== null && <h4>{t("launch")}:</h4>}
+                <h4>LAUNCH SITE:</h4>
+                <h4>ROCKET:</h4>
+                <h4>DATE:</h4>
+                {success !== null && <h4>LAUNCH:</h4>}
               </div>
               <div className={styles.ValuesContainer}>
-                {launchSiteName && <h4>{launchSiteName}</h4>}
-                {rocketName && <h4>{rocketName}</h4>}
-                {dateParsed && <h4>{dateParsed.toDateString()}</h4>}
+                <h4>{launchSiteName}</h4>
+                <h4>{rocketName}</h4>
+                <h4>{dateParsed.toDateString()}</h4>
                 {success !== null && (
                   <h4 style={{ color: success ? "#4BB543" : "#FA113D" }}>
                     {launch}
@@ -75,7 +73,7 @@ const LaunchExtendedInfo = ({
           </div>
           {!success && failures.length > 0 ? (
             <div className={styles.FailureContainer}>
-              <h4>{t("failures")}:</h4>
+              <h4>FAILURES:</h4>
               <ul>
                 {failures.map((failure, index) => (
                   <li key={index}>{failure.reason}</li>

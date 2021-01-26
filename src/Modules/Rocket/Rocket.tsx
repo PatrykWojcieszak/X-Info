@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import Button from "../Shared/Button/Button";
@@ -31,13 +30,10 @@ import { fetchRocket } from "../../Store/Rocket/actions";
 
 //OTHER
 import RocketSkeleton from "../Shared/Skeletons/RocketSkeleton";
-import SEO from "../Shared/SEO/SEO";
-import { rocketPageTitle, rocketPageDescription } from "../Shared/SEO/Tags";
 
 const Rocket = (props) => {
   const { vehicle } = useParams();
   const { onFetchRocket } = props;
-  const { t } = useTranslation();
 
   useEffect(() => {
     onFetchRocket(vehicle);
@@ -48,14 +44,14 @@ const Rocket = (props) => {
   const [showSecondStage, setShowSecondStage] = useState(false);
   const [showLandingLegs, setShowLandingLegs] = useState(false);
 
-  let rocketStatus = { name: t("statusActive"), color: "#4BB543" };
+  let rocketStatus = { name: "ACTIVE", color: "#4BB543" };
 
   if (!props.rocket.docs[0]?.active)
-    rocketStatus = { name: t("statusInactive"), color: "#FA113D" };
+    rocketStatus = { name: "INACTIVE", color: "#FA113D" };
   if (vehicle === "Falcon 1")
-    rocketStatus = { name: t("statusRetired"), color: "#005288" };
+    rocketStatus = { name: "RETIRED", color: "#005288" };
   if (vehicle === "Starship")
-    rocketStatus = { name: t("statusInDevelopment"), color: "#005288" };
+    rocketStatus = { name: "IN DEVELOPMENT", color: "#005288" };
 
   const showOverviewHandler = () => {
     setShowOverview(true);
@@ -121,21 +117,21 @@ const Rocket = (props) => {
         {props.rocket.docs[0].height.meters ||
         props.rocket.docs[0].height.feet ? (
           <InfoLine
-            title={t("height")}
-            value={`${props.rocket.docs[0].height.meters} m | ${props.rocket.docs[0].height.feet} ft`}
+            title="HEIGHT"
+            value={`${props.rocket.docs[0].height.meters} m | ${props.rocket.docs[0].height.feet} feet`}
           />
         ) : null}
 
         {props.rocket.docs[0].diameter.meters ||
         props.rocket.docs[0].diameter.feet ? (
           <InfoLine
-            title={t("diameter")}
-            value={`${props.rocket.docs[0].diameter.meters} m | ${props.rocket.docs[0].diameter.feet} ft`}
+            title="DIAMETER"
+            value={`${props.rocket.docs[0].diameter.meters} m | ${props.rocket.docs[0].diameter.feet} feet`}
           />
         ) : null}
         {props.rocket.docs[0].mass.kg || props.rocket.docs[0].mass.lb ? (
           <InfoLine
-            title={t("mass")}
+            title="MASS"
             value={`${props.rocket.docs[0].mass.kg} kg | ${props.rocket.docs[0].mass.lb} lb`}
           />
         ) : null}
@@ -162,7 +158,7 @@ const Rocket = (props) => {
         className={styles.Details}>
         {props.rocket.docs[0].first_stage.engines && (
           <InfoLine
-            title={t("engines")}
+            title="ENGINES"
             value={`${props.rocket.docs[0].first_stage.engines}`}
           />
         )}
@@ -170,7 +166,7 @@ const Rocket = (props) => {
         {(props.rocket.docs[0].first_stage.thrust_sea_level.kN ||
           props.rocket.docs[0].first_stage.thrust_sea_level.lbf) && (
           <InfoLine
-            title={t("thrustAtSeaLevel")}
+            title="THRUST AT SEA LEVEL"
             value={`${props.rocket.docs[0].first_stage.thrust_sea_level.kN} kn | ${props.rocket.docs[0].first_stage.thrust_sea_level.lbf} lbf`}
           />
         )}
@@ -178,60 +174,60 @@ const Rocket = (props) => {
         {(props.rocket.docs[0].first_stage.thrust_vacuum.kN ||
           props.rocket.docs[0].first_stage.thrust_vacuum.lbf) && (
           <InfoLine
-            title={t("thrustVacuum")}
+            title="THRUST VACUUM"
             value={`${props.rocket.docs[0].first_stage.thrust_vacuum.kN} kn | ${props.rocket.docs[0].first_stage.thrust_vacuum.lbf} lbf`}
           />
         )}
 
         {props.rocket.docs[0].first_stage.fuel_amount_tons && (
           <InfoLine
-            title={t("fuelAmount")}
+            title="FUEL AMOUNT"
             value={`${props.rocket.docs[0].first_stage.fuel_amount_tons} tons`}
           />
         )}
 
         {props.rocket.docs[0].first_stage.burn_time_sec && (
           <InfoLine
-            title={t("burnTime")}
+            title="BURN TIME"
             value={`${props.rocket.docs[0].first_stage.burn_time_sec} sec `}
           />
         )}
 
         {props.rocket.docs[0].engines.type && (
           <InfoLine
-            title={t("type")}
+            title="TYPE"
             value={`${props.rocket.docs[0].engines.type} `}
           />
         )}
 
         {props.rocket.docs[0].engines.version && (
           <InfoLine
-            title={t("version")}
+            title="VERSION"
             value={`${props.rocket.docs[0].engines.version}`}
           />
         )}
 
         {props.rocket.docs[0].engines.layout && (
           <InfoLine
-            title={t("layout")}
+            title="LAYOUT"
             value={`${props.rocket.docs[0].engines.layout}`}
           />
         )}
 
         <InfoLine
-          title={t("reusable")}
+          title="REUSABLE"
           value={props.rocket.docs[0].first_stage.reusable ? "YES" : "NO"}
         />
         {props.rocket.docs[0].engines.propellant_1 && (
           <InfoLine
-            title={`${t("propellant")} 1`}
+            title="PROPELLANT 1"
             value={`${props.rocket.docs[0].engines.propellant_1}`}
           />
         )}
 
         {props.rocket.docs[0].engines.propellant_2 && (
           <InfoLine
-            title={`${t("propellant")} 2`}
+            title="PROPELLANT 2"
             value={`${props.rocket.docs[0].engines.propellant_2}`}
           />
         )}
@@ -250,7 +246,7 @@ const Rocket = (props) => {
         className={styles.Details}>
         {props.rocket.docs[0].second_stage.engines && (
           <InfoLine
-            title={t("engines")}
+            title="ENGINES"
             value={`${props.rocket.docs[0].second_stage.engines}`}
           />
         )}
@@ -258,21 +254,21 @@ const Rocket = (props) => {
         {(props.rocket.docs[0].second_stage.thrust.kN ||
           props.rocket.docs[0].second_stage.thrust.lbf) && (
           <InfoLine
-            title={t("thrust")}
+            title="THRUST"
             value={`${props.rocket.docs[0].second_stage.thrust.kN} kn | ${props.rocket.docs[0].second_stage.thrust.lbf} lbf`}
           />
         )}
 
         {props.rocket.docs[0].second_stage.fuel_amount_tons && (
           <InfoLine
-            title={t("fuelAmount")}
+            title="FUEL AMOUNT"
             value={`${props.rocket.docs[0].second_stage.fuel_amount_tons} tons`}
           />
         )}
 
         {props.rocket.docs[0].second_s && (
           <InfoLine
-            title={t("burnTime")}
+            title="BURN TIME"
             value={`${props.rocket.docs[0].second_stage.burn_time_sec} sec`}
           />
         )}
@@ -291,14 +287,14 @@ const Rocket = (props) => {
         className={styles.Details}>
         {props.rocket.docs[0].landing_legs.number && (
           <InfoLine
-            title={t("number")}
+            title="NUMBER"
             value={`${props.rocket.docs[0].landing_legs.number}`}
           />
         )}
 
         {props.rocket.docs[0].landing_legs.material && (
           <InfoLine
-            title={t("material")}
+            title="MATERIAL"
             value={`${props.rocket.docs[0].landing_legs.material} `}
           />
         )}
@@ -306,108 +302,102 @@ const Rocket = (props) => {
     );
 
   return (
-    <>
-      <SEO
-        title={`${rocketPageTitle} - ${vehicle}`}
-        description={rocketPageDescription}
-      />
-      <motion.div
-        initial="initial"
-        animate="in"
-        exit="out"
-        variants={pageVariantsAnim}
-        className={styles.Rocket}>
-        <div className={rocketHeroImg.join(" ")}>
-          <motion.div
-            variants={bottomToTopAnim}
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            className={styles.HeroText}>
-            <h2>{props.rocket.docs[0]?.name}</h2>
-            <h4>
-              {rocketQuote} - <span>Elon Musk</span>
-            </h4>
-          </motion.div>
-        </div>
-        <div className={styles.Content}>
-          {props.loadingRocket ? (
-            <div style={{ width: "100%" }}>
-              <RocketSkeleton />
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariantsAnim}
+      className={styles.Rocket}>
+      <div className={rocketHeroImg.join(" ")}>
+        <motion.div
+          variants={bottomToTopAnim}
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          className={styles.HeroText}>
+          <h2>{props.rocket.docs[0]?.name}</h2>
+          <h4>
+            {rocketQuote} - <span>Elon Musk</span>
+          </h4>
+        </motion.div>
+      </div>
+      <div className={styles.Content}>
+        {props.loadingRocket ? (
+          <div style={{ width: "100%" }}>
+            <RocketSkeleton />
+          </div>
+        ) : (
+          <>
+            <div className={styles.Rocket}>
+              <img src={rocketImg} alt="falcon heavy" />
             </div>
-          ) : (
-            <>
-              <div className={styles.Rocket}>
-                <img src={rocketImg} alt="rocket" />
-              </div>
-              <div className={styles.InfoContainer}>
-                <p>{props.rocket.docs[0]?.description}</p>
-                <h3 style={{ textTransform: "uppercase" }}>
-                  {t("status")}:{" "}
-                  <span
-                    style={{
-                      color: rocketStatus.color,
-                    }}>
-                    {rocketStatus.name}
-                  </span>
-                </h3>
-                <div className={styles.RocketDetails}>
-                  <div className={styles.BtnContainer}>
+            <div className={styles.InfoContainer}>
+              <p>{props.rocket.docs[0]?.description}</p>
+              <h3>
+                STATUS:{" "}
+                <span
+                  style={{
+                    color: rocketStatus.color,
+                  }}>
+                  {rocketStatus.name}
+                </span>
+              </h3>
+              <div className={styles.RocketDetails}>
+                <div className={styles.BtnContainer}>
+                  <Button
+                    name="OVERVIEW"
+                    styleType="primary"
+                    clicked={showOverviewHandler}
+                    selected={showOverview}
+                  />
+                  <Button
+                    name="STAGE 1"
+                    styleType="primary"
+                    clicked={showFirstStageHandler}
+                    selected={showFirstStage}
+                  />
+                  <Button
+                    name="STAGE 2"
+                    styleType="primary"
+                    clicked={showSecondStageHandler}
+                    selected={showSecondStage}
+                  />
+                  {!props.loadingRocket &&
+                  (props.rocket.docs[0].landing_legs.number ||
+                    props.rocket.docs[0].landing_legs.material) ? (
                     <Button
-                      name={t("overview")}
+                      name="LANDING LEGS"
                       styleType="primary"
-                      clicked={showOverviewHandler}
-                      selected={showOverview}
+                      clicked={showLandingLegsHandler}
+                      selected={showLandingLegs}
                     />
-                    <Button
-                      name={`${t("stage")} 1`}
-                      styleType="primary"
-                      clicked={showFirstStageHandler}
-                      selected={showFirstStage}
-                    />
-                    <Button
-                      name={`${t("stage")} 2`}
-                      styleType="primary"
-                      clicked={showSecondStageHandler}
-                      selected={showSecondStage}
-                    />
-                    {!props.loadingRocket &&
-                    (props.rocket.docs[0].landing_legs.number ||
-                      props.rocket.docs[0].landing_legs.material) ? (
-                      <Button
-                        name={t("landingLegs")}
-                        styleType="primary"
-                        clicked={showLandingLegsHandler}
-                        selected={showLandingLegs}
-                      />
-                    ) : null}
-                  </div>
-                  <div className={styles.DetailsContainer}>
-                    <AnimatePresence>
-                      {showOverview && overViewDetails}
-                    </AnimatePresence>
-                    <AnimatePresence>
-                      {showFirstStage && stageOneDetails}
-                    </AnimatePresence>
-                    <AnimatePresence>
-                      {showSecondStage && stageTwoDetails}
-                    </AnimatePresence>
-                    <AnimatePresence>
-                      {showLandingLegs && landingLegsDetails}
-                    </AnimatePresence>
-                  </div>
+                  ) : null}
+                </div>
+                <div className={styles.DetailsContainer}>
+                  <AnimatePresence>
+                    {showOverview ? overViewDetails : null}
+                  </AnimatePresence>
+                  <AnimatePresence>
+                    {showFirstStage ? stageOneDetails : null}
+                  </AnimatePresence>
+                  <AnimatePresence>
+                    {showSecondStage ? stageTwoDetails : null}
+                  </AnimatePresence>
+                  <AnimatePresence>
+                    {showLandingLegs ? landingLegsDetails : null}
+                  </AnimatePresence>
                 </div>
               </div>
-            </>
-          )}
-        </div>
-        <div className={styles.GalleryWrapper}>
-          {props.rocket.docs[0]?.flickr_images.length > 0 ? (
-            <Gallery images={props.rocket.docs[0].flickr_images} />
-          ) : null}
-        </div>
-      </motion.div>
-    </>
+            </div>
+          </>
+        )}
+      </div>
+      <div className={styles.GalleryWrapper}>
+        {props.rocket.docs[0]?.flickr_images.length > 0 ? (
+          <Gallery images={props.rocket.docs[0].flickr_images} />
+        ) : null}
+      </div>
+    </motion.div>
   );
 };
 

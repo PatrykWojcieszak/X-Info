@@ -3,7 +3,6 @@ import "moment-precise-range-plugin";
 import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
-import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import LaunchDetails from "../LaunchDetails/LaunchDetails";
@@ -30,8 +29,6 @@ const initialTime: Time = {
 };
 
 const NextLaunch = (props) => {
-  const { t } = useTranslation();
-
   const [showLaunchDetails, setShowLaunchDetails] = useState(false);
   const [timer, setTimer] = useState<Time>(initialTime);
   const { onFetchNextLaunch, nextLaunchData } = props;
@@ -93,9 +90,7 @@ const NextLaunch = (props) => {
             exit="exit"
             className={styles.Top__Content}>
             <div className={styles.LaunchTitle}>
-              <h2>
-                {isAfterLaunch() ? t("currentLaunch") : t("nextLaunchTitle")}:{" "}
-              </h2>
+              <h2>{isAfterLaunch() ? "CURRENT LAUNCH" : "NEXT LAUNCH"}: </h2>
               <h2 className={styles.LaunchName}>
                 {nextLaunchData.docs[0].name}
               </h2>
@@ -114,7 +109,7 @@ const NextLaunch = (props) => {
                   icon="arrow-down"
                   onClick={() => setShowLaunchDetails(!showLaunchDetails)}
                 />
-                <h4>{t("showDetails")}</h4>
+                <h4>SHOW DETAILS</h4>
               </div>
             )}
             <AnimatePresence>
@@ -153,7 +148,7 @@ const NextLaunch = (props) => {
             animate="show"
             exit="exit">
             <iframe
-              title="SpaceX video"
+              title="spacex video"
               width="100%"
               height="100%"
               src={`https://www.youtube.com/embed/${nextLaunchData.docs[0]?.links.youtube_id}`}
