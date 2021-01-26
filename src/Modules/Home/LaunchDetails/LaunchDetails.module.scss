@@ -3,12 +3,33 @@
 .LaunchDetails {
   background-color: rgba($color: #000000, $alpha: 0.75);
   padding: 0.8rem;
+  display: flex;
   border-radius: 0.8rem;
   margin-top: 2rem;
+
+  h3 {
+    font-weight: 100;
+    color: $fontSecondary;
+    margin-top: 1rem;
+  }
+
+  .TitleContainer {
+    margin-right: 1rem;
+    min-width: 130px;
+  }
 }
 
 @include tablet {
   .LaunchDetails {
     margin-top: 1rem;
+
+    h3 {
+      font-size: 0.8rem;
+    }
+
+    .TitleContainer {
+      margin-right: 0.5rem;
+      min-width: 100px;
+    }
   }
 }

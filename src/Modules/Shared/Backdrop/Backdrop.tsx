@@ -1,6 +1,5 @@
 import React from "react";
 
-//STYLES
 import styles from "./Backdrop.module.scss";
 
 const Backdrop = ({ clicked, show }: backdropProps) =>
