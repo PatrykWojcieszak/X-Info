@@ -3,7 +3,6 @@ import { getLatLngObj } from "tle.js";
 import Globe from "react-globe.gl";
 import { connect } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
 
 //QUERieS
 import { fetchStarlink } from "../../Store/Starlink/actions";
@@ -15,14 +14,11 @@ import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 //TYPES
 import { GlobePoint } from "../../Types";
-import SEO from "../Shared/SEO/SEO";
-import { starlinkPageTitle, starlinkPageDescription } from "../Shared/SEO/Tags";
 
 const Starlink = (props) => {
   const { onFetchStarlink, starlinks } = props;
   const [showStarlinkInfo, setShowStarlinkInfo] = useState(false);
   const [starlinkInfoData, setStarlinkInfoData] = useState<any>({});
-  const { t } = useTranslation();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -72,6 +68,7 @@ const Starlink = (props) => {
   let globe = <></>;
 
   const showStarlinkInfoHandler = (point: any) => {
+    console.log(point);
     setStarlinkInfoData(point);
     setShowStarlinkInfo(true);
   };
@@ -93,41 +90,37 @@ const Starlink = (props) => {
   }
 
   return (
-    <>
-      <SEO title={starlinkPageTitle} description={starlinkPageDescription} />
-      <motion.div
-        initial="initial"
-        animate="in"
-        exit="out"
-        variants={pageVariantsAnim}
-        className={styles.Starlink}>
-        <div className={styles.StarlinkInfo}>
-          <h2>STARLINK</h2>
-          <h3>
-            <b>Starlink</b> {t("starlinkDescriptionPart1")}{" "}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.spacex.com/">
-              SpaceX
-            </a>{" "}
-            {t("starlinkDescriptionPart2")}
-          </h3>
-          <h4>
-            {t("starlinkOnTheOrbit")}: {props.starlinks.docs.length}
-          </h4>
-        </div>
-        {globe}
-        <AnimatePresence>
-          {showStarlinkInfo && (
-            <StarlinkInfo
-              starlink={starlinkInfoData}
-              close={closeStarlinkInfoHandler}
-            />
-          )}
-        </AnimatePresence>
-      </motion.div>
-    </>
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariantsAnim}
+      className={styles.Starlink}>
+      <div className={styles.StarlinkInfo}>
+        <h2>STARLINK</h2>
+        <h3>
+          <b>Starlink</b> is a satellite internet constellation being
+          constructed by{" "}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.spacex.com/">
+            SpaceX
+          </a>{" "}
+          providing satellite Internet access.
+        </h3>
+        <h4>Starlinks on the orbit: {props.starlinks.docs.length}</h4>
+      </div>
+      {globe}
+      <AnimatePresence>
+        {showStarlinkInfo && (
+          <StarlinkInfo
+            starlink={starlinkInfoData}
+            close={closeStarlinkInfoHandler}
+          />
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 };
 

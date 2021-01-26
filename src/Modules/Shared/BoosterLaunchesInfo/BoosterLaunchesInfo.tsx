@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 
 //MODELS
 import { Launch } from "../../../Types";
@@ -15,30 +14,28 @@ const BoosterLaunchesInfo = ({
   reuse_count,
   launches,
 }: boostersType) => {
-  const { t } = useTranslation();
-
   return (
     <div className={styles.Booster}>
       <div className={styles.BoosterInfoContainer}>
         <div className={[styles.InfoElement, styles.One].join(" ")}>
-          <h3>{t("block")}</h3>
+          <h3>Block</h3>
           <h4>{block}</h4>
         </div>
         <div className={[styles.InfoElement, styles.Two].join(" ")}>
-          <h3>{t("serialNumber")}</h3>
+          <h3>Serial Number</h3>
           <h4>{serial}</h4>
         </div>
         <div className={[styles.InfoElement, styles.Three].join(" ")}>
-          <h3>{t("launches")}</h3>
+          <h3>Launches</h3>
           <h4>{reuse_count ? reuse_count + 1 : launches.length > 0 ? 1 : 0}</h4>
         </div>
         <div className={[styles.InfoElement, styles.Four].join(" ")}>
-          <h3>{t("status")}</h3>
+          <h3>Status</h3>
           <h4>{status}</h4>
         </div>
       </div>
       <div className={styles.MissionsContainer}>
-        <h3 style={{ marginLeft: "1.1rem" }}>{t("missions")}</h3>
+        <h3 style={{ marginLeft: "1.1rem" }}>Missions</h3>
         <div className={styles.MissionListWrapper}>
           {launches.map((launch, index) => (
             <Link key={index} to={`/launch/${launch.flight_number}`}>

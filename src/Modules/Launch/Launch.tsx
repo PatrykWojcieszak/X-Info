@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import LaunchExtendedInfo from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo";
@@ -24,13 +23,11 @@ import { pageVariantsAnim } from "../../Animations/Animations_motion";
 import { connect } from "react-redux";
 import { fetchLaunch } from "../../Store/Launch/actions";
 import LaunchSkeleton from "../Shared/Skeletons/LaunchSkeleton";
-import SEO from "../Shared/SEO/SEO";
-import { launchPageTitle, launchPageDescription } from "../Shared/SEO/Tags";
 
 const Launch = (props) => {
   const { flight_number } = useParams();
+
   const { onFetchLaunch } = props;
-  const { t } = useTranslation();
 
   useEffect(() => {
     onFetchLaunch(flight_number);
@@ -73,7 +70,7 @@ const Launch = (props) => {
   if (props.launch.docs[0] && props.launch.docs[0].ships.length > 0) {
     ship = (
       <div className={styles.AdditionalInfo}>
-        <h2>{t("usedShips")}</h2>
+        <h2>USED SHIPS</h2>
         <div className={styles.AdditionalInfo__Content}>
           {props.launch.docs[0].ships.map((ship, index) => (
             <Ship key={index} name={ship.name} img={ship.image} />
@@ -90,32 +87,20 @@ const Launch = (props) => {
           (core, index) =>
             core.landpad && (
               <div key={index}>
-                <h2>
-                  {t("core")} #{index + 1}
-                </h2>
+                <h2>CORE #{index + 1}</h2>
                 <InfoLine
-                  title={t("landing")}
-                  value={
-                    core.landing_success
-                      ? t("launchSuccessful")
-                      : t("launchFailure")
-                  }
+                  title="LANDING"
+                  value={core.landing_success ? "SUCCESSFUL" : "FAILED"}
                 />
                 {core.landing_type && (
-                  <InfoLine
-                    title={t("landingType")}
-                    value={core.landing_type}
-                  />
+                  <InfoLine title="LANDING TYPE" value={core.landing_type} />
                 )}
                 {core.landpad.name && (
-                  <InfoLine title={t("landingPad")} value={core.landpad.name} />
+                  <InfoLine title="LANDING PAD" value={core.landpad.name} />
                 )}
-                <InfoLine
-                  title={t("reused")}
-                  value={core.reused ? t("yes") : t("no")}
-                />
+                <InfoLine title="REUSED" value={core.reused ? "YES" : "NO"} />
                 {core.flight && (
-                  <InfoLine title={t("flights")} value={`${core.flight}`} />
+                  <InfoLine title="FLIGHTS" value={`${core.flight}`} />
                 )}
               </div>
             )
@@ -177,35 +162,33 @@ const Launch = (props) => {
               <div className={styles.InfoWrapper}>
                 {props.launch.docs[0]?.payloads.map((payload, index) => (
                   <div key={index}>
-                    <h2>
-                      {t("payload")} #{index + 1}
-                    </h2>
+                    <h2>PAYLOAD #{index + 1}</h2>
                     {payload.name && (
-                      <InfoLine title={t("name")} value={`${payload.name}`} />
+                      <InfoLine title="NAME" value={`${payload.name}`} />
                     )}
-                    {payload.customers[0] && (
+                    {payload.customers && (
                       <InfoLine
-                        title={t("customer")}
+                        title="CUSTOMER"
                         value={`${payload.customers}`}
                       />
                     )}
                     {payload.manufacturers.length !== 0 ? (
                       <InfoLine
-                        title={t("manufacturer")}
+                        title="MANUFACTURER"
                         value={`${payload.manufacturers[0]}`}
                       />
                     ) : null}
                     {payload.type && (
-                      <InfoLine title={t("type")} value={`${payload.type}`} />
+                      <InfoLine title="TYPE" value={`${payload.type}`} />
                     )}
                     {(payload.mass_kg || payload.mass_lbs) && (
                       <InfoLine
-                        title={t("mass")}
+                        title="MASS"
                         value={`${payload.mass_kg} kg | ${payload.mass_lbs} lb`}
                       />
                     )}
                     {payload.orbit && (
-                      <InfoLine title={t("orbit")} value={`${payload.orbit}`} />
+                      <InfoLine title="ORBIT" value={`${payload.orbit}`} />
                     )}
                   </div>
                 ))}
@@ -222,59 +205,59 @@ const Launch = (props) => {
             <Gallery images={props.launch.docs[0].links.flickr.original} />
           ) : null}
           <div className={styles.MediaContainer}>
-            {props.launch.docs[0]?.links.reddit.campaign && (
+            {props.launch.docs[0]?.links.reddit.campaign ? (
               <MediaLink
-                name={t("campaign")}
+                name="CAMPAIGN"
                 icon="reddit-alien"
                 brand
                 link={props.launch.docs[0]?.links.reddit.campaign}
               />
-            )}
+            ) : null}
 
-            {props.launch.docs[0]?.links.reddit.launch && (
+            {props.launch.docs[0]?.links.reddit.launch ? (
               <MediaLink
-                name={t("launch")}
+                name="LAUNCH"
                 icon="reddit-alien"
                 brand
                 link={props.launch.docs[0]?.links.reddit.launch}
               />
-            )}
+            ) : null}
 
-            {props.launch.docs[0]?.links.reddit.media && (
+            {props.launch.docs[0]?.links.reddit.media ? (
               <MediaLink
-                name={t("media")}
+                name="MEDIA"
                 icon="reddit-alien"
                 brand
                 link={props.launch.docs[0]?.links.reddit.media}
               />
-            )}
+            ) : null}
 
-            {props.launch.docs[0]?.links.wikipedia && (
+            {props.launch.docs[0]?.links.wikipedia ? (
               <MediaLink
-                name={t("wikipedia")}
+                name="WIKIPEDIA"
                 icon="wikipedia-w"
                 brand
                 link={props.launch.docs[0]?.links.wikipedia}
               />
-            )}
+            ) : null}
 
-            {props.launch.docs[0]?.links.article && (
+            {props.launch.docs[0]?.links.article ? (
               <MediaLink
-                name={t("article")}
+                name="ARTICLE"
                 icon="file-alt"
                 brand={false}
                 link={props.launch.docs[0]?.links.article}
               />
-            )}
+            ) : null}
 
-            {props.launch.docs[0]?.links.presskit && (
+            {props.launch.docs[0]?.links.presskit ? (
               <MediaLink
-                name={t("pressKit")}
+                name="PRESS KIT"
                 icon="newspaper"
                 brand={false}
                 link={props.launch.docs[0]?.links.presskit}
               />
-            )}
+            ) : null}
           </div>
         </div>
       </>
@@ -283,10 +266,6 @@ const Launch = (props) => {
 
   return (
     <>
-      <SEO
-        title={`${launchPageTitle} - ${props.launch.docs[0]?.flight_number}`}
-        description={launchPageDescription}
-      />
       <motion.div
         initial="initial"
         animate="in"
