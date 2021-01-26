@@ -1,16 +1,11 @@
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
-
-//COMPONENTS
+import { DropdownElement } from "../../../Types";
 import Button from "../Button/Button";
 import CustomDatePicker from "../DatePicker/CustomDatePicker";
 import Dropdown from "../Dropdown/Dropdown";
 
 //STYLES
 import styles from "./Filter.module.scss";
-
-//TYPES
-import { DropdownElement } from "../../../Types";
 
 const Filter = ({
   rocketsFilterList,
@@ -27,7 +22,6 @@ const Filter = ({
   const [showDDRockets, setShowDDRockets] = useState(false);
   const [showDDLaunchSites, setShowDDLaunchSites] = useState(false);
   const [showDDStatuses, setShowDDStatuses] = useState(false);
-  const { t } = useTranslation();
 
   const clearFilterHandler = () => {
     rocketSelected(0);
@@ -40,7 +34,7 @@ const Filter = ({
   return (
     <div className={styles.Filter}>
       <div className={styles.OptionWrapper}>
-        <h3>{t("rocket")}:</h3>
+        <h3>ROCKET:</h3>
         <Dropdown
           title={rocketsFilterList.find((x) => x.selected)?.title}
           list={rocketsFilterList}
@@ -51,21 +45,21 @@ const Filter = ({
         />
       </div>
       <div className={styles.OptionWrapper}>
-        <h3>{t("dateFrom")}:</h3>
+        <h3>DATE FROM:</h3>
         <CustomDatePicker
           date={dateFrom}
           dateChanged={(date) => setDateFrom(date)}
         />
       </div>
       <div className={styles.OptionWrapper}>
-        <h3>{t("dateTo")}:</h3>
+        <h3>DATE TO:</h3>
         <CustomDatePicker
           date={dateTo}
           dateChanged={(date) => setDateTo(date)}
         />
       </div>
       <div className={styles.OptionWrapper}>
-        <h3>{t("launchSite")}:</h3>
+        <h3>LAUNCH SITE:</h3>
         <Dropdown
           title={launchSitesFilterList.find((x) => x.selected)?.title}
           list={launchSitesFilterList}
@@ -76,7 +70,7 @@ const Filter = ({
         />
       </div>
       <div className={styles.OptionWrapper}>
-        <h3 style={{ textTransform: "uppercase" }}>{t("status")}:</h3>
+        <h3>STATUS:</h3>
         <Dropdown
           title={statusesFilterList.find((x) => x.selected)?.title}
           list={statusesFilterList}
@@ -89,7 +83,7 @@ const Filter = ({
       <div className={styles.BtnWrapper}>
         <Button
           clicked={clearFilterHandler}
-          name={t("clearFilter")}
+          name="CLEAR FILTER"
           styleType="secondary"
         />
       </div>

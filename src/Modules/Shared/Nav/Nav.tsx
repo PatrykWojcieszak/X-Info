@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import NavElement from "./NavElement/NavElement";
@@ -8,24 +7,16 @@ import NavElement from "./NavElement/NavElement";
 import styles from "./Nav.module.scss";
 
 const Nav = () => {
-  const { t } = useTranslation();
-
   return (
     <div className={styles.Nav}>
-      <NavElement name={t("homeNav")} link="/home" exact={true}></NavElement>
+      <NavElement name="HOME" link="/home" exact={true}></NavElement>
       <NavElement
-        name={t("launchesNav")}
+        name="LAUNCHES"
         link="/launches/upcoming"
         exact={true}></NavElement>
-      <NavElement
-        name={t("vehiclesNav")}
-        link="/vehicles"
-        exact={true}></NavElement>
-      <NavElement
-        name={t("starlinkNav")}
-        link="/starlink"
-        exact={true}></NavElement>
-      <NavElement name={t("aboutNav")} link="/about" exact={true}></NavElement>
+      <NavElement name="VEHICLES" link="/vehicles" exact={true}></NavElement>
+      <NavElement name="STARLINK" link="/starlink" exact={true}></NavElement>
+      <NavElement name="ABOUT" link="/about" exact={true}></NavElement>
     </div>
   );
 };

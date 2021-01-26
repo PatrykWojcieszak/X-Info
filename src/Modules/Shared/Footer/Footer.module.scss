@@ -4,11 +4,9 @@
   @include flex-center;
   margin-bottom: 1rem;
   font-size: 0.8rem;
-  z-index: 1000;
 
   h3 {
     font-weight: 100;
-    z-index: 1000;
     color: $fontSecondary;
   }
 
@@ -17,48 +15,6 @@
     color: $blue;
     cursor: pointer;
     font-weight: 300;
-  }
-
-  .LanguageSelector {
-    margin-left: 1.5rem;
-    color: $fontPrimary;
-    cursor: pointer;
-    position: relative;
-
-    svg {
-      font-size: 1.4rem;
-      margin-right: 0.6rem;
-    }
-
-    .LanguagesWrapper {
-      visibility: hidden;
-      opacity: 0;
-      position: absolute;
-      top: -70px;
-      background-color: $foreground;
-      border-radius: 0.5rem;
-      width: 120px;
-
-      h4 {
-        color: $fontPrimary;
-        padding: 0.4rem 0.8rem;
-        border-radius: 0.2rem;
-      }
-
-      .Selected {
-        background-color: $background;
-        color: $blue;
-
-        h4 {
-          cursor: pointer;
-        }
-      }
-    }
-
-    .Show {
-      visibility: visible;
-      opacity: 1;
-    }
   }
 }
 

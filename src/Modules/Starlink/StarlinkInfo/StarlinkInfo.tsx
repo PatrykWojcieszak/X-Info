@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
 
 //TYPES
 import { GlobePoint } from "../../../Types";
@@ -12,8 +11,6 @@ import styles from "./StarlinkInfo.module.scss";
 import { pageVariantsAnim } from "../../../Animations/Animations_motion";
 
 const StarlinkInfo = ({ starlink, close }: starlinkProps) => {
-  const { t } = useTranslation();
-
   return (
     <motion.div
       initial="initial"
@@ -26,10 +23,10 @@ const StarlinkInfo = ({ starlink, close }: starlinkProps) => {
         <h2>STARLINK</h2>
         <div className={styles.InfoContainer}>
           <div className={styles.NameWrapper}>
-            <h4>{t("name")}</h4>
-            <h4>{t("version")}</h4>
-            <h4>{t("height")}</h4>
-            <h4>{t("velocity")}</h4>
+            <h4>NAME</h4>
+            <h4>VERSION</h4>
+            <h4>HEIGHT</h4>
+            <h4>VELOCITY</h4>
           </div>
           <div className={styles.ValuesWrapper}>
             <h4>{starlink.label}</h4>
@@ -40,7 +37,7 @@ const StarlinkInfo = ({ starlink, close }: starlinkProps) => {
         </div>
       </div>
       <div className={styles.Right}>
-        <h2>{t("flight")}</h2>
+        <h2>LAUNCH</h2>
         <Link to={`launch/${starlink.launch?.flight_number}`}>
           <div className={styles.LaunchInfoWrapper}>
             <h3>{starlink.launch?.name}</h3>

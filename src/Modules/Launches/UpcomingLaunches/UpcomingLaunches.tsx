@@ -15,16 +15,26 @@ import { Launch } from "../../../Types";
 
 const UpcomingLaunches = ({ launches, loading }: upcomingLaunchesProps) => {
   let upcomingLaunchesArr = (
-    <>
+    <motion.div
+      variants={showLaunchesList}
+      initial="initial"
+      animate="in"
+      exit="out"
+      className={styles.LaunchesWrapper}>
       {[1, 2, 3, 4, 5].map((n) => (
         <LaunchShortInfoSkeleton key={n} />
       ))}
-    </>
+    </motion.div>
   );
 
   if (!loading) {
     upcomingLaunchesArr = (
-      <>
+      <motion.div
+        variants={showLaunchesList}
+        initial="initial"
+        animate="in"
+        exit="out"
+        className={styles.LaunchesWrapper}>
         {launches.map((launch, index) => (
           <LaunchShortInfo
             key={index}
@@ -37,24 +47,23 @@ const UpcomingLaunches = ({ launches, loading }: upcomingLaunchesProps) => {
             nationality={launch.payloads[0].nationalities[0]}
           />
         ))}
-      </>
+      </motion.div>
     );
   }
 
-  if (launches.length === 0) upcomingLaunchesArr = <NotFoundLaunches />;
-
-  return (
-    <>
+  if (launches.length === 0)
+    upcomingLaunchesArr = (
       <motion.div
         variants={showLaunchesList}
         initial="initial"
         animate="in"
         exit="out"
         className={styles.LaunchesWrapper}>
-        {upcomingLaunchesArr}
+        <NotFoundLaunches />
       </motion.div>
-    </>
-  );
+    );
+
+  return <>{upcomingLaunchesArr}</>;
 };
 
 type upcomingLaunchesProps = {

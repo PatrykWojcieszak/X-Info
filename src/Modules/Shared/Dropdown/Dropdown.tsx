@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-//HOOKS
-import { useClickOutside } from "../../../Hooks";
+import { useClickOutside } from "../../../Hooks/useClickOutside";
 
 //STYLES
 import styles from "./Dropdown.module.scss";

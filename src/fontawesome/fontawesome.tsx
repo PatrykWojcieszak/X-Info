@@ -13,7 +13,6 @@ import {
   faTimes,
   faAngleUp,
   faAngleDown,
-  faGlobeAmericas,
 } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
 import {
@@ -35,6 +34,5 @@ library.add(
   faBars,
   faTimes,
   faAngleUp,
-  faAngleDown,
-  faGlobeAmericas
+  faAngleDown
 );
