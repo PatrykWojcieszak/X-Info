@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import LaunchExtendedInfo from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo";
@@ -29,147 +30,15 @@ import { connect } from "react-redux";
 //TYPES
 import { Launch, QueryResult } from "../../Types";
 import { changeDDElementToTrue } from "../../Utility/Utility";
-
-const launchesFilterUpcoming = [
-  {
-    id: 0,
-    title: "UPCOMING LAUNCHES",
-    selected: true,
-    key: "launchesType",
-  },
-  {
-    id: 1,
-    title: "PAST LAUNCHES",
-    selected: false,
-    key: "launchesType",
-  },
-  {
-    id: 2,
-    title: "BOOSTERS",
-    selected: false,
-    key: "launchesType",
-  },
-];
-
-const launchesFilterPast = [
-  {
-    id: 0,
-    title: "UPCOMING LAUNCHES",
-    selected: false,
-    key: "launchesType",
-  },
-  {
-    id: 1,
-    title: "PAST LAUNCHES",
-    selected: true,
-    key: "launchesType",
-  },
-  {
-    id: 2,
-    title: "BOOSTERS",
-    selected: false,
-    key: "launchesType",
-  },
-];
-
-const filterRockets = [
-  {
-    id: 0,
-    title: "All",
-    selected: true,
-    key: "rockets",
-  },
-  {
-    id: 1,
-    title: "Falcon 1",
-    selected: false,
-    key: "rockets",
-  },
-  {
-    id: 2,
-    title: "Falcon 9",
-    selected: false,
-    key: "rockets",
-  },
-  {
-    id: 3,
-    title: "Falcon Heavy",
-    selected: false,
-    key: "rockets",
-  },
-  {
-    id: 4,
-    title: "Starship",
-    selected: false,
-    key: "rockets",
-  },
-];
-
-const filterLaunchSite = [
-  {
-    id: 0,
-    title: "All",
-    selected: true,
-    key: "launchSite",
-  },
-  {
-    id: 1,
-    title: "VAFB SLC 3W",
-    selected: false,
-    key: "5e9e4501f5090910d4566f83",
-  },
-  {
-    id: 2,
-    title: "CCSFS SLC 40",
-    selected: false,
-    key: "5e9e4501f509094ba4566f84",
-  },
-  {
-    id: 3,
-    title: "STLS",
-    selected: false,
-    key: "5e9e4502f5090927f8566f85",
-  },
-  {
-    id: 4,
-    title: "Kwajalein Atoll",
-    selected: false,
-    key: "5e9e4502f5090995de566f86",
-  },
-  {
-    id: 5,
-    title: "VAFB SLC 4E",
-    selected: false,
-    key: "5e9e4502f509092b78566f87",
-  },
-  {
-    id: 6,
-    title: "KSC LC 39A",
-    selected: false,
-    key: "5e9e4502f509094188566f88",
-  },
-];
-
-const filterStatus = [
-  {
-    id: 0,
-    title: "All",
-    selected: true,
-    key: "status",
-  },
-  {
-    id: 1,
-    title: "Success",
-    selected: false,
-    key: "true",
-  },
-  {
-    id: 2,
-    title: "Failure",
-    selected: false,
-    key: "false",
-  },
-];
+import {
+  filterLaunchSite,
+  filterRockets,
+  filterStatus,
+  launchesFilterPast,
+  launchesFilterUpcoming,
+} from "../../Other/DDLists";
+import SEO from "../Shared/SEO/SEO";
+import { launchesPageTitle, launchesPageDescription } from "../Shared/SEO/Tags";
 
 const Launches = (props) => {
   const [isLaunchesTypeDDOpen, setIsLaunchesTypeDDOpen] = useState(false);
@@ -184,6 +53,8 @@ const Launches = (props) => {
   const [dateToFilter, setDateToFilter] = useState(
     new Date(new Date().setFullYear(new Date().getFullYear() + 1))
   );
+
+  const { t } = useTranslation();
 
   const { launchType } = useParams();
   const {
@@ -262,103 +133,108 @@ const Launches = (props) => {
   };
 
   return (
-    <motion.div
-      initial="initial"
-      animate="in"
-      exit="out"
-      variants={pageVariantsAnim}
-      className={styles.Launches}>
-      <div className={styles.Latest}>
-        <h2>LATEST LAUNCH</h2>
-        {props.loadingLatestLaunch ? (
-          <LaunchExtendedInfoSkeleton />
-        ) : (
-          <LaunchExtendedInfo
-            showMoreDetailsButton
-            details={props.latestLaunch.docs[0].details}
-            launchName={props.latestLaunch.docs[0].name}
-            date_local={props.latestLaunch.docs[0].date_local}
-            date_utc={props.latestLaunch.docs[0].date_utc}
-            rocketName={props.latestLaunch.docs[0].rocket.name}
-            launchSiteName={props.latestLaunch.docs[0].launchpad.full_name}
-            flightNumber={props.latestLaunch.docs[0].flight_number}
-            patchImg={props.latestLaunch.docs[0].links.patch.small}
-            success={props.latestLaunch.docs[0].success}
-            failures={props.latestLaunch.docs[0].failures}
-            launchId={props.latestLaunch.docs[0].id}
-            date_precision={props.latestLaunch.docs[0].date_precision}
-          />
-        )}
-      </div>
-      <div className={styles.Content}>
-        <div className={styles.ButtonsWrapper}>
-          <Dropdown
-            title={launchTypeFilter.find((x) => x.selected)?.title}
-            list={launchTypeFilter}
-            isListOpen={isLaunchesTypeDDOpen}
-            styleType="primary"
-            toggleList={(isOpen: boolean) => toggleLaunchTypeHandler(isOpen)}
-            selectedElement={(id: number) =>
-              launchTypeFilterSelectedHandler(id)
-            }
-          />
-          {!launchTypeFilter[2].selected && (
-            <Button
-              name="FILTER"
-              styleType="primary"
-              clicked={() => setShowFilterModal(!showFilterModal)}
+    <>
+      <SEO title={launchesPageTitle} description={launchesPageDescription} />
+      <motion.div
+        initial="initial"
+        animate="in"
+        exit="out"
+        variants={pageVariantsAnim}
+        className={styles.Launches}>
+        <div className={styles.Latest}>
+          <h2>{t("latestLaunchTitle")}</h2>
+          {props.loadingLatestLaunch ? (
+            <LaunchExtendedInfoSkeleton />
+          ) : (
+            <LaunchExtendedInfo
+              showMoreDetailsButton
+              details={props.latestLaunch.docs[0].details}
+              launchName={props.latestLaunch.docs[0].name}
+              date_local={props.latestLaunch.docs[0].date_local}
+              date_utc={props.latestLaunch.docs[0].date_utc}
+              rocketName={props.latestLaunch.docs[0].rocket.name}
+              launchSiteName={props.latestLaunch.docs[0].launchpad.full_name}
+              flightNumber={props.latestLaunch.docs[0].flight_number}
+              patchImg={props.latestLaunch.docs[0].links.patch.small}
+              success={props.latestLaunch.docs[0].success}
+              failures={props.latestLaunch.docs[0].failures}
+              launchId={props.latestLaunch.docs[0].id}
+              date_precision={props.latestLaunch.docs[0].date_precision}
             />
           )}
         </div>
-
-        <AnimatePresence>
-          {showFilterModal && (
-            <Modal
-              show={showFilterModal}
-              closeModal={() => setShowFilterModal(false)}>
-              <Filter
-                rocketsFilterList={rocketTypeFilter}
-                rocketSelected={(id: number) => rocketTypeFilterHandler(id)}
-                launchSitesFilterList={launchSiteFilter}
-                launchSiteSelected={(id: number) => launchSiteFilterHandler(id)}
-                statusesFilterList={launchStatusFilter}
-                launchStatusSelected={(id: number) =>
-                  launchStatusFilterHandler(id)
-                }
-                dateFrom={dateFromFilter}
-                setDateFrom={(dateFrom: Date) => setDateFromFilter(dateFrom)}
-                setDateTo={(dateTo: Date) => setDateToFilter(dateTo)}
-                dateTo={dateToFilter}
+        <div className={styles.Content}>
+          <div className={styles.ButtonsWrapper}>
+            <Dropdown
+              title={launchTypeFilter.find((x) => x.selected)?.title}
+              list={launchTypeFilter}
+              isListOpen={isLaunchesTypeDDOpen}
+              styleType="primary"
+              toggleList={(isOpen: boolean) => toggleLaunchTypeHandler(isOpen)}
+              selectedElement={(id: number) =>
+                launchTypeFilterSelectedHandler(id)
+              }
+            />
+            {!launchTypeFilter[2].selected && (
+              <Button
+                name={t("filter")}
+                styleType="primary"
+                clicked={() => setShowFilterModal(!showFilterModal)}
               />
-            </Modal>
-          )}
-        </AnimatePresence>
+            )}
+          </div>
 
-        <AnimatePresence>
-          {launchTypeFilter[0].selected && (
-            <UpcomingLaunches
-              launches={filter(props.upcomingLaunches)}
-              loading={props.loadingUpcomingLaunches}
-            />
-          )}
-        </AnimatePresence>
+          <AnimatePresence>
+            {showFilterModal && (
+              <Modal
+                show={showFilterModal}
+                closeModal={() => setShowFilterModal(false)}>
+                <Filter
+                  rocketsFilterList={rocketTypeFilter}
+                  rocketSelected={(id: number) => rocketTypeFilterHandler(id)}
+                  launchSitesFilterList={launchSiteFilter}
+                  launchSiteSelected={(id: number) =>
+                    launchSiteFilterHandler(id)
+                  }
+                  statusesFilterList={launchStatusFilter}
+                  launchStatusSelected={(id: number) =>
+                    launchStatusFilterHandler(id)
+                  }
+                  dateFrom={dateFromFilter}
+                  setDateFrom={(dateFrom: Date) => setDateFromFilter(dateFrom)}
+                  setDateTo={(dateTo: Date) => setDateToFilter(dateTo)}
+                  dateTo={dateToFilter}
+                />
+              </Modal>
+            )}
+          </AnimatePresence>
 
-        <AnimatePresence>
-          {launchTypeFilter[1].selected && (
-            <PastLaunches
-              launches={filter(props.pastLaunches)}
-              loading={props.loadingPastLaunches}
-            />
-          )}
-        </AnimatePresence>
+          <AnimatePresence>
+            {launchTypeFilter[0].selected && (
+              <UpcomingLaunches
+                launches={filter(props.upcomingLaunches)}
+                loading={props.loadingUpcomingLaunches}
+              />
+            )}
+          </AnimatePresence>
 
-        <AnimatePresence>
-          {launchTypeFilter[2].selected && <Boosters />}
-        </AnimatePresence>
-      </div>
+          <AnimatePresence>
+            {launchTypeFilter[1].selected && (
+              <PastLaunches
+                launches={filter(props.pastLaunches)}
+                loading={props.loadingPastLaunches}
+              />
+            )}
+          </AnimatePresence>
 
-      <ScrollToTop />
-    </motion.div>
+          <AnimatePresence>
+            {launchTypeFilter[2].selected && <Boosters />}
+          </AnimatePresence>
+        </div>
+
+        <ScrollToTop />
+      </motion.div>
+    </>
   );
 };
 

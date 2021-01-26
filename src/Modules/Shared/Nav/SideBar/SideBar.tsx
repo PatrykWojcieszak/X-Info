@@ -1,26 +1,26 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import NavElement from "../NavElement/NavElement";
 import { MenuToggle } from "./MenuToggle/MenuToggle";
 
 //HOOKS
-import { useDimensions } from "../../../../Hooks/useDimmensions";
-import { useClickOutside } from "../../../../Hooks/useClickOutside";
+import { useDimensions } from "../../../../Hooks";
+import { useClickOutside } from "../../../../Hooks";
 
 //STYLES
 import styles from "./SideBar.module.scss";
-
-//ANIM
 import { sideBarAnim } from "../../../../Animations/Animations_motion";
 
 const SideBar = () => {
-  // const [isOpen, toggleOpen] = useCycle(false, true);
   const [isOpen, toggleOpen] = useState(false);
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
+
+  const { t } = useTranslation();
 
   const bgStyles: string[] = [];
   let location = useLocation();
@@ -50,14 +50,23 @@ const SideBar = () => {
         variants={sideBarAnim}
         className={styles.Menu}>
         <MenuToggle toggle={() => toggleOpen(!isOpen)} />
-        <NavElement name="HOME" link="/home" exact={true}></NavElement>
+        <NavElement name={t("homeNav")} link="/home" exact={true}></NavElement>
         <NavElement
-          name="LAUNCHES"
+          name={t("launchesNav")}
           link="/launches/upcoming"
           exact={true}></NavElement>
-        <NavElement name="VEHICLES" link="/vehicles" exact={true}></NavElement>
-        <NavElement name="STARLINK" link="/starlink" exact={true}></NavElement>
-        <NavElement name="ABOUT" link="/about" exact={true}></NavElement>
+        <NavElement
+          name={t("vehiclesNav")}
+          link="/vehicles"
+          exact={true}></NavElement>
+        <NavElement
+          name={t("starlinkNav")}
+          link="/starlink"
+          exact={true}></NavElement>
+        <NavElement
+          name={t("aboutNav")}
+          link="/about"
+          exact={true}></NavElement>
       </motion.div>
     </motion.div>
   );
