@@ -284,7 +284,7 @@ const Launch = (props) => {
   return (
     <>
       <SEO
-        title={`${launchPageTitle} - ${props.launch.docs[0].flight_number}`}
+        title={`${launchPageTitle} - ${props.launch.docs[0]?.flight_number}`}
         description={launchPageDescription}
       />
       <motion.div
