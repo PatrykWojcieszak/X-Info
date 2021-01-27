@@ -28,7 +28,8 @@ const LaunchShortInfo = ({
         <div className={styles.Top}>
           <div className={styles.Name_Date}>
             <h2>{launchName}</h2>
-            <h4>{dateParsed.toDateString()}</h4>
+            {/* <h4>{dateParsed.toDateString()}</h4> */}
+            <h4>{t("key", { date: new Date() })}</h4>
           </div>
           <div className={styles.Column}>
             <div className={styles.Row}>

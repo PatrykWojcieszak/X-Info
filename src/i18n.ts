@@ -2,6 +2,8 @@ import i18n from "i18next";
 import Backend from "i18next-xhr-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
+import moment from "moment";
+import "moment/locale/pl";
 
 i18n
   .use(Backend)
@@ -14,7 +16,13 @@ i18n
       loadPath: "/locales/{{lng}}/{{ns}}.json",
     },
     interpolation: {
-      escapeValue: false,
+      format: function (value, formatting, lng) {
+        if (value instanceof Date) {
+          moment.locale(lng);
+          return moment(value).format("LL");
+        }
+        return value.toString();
+      },
     },
   });
 
