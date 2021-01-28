@@ -1,27 +1,31 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import { Button, LaunchShortInfo } from "../../Shared";
+import LaunchShortInfoSkeleton from "../../Shared/Skeletons/LaunchShortInfoSkeleton";
 
 //STYLES
 import styles from "./UpcomingLaunches.module.scss";
 
-//MODELS
-import LaunchShortInfoSkeleton from "../../Shared/Skeletons/LaunchShortInfoSkeleton";
-
 //REDUX
 import { fetchUpcomingLaunches } from "../../../Store/UpcomingLaunches/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../Store";
 
-const UpcomingLaunches = (props) => {
+export const UpcomingLaunches = () => {
   const { t } = useTranslation();
-  const { onFetchUpcomingLaunch, upcomingLaunches } = props;
+
+  const upcomingLaunches = useSelector(
+    (state: RootState) => state.upcomingLaunches
+  );
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (upcomingLaunches.docs.length === 0) onFetchUpcomingLaunch();
-  }, [onFetchUpcomingLaunch, upcomingLaunches]);
+    dispatch(fetchUpcomingLaunches());
+  }, [dispatch]);
 
   return (
     <div className={styles.UpcomingLaunches}>
@@ -29,9 +33,9 @@ const UpcomingLaunches = (props) => {
         <h2>{t("upcomingLaunchesTitle")}</h2>
       </div>
       <div className={styles.Content}>
-        {props.loadingUpcomingLaunches
+        {upcomingLaunches.loading
           ? [1, 2, 3, 4, 5].map((n) => <LaunchShortInfoSkeleton key={n} />)
-          : upcomingLaunches.docs
+          : upcomingLaunches.upcomingLaunches.docs
               .slice(0, 5)
               .map((launch, index) => (
                 <LaunchShortInfo
@@ -54,18 +58,3 @@ const UpcomingLaunches = (props) => {
     </div>
   );
 };
-
-const mapStateToProps = (state) => {
-  return {
-    upcomingLaunches: state.upcomingLaunches.upcomingLaunches,
-    loadingUpcomingLaunches: state.upcomingLaunches.loading,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onFetchUpcomingLaunch: () => dispatch(fetchUpcomingLaunches()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(UpcomingLaunches);

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
@@ -13,14 +12,21 @@ import styles from "./RecentLaunches.module.scss";
 
 //REDUX
 import { fetchRecentLaunches } from "../../../Store/RecentLaunches/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../Store";
 
-const RecentLaunches = (props) => {
-  const { onFetchRecentLaunch, recentLaunches } = props;
+export const RecentLaunches = () => {
   const { t } = useTranslation();
 
+  const recentLaunches = useSelector(
+    (state: RootState) => state.recentLaunches
+  );
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    if (recentLaunches.docs.length === 0) onFetchRecentLaunch();
-  }, [onFetchRecentLaunch, recentLaunches]);
+    dispatch(fetchRecentLaunches());
+  }, [dispatch]);
 
   return (
     <div className={styles.RecentLaunches}>
@@ -31,9 +37,9 @@ const RecentLaunches = (props) => {
         </Link>
       </div>
       <div className={styles.Content}>
-        {props.loadingRecentLaunches
+        {recentLaunches.loading
           ? [1, 2, 3, 4, 5].map((n) => <RecentLaunchSkeleton key={n} />)
-          : recentLaunches.docs.map((launch, index) => (
+          : recentLaunches.recentLaunches.docs.map((launch, index) => (
               <Launch
                 flightNumber={launch.flight_number}
                 key={index}
@@ -47,18 +53,3 @@ const RecentLaunches = (props) => {
     </div>
   );
 };
-
-const mapStateToProps = (state) => {
-  return {
-    recentLaunches: state.recentLaunches.recentLaunches,
-    loadingRecentLaunches: state.recentLaunches.loading,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onFetchRecentLaunch: () => dispatch(fetchRecentLaunches()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(RecentLaunches);

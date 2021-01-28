@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 import "moment-precise-range-plugin";
 
 //COMPONENTS
-import RecentLaunches from "./RecentLaunches/RecentLaunches";
-import UpcomingLaunches from "./UpcomingLaunches/UpcomingLaunches";
-import NextLaunch from "./NextLaunch/NextLaunch";
-import LaunchHistoryChart from "../Shared/LaunchHistoryChart/LaunchHistoryChart";
+import { RecentLaunches } from "./RecentLaunches/RecentLaunches";
+import { UpcomingLaunches } from "./UpcomingLaunches/UpcomingLaunches";
+import { NextLaunch } from "./NextLaunch/NextLaunch";
+import { LaunchHistoryChart } from "../Shared/LaunchHistoryChart/LaunchHistoryChart";
 import { SEO } from "../Shared";
 
 //STYLES

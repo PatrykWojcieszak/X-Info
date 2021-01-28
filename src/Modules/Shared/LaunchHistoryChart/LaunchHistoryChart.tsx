@@ -8,33 +8,39 @@ import { useTranslation } from "react-i18next";
 import styles from "./LaunchHistoryChart.module.scss";
 
 //REDUX
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../Store";
 import { fetchPastLaunches } from "../../../Store/PastLaunches/actions";
 import { fetchUpcomingLaunches } from "../../../Store/UpcomingLaunches/actions";
 
 //OTHER
 import { getYear } from "../../../Utility/Utility";
 
-const LaunchHistoryChart = (props) => {
+export const LaunchHistoryChart = () => {
   const { t } = useTranslation();
-  const { onFetchUpcomingLaunches, onFetchPastLaunches } = props;
+  const upcomingLaunches = useSelector(
+    (state: RootState) => state.upcomingLaunches
+  );
+  const pastLaunches = useSelector((state: RootState) => state.pastLaunches);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    onFetchUpcomingLaunches();
-    onFetchPastLaunches();
-  }, [onFetchUpcomingLaunches, onFetchPastLaunches]);
+    dispatch(fetchPastLaunches());
+    dispatch(fetchUpcomingLaunches());
+  }, [dispatch]);
 
   const launchesYearStart: number = 2006;
 
   let data = {};
 
-  if (!props.loadingUpcomingLaunches && !props.loadingPastLaunches) {
-    const upcomingLaunches: number[] = props.upcomingLaunches.docs.map(
+  if (!upcomingLaunches.loading && !pastLaunches.loading) {
+    const upcomingLaunchesYears: number[] = upcomingLaunches.upcomingLaunches.docs.map(
       (launch) => getYear(launch)
     );
-    upcomingLaunches.sort();
+    upcomingLaunchesYears.sort();
 
-    const launchesStartEnd: number | undefined = last(upcomingLaunches);
+    const launchesStartEnd: number | undefined = last(upcomingLaunchesYears);
     const years = range(
       launchesYearStart,
       launchesStartEnd ? launchesStartEnd + 1 : new Date().getFullYear()
@@ -48,7 +54,7 @@ const LaunchHistoryChart = (props) => {
           backgroundColor: "rgb(255,142,48)",
           data: years.map(
             (year) =>
-              props.pastLaunches.docs.filter(
+              pastLaunches.pastLaunches.docs.filter(
                 (launch) =>
                   getYear(launch) === year &&
                   launch.rocket.name === "Falcon 1" &&
@@ -61,7 +67,7 @@ const LaunchHistoryChart = (props) => {
           backgroundColor: "rgb(0,102,255)",
           data: years.map(
             (year) =>
-              props.pastLaunches.docs.filter(
+              pastLaunches.pastLaunches.docs.filter(
                 (launch) =>
                   getYear(launch) === year &&
                   launch.rocket.name === "Falcon 9" &&
@@ -75,7 +81,7 @@ const LaunchHistoryChart = (props) => {
           backgroundColor: "rgb(68,149,208)",
           data: years.map(
             (year) =>
-              props.pastLaunches.docs.filter(
+              pastLaunches.pastLaunches.docs.filter(
                 (launch) =>
                   getYear(launch) === year &&
                   launch.rocket.name === "Falcon 9" &&
@@ -89,7 +95,7 @@ const LaunchHistoryChart = (props) => {
           backgroundColor: "rgb(126,237,148)",
           data: years.map(
             (year) =>
-              props.pastLaunches.docs.filter(
+              pastLaunches.pastLaunches.docs.filter(
                 (launch) =>
                   getYear(launch) === year &&
                   launch.rocket.name === "Falcon Heavy" &&
@@ -102,7 +108,7 @@ const LaunchHistoryChart = (props) => {
           backgroundColor: "rgb(255, 0, 0)",
           data: years.map(
             (year) =>
-              props.pastLaunches.docs.filter(
+              pastLaunches.pastLaunches.docs.filter(
                 (launch) =>
                   getYear(launch) === year &&
                   launch.success !== null &&
@@ -115,7 +121,7 @@ const LaunchHistoryChart = (props) => {
           backgroundColor: "rgb(255, 255, 255)",
           data: years.map(
             (year) =>
-              props.upcomingLaunches.docs.filter(
+              upcomingLaunches.upcomingLaunches.docs.filter(
                 (launch) => getYear(launch) === year
               ).length
           ),
@@ -174,21 +180,3 @@ const LaunchHistoryChart = (props) => {
     </div>
   );
 };
-
-const mapStateToProps = (state) => {
-  return {
-    pastLaunches: state.pastLaunches.pastLaunches,
-    loadingPastLaunches: state.pastLaunches.loading,
-    upcomingLaunches: state.upcomingLaunches.upcomingLaunches,
-    loadingUpcomingLaunches: state.upcomingLaunches.loading,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onFetchPastLaunches: () => dispatch(fetchPastLaunches()),
-    onFetchUpcomingLaunches: () => dispatch(fetchUpcomingLaunches()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LaunchHistoryChart);
