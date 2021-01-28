@@ -6,9 +6,9 @@ import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import { Gallery, SEO, InfoLine, LaunchExtendedInfo } from "../Shared";
-import CrewPerson from "./CrewPerson/CrewPerson";
-import Ship from "./Ship/Ship";
-import MediaLink from "./MediaLink/MediaLink";
+import { CrewPerson } from "./CrewPerson/CrewPerson";
+import { Ship } from "./Ship/Ship";
+import { MediaLink } from "./MediaLink/MediaLink";
 
 //STYLE
 import fhheavy from "../../resources/images/falconHeavy.png";

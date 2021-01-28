@@ -13,7 +13,7 @@ import { showLaunchesList } from "../../../Animations/Animations_motion";
 //TYPES
 import { Launch } from "../../../Types";
 
-const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
+export const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
   const [numberOfLaunches, setNumberOfLaunches] = useState(5);
   const { t } = useTranslation();
 
@@ -81,5 +81,3 @@ type pastLaunchesProps = {
   launches: Launch[];
   loading: boolean;
 };
-
-export default PastLaunches;

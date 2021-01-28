@@ -3,7 +3,7 @@ import React from "react";
 //STYLES
 import styles from "./InfoLine.module.scss";
 
-const InfoLine = ({ title, value }: infoLineProps) => {
+export const InfoLine = React.memo(({ title, value }: infoLineProps) => {
   return (
     <div className={styles.InfoWrapper}>
       <div className={styles.Title}>
@@ -14,11 +14,9 @@ const InfoLine = ({ title, value }: infoLineProps) => {
       </div>
     </div>
   );
-};
+});
 
 type infoLineProps = {
   title: string;
   value: string;
 };
-
-export default InfoLine;

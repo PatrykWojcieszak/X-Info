@@ -6,19 +6,21 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 //STYLES
 import styles from "./MediaLink.module.scss";
 
-const MediaLink = ({ name, icon, brand, link }: mediaLinkProps) => {
-  let faIcon = ["fas", icon] as IconProp;
+export const MediaLink = React.memo(
+  ({ name, icon, brand, link }: mediaLinkProps) => {
+    let faIcon = ["fas", icon] as IconProp;
 
-  if (brand) faIcon = ["fab", icon] as IconProp;
-  return (
-    <a href={link} target="_blank" rel="noopener noreferrer">
-      <div className={styles.LinkBtn}>
-        <FontAwesomeIcon icon={faIcon} />
-        <h4>{name}</h4>
-      </div>
-    </a>
-  );
-};
+    if (brand) faIcon = ["fab", icon] as IconProp;
+    return (
+      <a href={link} target="_blank" rel="noopener noreferrer">
+        <div className={styles.LinkBtn}>
+          <FontAwesomeIcon icon={faIcon} />
+          <h4>{name}</h4>
+        </div>
+      </a>
+    );
+  }
+);
 
 type mediaLinkProps = {
   name: string;
@@ -26,5 +28,3 @@ type mediaLinkProps = {
   brand: boolean;
   link?: string;
 };
-
-export default React.memo(MediaLink);

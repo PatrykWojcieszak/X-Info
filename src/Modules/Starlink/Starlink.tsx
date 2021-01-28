@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { getLatLngObj } from "tle.js";
 import Globe from "react-globe.gl";
 import { connect } from "react-redux";
@@ -10,7 +10,7 @@ import { SEO } from "../Shared";
 
 //QUERieS
 import { fetchStarlink } from "../../Store/Starlink/actions";
-import StarlinkInfo from "./StarlinkInfo/StarlinkInfo";
+import { StarlinkInfo } from "./StarlinkInfo/StarlinkInfo";
 
 //STYLES
 import styles from "./Starlink.module.scss";
@@ -36,9 +36,9 @@ const Starlink = (props) => {
     };
   }, [onFetchStarlink]);
 
-  const closeStarlinkInfoHandler = () => {
+  const closeStarlinkInfoHandler = useCallback(() => {
     setShowStarlinkInfo(false);
-  };
+  }, []);
 
   const gData: GlobePoint[] = [];
 

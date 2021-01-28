@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import VehicleRocket from "./VehicleRocket/VehicleRocket";
+import { VehicleRocket } from "./VehicleRocket/VehicleRocket";
 
 //STYLES
 import styles from "./Vehicles.module.scss";

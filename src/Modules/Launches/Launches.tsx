@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import UpcomingLaunches from "./UpcomingLaunches/UpcomingLaunches";
-import PastLaunches from "./PastLaunches/PastLaunches";
+import { UpcomingLaunches } from "./UpcomingLaunches/UpcomingLaunches";
+import { PastLaunches } from "./PastLaunches/PastLaunches";
 import Boosters from "./Boosters/Boosters";
 import {
   Filter,

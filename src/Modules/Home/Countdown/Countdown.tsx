@@ -5,7 +5,12 @@ import { useTranslation } from "react-i18next";
 //STYLES
 import styles from "./Countdown.module.scss";
 
-const Countdown = ({ days, hours, minutes, seconds }: countdownProps) => {
+export const Countdown = ({
+  days,
+  hours,
+  minutes,
+  seconds,
+}: countdownProps) => {
   const { t } = useTranslation();
 
   return (
@@ -41,5 +46,3 @@ type countdownProps = {
   minutes: number;
   seconds: number;
 };
-
-export default Countdown;

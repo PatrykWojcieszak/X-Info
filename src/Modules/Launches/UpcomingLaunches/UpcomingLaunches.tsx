@@ -12,7 +12,10 @@ import { showLaunchesList } from "../../../Animations/Animations_motion";
 //TYPES
 import { Launch } from "../../../Types";
 
-const UpcomingLaunches = ({ launches, loading }: upcomingLaunchesProps) => {
+export const UpcomingLaunches = ({
+  launches,
+  loading,
+}: upcomingLaunchesProps) => {
   let upcomingLaunchesArr = (
     <>
       {[1, 2, 3, 4, 5].map((n) => (
@@ -60,5 +63,3 @@ type upcomingLaunchesProps = {
   launches: Launch[];
   loading: boolean;
 };
-
-export default UpcomingLaunches;

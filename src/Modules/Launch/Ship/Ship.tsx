@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 //STYLES
 import styles from "./Ship.module.scss";
 
-const Ship = ({ name, img }: shipProps) => {
+export const Ship = React.memo(({ name, img }: shipProps) => {
   const { t } = useTranslation();
 
   return (
@@ -15,11 +15,9 @@ const Ship = ({ name, img }: shipProps) => {
       </h3>
     </div>
   );
-};
+});
 
 type shipProps = {
   name: string;
   img: string;
 };
-
-export default React.memo(Ship);

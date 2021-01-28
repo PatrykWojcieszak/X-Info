@@ -6,8 +6,8 @@ import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import LaunchDetails from "../LaunchDetails/LaunchDetails";
-import Countdown from "../Countdown/Countdown";
+import { LaunchDetails } from "../LaunchDetails/LaunchDetails";
+import { Countdown } from "../Countdown/Countdown";
 
 //MODELS
 import { Time } from "../../../Types";
