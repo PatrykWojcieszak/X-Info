@@ -28,12 +28,11 @@ const LaunchExtendedInfo = ({
   date_precision,
 }: LaunchExtendedInfoProps) => {
   const { t } = useTranslation();
-  const dateParsed = new Date(date_utc);
 
   let launch = success ? t("launchSuccessful") : t("launchFailure");
 
   if (
-    dateParsed > new Date() ||
+    new Date(date_utc) > new Date() ||
     ["quarter", "half", "year", "month"].includes(date_precision)
   )
     launch = t("launchNotLaunchedYet");
@@ -58,13 +57,13 @@ const LaunchExtendedInfo = ({
               <div className={styles.TitlesContainer}>
                 {launchSiteName && <h4>{t("launchSite")}:</h4>}
                 {rocketName && <h4>{t("rocket")}:</h4>}
-                {dateParsed && <h4>{t("date")}:</h4>}
+                {date_utc && <h4>{t("date")}:</h4>}
                 {success !== null && <h4>{t("launch")}:</h4>}
               </div>
               <div className={styles.ValuesContainer}>
                 {launchSiteName && <h4>{launchSiteName}</h4>}
                 {rocketName && <h4>{rocketName}</h4>}
-                {dateParsed && <h4>{dateParsed.toDateString()}</h4>}
+                {date_utc && <h4>{t("key", { date: new Date(date_utc) })}</h4>}
                 {success !== null && (
                   <h4 style={{ color: success ? "#4BB543" : "#FA113D" }}>
                     {launch}

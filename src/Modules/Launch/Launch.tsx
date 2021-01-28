@@ -183,7 +183,7 @@ const Launch = (props) => {
                     {payload.name && (
                       <InfoLine title={t("name")} value={`${payload.name}`} />
                     )}
-                    {payload.customers && (
+                    {payload.customers[0] && (
                       <InfoLine
                         title={t("customer")}
                         value={`${payload.customers}`}

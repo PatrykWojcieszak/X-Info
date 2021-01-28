@@ -45,7 +45,7 @@ const StarlinkInfo = ({ starlink, close }: starlinkProps) => {
           <div className={styles.LaunchInfoWrapper}>
             <h3>{starlink.launch?.name}</h3>
             <h4>
-              {new Date(starlink.launch?.date_utc).toDateString()} | #
+              {t("key", { date: new Date(starlink.launch?.date_utc) })} | #
               {starlink.launch?.flight_number}
             </h4>
           </div>

@@ -17,7 +17,6 @@ const LaunchDetails = ({
   launchpadFullName,
 }: launchDetailsProps) => {
   const { t } = useTranslation();
-  const formattedDate = new Date(dateLocal);
 
   return (
     <motion.div
@@ -29,7 +28,10 @@ const LaunchDetails = ({
         <InfoLine title={t("flight")} value={flightNumber.toString()} />
       )}
       {dateLocal && (
-        <InfoLine title={t("launchDate")} value={formattedDate.toUTCString()} />
+        <InfoLine
+          title={t("launchDate")}
+          value={t("key", { date: new Date(dateLocal) })}
+        />
       )}
       {rocketName && <InfoLine title={t("rocket")} value={rocketName} />}
       {launchpadFullName && (

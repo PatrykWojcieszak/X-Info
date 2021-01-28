@@ -12,7 +12,6 @@ import noImage from "../../../../resources/images/noImage.png";
 
 const Launch = ({ flightNumber, name, patch, date, success }: launchProps) => {
   const { t } = useTranslation();
-  const dateParsed = new Date(date);
 
   return (
     <Link to={`/launch/${flightNumber}`}>
@@ -20,7 +19,7 @@ const Launch = ({ flightNumber, name, patch, date, success }: launchProps) => {
         <img src={patch ? patch : noImage} alt="patch" loading="lazy" />
         <h3>{name}</h3>
         <div className={styles.Column}>
-          <h4>{dateParsed.toDateString()}</h4>
+          <h4>{t("key", { date: new Date(date) })}</h4>
           {success != null ? (
             <FontAwesomeIcon
               style={{ color: success ? "#4BB543" : "#FA113D" }}

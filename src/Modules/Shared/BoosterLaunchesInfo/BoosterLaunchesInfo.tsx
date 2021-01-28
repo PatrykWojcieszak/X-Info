@@ -45,7 +45,7 @@ const BoosterLaunchesInfo = ({
               <div className={styles.Mission}>
                 <h3>{launch.name}</h3>
                 <h4>
-                  {new Date(launch.date_utc).toDateString()} | #
+                  {t("key", { date: new Date(launch.date_utc) })} | #
                   {launch.flight_number}
                 </h4>
               </div>
