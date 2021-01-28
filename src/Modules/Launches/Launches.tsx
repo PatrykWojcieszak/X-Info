@@ -4,12 +4,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import LaunchExtendedInfo from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo";
 import UpcomingLaunches from "./UpcomingLaunches/UpcomingLaunches";
 import PastLaunches from "./PastLaunches/PastLaunches";
 import Boosters from "./Boosters/Boosters";
-import Button from "../Shared/Button/Button";
-import { Filter, Modal, Dropdown, ScrollToTop, SEO } from "../Shared";
+import {
+  Filter,
+  Modal,
+  Dropdown,
+  ScrollToTop,
+  SEO,
+  LaunchExtendedInfo,
+  Button,
+} from "../Shared";
 
 //STYLES
 import styles from "./Launches.module.scss";

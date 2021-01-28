@@ -4,8 +4,7 @@ import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import Button from "../../Shared/Button/Button";
-import LaunchShortInfo from "../../Shared/LaunchShortInfo/LaunchShortInfo";
+import { Button, LaunchShortInfo } from "../../Shared";
 
 //STYLES
 import styles from "./UpcomingLaunches.module.scss";

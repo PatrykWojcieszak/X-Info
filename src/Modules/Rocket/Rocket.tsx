@@ -4,9 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import Button from "../Shared/Button/Button";
-import { Gallery, SEO } from "../Shared";
-import InfoLine from "../Shared/InfoLine/InfoLine";
+import { Gallery, SEO, InfoLine, Button } from "../Shared";
 
 //STYLES
 import styles from "./Rocket.module.scss";

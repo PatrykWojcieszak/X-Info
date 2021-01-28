@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import Button from "../../../Shared/Button/Button";
+import { Button } from "../../../Shared";
 
 //STYLES
 import styles from "./Launch.module.scss";

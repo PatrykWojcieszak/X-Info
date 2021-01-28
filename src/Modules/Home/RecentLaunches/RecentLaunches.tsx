@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import Launch from "./Launch/Launch";
-import Button from "../../Shared/Button/Button";
+import { Button } from "../../Shared";
 import RecentLaunchSkeleton from "../../Shared/Skeletons/RecentLaunchSkeleton";
 
 //STYLES

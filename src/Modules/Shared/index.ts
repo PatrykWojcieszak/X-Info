@@ -11,3 +11,8 @@ export { SideBar } from "./Nav/SideBar/SideBar";
 export { ScrollToTop } from "./ScrollToTop/ScrollToTop";
 export { SEO } from "./SEO/SEO";
 export { Spinner } from "./Spinner/Spinner";
+export { Button } from "./Button/Button";
+export { InfoLine } from "./InfoLine/InfoLine";
+export { LaunchShortInfo } from "./LaunchShortInfo/LaunchShortInfo";
+export { NotFoundLaunches } from "./NotFoundLaunches/NotFoundLaunches";
+export { LaunchExtendedInfo } from "./LaunchExtendedInfo/LaunchExtendedInfo";

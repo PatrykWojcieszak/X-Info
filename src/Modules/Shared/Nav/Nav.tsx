@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import NavElement from "./NavElement/NavElement";
+import { NavElement } from "./NavElement/NavElement";
 
 //STYLeS
 import styles from "./Nav.module.scss";

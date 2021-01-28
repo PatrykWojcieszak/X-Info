@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import Button from "../Button/Button";
-import { CustomDatePicker, Dropdown } from "../";
+import { CustomDatePicker, Dropdown, Button } from "../";
 
 //STYLES
 import styles from "./Filter.module.scss";

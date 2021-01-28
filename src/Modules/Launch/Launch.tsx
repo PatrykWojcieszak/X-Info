@@ -5,9 +5,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import LaunchExtendedInfo from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo";
-import InfoLine from "../Shared/InfoLine/InfoLine";
-import { Gallery, SEO } from "../Shared";
+import { Gallery, SEO, InfoLine, LaunchExtendedInfo } from "../Shared";
 import CrewPerson from "./CrewPerson/CrewPerson";
 import Ship from "./Ship/Ship";
 import MediaLink from "./MediaLink/MediaLink";

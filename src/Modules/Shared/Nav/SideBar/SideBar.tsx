@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import NavElement from "../NavElement/NavElement";
+import { NavElement } from "../NavElement/NavElement";
 import { MenuToggle } from "./MenuToggle/MenuToggle";
 
 //HOOKS

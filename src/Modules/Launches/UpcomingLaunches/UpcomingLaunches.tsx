@@ -1,9 +1,8 @@
 import React from "react";
 
 //COMPONENTS
-import LaunchShortInfo from "../../Shared/LaunchShortInfo/LaunchShortInfo";
 import LaunchShortInfoSkeleton from "../../Shared/Skeletons/LaunchShortInfoSkeleton";
-import NotFoundLaunches from "../../Shared/NotFoundLaunches/NotFoundLaunches";
+import { NotFoundLaunches, LaunchShortInfo } from "../../Shared";
 
 //STYLES
 import styles from "./UpcomingLaunches.module.scss";

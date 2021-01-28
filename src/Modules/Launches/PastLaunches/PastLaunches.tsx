@@ -3,10 +3,8 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import Button from "../../Shared/Button/Button";
-import LaunchShortInfo from "../../Shared/LaunchShortInfo/LaunchShortInfo";
+import { Button, LaunchShortInfo, NotFoundLaunches } from "../../Shared";
 import LaunchShortInfoSkeleton from "../../Shared/Skeletons/LaunchShortInfoSkeleton";
-import NotFoundLaunches from "../../Shared/NotFoundLaunches/NotFoundLaunches";
 
 //STYLES
 import styles from "./PastLaunches.module.scss";
