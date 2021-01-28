@@ -7,7 +7,7 @@ import NavElement from "./NavElement/NavElement";
 //STYLeS
 import styles from "./Nav.module.scss";
 
-const Nav = () => {
+export const Nav = () => {
   const { t } = useTranslation();
 
   return (
@@ -29,5 +29,3 @@ const Nav = () => {
     </div>
   );
 };
-
-export default Nav;

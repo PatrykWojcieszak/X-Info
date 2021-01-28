@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./Footer.module.scss";
 import { useClickOutside } from "../../../Hooks/useClickOutside";
 
-const Footer = () => {
+export const Footer = () => {
   const { i18n, t } = useTranslation();
 
   const [selectedLang, setSelectedLang] = useState(i18n.language);
@@ -72,5 +72,3 @@ const Footer = () => {
     </div>
   );
 };
-
-export default Footer;

@@ -3,8 +3,7 @@ import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import Button from "../Button/Button";
-import CustomDatePicker from "../DatePicker/CustomDatePicker";
-import Dropdown from "../Dropdown/Dropdown";
+import { CustomDatePicker, Dropdown } from "../";
 
 //STYLES
 import styles from "./Filter.module.scss";
@@ -12,7 +11,7 @@ import styles from "./Filter.module.scss";
 //TYPES
 import { DropdownElement } from "../../../Types";
 
-const Filter = ({
+export const Filter = ({
   rocketsFilterList,
   launchSitesFilterList,
   statusesFilterList,
@@ -109,5 +108,3 @@ type filterProps = {
   dateFrom: Date;
   dateTo: Date;
 };
-
-export default Filter;

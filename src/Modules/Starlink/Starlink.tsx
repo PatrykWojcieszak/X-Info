@@ -5,6 +5,9 @@ import { connect } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
+//COMPONENTS
+import { SEO } from "../Shared";
+
 //QUERieS
 import { fetchStarlink } from "../../Store/Starlink/actions";
 import StarlinkInfo from "./StarlinkInfo/StarlinkInfo";
@@ -15,7 +18,6 @@ import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 //TYPES
 import { GlobePoint } from "../../Types";
-import SEO from "../Shared/SEO/SEO";
 import { starlinkPageTitle, starlinkPageDescription } from "../Shared/SEO/Tags";
 
 const Starlink = (props) => {

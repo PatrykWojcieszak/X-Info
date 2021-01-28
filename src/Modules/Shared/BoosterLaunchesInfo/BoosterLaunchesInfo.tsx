@@ -8,7 +8,7 @@ import { Launch } from "../../../Types";
 //STYLES
 import styles from "./BoosterLaunchesInfo.module.scss";
 
-const BoosterLaunchesInfo = ({
+export const BoosterLaunchesInfo = ({
   serial,
   block,
   status,
@@ -64,5 +64,3 @@ type boostersType = {
   reuse_count: number;
   launches: Launch[];
 };
-
-export default BoosterLaunchesInfo;

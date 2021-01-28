@@ -6,7 +6,7 @@ import moment from "moment";
 import styles from "./CustomDatePicker.module.scss";
 import "react-datepicker/dist/react-datepicker.css";
 
-const CustomDatePicker = ({ date, dateChanged }: datePickerProps) => {
+export const CustomDatePicker = ({ date, dateChanged }: datePickerProps) => {
   const validation = (date: any) => {
     const isValid = moment(date, "MM/DD/YYYY", true).isValid();
     if (isValid) dateChanged(date);
@@ -26,5 +26,3 @@ type datePickerProps = {
   date: Date;
   dateChanged: (date: Date) => void;
 };
-
-export default CustomDatePicker;

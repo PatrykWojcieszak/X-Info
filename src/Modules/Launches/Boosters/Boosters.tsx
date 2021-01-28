@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import BoosterLaunchesInfo from "../../Shared/BoosterLaunchesInfo/BoosterLaunchesInfo";
+import { BoosterLaunchesInfo, Spinner } from "../../Shared";
 import Button from "../../Shared/Button/Button";
-import Spinner from "../../Shared/Spinner/Spinner";
 import BoostersSkeleton from "../../Shared/Skeletons/BoostersSkeleton";
 
 //STYLES

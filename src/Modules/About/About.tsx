@@ -7,7 +7,7 @@ import styles from "./About.module.scss";
 
 //OTHER
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
-import SEO from "../Shared/SEO/SEO";
+import { SEO } from "../Shared";
 import { aboutPageTitle, aboutPageDescription } from "../Shared/SEO/Tags";
 
 const About = () => {

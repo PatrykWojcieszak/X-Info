@@ -12,7 +12,7 @@ const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
 
-const Gallery = ({ images }: galleryProps) => {
+export const Gallery = ({ images }: galleryProps) => {
   const [[page, direction], setPage] = useState([0, 0]);
 
   const imageIndex = wrap(0, images.length, page);
@@ -65,5 +65,3 @@ const Gallery = ({ images }: galleryProps) => {
 type galleryProps = {
   images: Array<string>;
 };
-
-export default Gallery;

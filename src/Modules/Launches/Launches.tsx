@@ -5,14 +5,11 @@ import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import LaunchExtendedInfo from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo";
-import ScrollToTop from "../Shared/ScrollToTop/ScrollToTop";
 import UpcomingLaunches from "./UpcomingLaunches/UpcomingLaunches";
 import PastLaunches from "./PastLaunches/PastLaunches";
-import Dropdown from "../Shared/Dropdown/Dropdown";
 import Boosters from "./Boosters/Boosters";
 import Button from "../Shared/Button/Button";
-import Modal from "../Shared/Modal/Modal";
-import Filter from "../Shared/Filter/Filter";
+import { Filter, Modal, Dropdown, ScrollToTop, SEO } from "../Shared";
 
 //STYLES
 import styles from "./Launches.module.scss";
@@ -20,6 +17,7 @@ import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 //OTHER
 import LaunchExtendedInfoSkeleton from "../Shared/Skeletons/LaunchExtendedInfoSkeleton";
+import { launchesPageTitle, launchesPageDescription } from "../Shared/SEO/Tags";
 
 //REDUX
 import { fetchLatestLaunch } from "../../Store/LatestLaunch/actions";
@@ -37,8 +35,6 @@ import {
   launchesFilterPast,
   launchesFilterUpcoming,
 } from "../../Other/DDLists";
-import SEO from "../Shared/SEO/SEO";
-import { launchesPageTitle, launchesPageDescription } from "../Shared/SEO/Tags";
 
 const Launches = (props) => {
   const [isLaunchesTypeDDOpen, setIsLaunchesTypeDDOpen] = useState(false);

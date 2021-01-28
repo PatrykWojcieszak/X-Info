@@ -42,4 +42,4 @@ type countdownProps = {
   seconds: number;
 };
 
-export default React.memo(Countdown);
+export default Countdown;

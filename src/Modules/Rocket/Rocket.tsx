@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import Button from "../Shared/Button/Button";
-import Gallery from "../Shared/Gallery/Gallery";
+import { Gallery, SEO } from "../Shared";
 import InfoLine from "../Shared/InfoLine/InfoLine";
 
 //STYLES
@@ -31,7 +31,6 @@ import { fetchRocket } from "../../Store/Rocket/actions";
 
 //OTHER
 import RocketSkeleton from "../Shared/Skeletons/RocketSkeleton";
-import SEO from "../Shared/SEO/SEO";
 import { rocketPageTitle, rocketPageDescription } from "../Shared/SEO/Tags";
 
 const Rocket = (props) => {

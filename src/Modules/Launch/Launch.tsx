@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 //COMPONENTS
 import LaunchExtendedInfo from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo";
 import InfoLine from "../Shared/InfoLine/InfoLine";
-import Gallery from "../Shared/Gallery/Gallery";
+import { Gallery, SEO } from "../Shared";
 import CrewPerson from "./CrewPerson/CrewPerson";
 import Ship from "./Ship/Ship";
 import MediaLink from "./MediaLink/MediaLink";
@@ -24,7 +24,6 @@ import { pageVariantsAnim } from "../../Animations/Animations_motion";
 import { connect } from "react-redux";
 import { fetchLaunch } from "../../Store/Launch/actions";
 import LaunchSkeleton from "../Shared/Skeletons/LaunchSkeleton";
-import SEO from "../Shared/SEO/SEO";
 import { launchPageTitle, launchPageDescription } from "../Shared/SEO/Tags";
 
 const Launch = (props) => {

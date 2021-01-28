@@ -15,7 +15,7 @@ import { useClickOutside } from "../../../../Hooks";
 import styles from "./SideBar.module.scss";
 import { sideBarAnim } from "../../../../Animations/Animations_motion";
 
-const SideBar = () => {
+export const SideBar = () => {
   const [isOpen, toggleOpen] = useState(false);
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
@@ -71,5 +71,3 @@ const SideBar = () => {
     </motion.div>
   );
 };
-
-export default SideBar;

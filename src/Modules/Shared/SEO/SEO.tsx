@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 
-const SEO = ({ description, title }: seoProps) => {
+export const SEO = ({ description, title }: seoProps) => {
   return (
     <Helmet>
       <html lang="en" />
@@ -25,5 +25,3 @@ type seoProps = {
   title: string;
   description: string;
 };
-
-export default SEO;
