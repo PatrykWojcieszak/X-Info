@@ -1,16 +1,16 @@
-import { combineReducers } from "redux";
+import { combineReducers } from "@reduxjs/toolkit";
 
 import { nextLaunchReducer } from "./NextLaunch/reducers";
 import { recentLaunchesReducer } from "./RecentLaunches/reducers";
-import { upcomingLaunchesReducer } from "./UpcomingLaunches/reducers";
 import { pastLaunchesReducer } from "./PastLaunches/reducers";
 import { rocketReducer } from "./Rocket/reducers";
 import { launchReducer } from "./Launch/reducers";
 import { latestLaunchReducer } from "./LatestLaunch/reducers";
-import { starlinkReducer } from "./Starlink/reducers";
 import { boostersReducer } from "./Boosters/reducers";
+import upcomingLaunchesReducer from "./UpcomingLaunches/upcomingLaunchesSlice";
+import starlinkReducer from "./Starlink/starlinkSlice";
 
-export const rootReducer = combineReducers({
+const rootReducer = combineReducers({
   nextLaunch: nextLaunchReducer,
   recentLaunches: recentLaunchesReducer,
   upcomingLaunches: upcomingLaunchesReducer,
@@ -23,3 +23,4 @@ export const rootReducer = combineReducers({
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
+export default rootReducer;

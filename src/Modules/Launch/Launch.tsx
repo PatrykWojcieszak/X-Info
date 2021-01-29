@@ -25,7 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 //OTHER
 import { launchPageTitle, launchPageDescription } from "../Shared/SEO/Tags";
-import { RootState } from "../../Store";
+import { RootState } from "../../Store/rootReducer";
 
 const Launch = (props) => {
   const { flight_number } = useParams();

@@ -9,13 +9,13 @@ import { SEO } from "../Shared";
 import { StarlinkInfo } from "./StarlinkInfo/StarlinkInfo";
 
 //QUERieS
-import { fetchStarlink } from "../../Store/Starlink/actions";
+import { fetchStarlinks } from "../../Store/Starlink/starlinkSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 //STYLES
 import styles from "./Starlink.module.scss";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
-import { RootState } from "../../Store";
+import { RootState } from "../../Store/rootReducer";
 
 //TYPES
 import { GlobePoint } from "../../Types";
@@ -31,7 +31,7 @@ const Starlink = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      dispatch(fetchStarlink());
+      dispatch(fetchStarlinks());
     }, 3000);
 
     return () => {

@@ -13,7 +13,7 @@ import styles from "./RecentLaunches.module.scss";
 //REDUX
 import { fetchRecentLaunches } from "../../../Store/RecentLaunches/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../Store";
+import { RootState } from "../../../Store/rootReducer";
 
 export const RecentLaunches = () => {
   const { t } = useTranslation();

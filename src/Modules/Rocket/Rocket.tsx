@@ -26,7 +26,7 @@ import RocketQuotes from "../../Other/RocketQuotes";
 //REDUX
 import { fetchRocket } from "../../Store/Rocket/actions";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../Store";
+import { RootState } from "../../Store/rootReducer";
 
 //OTHER
 import { RocketSkeleton } from "../Shared/Skeletons/RocketSkeleton";

@@ -28,9 +28,9 @@ import { launchesPageTitle, launchesPageDescription } from "../Shared/SEO/Tags";
 //REDUX
 import { fetchLatestLaunch } from "../../Store/LatestLaunch/actions";
 import { fetchPastLaunches } from "../../Store/PastLaunches/actions";
-import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/actions";
+import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/upcomingLaunchesSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../Store";
+import { RootState } from "../../Store/rootReducer";
 
 //TYPES
 import { Launch, QueryResult } from "../../Types";

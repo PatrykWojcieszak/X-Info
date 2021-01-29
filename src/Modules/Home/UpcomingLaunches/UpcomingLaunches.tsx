@@ -10,9 +10,9 @@ import { LaunchShortInfoSkeleton } from "../../Shared/Skeletons/LaunchShortInfoS
 import styles from "./UpcomingLaunches.module.scss";
 
 //REDUX
-import { fetchUpcomingLaunches } from "../../../Store/UpcomingLaunches/actions";
+import { fetchUpcomingLaunches } from "../../../Store/UpcomingLaunches/upcomingLaunchesSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../Store";
+import { RootState } from "../../../Store/rootReducer";
 
 export const UpcomingLaunches = () => {
   const { t } = useTranslation();

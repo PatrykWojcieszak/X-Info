@@ -18,7 +18,7 @@ import { bottomToTopAnim } from "../../../Animations/Animations_motion";
 //REDUX
 import { fetchNextLaunch } from "../../../Store/NextLaunch/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../Store";
+import { RootState } from "../../../Store/rootReducer";
 
 const initialTime: Time = {
   days: 0,
