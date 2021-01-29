@@ -1,4 +1,4 @@
-import { updateObject } from "../../Utility/Utility";
+import produce from "immer";
 import { DEFAULT_KEY, generateCacheTTL } from "redux-cache";
 import {
   NextLaunchState,
@@ -26,25 +26,26 @@ const initialState: NextLaunchState = {
   loading: true,
 };
 
-export function nextLaunchReducer(
-  state = initialState,
-  action: NextLaunchTypes
-): NextLaunchState {
-  switch (action.type) {
-    case FETCH_NEXT_LAUNCH_START:
-      return updateObject(state, { loading: true });
+export const nextLaunchReducer = produce(
+  (draft: NextLaunchState, action: NextLaunchTypes): NextLaunchState => {
+    switch (action.type) {
+      case FETCH_NEXT_LAUNCH_START: {
+        draft.loading = true;
+        return draft;
+      }
 
-    case FETCH_NEXT_LAUNCH_SUCCESS:
-      return updateObject(state, {
-        nextLaunch: action.payload,
-        loading: false,
-        [DEFAULT_KEY]: generateCacheTTL(),
-      });
+      case FETCH_NEXT_LAUNCH_SUCCESS: {
+        draft.nextLaunch = action.payload;
+        draft.loading = false;
+        draft[DEFAULT_KEY] = generateCacheTTL();
+        return draft;
+      }
 
-    case FETCH_NEXT_LAUNCH_FAIL:
-      return updateObject(state, { loading: false });
-
-    default:
-      return state;
-  }
-}
+      case FETCH_NEXT_LAUNCH_FAIL: {
+        draft.loading = false;
+        return draft;
+      }
+    }
+  },
+  initialState
+);

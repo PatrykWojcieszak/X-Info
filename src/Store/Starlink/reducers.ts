@@ -1,4 +1,4 @@
-import { updateObject } from "../../Utility/Utility";
+import produce from "immer";
 import {
   StarlinkState,
   FETCH_STARLINK_START,
@@ -24,24 +24,23 @@ const initialState: StarlinkState = {
   loading: true,
 };
 
-export function starlinkReducer(
-  state = initialState,
-  action: StarlinkTypes
-): StarlinkState {
-  switch (action.type) {
-    case FETCH_STARLINK_START:
-      return updateObject(state, { loading: true });
-
-    case FETCH_STARLINK_SUCCESS:
-      return updateObject(state, {
-        starlinks: action.payload,
-        loading: false,
-      });
-
-    case FETCH_STARLINK_FAIL:
-      return updateObject(state, { loading: false });
-
-    default:
-      return state;
-  }
-}
+export const starlinkReducer = produce(
+  (draft: StarlinkState, action: StarlinkTypes): StarlinkState => {
+    switch (action.type) {
+      case FETCH_STARLINK_START: {
+        draft.loading = true;
+        return draft;
+      }
+      case FETCH_STARLINK_SUCCESS: {
+        draft.loading = false;
+        draft.starlinks = action.payload;
+        return draft;
+      }
+      case FETCH_STARLINK_FAIL: {
+        draft.loading = false;
+        return draft;
+      }
+    }
+  },
+  initialState
+);

@@ -1,4 +1,4 @@
-import { updateObject } from "../../Utility/Utility";
+import produce from "immer";
 import {
   RocketState,
   FETCH_ROCKET_START,
@@ -24,24 +24,25 @@ const initialState: RocketState = {
   loading: true,
 };
 
-export function rocketReducer(
-  state = initialState,
-  action: RocketTypes
-): RocketState {
-  switch (action.type) {
-    case FETCH_ROCKET_START:
-      return updateObject(state, { loading: true });
+export const rocketReducer = produce(
+  (draft: RocketState, action: RocketTypes): RocketState => {
+    switch (action.type) {
+      case FETCH_ROCKET_START: {
+        draft.loading = true;
+        return draft;
+      }
 
-    case FETCH_ROCKET_SUCCESS:
-      return updateObject(state, {
-        rocket: action.payload,
-        loading: false,
-      });
+      case FETCH_ROCKET_SUCCESS: {
+        draft.rocket = action.payload;
+        draft.loading = false;
+        return draft;
+      }
 
-    case FETCH_ROCKET_FAIL:
-      return updateObject(state, { loading: false });
-
-    default:
-      return state;
-  }
-}
+      case FETCH_ROCKET_FAIL: {
+        draft.loading = false;
+        return draft;
+      }
+    }
+  },
+  initialState
+);

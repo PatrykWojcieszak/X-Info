@@ -92,7 +92,7 @@ const Launch = (props) => {
         {launch.launch.docs[0]?.cores.map(
           (core, index) =>
             core.landpad && (
-              <div key={index}>
+              <div key={index} style={{ marginBottom: "1.5rem" }}>
                 <h2>
                   {t("core")} #{index + 1}
                 </h2>

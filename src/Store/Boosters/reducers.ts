@@ -1,4 +1,4 @@
-import { updateObject } from "../../Utility/Utility";
+import produce from "immer";
 import { DEFAULT_KEY, generateCacheTTL } from "redux-cache";
 import {
   BoosterState,
@@ -9,8 +9,8 @@ import {
 } from "./types";
 
 const initialState: BoosterState = {
+  [DEFAULT_KEY]: null,
   boosters: {
-    [DEFAULT_KEY]: null,
     docs: [],
     totalDocs: 0,
     offset: 0,
@@ -26,30 +26,26 @@ const initialState: BoosterState = {
   loading: true,
 };
 
-export function boostersReducer(
-  state = initialState,
-  action: BoosterTypes
-): BoosterState {
-  switch (action.type) {
-    case FETCH_BOOSTERS_START:
-      return updateObject(state, { loading: true });
-
-    case FETCH_BOOSTERS_SUCCESS:
-      return {
-        ...state,
-        [DEFAULT_KEY]: generateCacheTTL(),
-        boosters: {
-          ...state.boosters,
-          ...action.payload,
-          docs: [...state.boosters.docs, ...action.payload.docs],
-        },
-        loading: false,
-      };
-
-    case FETCH_BOOSTERS_FAIL:
-      return updateObject(state, { loading: false });
-
-    default:
-      return state;
-  }
-}
+export const boostersReducer = produce(
+  (draft: BoosterState, action: BoosterTypes): BoosterState => {
+    switch (action.type) {
+      case FETCH_BOOSTERS_START: {
+        draft.loading = true;
+        return draft;
+      }
+      case FETCH_BOOSTERS_SUCCESS: {
+        const boosterTemp = draft.boosters.docs;
+        draft.boosters = action.payload;
+        draft.boosters.docs.unshift(...boosterTemp);
+        draft.loading = false;
+        draft[DEFAULT_KEY] = generateCacheTTL();
+        return draft;
+      }
+      case FETCH_BOOSTERS_FAIL: {
+        draft.loading = false;
+        return draft;
+      }
+    }
+  },
+  initialState
+);

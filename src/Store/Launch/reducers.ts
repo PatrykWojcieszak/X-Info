@@ -1,4 +1,4 @@
-import { updateObject } from "../../Utility/Utility";
+import produce from "immer";
 import {
   LaunchState,
   FETCH_LAUNCH_START,
@@ -24,24 +24,23 @@ const initialState: LaunchState = {
   loading: true,
 };
 
-export function launchReducer(
-  state = initialState,
-  action: LaunchTypes
-): LaunchState {
-  switch (action.type) {
-    case FETCH_LAUNCH_START:
-      return updateObject(state, { loading: true });
-
-    case FETCH_LAUNCH_SUCCESS:
-      return updateObject(state, {
-        launch: action.payload,
-        loading: false,
-      });
-
-    case FETCH_LAUNCH_FAIL:
-      return updateObject(state, { loading: false });
-
-    default:
-      return state;
-  }
-}
+export const launchReducer = produce(
+  (draft: LaunchState, action: LaunchTypes): LaunchState => {
+    switch (action.type) {
+      case FETCH_LAUNCH_START: {
+        draft.loading = true;
+        return draft;
+      }
+      case FETCH_LAUNCH_SUCCESS: {
+        draft.launch = action.payload;
+        draft.loading = false;
+        return draft;
+      }
+      case FETCH_LAUNCH_FAIL: {
+        draft.loading = false;
+        return draft;
+      }
+    }
+  },
+  initialState
+);

@@ -1,4 +1,4 @@
-import { updateObject } from "../../Utility/Utility";
+import produce from "immer";
 import { DEFAULT_KEY, generateCacheTTL } from "redux-cache";
 import {
   RecentLaunchesState,
@@ -26,25 +26,27 @@ const initialState: RecentLaunchesState = {
   loading: true,
 };
 
-export function recentLaunchesReducer(
-  state = initialState,
-  action: RecentLaunchesTypes
-): RecentLaunchesState {
-  switch (action.type) {
-    case FETCH_RECENT_LAUNCHES_START:
-      return updateObject(state, { loading: true });
-
-    case FETCH_RECENT_LAUNCHES_SUCCESS:
-      return updateObject(state, {
-        recentLaunches: action.payload,
-        loading: false,
-        [DEFAULT_KEY]: generateCacheTTL(),
-      });
-
-    case FETCH_RECENT_LAUNCHES_FAIL:
-      return updateObject(state, { loading: false });
-
-    default:
-      return state;
-  }
-}
+export const recentLaunchesReducer = produce(
+  (
+    draft: RecentLaunchesState,
+    action: RecentLaunchesTypes
+  ): RecentLaunchesState => {
+    switch (action.type) {
+      case FETCH_RECENT_LAUNCHES_START: {
+        draft.loading = true;
+        return draft;
+      }
+      case FETCH_RECENT_LAUNCHES_SUCCESS: {
+        draft.loading = false;
+        draft.recentLaunches = action.payload;
+        draft[DEFAULT_KEY] = generateCacheTTL();
+        return draft;
+      }
+      case FETCH_RECENT_LAUNCHES_FAIL: {
+        draft.loading = false;
+        return draft;
+      }
+    }
+  },
+  initialState
+);
