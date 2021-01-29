@@ -1,40 +1,43 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { getLatLngObj } from "tle.js";
 import Globe from "react-globe.gl";
-import { connect } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import { SEO } from "../Shared";
+import { StarlinkInfo } from "./StarlinkInfo/StarlinkInfo";
 
 //QUERieS
 import { fetchStarlink } from "../../Store/Starlink/actions";
-import { StarlinkInfo } from "./StarlinkInfo/StarlinkInfo";
+import { useSelector, useDispatch } from "react-redux";
 
 //STYLES
 import styles from "./Starlink.module.scss";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
+import { RootState } from "../../Store";
 
 //TYPES
 import { GlobePoint } from "../../Types";
 import { starlinkPageTitle, starlinkPageDescription } from "../Shared/SEO/Tags";
 
-const Starlink = (props) => {
-  const { onFetchStarlink, starlinks } = props;
+const Starlink = () => {
   const [showStarlinkInfo, setShowStarlinkInfo] = useState(false);
   const [starlinkInfoData, setStarlinkInfoData] = useState<any>({});
+  const starlink = useSelector((root: RootState) => root.starlink);
   const { t } = useTranslation();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const interval = setInterval(() => {
-      onFetchStarlink();
+      dispatch(fetchStarlink());
     }, 3000);
 
     return () => {
       clearInterval(interval);
     };
-  }, [onFetchStarlink]);
+  }, [dispatch]);
 
   const closeStarlinkInfoHandler = useCallback(() => {
     setShowStarlinkInfo(false);
@@ -42,7 +45,7 @@ const Starlink = (props) => {
 
   const gData: GlobePoint[] = [];
 
-  starlinks.docs.forEach((starlink) => {
+  starlink.starlinks.docs.forEach((starlink) => {
     const TLE0 = starlink?.spaceTrack.TLE_LINE0.substring(
       2,
       starlink?.spaceTrack.TLE_LINE0.length
@@ -116,7 +119,7 @@ const Starlink = (props) => {
             {t("starlinkDescriptionPart2")}
           </h3>
           <h4>
-            {t("starlinkOnTheOrbit")}: {props.starlinks.docs.length}
+            {t("starlinkOnTheOrbit")}: {starlink.starlinks.docs.length}
           </h4>
         </div>
         {globe}
@@ -133,17 +136,4 @@ const Starlink = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    starlinks: state.starlink.starlinks,
-    loadingStarlinks: state.starlink.loading,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onFetchStarlink: () => dispatch(fetchStarlink()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Starlink);
+export default Starlink;
