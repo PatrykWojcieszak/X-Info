@@ -1,14 +1,14 @@
 import React from "react";
-import LaunchExtendedInfoSkeleton from "./LaunchExtendedInfoSkeleton";
 
 //COMPONENTS
-import Shimmer from "./Shimmer/Shimmer";
-import SkeletonElement from "./SkeletonElement";
+import { Shimmer } from "./Shimmer/Shimmer";
+import { SkeletonElement } from "./SkeletonElement";
+import { LaunchExtendedInfoSkeleton } from "./LaunchExtendedInfoSkeleton";
 
 //STYLES
 import styles from "./Skeletons.module.scss";
 
-const LaunchSkeleton = () => {
+export const LaunchSkeleton = () => {
   return (
     <div className={styles.SkeletonWrapper}>
       <div className={styles.LaunchSkeleton}>
@@ -39,5 +39,3 @@ const LaunchSkeleton = () => {
     </div>
   );
 };
-
-export default LaunchSkeleton;

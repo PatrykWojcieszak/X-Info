@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import { Button, LaunchShortInfo, NotFoundLaunches } from "../../Shared";
-import LaunchShortInfoSkeleton from "../../Shared/Skeletons/LaunchShortInfoSkeleton";
+import { LaunchShortInfoSkeleton } from "../../Shared/Skeletons/LaunchShortInfoSkeleton";
 
 //STYLES
 import styles from "./PastLaunches.module.scss";

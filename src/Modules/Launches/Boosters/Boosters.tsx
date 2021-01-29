@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import { BoosterLaunchesInfo, Spinner, Button } from "../../Shared";
-import BoostersSkeleton from "../../Shared/Skeletons/BoostersSkeleton";
+import { BoostersSkeleton } from "../../Shared/Skeletons/BoostersSkeleton";
 
 //STYLES
 import styles from "./Boosters.module.scss";

@@ -22,7 +22,7 @@ import styles from "./Launches.module.scss";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 //OTHER
-import LaunchExtendedInfoSkeleton from "../Shared/Skeletons/LaunchExtendedInfoSkeleton";
+import { LaunchExtendedInfoSkeleton } from "../Shared/Skeletons/LaunchExtendedInfoSkeleton";
 import { launchesPageTitle, launchesPageDescription } from "../Shared/SEO/Tags";
 
 //REDUX

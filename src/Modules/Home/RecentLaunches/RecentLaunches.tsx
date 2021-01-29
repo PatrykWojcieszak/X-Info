@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import Launch from "./Launch/Launch";
+import { Launch } from "./Launch/Launch";
 import { Button } from "../../Shared";
-import RecentLaunchSkeleton from "../../Shared/Skeletons/RecentLaunchSkeleton";
+import { RecentLaunchSkeleton } from "../../Shared/Skeletons/RecentLaunchSkeleton";
 
 //STYLES
 import styles from "./RecentLaunches.module.scss";

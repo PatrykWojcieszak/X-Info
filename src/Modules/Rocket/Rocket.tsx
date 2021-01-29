@@ -29,7 +29,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../Store";
 
 //OTHER
-import RocketSkeleton from "../Shared/Skeletons/RocketSkeleton";
+import { RocketSkeleton } from "../Shared/Skeletons/RocketSkeleton";
 import { rocketPageTitle, rocketPageDescription } from "../Shared/SEO/Tags";
 
 const Rocket = () => {
