@@ -24,7 +24,7 @@ import falcon9_img from "../../resources/images/falcon9.png";
 import RocketQuotes from "../../Other/RocketQuotes";
 
 //REDUX
-import { fetchRocket } from "../../Store/Rocket/actions";
+import { fetchRocket } from "../../Store/Rocket/rocketSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../Store/rootReducer";
 
