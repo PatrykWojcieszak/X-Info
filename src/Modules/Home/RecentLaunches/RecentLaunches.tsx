@@ -11,7 +11,7 @@ import { RecentLaunchSkeleton } from "../../Shared/Skeletons/RecentLaunchSkeleto
 import styles from "./RecentLaunches.module.scss";
 
 //REDUX
-import { fetchRecentLaunches } from "../../../Store/RecentLaunches/actions";
+import { fetchRecentLaunches } from "../../../Store/RecentLaunches/recentLaunchesSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
 

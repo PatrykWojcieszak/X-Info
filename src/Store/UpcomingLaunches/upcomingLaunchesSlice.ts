@@ -1,7 +1,8 @@
+import { UpcomingLaunchesQuery } from "./../../Queries";
 import { QueryResult, Launch } from "./../../Types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppThunk } from "../configureStore";
-import { getLaunches } from "../../API/spacexAPI";
+import { getData, LAUNCHES_QUERY } from "../../API/spacexAPI";
 
 interface UpcomingLaunchState {
   upcomingLaunches: QueryResult<Launch>;
@@ -56,7 +57,10 @@ export default upcomingLaunches.reducer;
 export const fetchUpcomingLaunches = (): AppThunk => async (dispatch) => {
   try {
     dispatch(getUpcomingLaunchesStart());
-    const launches = await getLaunches();
+    const launches = await getData<Launch>(
+      LAUNCHES_QUERY,
+      UpcomingLaunchesQuery
+    );
     dispatch(getUpcomingLaunchesSuccess(launches));
   } catch (err) {
     dispatch(getUpcomingLaunchesFail());

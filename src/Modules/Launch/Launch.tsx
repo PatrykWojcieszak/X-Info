@@ -20,7 +20,7 @@ import styles from "./Launch.module.scss";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 //REDUX
-import { fetchLaunch } from "../../Store/Launch/actions";
+import { fetchLaunch } from "../../Store/Launch/launchSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 //OTHER

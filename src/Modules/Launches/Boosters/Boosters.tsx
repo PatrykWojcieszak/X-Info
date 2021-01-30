@@ -11,7 +11,7 @@ import { showLaunchesList } from "../../../Animations/Animations_motion";
 import { motion } from "framer-motion";
 
 //REDUX
-import { fetchBoosters } from "../../../Store/Boosters/actions";
+import { fetchBoosters } from "../../../Store/Boosters/boostersSlice";
 import { connect } from "react-redux";
 
 const Boosters = (props) => {

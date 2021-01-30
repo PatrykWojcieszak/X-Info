@@ -16,7 +16,7 @@ import styles from "./NextLaunch.module.scss";
 import { bottomToTopAnim } from "../../../Animations/Animations_motion";
 
 //REDUX
-import { fetchNextLaunch } from "../../../Store/NextLaunch/actions";
+import { fetchNextLaunch } from "../../../Store/NextLaunch/nextLaunchSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
 

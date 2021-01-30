@@ -1,8 +1,8 @@
+import { StarlinkQuery } from "./../../Queries";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { QueryResult, Starlink } from "../../Types";
 import { AppThunk } from "../configureStore";
-import { getStarlinks } from "../../API/spacexAPI";
-
+import { getData, STARLINK_QUERY } from "../../API/spacexAPI";
 interface StarlinkState {
   starlinks: QueryResult<Starlink>;
   loading: boolean;
@@ -53,8 +53,8 @@ export default starlinks.reducer;
 export const fetchStarlinks = (): AppThunk => async (dispatch) => {
   try {
     dispatch(getStarlinksStart());
-    const launches = await getStarlinks();
-    dispatch(getStarlinksSuccess(launches));
+    const starlinks = await getData<Starlink>(STARLINK_QUERY, StarlinkQuery);
+    dispatch(getStarlinksSuccess(starlinks));
   } catch (err) {
     dispatch(getStarlinksFail());
   }

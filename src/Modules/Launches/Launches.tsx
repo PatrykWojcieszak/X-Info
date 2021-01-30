@@ -26,8 +26,8 @@ import { LaunchExtendedInfoSkeleton } from "../Shared/Skeletons/LaunchExtendedIn
 import { launchesPageTitle, launchesPageDescription } from "../Shared/SEO/Tags";
 
 //REDUX
-import { fetchLatestLaunch } from "../../Store/LatestLaunch/actions";
-import { fetchPastLaunches } from "../../Store/PastLaunches/actions";
+import { fetchLatestLaunch } from "../../Store/LatestLaunch/latestLaunchSlice";
+import { fetchPastLaunches } from "../../Store/PastLaunches/pastLaunchesSlice";
 import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/upcomingLaunchesSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Store/rootReducer";

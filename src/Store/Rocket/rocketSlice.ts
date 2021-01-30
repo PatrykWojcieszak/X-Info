@@ -1,8 +1,8 @@
+import { RocketQuery } from "./../../Queries/RocketQuery";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { QueryResult, Rocket } from "../../Types";
 import { AppThunk } from "../configureStore";
-import { getRocket } from "../../API/spacexAPI";
-
+import { getData, ROCKET_QUERY } from "../../API/spacexAPI";
 export interface RocketState {
   rocket: QueryResult<Rocket>;
   loading: boolean;
@@ -53,7 +53,9 @@ export default rocket.reducer;
 export const fetchRocket = (vehicle: string): AppThunk => async (dispatch) => {
   try {
     dispatch(getRocketStart());
-    const launches = await getRocket(vehicle);
+    const query = RocketQuery;
+    query.query.name = vehicle;
+    const launches = await getData<Rocket>(ROCKET_QUERY, query);
     dispatch(getRocketSuccess(launches));
   } catch (err) {
     dispatch(getRocketFail());

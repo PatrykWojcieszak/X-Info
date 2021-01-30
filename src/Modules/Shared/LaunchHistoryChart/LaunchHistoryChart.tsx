@@ -10,7 +10,7 @@ import styles from "./LaunchHistoryChart.module.scss";
 //REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
-import { fetchPastLaunches } from "../../../Store/PastLaunches/actions";
+import { fetchPastLaunches } from "../../../Store/PastLaunches/pastLaunchesSlice";
 import { fetchUpcomingLaunches } from "../../../Store/UpcomingLaunches/upcomingLaunchesSlice";
 
 //OTHER

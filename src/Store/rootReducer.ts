@@ -1,14 +1,14 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
-import { nextLaunchReducer } from "./NextLaunch/reducers";
-import { recentLaunchesReducer } from "./RecentLaunches/reducers";
-import { pastLaunchesReducer } from "./PastLaunches/reducers";
-import { launchReducer } from "./Launch/reducers";
-import { latestLaunchReducer } from "./LatestLaunch/reducers";
-import { boostersReducer } from "./Boosters/reducers";
+import boostersReducer from "./Boosters/boostersSlice";
+import launchReducer from "./Launch/launchSlice";
+import latestLaunchReducer from "./LatestLaunch/latestLaunchSlice";
+import nextLaunchReducer from "./NextLaunch/nextLaunchSlice";
+import pastLaunchesReducer from "./PastLaunches/pastLaunchesSlice";
 import upcomingLaunchesReducer from "./UpcomingLaunches/upcomingLaunchesSlice";
 import starlinkReducer from "./Starlink/starlinkSlice";
 import rocketReducer from "./Rocket/rocketSlice";
+import recentLaunchesReducer from "./RecentLaunches/recentLaunchesSlice";
 
 const rootReducer = combineReducers({
   nextLaunch: nextLaunchReducer,
