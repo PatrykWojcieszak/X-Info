@@ -25,8 +25,9 @@ export const RecentLaunches = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchRecentLaunches());
-  }, [dispatch]);
+    if (recentLaunches.recentLaunches.docs.length === 0)
+      dispatch(fetchRecentLaunches());
+  }, [dispatch, recentLaunches]);
 
   return (
     <div className={styles.RecentLaunches}>

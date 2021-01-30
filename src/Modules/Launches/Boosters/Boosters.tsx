@@ -12,18 +12,22 @@ import { motion } from "framer-motion";
 
 //REDUX
 import { fetchBoosters } from "../../../Store/Boosters/boostersSlice";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../Store/rootReducer";
+import { Booster } from "../../../Types";
 
-const Boosters = (props) => {
+export const Boosters = () => {
   const { t } = useTranslation();
-  const { onFetchBoosters } = props;
+  const boosters = useSelector((root: RootState) => root.boosters);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    onFetchBoosters(1);
-  }, [onFetchBoosters]);
+    if (boosters.boosters.docs.length === 0) dispatch(fetchBoosters(1));
+  }, [dispatch, boosters]);
 
   const FetchBoosters = () => {
-    onFetchBoosters(props.boosters.nextPage);
+    dispatch(fetchBoosters(boosters.boosters.nextPage));
   };
 
   let boostersArr = (
@@ -39,7 +43,7 @@ const Boosters = (props) => {
     </motion.div>
   );
 
-  if (props.boosters.docs.length > 0) {
+  if (boosters.boosters.docs.length > 0) {
     boostersArr = (
       <motion.div
         variants={showLaunchesList}
@@ -47,7 +51,7 @@ const Boosters = (props) => {
         animate="in"
         exit="out"
         className={styles.LaunchesWrapper}>
-        {props.boosters.docs.map((booster, index) => (
+        {boosters.boosters.docs.map((booster: Booster, index) => (
           <BoosterLaunchesInfo
             key={index}
             block={booster.block}
@@ -57,7 +61,7 @@ const Boosters = (props) => {
             launches={booster.launches}
           />
         ))}
-        {props.boosters.nextPage && (
+        {boosters.boosters.nextPage && (
           <div
             style={{
               marginTop: "2rem",
@@ -65,9 +69,9 @@ const Boosters = (props) => {
               display: "flex",
               justifyContent: "center",
             }}>
-            {props.loadingBoosters && <Spinner />}
+            {boosters.loading && <Spinner />}
             <Button
-              disabled={props.loadingBoosters}
+              disabled={boosters.loading}
               name={t("loadMore")}
               styleType="primary"
               clicked={FetchBoosters}
@@ -80,18 +84,3 @@ const Boosters = (props) => {
 
   return <>{boostersArr}</>;
 };
-
-const mapStateToProps = (state) => {
-  return {
-    boosters: state.boosters.boosters,
-    loadingBoosters: state.boosters.loading,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onFetchBoosters: (page: number) => dispatch(fetchBoosters(page)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Boosters);

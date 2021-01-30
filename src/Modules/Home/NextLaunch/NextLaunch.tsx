@@ -40,8 +40,8 @@ export const NextLaunch = ({ elonMuskQuote }: nextLaunchProps) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchNextLaunch());
-  }, [dispatch]);
+    if (nextLaunch.nextLaunch.docs.length === 0) dispatch(fetchNextLaunch());
+  }, [dispatch, nextLaunch]);
 
   const moment = require("moment");
   const dateLocal = nextLaunch.nextLaunch.docs[0]?.date_local;

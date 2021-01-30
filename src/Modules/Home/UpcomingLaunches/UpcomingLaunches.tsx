@@ -24,8 +24,9 @@ export const UpcomingLaunches = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUpcomingLaunches());
-  }, [dispatch]);
+    if (upcomingLaunches.upcomingLaunches.docs.length === 0)
+      dispatch(fetchUpcomingLaunches());
+  }, [dispatch, upcomingLaunches]);
 
   return (
     <div className={styles.UpcomingLaunches}>

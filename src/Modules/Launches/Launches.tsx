@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 //COMPONENTS
 import { UpcomingLaunches } from "./UpcomingLaunches/UpcomingLaunches";
 import { PastLaunches } from "./PastLaunches/PastLaunches";
-import Boosters from "./Boosters/Boosters";
+import { Boosters } from "./Boosters/Boosters";
 import {
   Filter,
   Modal,
@@ -69,14 +69,17 @@ const Launches = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchLatestLaunch());
-    dispatch(fetchPastLaunches());
-    dispatch(fetchUpcomingLaunches());
+    if (latestLaunch.latestLaunch.docs.length === 0)
+      dispatch(fetchLatestLaunch());
+    if (pastLaunches.pastLaunches.docs.length === 0)
+      dispatch(fetchPastLaunches());
+    if (upcomingLaunches.upcomingLaunches.docs.length === 0)
+      dispatch(fetchUpcomingLaunches());
 
     if (launchType === "past") {
       setLaunchTypeFilter(launchesFilterPast);
     }
-  }, [dispatch, launchType]);
+  }, [dispatch, launchType, latestLaunch, pastLaunches, upcomingLaunches]);
 
   const filter = (arr: QueryResult<Launch>): Launch[] => {
     let temp = { ...arr };

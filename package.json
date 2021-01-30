@@ -41,7 +41,6 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "redux": "^4.0.5",
-    "redux-cache": "^0.3.0",
     "redux-thunk": "^2.3.0",
     "three": "^0.124.0",
     "tle.js": "^4.2.8",
