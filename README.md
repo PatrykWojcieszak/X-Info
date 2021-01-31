@@ -13,7 +13,7 @@ Official website. [X-Info Official](https://x-info.eu/home)
 
 ## Installation
 
-Use the package manager [npm](https://www.npmjs.com/) to install ReactMusicPlayer.
+Use the package manager [npm](https://www.npmjs.com/).
 
 1. Clone this project
 2. Install dependencies
