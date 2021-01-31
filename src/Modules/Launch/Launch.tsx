@@ -58,12 +58,12 @@ const Launch = (props) => {
       <div className={styles.AdditionalInfo}>
         <h2>CREW</h2>
         <div className={styles.AdditionalInfo__Content}>
-          {launch.launch.docs[0].crew.map((crew, index) => (
+          {launch.launch.docs[0].crew.map((crew: any, index) => (
             <CrewPerson
               key={index}
-              name={crew.name}
-              img={crew.image}
-              agency={crew.agency}
+              name={crew.crew.name}
+              img={crew.crew.image}
+              agency={crew.crew.agency}
             />
           ))}
         </div>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { QueryResult } from "../Types";
 
-const BASE_URL = "https://api.spacexdata.com/v4/";
+const BASE_URL = "https://stage.spacexdata.com/v4/";
 export const LAUNCHES_QUERY = "launches/query";
 export const STARLINK_QUERY = "starlink/query";
 export const BOOSTER_QUERY = "cores/query";
