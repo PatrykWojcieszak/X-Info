@@ -10,9 +10,9 @@ import { LaunchShortInfoSkeleton } from "../../Shared/Skeletons/LaunchShortInfoS
 import styles from "./UpcomingLaunches.module.scss";
 
 //REDUX
-import { fetchUpcomingLaunches } from "../../../Store/UpcomingLaunches/actions";
+import { fetchUpcomingLaunches } from "../../../Store/UpcomingLaunches/upcomingLaunchesSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../Store";
+import { RootState } from "../../../Store/rootReducer";
 
 export const UpcomingLaunches = () => {
   const { t } = useTranslation();
@@ -24,8 +24,9 @@ export const UpcomingLaunches = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUpcomingLaunches());
-  }, [dispatch]);
+    if (upcomingLaunches.upcomingLaunches.docs.length === 0)
+      dispatch(fetchUpcomingLaunches());
+  }, [dispatch, upcomingLaunches]);
 
   return (
     <div className={styles.UpcomingLaunches}>

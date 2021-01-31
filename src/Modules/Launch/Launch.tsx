@@ -20,12 +20,12 @@ import styles from "./Launch.module.scss";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 //REDUX
-import { fetchLaunch } from "../../Store/Launch/actions";
+import { fetchLaunch } from "../../Store/Launch/launchSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 //OTHER
 import { launchPageTitle, launchPageDescription } from "../Shared/SEO/Tags";
-import { RootState } from "../../Store";
+import { RootState } from "../../Store/rootReducer";
 
 const Launch = (props) => {
   const { flight_number } = useParams();
@@ -58,12 +58,12 @@ const Launch = (props) => {
       <div className={styles.AdditionalInfo}>
         <h2>CREW</h2>
         <div className={styles.AdditionalInfo__Content}>
-          {launch.launch.docs[0].crew.map((crew, index) => (
+          {launch.launch.docs[0].crew.map((crew: any, index) => (
             <CrewPerson
               key={index}
-              name={crew.name}
-              img={crew.image}
-              agency={crew.agency}
+              name={crew.crew.name}
+              img={crew.crew.image}
+              agency={crew.crew.agency}
             />
           ))}
         </div>

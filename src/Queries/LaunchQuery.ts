@@ -31,7 +31,7 @@ export const LaunchQuery = {
         },
       },
       {
-        path: "crew",
+        path: "crew.crew",
         select: {
           name: 1,
           agency: 1,

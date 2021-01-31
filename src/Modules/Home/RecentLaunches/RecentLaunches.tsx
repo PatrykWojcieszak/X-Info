@@ -11,9 +11,9 @@ import { RecentLaunchSkeleton } from "../../Shared/Skeletons/RecentLaunchSkeleto
 import styles from "./RecentLaunches.module.scss";
 
 //REDUX
-import { fetchRecentLaunches } from "../../../Store/RecentLaunches/actions";
+import { fetchRecentLaunches } from "../../../Store/RecentLaunches/recentLaunchesSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../Store";
+import { RootState } from "../../../Store/rootReducer";
 
 export const RecentLaunches = () => {
   const { t } = useTranslation();
@@ -25,8 +25,9 @@ export const RecentLaunches = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchRecentLaunches());
-  }, [dispatch]);
+    if (recentLaunches.recentLaunches.docs.length === 0)
+      dispatch(fetchRecentLaunches());
+  }, [dispatch, recentLaunches]);
 
   return (
     <div className={styles.RecentLaunches}>

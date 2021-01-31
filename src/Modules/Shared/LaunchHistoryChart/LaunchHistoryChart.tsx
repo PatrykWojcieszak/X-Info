@@ -9,9 +9,8 @@ import styles from "./LaunchHistoryChart.module.scss";
 
 //REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../Store";
-import { fetchPastLaunches } from "../../../Store/PastLaunches/actions";
-import { fetchUpcomingLaunches } from "../../../Store/UpcomingLaunches/actions";
+import { RootState } from "../../../Store/rootReducer";
+import { fetchPastLaunches } from "../../../Store/PastLaunches/pastLaunchesSlice";
 
 //OTHER
 import { getYear } from "../../../Utility/Utility";
@@ -26,9 +25,9 @@ export const LaunchHistoryChart = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchPastLaunches());
-    dispatch(fetchUpcomingLaunches());
-  }, [dispatch]);
+    if (pastLaunches.pastLaunches.docs.length === 0)
+      dispatch(fetchPastLaunches());
+  }, [dispatch, pastLaunches]);
 
   const launchesYearStart: number = 2006;
 

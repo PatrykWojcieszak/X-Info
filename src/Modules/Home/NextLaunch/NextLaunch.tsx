@@ -16,9 +16,9 @@ import styles from "./NextLaunch.module.scss";
 import { bottomToTopAnim } from "../../../Animations/Animations_motion";
 
 //REDUX
-import { fetchNextLaunch } from "../../../Store/NextLaunch/actions";
+import { fetchNextLaunch } from "../../../Store/NextLaunch/nextLaunchSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../Store";
+import { RootState } from "../../../Store/rootReducer";
 
 const initialTime: Time = {
   days: 0,
@@ -40,8 +40,8 @@ export const NextLaunch = ({ elonMuskQuote }: nextLaunchProps) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchNextLaunch());
-  }, [dispatch]);
+    if (nextLaunch.nextLaunch.docs.length === 0) dispatch(fetchNextLaunch());
+  }, [dispatch, nextLaunch]);
 
   const moment = require("moment");
   const dateLocal = nextLaunch.nextLaunch.docs[0]?.date_local;

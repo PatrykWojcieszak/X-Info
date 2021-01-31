@@ -5,6 +5,9 @@ import styles from "./CrewPerson.module.scss";
 
 export const CrewPerson = React.memo(
   ({ name, img, agency }: crewPersonProps) => {
+    // console.log(name);
+    // console.log(img);
+    // console.log(agency);
     return (
       <div className={styles.CrewPerson}>
         <img src={img} alt="astronaut" loading="lazy" />

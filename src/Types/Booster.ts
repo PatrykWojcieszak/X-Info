@@ -4,7 +4,7 @@ export interface Booster {
   serial: string;
   block: number;
   status: string;
-  reuse_count: string;
+  reuse_count: number;
   rtls_attempts: number;
   rtls_landings: number;
   asds_attempts: number;

@@ -5,12 +5,10 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
-import configureStore from "./Store/configureStore";
+import { store } from "./Store/configureStore";
 import "./fontawesome/fontawesome";
 import { useScrollToTop as ScrollToTOp } from "./Hooks/index";
 import "./i18n";
-
-const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
