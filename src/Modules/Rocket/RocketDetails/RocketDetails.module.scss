@@ -1,0 +1,83 @@
+@import "../../../resources/styles/index.scss";
+
+.RocketDetailsContainer {
+  margin-left: 10rem;
+  @include flex-column;
+  align-items: flex-start;
+
+  p {
+    color: $fontPrimary;
+    margin-bottom: 1.2rem;
+  }
+
+  h3 {
+    color: $fontSecondary;
+  }
+
+  .RocketDetails {
+    @include flex-center-column;
+    margin-top: 2rem;
+    width: 100%;
+
+    .BtnContainer {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+
+    .BtnContainer > * {
+      margin: 0.5rem 0.5rem;
+    }
+
+    .DetailsContainer {
+      position: relative;
+      width: 100%;
+
+      .Details {
+        @include flex-center-column;
+        justify-content: flex-start;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+}
+
+@include large {
+  .RocketDetailsContainer {
+    margin-left: 4rem;
+  }
+}
+
+@include tablet {
+  .RocketDetailsContainer {
+    margin-left: 2rem;
+    position: relative;
+
+    p,
+    h3 {
+      font-size: 0.8rem;
+    }
+
+    .RocketDetails {
+      .BtnContainer {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+      }
+
+      .BtnContainer > * {
+        margin: 0.8rem 0;
+      }
+
+      .DetailsContainer {
+        height: 550px;
+      }
+    }
+  }
+}
