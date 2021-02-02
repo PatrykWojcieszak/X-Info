@@ -6,8 +6,8 @@ import "moment-precise-range-plugin";
 import { RecentLaunches } from "./RecentLaunches/RecentLaunches";
 import { UpcomingLaunches } from "./UpcomingLaunches/UpcomingLaunches";
 import { NextLaunch } from "./NextLaunch/NextLaunch";
-import { LaunchHistoryChart } from "../Shared/LaunchHistoryChart/LaunchHistoryChart";
 import { SEO } from "../Shared";
+import { LaunchHistoryChart } from "./LaunchHistoryChart/LaunchHistoryChart";
 
 //STYLES
 import styles from "./Home.module.scss";
