@@ -28,7 +28,7 @@ import { RootState } from "../../Store/rootReducer";
 import { YouTubeFrame } from "../Shared/YoutubeFrame/YouTubeFrame";
 import { MediaSection } from "./MediaSection/MediaSection";
 
-const Launch = (props) => {
+const Launch = () => {
   const { flight_number } = useParams();
   const { t } = useTranslation();
 
