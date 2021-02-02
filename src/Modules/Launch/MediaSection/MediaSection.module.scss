@@ -1,0 +1,8 @@
+@import "../../../resources/styles/index.scss";
+
+.MediaSection {
+  @include flex-center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 3rem 0;
+}

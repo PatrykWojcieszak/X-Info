@@ -15,3 +15,4 @@ export type { SpaceTrack } from "./SpaceTrack";
 export type { Starlink } from "./Starlink";
 export type { Time } from "./Time";
 export type { DropdownElement } from "./Dropdown";
+export type { Links } from ".//Links";

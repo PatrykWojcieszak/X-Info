@@ -2,6 +2,7 @@ import { Core } from "./Core";
 import { Crew } from "./Crew";
 import { Failure } from "./Failure";
 import { Launchpad } from "./Launchpad";
+import { Links } from "./Links";
 import { Payload } from "./Payload";
 import { Rocket } from "./Rocket";
 import { Ship } from "./Ship";
@@ -37,26 +38,6 @@ export interface Launch {
   payloads: Payload[];
   launchpad: Launchpad;
   cores: Core[];
-  links: {
-    patch: {
-      small: string;
-      large: string;
-    };
-    reddit: {
-      campaign: string;
-      launch: string;
-      media: string;
-      recovery: string;
-    };
-    flickr: {
-      small: [];
-      original: [];
-    };
-    presskit: string;
-    webcast: string;
-    youtube_id: string;
-    article: string;
-    wikipedia: string;
-  };
+  links: Links;
   auto_update: boolean;
 }

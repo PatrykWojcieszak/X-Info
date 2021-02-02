@@ -8,7 +8,6 @@ import { useTranslation } from "react-i18next";
 import { Gallery, SEO, InfoLine, LaunchExtendedInfo } from "../Shared";
 import { CrewPerson } from "./CrewPerson/CrewPerson";
 import { Ship } from "./Ship/Ship";
-import { MediaLink } from "./MediaLink/MediaLink";
 import { LaunchSkeleton } from "../Shared/Skeletons/LaunchSkeleton";
 
 //STYLE
@@ -27,6 +26,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { launchPageTitle, launchPageDescription } from "../Shared/SEO/Tags";
 import { RootState } from "../../Store/rootReducer";
 import { YouTubeFrame } from "../Shared/YoutubeFrame/YouTubeFrame";
+import { MediaSection } from "./MediaSection/MediaSection";
 
 const Launch = (props) => {
   const { flight_number } = useParams();
@@ -218,61 +218,7 @@ const Launch = (props) => {
           {launch.launch.docs[0]?.links.flickr.original.length > 0 ? (
             <Gallery images={launch.launch.docs[0].links.flickr.original} />
           ) : null}
-          <div className={styles.MediaContainer}>
-            {launch.launch.docs[0]?.links.reddit.campaign && (
-              <MediaLink
-                name={t("campaign")}
-                icon="reddit-alien"
-                brand
-                link={launch.launch.docs[0]?.links.reddit.campaign}
-              />
-            )}
-
-            {launch.launch.docs[0]?.links.reddit.launch && (
-              <MediaLink
-                name={t("launch")}
-                icon="reddit-alien"
-                brand
-                link={launch.launch.docs[0]?.links.reddit.launch}
-              />
-            )}
-
-            {launch.launch.docs[0]?.links.reddit.media && (
-              <MediaLink
-                name={t("media")}
-                icon="reddit-alien"
-                brand
-                link={launch.launch.docs[0]?.links.reddit.media}
-              />
-            )}
-
-            {launch.launch.docs[0]?.links.wikipedia && (
-              <MediaLink
-                name={t("wikipedia")}
-                icon="wikipedia-w"
-                brand
-                link={launch.launch.docs[0]?.links.wikipedia}
-              />
-            )}
-
-            {launch.launch.docs[0]?.links.article && (
-              <MediaLink
-                name={t("article")}
-                icon="file-alt"
-                brand={false}
-                link={launch.launch.docs[0]?.links.article}
-              />
-            )}
-
-            {launch.launch.docs[0]?.links.presskit && (
-              <MediaLink
-                name={t("pressKit")}
-                icon="newspaper"
-                brand={false}
-                link={launch.launch.docs[0]?.links.presskit}
-              />
-            )}
-          </div>
+          <MediaSection links={launch.launch.docs[0]?.links} />
         </div>
       </>
     );
