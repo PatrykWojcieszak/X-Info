@@ -26,6 +26,7 @@ import { useDispatch, useSelector } from "react-redux";
 //OTHER
 import { launchPageTitle, launchPageDescription } from "../Shared/SEO/Tags";
 import { RootState } from "../../Store/rootReducer";
+import { YouTubeFrame } from "../Shared/YoutubeFrame/YouTubeFrame";
 
 const Launch = (props) => {
   const { flight_number } = useParams();
@@ -131,14 +132,7 @@ const Launch = (props) => {
   if (launch.launch.docs[0]?.links.youtube_id) {
     youtube = (
       <div className={styles.YoutubeContainer}>
-        <iframe
-          title="spacex video"
-          width="560"
-          height="315"
-          src={`https://www.youtube.com/embed/${launch.launch.docs[0]?.links.youtube_id}`}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen></iframe>
+        <YouTubeFrame url={launch.launch.docs[0]?.links.youtube_id} />
       </div>
     );
   }

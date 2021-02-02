@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 //COMPONENTS
 import { LaunchDetails } from "../LaunchDetails/LaunchDetails";
 import { Countdown } from "../Countdown/Countdown";
+import { YouTubeFrame } from "../../Shared/YoutubeFrame/YouTubeFrame";
 
 //MODELS
 import { Time } from "../../../Types";
@@ -157,14 +158,9 @@ export const NextLaunch = ({ elonMuskQuote }: nextLaunchProps) => {
             initial="hidden"
             animate="show"
             exit="exit">
-            <iframe
-              title="SpaceX video"
-              width="100%"
-              height="100%"
-              src={`https://www.youtube.com/embed/${nextLaunch.nextLaunch.docs[0]?.links.youtube_id}`}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen></iframe>
+            <YouTubeFrame
+              url={nextLaunch.nextLaunch.docs[0]?.links.youtube_id}
+            />
           </motion.div>
         </AnimatePresence>
       );
