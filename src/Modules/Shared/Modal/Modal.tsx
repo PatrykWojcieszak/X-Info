@@ -3,13 +3,13 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //COMPONENTS
-import Backdrop from "../Backdrop/Backdrop";
+import { Backdrop } from "../";
 
 //STYLES
 import styles from "./Modal.module.scss";
 import { modalAnim } from "../../../Animations/Animations_motion";
 
-const Modal = ({ closeModal, show, children }: modalProps) => {
+export const Modal = ({ closeModal, show, children }: modalProps) => {
   return (
     <>
       <Backdrop clicked={closeModal} show={show} />
@@ -35,5 +35,3 @@ type modalProps = {
   show: boolean;
   children: React.ReactNode;
 };
-
-export default Modal;

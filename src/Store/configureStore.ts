@@ -1,23 +1,11 @@
-import { cacheEnhancer } from "redux-cache";
-import thunk from "redux-thunk";
-import { applyMiddleware, createStore, compose } from "redux";
-import { rootReducer } from "./index";
+import { ThunkAction } from "redux-thunk";
+import rootReducer, { RootState } from "./rootReducer";
+import { configureStore, Action } from "@reduxjs/toolkit";
 
-const middleware = [thunk];
+export const store = configureStore({
+  reducer: rootReducer,
+  devTools: process.env.NODE_ENV !== "production",
+});
 
-const composeEnhancers =
-  process.env.NODE_ENV === "development"
-    ? (window["__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"] as typeof compose)
-    : null || compose;
-
-const configureStore = (initialState = {}) =>
-  createStore(
-    rootReducer,
-    initialState,
-    composeEnhancers(
-      applyMiddleware(...middleware),
-      cacheEnhancer({ log: true })
-    )
-  );
-
-export default configureStore;
+export type AppDispatch = typeof store.dispatch;
+export type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>;

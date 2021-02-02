@@ -2,12 +2,12 @@ import React, { useState, useCallback, useEffect } from "react";
 import "moment-precise-range-plugin";
 import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import LaunchDetails from "../LaunchDetails/LaunchDetails";
-import Countdown from "../Countdown/Countdown";
+import { LaunchDetails } from "../LaunchDetails/LaunchDetails";
+import { Countdown } from "../Countdown/Countdown";
+import { YouTubeFrame } from "../../Shared/YoutubeFrame/YouTubeFrame";
 
 //MODELS
 import { Time } from "../../../Types";
@@ -17,7 +17,9 @@ import styles from "./NextLaunch.module.scss";
 import { bottomToTopAnim } from "../../../Animations/Animations_motion";
 
 //REDUX
-import { fetchNextLaunch } from "../../../Store/NextLaunch/actions";
+import { fetchNextLaunch } from "../../../Store/NextLaunch/nextLaunchSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../Store/rootReducer";
 
 const initialTime: Time = {
   days: 0,
@@ -29,19 +31,21 @@ const initialTime: Time = {
   years: 0,
 };
 
-const NextLaunch = (props) => {
+export const NextLaunch = ({ elonMuskQuote }: nextLaunchProps) => {
   const { t } = useTranslation();
 
   const [showLaunchDetails, setShowLaunchDetails] = useState(false);
   const [timer, setTimer] = useState<Time>(initialTime);
-  const { onFetchNextLaunch, nextLaunchData } = props;
+  const nextLaunch = useSelector((state: RootState) => state.nextLaunch);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!nextLaunchData?.docs[0]) onFetchNextLaunch();
-  }, [onFetchNextLaunch, nextLaunchData]);
+    if (nextLaunch.nextLaunch.docs.length === 0) dispatch(fetchNextLaunch());
+  }, [dispatch, nextLaunch]);
 
   const moment = require("moment");
-  const dateLocal = nextLaunchData.docs[0]?.date_local;
+  const dateLocal = nextLaunch.nextLaunch.docs[0]?.date_local;
 
   const timeDiff = useCallback(() => {
     const launchDate = new Date(dateLocal);
@@ -82,7 +86,7 @@ const NextLaunch = (props) => {
   };
 
   if (
-    !props.loadingNextLaunch &&
+    !nextLaunch.loading &&
     (nextLaunchWrapper = (
       <AnimatePresence>
         <div className={styles.Top}>
@@ -97,7 +101,7 @@ const NextLaunch = (props) => {
                 {isAfterLaunch() ? t("currentLaunch") : t("nextLaunchTitle")}:{" "}
               </h2>
               <h2 className={styles.LaunchName}>
-                {nextLaunchData.docs[0].name}
+                {nextLaunch.nextLaunch.docs[0].name}
               </h2>
             </div>
             {timer && (
@@ -120,17 +124,19 @@ const NextLaunch = (props) => {
             <AnimatePresence>
               {showLaunchDetails && (
                 <LaunchDetails
-                  flightNumber={nextLaunchData.docs[0].flight_number}
-                  dateLocal={nextLaunchData.docs[0].date_local}
-                  details={nextLaunchData.docs[0].details}
-                  rocketName={nextLaunchData.docs[0].rocket.name}
-                  launchpadFullName={nextLaunchData.docs[0].launchpad.full_name}
+                  flightNumber={nextLaunch.nextLaunch.docs[0].flight_number}
+                  dateLocal={nextLaunch.nextLaunch.docs[0].date_local}
+                  details={nextLaunch.nextLaunch.docs[0].details}
+                  rocketName={nextLaunch.nextLaunch.docs[0].rocket.name}
+                  launchpadFullName={
+                    nextLaunch.nextLaunch.docs[0].launchpad.full_name
+                  }
                 />
               )}
             </AnimatePresence>
             <div className={styles.QuoteContainer}>
               <h2>
-                {props.elonMuskQuote} - <span>Elon Musk</span>
+                {elonMuskQuote} - <span>Elon Musk</span>
               </h2>
             </div>
           </motion.div>
@@ -142,7 +148,7 @@ const NextLaunch = (props) => {
       timer.days === 0 &&
       timer.hours === 0 &&
       timer.minutes < 2 &&
-      nextLaunchData.docs[0]?.links.youtube_id
+      nextLaunch.nextLaunch.docs[0]?.links.youtube_id
     )
       nextLaunchWrapper = (
         <AnimatePresence>
@@ -152,14 +158,9 @@ const NextLaunch = (props) => {
             initial="hidden"
             animate="show"
             exit="exit">
-            <iframe
-              title="SpaceX video"
-              width="100%"
-              height="100%"
-              src={`https://www.youtube.com/embed/${nextLaunchData.docs[0]?.links.youtube_id}`}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen></iframe>
+            <YouTubeFrame
+              url={nextLaunch.nextLaunch.docs[0]?.links.youtube_id}
+            />
           </motion.div>
         </AnimatePresence>
       );
@@ -167,17 +168,6 @@ const NextLaunch = (props) => {
   return <div className={styles.NextLaunch}>{nextLaunchWrapper}</div>;
 };
 
-const mapStateToProps = (state) => {
-  return {
-    nextLaunchData: state.nextLaunch.nextLaunch,
-    loadingNextLaunch: state.nextLaunch.loading,
-  };
+type nextLaunchProps = {
+  elonMuskQuote: string;
 };
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onFetchNextLaunch: () => dispatch(fetchNextLaunch()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(NextLaunch);

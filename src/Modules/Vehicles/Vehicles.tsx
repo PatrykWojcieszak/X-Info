@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import VehicleRocket from "./VehicleRocket/VehicleRocket";
+import { VehicleRocket } from "./VehicleRocket/VehicleRocket";
 
 //STYLES
 import styles from "./Vehicles.module.scss";
@@ -14,7 +14,7 @@ import falcon1 from "../../resources/images/f1.png";
 import falcon9 from "../../resources/images/f9.png";
 import falconHeavy from "../../resources/images/fh2.png";
 import starship from "../../resources/images/st.png";
-import SEO from "../Shared/SEO/SEO";
+import { SEO } from "../Shared";
 import { vehiclesPageTitle, vehiclesPageDescription } from "../Shared/SEO/Tags";
 
 const Vehicles = () => {

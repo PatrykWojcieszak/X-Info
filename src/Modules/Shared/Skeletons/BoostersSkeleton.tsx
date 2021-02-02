@@ -1,13 +1,13 @@
 import React from "react";
 
 //COMPONENTS
-import Shimmer from "./Shimmer/Shimmer";
-import SkeletonElement from "./SkeletonElement";
+import { Shimmer } from "./Shimmer/Shimmer";
+import { SkeletonElement } from "./SkeletonElement";
 
 //STYLES
 import styles from "./Skeletons.module.scss";
 
-const BoostersSkeleton = () => {
+export const BoostersSkeleton = () => {
   return (
     <div className={styles.SkeletonWrapper}>
       <div className={styles.BoostersSkeleton}>
@@ -32,5 +32,3 @@ const BoostersSkeleton = () => {
     </div>
   );
 };
-
-export default BoostersSkeleton;

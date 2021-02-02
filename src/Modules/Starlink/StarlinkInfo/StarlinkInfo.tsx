@@ -11,7 +11,7 @@ import { GlobePoint } from "../../../Types";
 import styles from "./StarlinkInfo.module.scss";
 import { pageVariantsAnim } from "../../../Animations/Animations_motion";
 
-const StarlinkInfo = ({ starlink, close }: starlinkProps) => {
+export const StarlinkInfo = React.memo(({ starlink, close }: starlinkProps) => {
   const { t } = useTranslation();
 
   return (
@@ -45,7 +45,7 @@ const StarlinkInfo = ({ starlink, close }: starlinkProps) => {
           <div className={styles.LaunchInfoWrapper}>
             <h3>{starlink.launch?.name}</h3>
             <h4>
-              {new Date(starlink.launch?.date_utc).toDateString()} | #
+              {t("key", { date: new Date(starlink.launch?.date_utc) })} | #
               {starlink.launch?.flight_number}
             </h4>
           </div>
@@ -53,11 +53,9 @@ const StarlinkInfo = ({ starlink, close }: starlinkProps) => {
       </div>
     </motion.div>
   );
-};
+});
 
 type starlinkProps = {
   starlink: GlobePoint;
   close: () => void;
 };
-
-export default React.memo(StarlinkInfo);

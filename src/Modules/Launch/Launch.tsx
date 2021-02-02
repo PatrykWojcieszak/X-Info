@@ -5,12 +5,10 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import LaunchExtendedInfo from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo";
-import InfoLine from "../Shared/InfoLine/InfoLine";
-import Gallery from "../Shared/Gallery/Gallery";
-import CrewPerson from "./CrewPerson/CrewPerson";
-import Ship from "./Ship/Ship";
-import MediaLink from "./MediaLink/MediaLink";
+import { Gallery, SEO, InfoLine, LaunchExtendedInfo } from "../Shared";
+import { CrewPerson } from "./CrewPerson/CrewPerson";
+import { Ship } from "./Ship/Ship";
+import { LaunchSkeleton } from "../Shared/Skeletons/LaunchSkeleton";
 
 //STYLE
 import fhheavy from "../../resources/images/falconHeavy.png";
@@ -18,49 +16,55 @@ import falcon1 from "../../resources/images/f1.png";
 import starship from "../../resources/images/st.png";
 import falcon9 from "../../resources/images/falcon9.png";
 import styles from "./Launch.module.scss";
+import { pageVariantsAnim } from "../../Animations/Animations_motion";
+
+//REDUX
+import { fetchLaunch } from "../../Store/Launch/launchSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 //OTHER
-import { pageVariantsAnim } from "../../Animations/Animations_motion";
-import { connect } from "react-redux";
-import { fetchLaunch } from "../../Store/Launch/actions";
-import LaunchSkeleton from "../Shared/Skeletons/LaunchSkeleton";
-import SEO from "../Shared/SEO/SEO";
 import { launchPageTitle, launchPageDescription } from "../Shared/SEO/Tags";
+import { RootState } from "../../Store/rootReducer";
+import { YouTubeFrame } from "../Shared/YoutubeFrame/YouTubeFrame";
+import { MediaSection } from "./MediaSection/MediaSection";
 
-const Launch = (props) => {
+const Launch = () => {
   const { flight_number } = useParams();
-  const { onFetchLaunch } = props;
   const { t } = useTranslation();
 
+  const launch = useSelector((state: RootState) => state.launch);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    onFetchLaunch(flight_number);
-  }, [onFetchLaunch, flight_number]);
+    dispatch(fetchLaunch(flight_number));
+  }, [dispatch, flight_number]);
 
   //ROCKET IMAGE
   let rocketImg = <img src={falcon9} alt="Falcon 9" />;
 
-  if (props.launch.docs[0]?.rocket.name === "Falcon 1")
+  if (launch.launch.docs[0]?.rocket.name === "Falcon 1")
     rocketImg = <img src={falcon1} alt="Falcon 1" />;
-  else if (props.launch.docs[0]?.rocket.name === "Falcon 9")
+  else if (launch.launch.docs[0]?.rocket.name === "Falcon 9")
     rocketImg = <img src={falcon9} alt="Falcon 9" />;
-  else if (props.launch.docs[0]?.rocket.name === "Falcon Heavy")
+  else if (launch.launch.docs[0]?.rocket.name === "Falcon Heavy")
     rocketImg = <img src={fhheavy} alt="Falcon Heavy" />;
-  else if (props.launch.docs[0]?.rocket.name === "Starship")
+  else if (launch.launch.docs[0]?.rocket.name === "Starship")
     rocketImg = <img src={starship} alt="Starship" />;
 
   //CREW COMPONENTS
   let crew = <></>;
-  if (props.launch.docs[0] && props.launch.docs[0].crew.length > 0) {
+  if (launch.launch.docs[0] && launch.launch.docs[0].crew.length > 0) {
     crew = (
       <div className={styles.AdditionalInfo}>
         <h2>CREW</h2>
         <div className={styles.AdditionalInfo__Content}>
-          {props.launch.docs[0].crew.map((crew, index) => (
+          {launch.launch.docs[0].crew.map((crew: any, index) => (
             <CrewPerson
               key={index}
-              name={crew.name}
-              img={crew.image}
-              agency={crew.agency}
+              name={crew.crew.name}
+              img={crew.crew.image}
+              agency={crew.crew.agency}
             />
           ))}
         </div>
@@ -70,12 +74,12 @@ const Launch = (props) => {
 
   //SHIP COMPONENTS
   let ship = <></>;
-  if (props.launch.docs[0] && props.launch.docs[0].ships.length > 0) {
+  if (launch.launch.docs[0] && launch.launch.docs[0].ships.length > 0) {
     ship = (
       <div className={styles.AdditionalInfo}>
         <h2>{t("usedShips")}</h2>
         <div className={styles.AdditionalInfo__Content}>
-          {props.launch.docs[0].ships.map((ship, index) => (
+          {launch.launch.docs[0].ships.map((ship, index) => (
             <Ship key={index} name={ship.name} img={ship.image} />
           ))}
         </div>
@@ -86,10 +90,10 @@ const Launch = (props) => {
   let cores = (
     <>
       <div className={styles.InfoWrapper}>
-        {props.launch.docs[0]?.cores.map(
+        {launch.launch.docs[0]?.cores.map(
           (core, index) =>
             core.landpad && (
-              <div key={index}>
+              <div key={index} style={{ marginBottom: "1.5rem" }}>
                 <h2>
                   {t("core")} #{index + 1}
                 </h2>
@@ -125,17 +129,10 @@ const Launch = (props) => {
   );
 
   let youtube = <></>;
-  if (props.launch.docs[0]?.links.youtube_id) {
+  if (launch.launch.docs[0]?.links.youtube_id) {
     youtube = (
       <div className={styles.YoutubeContainer}>
-        <iframe
-          title="spacex video"
-          width="560"
-          height="315"
-          src={`https://www.youtube.com/embed/${props.launch.docs[0]?.links.youtube_id}`}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen></iframe>
+        <YouTubeFrame url={launch.launch.docs[0]?.links.youtube_id} />
       </div>
     );
   }
@@ -146,36 +143,36 @@ const Launch = (props) => {
     </div>
   );
 
-  if (!props.loadingLaunch) {
+  if (!launch.loading) {
     launchInformation = (
       <>
         <div className={styles.Launch}>
           <LaunchExtendedInfo
             showMoreDetailsButton={false}
-            details={props.launch.docs[0].details}
-            launchName={props.launch.docs[0].name}
-            date_local={props.launch.docs[0].date_local}
-            date_utc={props.launch.docs[0].date_utc}
-            rocketName={props.launch.docs[0].rocket.name}
-            launchSiteName={props.launch.docs[0].launchpad.full_name}
-            flightNumber={props.launch.docs[0].flight_number}
-            patchImg={props.launch.docs[0].links.patch.small}
-            success={props.launch.docs[0].success}
-            failures={props.launch.docs[0].failures}
-            launchId={props.launch.docs[0].id}
-            date_precision={props.launch.docs[0].date_precision}
+            details={launch.launch.docs[0].details}
+            launchName={launch.launch.docs[0].name}
+            date_local={launch.launch.docs[0].date_local}
+            date_utc={launch.launch.docs[0].date_utc}
+            rocketName={launch.launch.docs[0].rocket.name}
+            launchSiteName={launch.launch.docs[0].launchpad.full_name}
+            flightNumber={launch.launch.docs[0].flight_number}
+            patchImg={launch.launch.docs[0].links.patch.small}
+            success={launch.launch.docs[0].success}
+            failures={launch.launch.docs[0].failures}
+            launchId={launch.launch.docs[0].id}
+            date_precision={launch.launch.docs[0].date_precision}
           />
 
           <div className={styles.Row}>
-            <Link to={`/vehicles/${props.launch.docs[0]?.rocket.name}`}>
+            <Link to={`/vehicles/${launch.launch.docs[0]?.rocket.name}`}>
               <div className={styles.Rocket}>
-                <h3>{props.launch.docs[0]?.rocket.name}</h3>
+                <h3>{launch.launch.docs[0]?.rocket.name}</h3>
                 {rocketImg}
               </div>
             </Link>
             <div className={styles.InfoContainer}>
               <div className={styles.InfoWrapper}>
-                {props.launch.docs[0]?.payloads.map((payload, index) => (
+                {launch.launch.docs[0]?.payloads.map((payload, index) => (
                   <div key={index}>
                     <h2>
                       {t("payload")} #{index + 1}
@@ -183,7 +180,7 @@ const Launch = (props) => {
                     {payload.name && (
                       <InfoLine title={t("name")} value={`${payload.name}`} />
                     )}
-                    {payload.customers && (
+                    {payload.customers[0] && (
                       <InfoLine
                         title={t("customer")}
                         value={`${payload.customers}`}
@@ -192,7 +189,7 @@ const Launch = (props) => {
                     {payload.manufacturers.length !== 0 ? (
                       <InfoLine
                         title={t("manufacturer")}
-                        value={`${payload.manufacturers[0]}`}
+                        value={`${payload.manufacturers}`}
                       />
                     ) : null}
                     {payload.type && (
@@ -218,64 +215,10 @@ const Launch = (props) => {
           {youtube}
         </div>
         <div style={{ padding: "0 1rem" }}>
-          {props.launch.docs[0]?.links.flickr.original.length > 0 ? (
-            <Gallery images={props.launch.docs[0].links.flickr.original} />
+          {launch.launch.docs[0]?.links.flickr.original.length > 0 ? (
+            <Gallery images={launch.launch.docs[0].links.flickr.original} />
           ) : null}
-          <div className={styles.MediaContainer}>
-            {props.launch.docs[0]?.links.reddit.campaign && (
-              <MediaLink
-                name={t("campaign")}
-                icon="reddit-alien"
-                brand
-                link={props.launch.docs[0]?.links.reddit.campaign}
-              />
-            )}
-
-            {props.launch.docs[0]?.links.reddit.launch && (
-              <MediaLink
-                name={t("launch")}
-                icon="reddit-alien"
-                brand
-                link={props.launch.docs[0]?.links.reddit.launch}
-              />
-            )}
-
-            {props.launch.docs[0]?.links.reddit.media && (
-              <MediaLink
-                name={t("media")}
-                icon="reddit-alien"
-                brand
-                link={props.launch.docs[0]?.links.reddit.media}
-              />
-            )}
-
-            {props.launch.docs[0]?.links.wikipedia && (
-              <MediaLink
-                name={t("wikipedia")}
-                icon="wikipedia-w"
-                brand
-                link={props.launch.docs[0]?.links.wikipedia}
-              />
-            )}
-
-            {props.launch.docs[0]?.links.article && (
-              <MediaLink
-                name={t("article")}
-                icon="file-alt"
-                brand={false}
-                link={props.launch.docs[0]?.links.article}
-              />
-            )}
-
-            {props.launch.docs[0]?.links.presskit && (
-              <MediaLink
-                name={t("pressKit")}
-                icon="newspaper"
-                brand={false}
-                link={props.launch.docs[0]?.links.presskit}
-              />
-            )}
-          </div>
+          <MediaSection links={launch.launch.docs[0]?.links} />
         </div>
       </>
     );
@@ -284,7 +227,7 @@ const Launch = (props) => {
   return (
     <>
       <SEO
-        title={`${launchPageTitle} - ${props.launch.docs[0]?.flight_number}`}
+        title={`${launchPageTitle} - ${launch.launch.docs[0]?.flight_number}`}
         description={launchPageDescription}
       />
       <motion.div
@@ -298,18 +241,4 @@ const Launch = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    launch: state.launch.launch,
-    loadingLaunch: state.launch.loading,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onFetchLaunch: (flightNumber: number) =>
-      dispatch(fetchLaunch(flightNumber)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Launch);
+export default Launch;

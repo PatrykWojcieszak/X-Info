@@ -10,7 +10,7 @@ import styles from "./Dropdown.module.scss";
 //TYPES
 import { DropdownElement } from "../../../Types/";
 
-const Dropdown = ({
+export const Dropdown = ({
   title,
   list,
   isListOpen,
@@ -82,5 +82,3 @@ type dropdownProps = {
   selectedElement: (id: number) => void;
   styleType: string;
 };
-
-export default Dropdown;

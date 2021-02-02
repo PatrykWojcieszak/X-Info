@@ -106,6 +106,8 @@
   "clearFilter": "WYCZYŚĆ FILTROWANIE",
   "success": "Sukces",
 
+  "key": "{{date, DD/MM/YYYY}}",
+
   "createdBy": "Stworzone przez",
   "using": "używając",
 

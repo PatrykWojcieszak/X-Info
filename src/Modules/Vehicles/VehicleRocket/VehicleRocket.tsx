@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 //STYLES
 import styles from "./VehicleRocket.module.scss";
 
-const VehicleRocket = ({ name, img, link }: vehicleRocketProps) => {
+export const VehicleRocket = ({ name, img, link }: vehicleRocketProps) => {
   return (
     <Link to={`/vehicles/${link}`}>
       <div className={styles.Rocket}>
@@ -20,5 +20,3 @@ type vehicleRocketProps = {
   img: string;
   link: string;
 };
-
-export default VehicleRocket;

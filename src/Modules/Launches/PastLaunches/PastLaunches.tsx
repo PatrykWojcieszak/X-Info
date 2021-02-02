@@ -3,10 +3,8 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import Button from "../../Shared/Button/Button";
-import LaunchShortInfo from "../../Shared/LaunchShortInfo/LaunchShortInfo";
-import LaunchShortInfoSkeleton from "../../Shared/Skeletons/LaunchShortInfoSkeleton";
-import NotFoundLaunches from "../../Shared/NotFoundLaunches/NotFoundLaunches";
+import { Button, LaunchShortInfo, NotFoundLaunches } from "../../Shared";
+import { LaunchShortInfoSkeleton } from "../../Shared/Skeletons/LaunchShortInfoSkeleton";
 
 //STYLES
 import styles from "./PastLaunches.module.scss";
@@ -15,7 +13,7 @@ import { showLaunchesList } from "../../../Animations/Animations_motion";
 //TYPES
 import { Launch } from "../../../Types";
 
-const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
+export const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
   const [numberOfLaunches, setNumberOfLaunches] = useState(5);
   const { t } = useTranslation();
 
@@ -83,5 +81,3 @@ type pastLaunchesProps = {
   launches: Launch[];
   loading: boolean;
 };
-
-export default PastLaunches;

@@ -30,9 +30,7 @@ const Quotes = [
   "If humanity doesn't land on Mars in my lifetime, I would be very disappointed.",
 ];
 
-const randomQuote = () => {
+export const randomQuote = () => {
   const quote = Math.floor(Math.random() * Quotes.length);
   return Quotes[quote];
 };
-
-export default randomQuote;

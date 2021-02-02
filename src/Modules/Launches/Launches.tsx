@@ -4,28 +4,33 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import LaunchExtendedInfo from "../Shared/LaunchExtendedInfo/LaunchExtendedInfo";
-import ScrollToTop from "../Shared/ScrollToTop/ScrollToTop";
-import UpcomingLaunches from "./UpcomingLaunches/UpcomingLaunches";
-import PastLaunches from "./PastLaunches/PastLaunches";
-import Dropdown from "../Shared/Dropdown/Dropdown";
-import Boosters from "./Boosters/Boosters";
-import Button from "../Shared/Button/Button";
-import Modal from "../Shared/Modal/Modal";
-import Filter from "../Shared/Filter/Filter";
+import { UpcomingLaunches } from "./UpcomingLaunches/UpcomingLaunches";
+import { PastLaunches } from "./PastLaunches/PastLaunches";
+import { Boosters } from "./Boosters/Boosters";
+import {
+  Filter,
+  Modal,
+  Dropdown,
+  ScrollToTop,
+  SEO,
+  LaunchExtendedInfo,
+  Button,
+} from "../Shared";
 
 //STYLES
 import styles from "./Launches.module.scss";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 //OTHER
-import LaunchExtendedInfoSkeleton from "../Shared/Skeletons/LaunchExtendedInfoSkeleton";
+import { LaunchExtendedInfoSkeleton } from "../Shared/Skeletons/LaunchExtendedInfoSkeleton";
+import { launchesPageTitle, launchesPageDescription } from "../Shared/SEO/Tags";
 
 //REDUX
-import { fetchLatestLaunch } from "../../Store/LatestLaunch/actions";
-import { fetchPastLaunches } from "../../Store/PastLaunches/actions";
-import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/actions";
-import { connect } from "react-redux";
+import { fetchLatestLaunch } from "../../Store/LatestLaunch/latestLaunchSlice";
+import { fetchPastLaunches } from "../../Store/PastLaunches/pastLaunchesSlice";
+import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/upcomingLaunchesSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../Store/rootReducer";
 
 //TYPES
 import { Launch, QueryResult } from "../../Types";
@@ -37,10 +42,8 @@ import {
   launchesFilterPast,
   launchesFilterUpcoming,
 } from "../../Other/DDLists";
-import SEO from "../Shared/SEO/SEO";
-import { launchesPageTitle, launchesPageDescription } from "../Shared/SEO/Tags";
 
-const Launches = (props) => {
+const Launches = () => {
   const [isLaunchesTypeDDOpen, setIsLaunchesTypeDDOpen] = useState(false);
   const [launchTypeFilter, setLaunchTypeFilter] = useState(
     launchesFilterUpcoming
@@ -54,14 +57,29 @@ const Launches = (props) => {
     new Date(new Date().setFullYear(new Date().getFullYear() + 1))
   );
 
-  const { t } = useTranslation();
+  const latestLaunch = useSelector((root: RootState) => root.latestLaunch);
+  const upcomingLaunches = useSelector(
+    (root: RootState) => root.upcomingLaunches
+  );
+  const pastLaunches = useSelector((root: RootState) => root.pastLaunches);
 
+  const { t } = useTranslation();
   const { launchType } = useParams();
-  const {
-    onFetchLatestLaunch,
-    onFetchPastLaunches,
-    onFetchUpcomingLaunches,
-  } = props;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (latestLaunch.latestLaunch.docs.length === 0)
+      dispatch(fetchLatestLaunch());
+    if (pastLaunches.pastLaunches.docs.length === 0)
+      dispatch(fetchPastLaunches());
+    if (upcomingLaunches.upcomingLaunches.docs.length === 0)
+      dispatch(fetchUpcomingLaunches());
+
+    if (launchType === "past") {
+      setLaunchTypeFilter(launchesFilterPast);
+    }
+  }, [dispatch, launchType, latestLaunch, pastLaunches, upcomingLaunches]);
 
   const filter = (arr: QueryResult<Launch>): Launch[] => {
     let temp = { ...arr };
@@ -92,21 +110,6 @@ const Launches = (props) => {
 
     return temp.docs;
   };
-
-  useEffect(() => {
-    onFetchLatestLaunch();
-    onFetchPastLaunches();
-    onFetchUpcomingLaunches();
-
-    if (launchType === "past") {
-      setLaunchTypeFilter(launchesFilterPast);
-    }
-  }, [
-    onFetchLatestLaunch,
-    launchType,
-    onFetchPastLaunches,
-    onFetchUpcomingLaunches,
-  ]);
 
   const toggleLaunchTypeHandler = (isOpen: boolean) => {
     setIsLaunchesTypeDDOpen(isOpen);
@@ -143,23 +146,25 @@ const Launches = (props) => {
         className={styles.Launches}>
         <div className={styles.Latest}>
           <h2>{t("latestLaunchTitle")}</h2>
-          {props.loadingLatestLaunch ? (
+          {latestLaunch.loading ? (
             <LaunchExtendedInfoSkeleton />
           ) : (
             <LaunchExtendedInfo
               showMoreDetailsButton
-              details={props.latestLaunch.docs[0].details}
-              launchName={props.latestLaunch.docs[0].name}
-              date_local={props.latestLaunch.docs[0].date_local}
-              date_utc={props.latestLaunch.docs[0].date_utc}
-              rocketName={props.latestLaunch.docs[0].rocket.name}
-              launchSiteName={props.latestLaunch.docs[0].launchpad.full_name}
-              flightNumber={props.latestLaunch.docs[0].flight_number}
-              patchImg={props.latestLaunch.docs[0].links.patch.small}
-              success={props.latestLaunch.docs[0].success}
-              failures={props.latestLaunch.docs[0].failures}
-              launchId={props.latestLaunch.docs[0].id}
-              date_precision={props.latestLaunch.docs[0].date_precision}
+              details={latestLaunch.latestLaunch.docs[0].details}
+              launchName={latestLaunch.latestLaunch.docs[0].name}
+              date_local={latestLaunch.latestLaunch.docs[0].date_local}
+              date_utc={latestLaunch.latestLaunch.docs[0].date_utc}
+              rocketName={latestLaunch.latestLaunch.docs[0].rocket.name}
+              launchSiteName={
+                latestLaunch.latestLaunch.docs[0].launchpad.full_name
+              }
+              flightNumber={latestLaunch.latestLaunch.docs[0].flight_number}
+              patchImg={latestLaunch.latestLaunch.docs[0].links.patch.small}
+              success={latestLaunch.latestLaunch.docs[0].success}
+              failures={latestLaunch.latestLaunch.docs[0].failures}
+              launchId={latestLaunch.latestLaunch.docs[0].id}
+              date_precision={latestLaunch.latestLaunch.docs[0].date_precision}
             />
           )}
         </div>
@@ -212,8 +217,8 @@ const Launches = (props) => {
           <AnimatePresence>
             {launchTypeFilter[0].selected && (
               <UpcomingLaunches
-                launches={filter(props.upcomingLaunches)}
-                loading={props.loadingUpcomingLaunches}
+                launches={filter(upcomingLaunches.upcomingLaunches)}
+                loading={upcomingLaunches.loading}
               />
             )}
           </AnimatePresence>
@@ -221,8 +226,8 @@ const Launches = (props) => {
           <AnimatePresence>
             {launchTypeFilter[1].selected && (
               <PastLaunches
-                launches={filter(props.pastLaunches)}
-                loading={props.loadingPastLaunches}
+                launches={filter(pastLaunches.pastLaunches)}
+                loading={pastLaunches.loading}
               />
             )}
           </AnimatePresence>
@@ -238,23 +243,4 @@ const Launches = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    latestLaunch: state.latestLaunch.latestLaunch,
-    loadingLatestLaunch: state.latestLaunch.loading,
-    pastLaunches: state.pastLaunches.pastLaunches,
-    loadingPastLaunches: state.pastLaunches.loading,
-    upcomingLaunches: state.upcomingLaunches.upcomingLaunches,
-    loadingUpcomingLaunches: state.upcomingLaunches.loading,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onFetchLatestLaunch: () => dispatch(fetchLatestLaunch()),
-    onFetchPastLaunches: () => dispatch(fetchPastLaunches()),
-    onFetchUpcomingLaunches: () => dispatch(fetchUpcomingLaunches()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Launches);
+export default Launches;

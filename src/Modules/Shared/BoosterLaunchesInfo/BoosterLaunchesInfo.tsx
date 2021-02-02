@@ -8,7 +8,7 @@ import { Launch } from "../../../Types";
 //STYLES
 import styles from "./BoosterLaunchesInfo.module.scss";
 
-const BoosterLaunchesInfo = ({
+export const BoosterLaunchesInfo = ({
   serial,
   block,
   status,
@@ -45,7 +45,7 @@ const BoosterLaunchesInfo = ({
               <div className={styles.Mission}>
                 <h3>{launch.name}</h3>
                 <h4>
-                  {new Date(launch.date_utc).toDateString()} | #
+                  {t("key", { date: new Date(launch.date_utc) })} | #
                   {launch.flight_number}
                 </h4>
               </div>
@@ -64,5 +64,3 @@ type boostersType = {
   reuse_count: number;
   launches: Launch[];
 };
-
-export default BoosterLaunchesInfo;

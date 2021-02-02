@@ -7,7 +7,7 @@ import styles from "./NotFoundLaunches.module.scss";
 //IMAGES
 import sadRocket from "../../../resources/images/sadRocket.png";
 
-const NotFoundLaunches = (props) => {
+export const NotFoundLaunches = React.memo(() => {
   const { t } = useTranslation();
 
   return (
@@ -16,6 +16,4 @@ const NotFoundLaunches = (props) => {
       <h2>{t("launchesNotFound")}!</h2>
     </div>
   );
-};
-
-export default React.memo(NotFoundLaunches);
+});
