@@ -14,7 +14,7 @@ import styles from "./Home.module.scss";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 //OTHER
-import RandomQuote from "../../Other/ElonMuskQuotes";
+import { randomQuote } from "../../Other/ElonMuskQuotes";
 import { homePageTitle, homePageDescription } from "../Shared/SEO/Tags";
 
 const Home = () => {
@@ -27,7 +27,7 @@ const Home = () => {
         exit="out"
         variants={pageVariantsAnim}
         className={styles.Home}>
-        <NextLaunch elonMuskQuote={RandomQuote()} />
+        <NextLaunch elonMuskQuote={randomQuote()} />
         <div className={styles.Home__Content}>
           <RecentLaunches />
           <UpcomingLaunches />

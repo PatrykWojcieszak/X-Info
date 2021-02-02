@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 import styles from "./HeroImage.module.scss";
 import { bottomToTopAnim } from "../../../Animations/Animations_motion";
-import RocketQuotes from "../../../Other/RocketQuotes";
+import { RocketQuotes } from "../../../Other/RocketQuotes";
 
 export const HeroImage = ({ vehicle }: heroImageProps) => {
   const rocketHeroImg = [styles.HeroImage];
