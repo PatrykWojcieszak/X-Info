@@ -1,49 +1,6 @@
 @import "../../resources/styles/index.scss";
 
 .Rocket {
-  .Top {
-    background-blend-mode: darken;
-    background-repeat: no-repeat;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-
-    .HeroText {
-      @include flex-center-column;
-      position: absolute;
-      margin: auto;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      left: 0;
-
-      h2 {
-        font-size: 5rem;
-        text-transform: uppercase;
-      }
-
-      h2,
-      h4 {
-        color: $fontPrimary;
-      }
-
-      h4 {
-        font-weight: 100;
-        font-size: 1rem;
-        width: 80%;
-        text-align: center;
-
-        span {
-          font-weight: 500;
-          color: $blue;
-        }
-      }
-    }
-  }
-
   .Content {
     @include flex-center;
     margin-top: 2rem;
@@ -131,17 +88,6 @@
 
 @include tablet {
   .Rocket {
-    .Top {
-      .HeroText {
-        h2 {
-          font-size: 3rem;
-        }
-        h4 {
-          font-size: 0.7rem;
-        }
-      }
-    }
-
     .Content {
       padding: 0 1rem;
 
@@ -186,20 +132,4 @@
       padding: 0 1rem;
     }
   }
-}
-
-.Falcon1 {
-  background: rgba(0, 0, 0, 0.6) url("../../resources/images/falcon1_bg.jpg");
-}
-
-.Falcon9 {
-  background: rgba(0, 0, 0, 0.6) url("../../resources/images/falcon9_bg.jpg");
-}
-
-.FalconHeavy {
-  background: rgba(0, 0, 0, 0.6) url("../../resources/images/fheavy_bg2.jpg");
-}
-
-.Starship {
-  background: rgba(0, 0, 0, 0.6) url("../../resources/images/starship_bg.jpg");
 }

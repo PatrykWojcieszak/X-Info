@@ -31,6 +31,7 @@ import { RootState } from "../../Store/rootReducer";
 //OTHER
 import { RocketSkeleton } from "../Shared/Skeletons/RocketSkeleton";
 import { rocketPageTitle, rocketPageDescription } from "../Shared/SEO/Tags";
+import { HeroImage } from "./HeroImage/HeroImage";
 
 const Rocket = () => {
   const { vehicle } = useParams();
@@ -85,27 +86,17 @@ const Rocket = () => {
     setShowLandingLegs(true);
   };
 
-  let rocketQuote = "";
-  const rocketHeroImg = [styles.Top];
   let rocketImg = "";
 
   if (vehicle === "Falcon 1") {
-    rocketHeroImg.push(styles.Falcon1);
     rocketImg = falcon1_img;
-    rocketQuote = RocketQuotes[0];
   } else if (vehicle === "Falcon 9") {
-    rocketHeroImg.push(styles.Falcon9);
     rocketImg = falcon9_img;
-    rocketQuote = RocketQuotes[1];
   } else if (vehicle === "Falcon Heavy") {
-    rocketHeroImg.push(styles.FalconHeavy);
     rocketImg = falconheavy_img;
-    rocketQuote = RocketQuotes[2];
   }
   if (vehicle === "Starship") {
-    rocketHeroImg.push(styles.Starship);
     rocketImg = starship_img;
-    rocketQuote = RocketQuotes[3];
   }
 
   //OVERVIEW DETAILS
@@ -317,19 +308,7 @@ const Rocket = () => {
         exit="out"
         variants={pageVariantsAnim}
         className={styles.Rocket}>
-        <div className={rocketHeroImg.join(" ")}>
-          <motion.div
-            variants={bottomToTopAnim}
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            className={styles.HeroText}>
-            <h2>{rocket.rocket.docs[0]?.name}</h2>
-            <h4>
-              {rocketQuote} - <span>Elon Musk</span>
-            </h4>
-          </motion.div>
-        </div>
+        <HeroImage vehicle={vehicle} />
         <div className={styles.Content}>
           {rocket.loading ? (
             <div style={{ width: "100%" }}>
