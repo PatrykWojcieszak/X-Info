@@ -3,7 +3,7 @@ import { last, range } from "lodash";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import { Chart } from "../../Shared/LaunchHistoryChart/Chart";
+import { Chart } from "../../Shared/Chart/Chart";
 
 //REDUX
 import { RootState } from "../../../Store/rootReducer";
