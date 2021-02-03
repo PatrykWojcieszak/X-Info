@@ -1,13 +1,6 @@
 @import "../../../resources/styles/index.scss";
 
 .HeroImage {
-  background-blend-mode: darken;
-  background-repeat: no-repeat;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  background-position: center;
   height: 100vh;
 
   .HeroText {
@@ -58,17 +51,21 @@
 
 .Falcon1 {
   background: rgba(0, 0, 0, 0.6) url("../../../resources/images/falcon1_bg.jpg");
+  @include cover-background;
 }
 
 .Falcon9 {
   background: rgba(0, 0, 0, 0.6) url("../../../resources/images/falcon9_bg.jpg");
+  @include cover-background;
 }
 
 .FalconHeavy {
   background: rgba(0, 0, 0, 0.6) url("../../../resources/images/fheavy_bg2.jpg");
+  @include cover-background;
 }
 
 .Starship {
   background: rgba(0, 0, 0, 0.6)
     url("../../../resources/images/starship_bg.jpg");
+  @include cover-background;
 }
