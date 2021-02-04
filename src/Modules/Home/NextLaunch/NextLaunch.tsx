@@ -75,12 +75,7 @@ export const NextLaunch = ({ elonMuskQuote }: nextLaunchProps) => {
   let nextLaunchWrapper = <div className={styles.Top}></div>;
 
   const isAfterLaunch = (): boolean => {
-    if (
-      timer.days === 0 &&
-      timer.hours === 0 &&
-      timer.minutes === 0 &&
-      timer.seconds === 0
-    )
+    if (new Date() > new Date(nextLaunch.nextLaunch.docs[0]?.date_local))
       return true;
     else return false;
   };

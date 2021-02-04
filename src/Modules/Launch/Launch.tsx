@@ -6,8 +6,6 @@ import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import { Gallery, SEO, InfoLine, LaunchExtendedInfo } from "../Shared";
-import { CrewPerson } from "./CrewPerson/CrewPerson";
-import { Ship } from "./Ship/Ship";
 import { LaunchSkeleton } from "../Shared/Skeletons/LaunchSkeleton";
 
 //STYLE
@@ -27,6 +25,8 @@ import { launchPageTitle, launchPageDescription } from "../Shared/SEO/Tags";
 import { RootState } from "../../Store/rootReducer";
 import { YouTubeFrame } from "../Shared/YoutubeFrame/YouTubeFrame";
 import { MediaSection } from "./MediaSection/MediaSection";
+import { CrewList } from "./CrewList/CrewList";
+import { ShipList } from "./ShipList/ShipList";
 
 const Launch = () => {
   const { flight_number } = useParams();
@@ -51,41 +51,6 @@ const Launch = () => {
     rocketImg = <img src={fhheavy} alt="Falcon Heavy" />;
   else if (launch.launch.docs[0]?.rocket.name === "Starship")
     rocketImg = <img src={starship} alt="Starship" />;
-
-  //CREW COMPONENTS
-  let crew = <></>;
-  if (launch.launch.docs[0] && launch.launch.docs[0].crew.length > 0) {
-    crew = (
-      <div className={styles.AdditionalInfo}>
-        <h2>CREW</h2>
-        <div className={styles.AdditionalInfo__Content}>
-          {launch.launch.docs[0].crew.map((crew: any, index) => (
-            <CrewPerson
-              key={index}
-              name={crew.crew.name}
-              img={crew.crew.image}
-              agency={crew.crew.agency}
-            />
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  //SHIP COMPONENTS
-  let ship = <></>;
-  if (launch.launch.docs[0] && launch.launch.docs[0].ships.length > 0) {
-    ship = (
-      <div className={styles.AdditionalInfo}>
-        <h2>{t("usedShips")}</h2>
-        <div className={styles.AdditionalInfo__Content}>
-          {launch.launch.docs[0].ships.map((ship, index) => (
-            <Ship key={index} name={ship.name} img={ship.image} />
-          ))}
-        </div>
-      </div>
-    );
-  }
 
   let cores = (
     <>
@@ -210,8 +175,8 @@ const Launch = () => {
               {cores}
             </div>
           </div>
-          {crew}
-          {ship}
+          <CrewList crewList={launch.launch.docs[0].crew} />
+          <ShipList shipList={launch.launch.docs[0].ships} />
           {youtube}
         </div>
         <div style={{ padding: "0 1rem" }}>
