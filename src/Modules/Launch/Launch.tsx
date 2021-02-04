@@ -27,6 +27,7 @@ import { YouTubeFrame } from "../Shared/YoutubeFrame/YouTubeFrame";
 import { MediaSection } from "./MediaSection/MediaSection";
 import { CrewList } from "./CrewList/CrewList";
 import { ShipList } from "./ShipList/ShipList";
+import { CoreList } from "./CoreList/CoreList";
 
 const Launch = () => {
   const { flight_number } = useParams();
@@ -172,6 +173,7 @@ const Launch = () => {
                   </div>
                 ))}
               </div>
+              <CoreList />
               {cores}
             </div>
           </div>

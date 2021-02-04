@@ -52,6 +52,7 @@
   "launches": "Launches",
   "status": "Status",
   "missions": "Missions",
+  "crew": "CREW",
 
   "statusInDevelopment": "IN DEVELOPMENT",
   "statusInactive": "INACTIVE",

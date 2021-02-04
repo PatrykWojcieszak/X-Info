@@ -11,8 +11,9 @@ import styles from "./ShipList.module.scss";
 import { Ship as ShipType } from "../../../Types";
 
 export const ShipList = ({ shipList }: shipListProps) => {
-  let shipListArr = <></>;
   const { t } = useTranslation();
+
+  let shipListArr = <></>;
 
   if (shipList.length > 0)
     shipListArr = (

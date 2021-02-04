@@ -52,6 +52,7 @@
   "launches": "Ilość startów",
   "status": "Status",
   "missions": "Misje",
+  "crew": "ZAŁOGA",
   
   "statusInDevelopment": "W TRAKCIE PRAC",
   "statusInactive": "NIE UŻYWANY",
