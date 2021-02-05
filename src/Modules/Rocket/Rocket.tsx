@@ -49,6 +49,22 @@ const Rocket = () => {
     rocketImg = starship_img;
   }
 
+  let rocketContainer = (
+    <div style={{ width: "100%" }}>
+      <RocketSkeleton />
+    </div>
+  );
+
+  if (!rocket.loading)
+    rocketContainer = (
+      <>
+        <div className={styles.Rocket}>
+          <img src={rocketImg} alt="rocket" />
+        </div>
+        <RocketDetails rocket={rocket.rocket.docs[0]} rocketName={vehicle} />
+      </>
+    );
+
   return (
     <>
       <SEO
@@ -62,23 +78,7 @@ const Rocket = () => {
         variants={pageVariantsAnim}
         className={styles.Rocket}>
         <HeroImage vehicle={vehicle} />
-        <div className={styles.Content}>
-          {rocket.loading ? (
-            <div style={{ width: "100%" }}>
-              <RocketSkeleton />
-            </div>
-          ) : (
-            <>
-              <div className={styles.Rocket}>
-                <img src={rocketImg} alt="rocket" />
-              </div>
-              <RocketDetails
-                loading={rocket.loading}
-                rocket={rocket.rocket.docs[0]}
-              />
-            </>
-          )}
-        </div>
+        <div className={styles.Content}>{rocketContainer}</div>
         <div className={styles.GalleryWrapper}>
           {rocket.rocket.docs[0]?.flickr_images.length > 0 ? (
             <Gallery images={rocket.rocket.docs[0].flickr_images} />
