@@ -2,11 +2,11 @@ import React, { useEffect, useState, useCallback } from "react";
 import { getLatLngObj } from "tle.js";
 import Globe from "react-globe.gl";
 import { AnimatePresence, motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import { SEO } from "../Shared";
 import { StarlinkInfo } from "./StarlinkInfo/StarlinkInfo";
+import { Description } from "./Description/Description";
 
 //QUERieS
 import { fetchStarlinks } from "../../Store/Starlink/starlinkSlice";
@@ -25,7 +25,6 @@ const Starlink = () => {
   const [showStarlinkInfo, setShowStarlinkInfo] = useState(false);
   const [starlinkInfoData, setStarlinkInfoData] = useState<any>({});
   const starlink = useSelector((root: RootState) => root.starlink);
-  const { t } = useTranslation();
 
   const dispatch = useDispatch();
 
@@ -106,22 +105,7 @@ const Starlink = () => {
         exit="out"
         variants={pageVariantsAnim}
         className={styles.Starlink}>
-        <div className={styles.StarlinkInfo}>
-          <h2>STARLINK</h2>
-          <h3>
-            <b>Starlink</b> {t("starlinkDescriptionPart1")}{" "}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.spacex.com/">
-              SpaceX
-            </a>{" "}
-            {t("starlinkDescriptionPart2")}
-          </h3>
-          <h4>
-            {t("starlinkOnTheOrbit")}: {starlink.starlinks.docs.length}
-          </h4>
-        </div>
+        <Description starlinkOnTheOrbit={starlink.starlinks.docs.length} />
         {globe}
         <AnimatePresence>
           {showStarlinkInfo && (
