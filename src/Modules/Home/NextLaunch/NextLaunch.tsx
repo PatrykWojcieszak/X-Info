@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import { LaunchDetails } from "../LaunchDetails/LaunchDetails";
+import { LaunchDetails } from "./LaunchDetails/LaunchDetails";
 import { Countdown } from "../Countdown/Countdown";
 import { YouTubeFrame } from "../../Shared/YoutubeFrame/YouTubeFrame";
 
