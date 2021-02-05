@@ -1,0 +1,12 @@
+@import "../../../../resources/styles/index.scss";
+
+.Patch {
+  margin-bottom: 1.5rem;
+  width: 200px;
+}
+
+@include mobile {
+  .Patch {
+    width: 140px;
+  }
+}

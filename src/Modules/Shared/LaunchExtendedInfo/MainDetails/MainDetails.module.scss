@@ -1,0 +1,88 @@
+@import "../../../../resources/styles/index.scss";
+
+.MainDetailsContainer {
+  background-color: $foreground;
+  border-radius: 0.8rem;
+  padding: 1rem;
+  position: relative;
+
+  .LaunchNumber {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    color: $fontSecondary;
+    font-weight: 100;
+    font-size: 2rem;
+  }
+
+  h2,
+  h4,
+  p {
+    font-weight: 100;
+  }
+
+  p {
+    max-width: 80%;
+    color: $fontSecondary;
+    font-size: 1.1rem;
+  }
+
+  h2 {
+    color: $blue;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .DetailsWrapper {
+    display: flex;
+    margin-top: 1rem;
+
+    .TitlesContainer {
+      margin-right: 1rem;
+
+      h4 {
+        color: $fontSecondary;
+        margin-top: 0.5rem;
+      }
+    }
+
+    .ValuesContainer {
+      h4 {
+        color: $fontPrimary;
+        font-weight: 300;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+}
+
+@include tablet {
+  .MainDetailsContainer {
+    .LaunchNumber {
+      font-size: 1.2rem;
+    }
+
+    p {
+      max-width: 90%;
+      font-size: 0.8rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    .DetailsWrapper {
+      .TitlesContainer {
+        h4 {
+          font-size: 0.8rem;
+        }
+      }
+
+      .ValuesContainer {
+        h4 {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}

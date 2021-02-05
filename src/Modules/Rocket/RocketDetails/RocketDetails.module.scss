@@ -5,15 +5,6 @@
   @include flex-column;
   align-items: flex-start;
 
-  p {
-    color: $fontPrimary;
-    margin-bottom: 1.2rem;
-  }
-
-  h3 {
-    color: $fontSecondary;
-  }
-
   .RocketDetails {
     @include flex-center-column;
     margin-top: 2rem;
@@ -33,15 +24,6 @@
     .DetailsContainer {
       position: relative;
       width: 100%;
-
-      .Details {
-        @include flex-center-column;
-        justify-content: flex-start;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
     }
   }
 }
@@ -56,11 +38,6 @@
   .RocketDetailsContainer {
     margin-left: 2rem;
     position: relative;
-
-    p,
-    h3 {
-      font-size: 0.8rem;
-    }
 
     .RocketDetails {
       .BtnContainer {

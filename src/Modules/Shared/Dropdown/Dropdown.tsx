@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //HOOKS
 import { useClickOutside } from "../../../Hooks";
@@ -9,6 +8,8 @@ import styles from "./Dropdown.module.scss";
 
 //TYPES
 import { DropdownElement } from "../../../Types/";
+import { Header } from "./Header/Header";
+import { List } from "./List/List";
 
 export const Dropdown = ({
   title,
@@ -44,31 +45,20 @@ export const Dropdown = ({
 
   return (
     <div className={ddStyles.join(" ")} ref={wrapperRef}>
-      <div
-        className={styles.HeaderWrapper}
-        onClick={() => toggleList(!isListOpen)}>
-        <h4>{headerTitle}</h4>
-        {isListOpen ? (
-          <FontAwesomeIcon icon="angle-up" />
-        ) : (
-          <FontAwesomeIcon icon="angle-down" />
-        )}
-      </div>
+      <Header
+        title={headerTitle}
+        isListOpen={isListOpen}
+        styleType={styleType}
+        toggleList={(open: boolean) => toggleList(open)}
+      />
       {isListOpen && (
-        <div className={styles.DropdownListWrapper}>
-          {list.map((element) => (
-            <h4
-              onClick={() => selectItemHandler(element)}
-              className={
-                element.selected
-                  ? [styles.ListElement, styles.Selected].join(" ")
-                  : styles.ListElement
-              }
-              key={element.id}>
-              {element.title}
-            </h4>
-          ))}
-        </div>
+        <List
+          list={list}
+          styleType={styleType}
+          selectedItem={(element: DropdownElement) =>
+            selectItemHandler(element)
+          }
+        />
       )}
     </div>
   );

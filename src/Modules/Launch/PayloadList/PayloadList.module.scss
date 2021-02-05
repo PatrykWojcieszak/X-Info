@@ -1,0 +1,30 @@
+@import "../../../resources/styles/index.scss";
+
+.PayloadList {
+  width: 100%;
+  @include flex-column;
+
+  margin-bottom: 2rem;
+
+  h2 {
+    font-weight: 100;
+    color: $fontPrimary;
+    font-size: 2rem;
+  }
+}
+
+@include tablet {
+  .PayloadList {
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@include mobile {
+  .PayloadList {
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+}

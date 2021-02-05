@@ -7,7 +7,7 @@ import { InfoLine } from "./InfoLine/InfoLine";
 
 //STYLES
 import styles from "./LaunchDetails.module.scss";
-import { launchDetailsAnim } from "../../../Animations/Animations_motion";
+import { launchDetailsAnim } from "../../../../Animations/Animations_motion";
 
 export const LaunchDetails = React.memo(
   ({

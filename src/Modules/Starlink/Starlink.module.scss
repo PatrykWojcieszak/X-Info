@@ -4,60 +4,9 @@
   height: 95vh;
 }
 
-.StarlinkInfo {
-  z-index: 100;
-  position: absolute;
-  top: 6rem;
-  left: 2%;
-  @include flex-column;
-  max-width: 400px;
-
-  h2 {
-    font-size: 3rem;
-    color: $fontPrimary;
-    margin-bottom: 1rem;
-  }
-
-  h3 {
-    font-size: 1.2rem;
-    color: $fontSecondary;
-  }
-
-  h2,
-  h3,
-  h4 {
-    font-weight: 300;
-  }
-
-  h4 {
-    margin-top: 1rem;
-    color: $fontSecondary;
-  }
-}
-
 a {
   text-decoration: none;
   color: $blue;
-}
-
-@include tablet {
-  .StarlinkInfo {
-    z-index: 100;
-    position: absolute;
-    top: 10%;
-    left: 2%;
-    @include flex-column;
-    max-width: 400px;
-
-    h2 {
-      font-size: 2rem;
-    }
-
-    h3,
-    h4 {
-      font-size: 0.8rem;
-    }
-  }
 }
 
 .SpinnerWrapper {

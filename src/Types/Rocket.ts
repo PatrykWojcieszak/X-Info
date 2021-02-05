@@ -1,4 +1,10 @@
+import { Engines } from "./Engines";
+import { FirstStage } from "./FirstStage";
+import { LandingLegs } from "./LandingLegs";
+import { Length } from "./Length";
+import { Mass } from "./Mass";
 import { PayloadWeights } from "./PayloadWeights";
+import { SecondStage } from "./SecondStage";
 
 export const enum RocketType {
   f1 = "5e9d0d95eda69955f709d1eb",
@@ -19,82 +25,14 @@ export interface Rocket {
   first_flight: string;
   country: string;
   company: string;
-  height: {
-    meters: number;
-    feet: number;
-  };
-  diameter: {
-    meters: number;
-    feet: number;
-  };
-  mass: {
-    kg: number;
-    lb: number;
-  };
+  height: Length;
+  diameter: Length;
+  mass: Mass;
   payload_weights: PayloadWeights[];
-  first_stage: {
-    reusable: boolean;
-    engines: number;
-    fuel_amount_tons: number;
-    burn_time_sec: number;
-    thrust_sea_level: {
-      kN: number;
-      lbf: number;
-    };
-    thrust_vacuum: {
-      kN: number;
-      lbf: number;
-    };
-  };
-  second_stage: {
-    reusable: boolean;
-    engines: number;
-    fuel_amount_tons: number;
-    burn_time_sec: number;
-    thrust: {
-      kN: number;
-      lbf: number;
-    };
-    payloads: {
-      option_1: string;
-      composite_fairing: {
-        height: {
-          meters: number;
-          feet: number;
-        };
-        diameter: {
-          meters: number;
-          feet: number;
-        };
-      };
-    };
-  };
-  engines: {
-    number: number;
-    type: string;
-    version: string;
-    layout: string;
-    isp: {
-      sea_level: number;
-      vacuum: number;
-    };
-    engine_loss_max: number;
-    propellant_1: string;
-    propellant_2: string;
-    thrust_sea_level: {
-      kN: number;
-      lbf: number;
-    };
-    thrust_vacuum: {
-      kN: number;
-      lbf: number;
-    };
-    thrust_to_weight: number;
-  };
-  landing_legs: {
-    number: number;
-    material: {};
-  };
+  first_stage: FirstStage;
+  second_stage: SecondStage;
+  engines: Engines;
+  landing_legs: LandingLegs;
   flickr_images: [];
   wikipedia: string;
   description: string;

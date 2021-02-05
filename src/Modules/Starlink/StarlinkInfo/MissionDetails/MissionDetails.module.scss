@@ -1,0 +1,21 @@
+@import "../../../../resources/styles/index.scss";
+
+.MissionDetails {
+  margin-left: 4rem;
+
+  .LaunchInfoWrapper {
+    cursor: pointer;
+
+    h3 {
+      color: $blue;
+      font-weight: 300;
+    }
+  }
+}
+
+@include mobile {
+  .MissionDetails {
+    margin-top: 2rem;
+    margin-left: 0;
+  }
+}

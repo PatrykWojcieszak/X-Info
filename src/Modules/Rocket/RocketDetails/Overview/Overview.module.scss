@@ -1,0 +1,10 @@
+@import "../../../../resources/styles/index.scss";
+
+.Overview {
+  @include flex-center-column;
+  justify-content: flex-start;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

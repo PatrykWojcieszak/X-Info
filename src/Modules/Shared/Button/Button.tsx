@@ -7,9 +7,9 @@ export const Button = React.memo(
   ({ name, selected, clicked, disabled, styleType }: buttonProps) => {
     const btnStyle = [styles.Button];
 
-    if (selected) btnStyle.push(styles.Selected);
     if (styleType === "primary") btnStyle.push(styles.Primary);
     if (styleType === "secondary") btnStyle.push(styles.Secondary);
+    if (selected) btnStyle.push(styles.Selected);
 
     return (
       <button
