@@ -1,0 +1,51 @@
+@import "../../../../resources/styles/index.scss";
+
+.SecondaryDetails {
+  display: flex;
+  margin-top: 1rem;
+
+  .Element {
+    @include flex-column;
+    margin-right: 1rem;
+
+    .Title,
+    .Value {
+      margin-top: 0.5rem;
+      font-weight: 100;
+    }
+
+    .Title {
+      color: $fontSecondary;
+    }
+
+    .Value {
+      color: $fontPrimary;
+    }
+  }
+}
+
+@include tablet {
+  .SecondaryDetails {
+    margin-top: 1rem;
+
+    .Element {
+      .Title,
+      .Value {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+
+@include mobile {
+  .SecondaryDetails {
+    margin-top: 1rem;
+
+    .Element {
+      .Title,
+      .Value {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
