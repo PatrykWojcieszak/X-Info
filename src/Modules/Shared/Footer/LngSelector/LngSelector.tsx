@@ -8,7 +8,7 @@ import styles from "./LngSelector.module.scss";
 //HOOK
 import { useClickOutside } from "../../../../Hooks/useClickOutside";
 
-export const LngSelector = (props) => {
+export const LngSelector = () => {
   const { i18n } = useTranslation();
 
   const [selectedLang, setSelectedLang] = useState(i18n.language);
