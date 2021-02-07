@@ -108,7 +108,8 @@
   "clearFilter": "WYCZYŚĆ FILTROWANIE",
   "success": "Sukces",
 
-  "key": "{{date, DD/MM/YYYY}}",
+  "key": "{{date, LLL}}",
+  "keyMonth": "{{date, MMMM, YYYY}}",
 
   "createdBy": "Stworzone przez",
   "using": "używając",

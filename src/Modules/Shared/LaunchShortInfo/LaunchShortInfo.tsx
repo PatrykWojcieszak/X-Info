@@ -21,6 +21,7 @@ export const LaunchShortInfo = React.memo(
     flightNumber,
     success,
     nationality,
+    datePrecision,
   }: launchShortInfoProps) => {
     return (
       <Link to={`/launch/${flightNumber}`}>
@@ -31,6 +32,7 @@ export const LaunchShortInfo = React.memo(
             flightNumber={flightNumber}
             success={success}
             launchDateUtc={launchDateUtc}
+            datePrecision={datePrecision}
           />
           <SecondaryDetails
             launchSiteName={launchSiteName}
@@ -52,4 +54,5 @@ type launchShortInfoProps = {
   flightNumber: number;
   success?: boolean;
   nationality: string;
+  datePrecision: string;
 };

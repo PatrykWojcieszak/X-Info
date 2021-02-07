@@ -24,6 +24,9 @@ export const MainDetails = ({
   )
     launch = t("launchNotLaunchedYet");
 
+  let datePrec = "key";
+  if (date_precision === "month") datePrec = "keyMonth";
+
   return (
     <div className={styles.MainDetailsContainer}>
       <h2>{launchName}</h2>
@@ -39,7 +42,7 @@ export const MainDetails = ({
         <div className={styles.ValuesContainer}>
           {launchSiteName && <h4>{launchSiteName}</h4>}
           {rocketName && <h4>{rocketName}</h4>}
-          {date_utc && <h4>{t("key", { date: new Date(date_utc) })}</h4>}
+          {date_utc && <h4>{t(datePrec, { date: new Date(date_utc) })}</h4>}
           {success !== null && (
             <h4 style={{ color: success ? "#4BB543" : "#FA113D" }}>{launch}</h4>
           )}

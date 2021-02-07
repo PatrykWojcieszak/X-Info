@@ -13,6 +13,7 @@ export const PastLaunchesQuery = {
       success: 1,
       links: 1,
       flight_number: 1,
+      date_precision: 1,
     },
     sort: {
       flight_number: "desc",
