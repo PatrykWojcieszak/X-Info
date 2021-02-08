@@ -39,6 +39,7 @@ export const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
             flightNumber={launch.flight_number}
             success={launch.success}
             nationality={launch.payloads[0].nationalities[0]}
+            datePrecision={launch.date_precision}
           />
         ))}
         {launches.length >= numberOfLaunches && (

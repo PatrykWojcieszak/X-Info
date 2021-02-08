@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
 
@@ -6,17 +6,21 @@ import { useTranslation } from "react-i18next";
 import styles from "./LngSelector.module.scss";
 
 //HOOK
-import { useClickOutside } from "../../../../Hooks/useClickOutside";
+import { useClickOutside, useLocalStorage } from "../../../../Hooks";
 
 export const LngSelector = () => {
   const { i18n } = useTranslation();
-
-  const [selectedLang, setSelectedLang] = useState(i18n.language);
+  const [selectedLng, setSelectedLng] = useLocalStorage("lng", i18n.language);
   const [showLngSelector, setShowLngSelector] = useState(false);
 
+  useEffect(() => {
+    i18n.changeLanguage(selectedLng);
+  }, [selectedLng, i18n]);
+
   const changeLanguageHandler = (lng) => {
-    setSelectedLang(lng);
+    setSelectedLng(lng);
     i18n.changeLanguage(lng);
+
     setShowLngSelector(false);
   };
 
@@ -33,7 +37,7 @@ export const LngSelector = () => {
         style={{ display: "flex", alignItems: "center" }}
         onClick={() => setShowLngSelector(!showLngSelector)}>
         <FontAwesomeIcon icon="globe-americas" />
-        {selectedLang}
+        {selectedLng}
       </div>
       <div
         className={
@@ -42,12 +46,12 @@ export const LngSelector = () => {
             : styles.LanguagesWrapper
         }>
         <h4
-          className={selectedLang === "en" ? styles.Selected : ""}
+          className={selectedLng === "en" ? styles.Selected : ""}
           onClick={() => changeLanguageHandler("en")}>
           English - EN
         </h4>
         <h4
-          className={selectedLang === "pl" ? styles.Selected : ""}
+          className={selectedLng === "pl" ? styles.Selected : ""}
           onClick={() => changeLanguageHandler("pl")}>
           Polish - PL
         </h4>

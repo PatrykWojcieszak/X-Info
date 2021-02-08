@@ -18,7 +18,7 @@ i18n
       format: function (value, formatting, lng) {
         if (value instanceof Date) {
           moment.locale(lng);
-          return moment(value).format("LLLL");
+          return moment(value).format(formatting);
         }
         return value.toString();
       },

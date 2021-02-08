@@ -10,14 +10,18 @@ export const MainDetails = ({
   rocketName,
   success,
   flightNumber,
+  datePrecision,
 }: mainDetails) => {
   const { t } = useTranslation();
+
+  let datePrec = "key";
+  if (datePrecision === "month") datePrec = "keyMonth";
 
   return (
     <div className={styles.MainDetails}>
       <div className={styles.Name_Date}>
         <h2>{launchName}</h2>
-        <h4>{t("key", { date: new Date(launchDateUtc) })}</h4>
+        <h4>{t(datePrec, { date: new Date(launchDateUtc) })}</h4>
       </div>
       <div className={styles.Column}>
         <div className={styles.Row}>
@@ -44,4 +48,5 @@ type mainDetails = {
   rocketName: string;
   success?: boolean;
   flightNumber: number;
+  datePrecision: string;
 };

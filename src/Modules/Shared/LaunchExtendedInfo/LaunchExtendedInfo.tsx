@@ -29,7 +29,7 @@ export const LaunchExtendedInfo = React.memo(
     return (
       <Link
         style={{ cursor: showMoreDetailsButton ? "pointer" : "default" }}
-        to={showMoreDetailsButton ? `/launch/${flightNumber}` : null}>
+        to={showMoreDetailsButton ? `/launch/${flightNumber}` : "#"}>
         <div className={styles.LatestLaunch}>
           <div className={styles.LeftContainer}>
             <Patch
