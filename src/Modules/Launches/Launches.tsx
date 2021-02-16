@@ -153,7 +153,6 @@ const Launches = () => {
               showMoreDetailsButton
               details={latestLaunch.latestLaunch.docs[0].details}
               launchName={latestLaunch.latestLaunch.docs[0].name}
-              date_local={latestLaunch.latestLaunch.docs[0].date_local}
               date_utc={latestLaunch.latestLaunch.docs[0].date_utc}
               rocketName={latestLaunch.latestLaunch.docs[0].rocket.name}
               launchSiteName={
@@ -163,7 +162,7 @@ const Launches = () => {
               patchImg={latestLaunch.latestLaunch.docs[0].links.patch.small}
               success={latestLaunch.latestLaunch.docs[0].success}
               failures={latestLaunch.latestLaunch.docs[0].failures}
-              launchId={latestLaunch.latestLaunch.docs[0].id}
+              id={latestLaunch.latestLaunch.docs[0].id}
               date_precision={latestLaunch.latestLaunch.docs[0].date_precision}
             />
           )}

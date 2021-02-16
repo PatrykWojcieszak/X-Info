@@ -9,13 +9,14 @@ export const MissionDetails = ({
   flightNumber,
   name,
   dateUtc,
+  id,
 }: missionDetailsProps) => {
   const { t } = useTranslation();
 
   return (
     <div className={styles.MissionDetails}>
       <h2>{t("launch")}</h2>
-      <Link to={`launch/${flightNumber}`}>
+      <Link to={`launch/${id}`}>
         <div className={styles.LaunchInfoWrapper}>
           <h3>{name}</h3>
           <h4>
@@ -31,4 +32,5 @@ type missionDetailsProps = {
   flightNumber: number;
   name: string;
   dateUtc: string;
+  id: string;
 };

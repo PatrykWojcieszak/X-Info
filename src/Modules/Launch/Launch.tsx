@@ -28,28 +28,29 @@ import { RootState } from "../../Store/rootReducer";
 
 //OTHER
 import { launchPageTitle, launchPageDescription } from "../Shared/SEO/Tags";
+import { RocketType } from "../../Types";
 
 const Launch = () => {
-  const { flight_number } = useParams();
+  const { id } = useParams();
 
   const launch = useSelector((state: RootState) => state.launch);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchLaunch(flight_number));
-  }, [dispatch, flight_number]);
+    dispatch(fetchLaunch(id));
+  }, [dispatch, id]);
 
   //ROCKET IMAGE
-  let rocketImg = <img src={falcon9} alt="Falcon 9" />;
+  let rocketImg = <></>;
 
-  if (launch.launch.docs[0]?.rocket.name === "Falcon 1")
+  if (launch.launch.docs[0]?.rocket.id === RocketType.f1)
     rocketImg = <img src={falcon1} alt="Falcon 1" />;
-  else if (launch.launch.docs[0]?.rocket.name === "Falcon 9")
+  else if (launch.launch.docs[0]?.rocket.id === RocketType.f9)
     rocketImg = <img src={falcon9} alt="Falcon 9" />;
-  else if (launch.launch.docs[0]?.rocket.name === "Falcon Heavy")
+  else if (launch.launch.docs[0]?.rocket.id === RocketType.fh)
     rocketImg = <img src={fhheavy} alt="Falcon Heavy" />;
-  else if (launch.launch.docs[0]?.rocket.name === "Starship")
+  else if (launch.launch.docs[0]?.rocket.id === RocketType.starship)
     rocketImg = <img src={starship} alt="Starship" />;
 
   let launchInformation = (
@@ -66,7 +67,6 @@ const Launch = () => {
             showMoreDetailsButton={false}
             details={launch.launch.docs[0].details}
             launchName={launch.launch.docs[0].name}
-            date_local={launch.launch.docs[0].date_local}
             date_utc={launch.launch.docs[0].date_utc}
             rocketName={launch.launch.docs[0].rocket.name}
             launchSiteName={launch.launch.docs[0].launchpad.full_name}
@@ -74,12 +74,12 @@ const Launch = () => {
             patchImg={launch.launch.docs[0].links.patch.small}
             success={launch.launch.docs[0].success}
             failures={launch.launch.docs[0].failures}
-            launchId={launch.launch.docs[0].id}
+            id={launch.launch.docs[0].id}
             date_precision={launch.launch.docs[0].date_precision}
           />
 
           <div className={styles.Row}>
-            <Link to={`/vehicles/${launch.launch.docs[0]?.rocket.name}`}>
+            <Link to={`/vehicles/${launch.launch.docs[0]?.rocket.id}`}>
               <div className={styles.Rocket}>
                 <h3>{launch.launch.docs[0]?.rocket.name}</h3>
                 {rocketImg}

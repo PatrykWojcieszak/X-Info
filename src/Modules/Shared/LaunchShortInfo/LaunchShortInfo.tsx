@@ -22,9 +22,10 @@ export const LaunchShortInfo = React.memo(
     success,
     nationality,
     datePrecision,
+    id,
   }: launchShortInfoProps) => {
     return (
-      <Link to={`/launch/${flightNumber}`}>
+      <Link to={`/launch/${id}`}>
         <div className={styles.Launch}>
           <MainDetails
             launchName={launchName}
@@ -55,4 +56,5 @@ type launchShortInfoProps = {
   success?: boolean;
   nationality: string;
   datePrecision: string;
+  id: string;
 };

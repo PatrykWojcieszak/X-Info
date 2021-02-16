@@ -42,7 +42,7 @@ export const RecentLaunches = () => {
           ? [1, 2, 3, 4, 5].map((n) => <RecentLaunchSkeleton key={n} />)
           : recentLaunches.recentLaunches.docs.map((launch, index) => (
               <Launch
-                flightNumber={launch.flight_number}
+                id={launch.id}
                 key={index}
                 name={launch.name}
                 patch={launch.links.patch.small}

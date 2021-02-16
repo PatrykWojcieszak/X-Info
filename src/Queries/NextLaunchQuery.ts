@@ -6,6 +6,7 @@ export const NextLaunchQuery = {
     limit: 1,
     select: {
       name: 1,
+      id: 1,
       date_local: 1,
       flight_number: 1,
       details: 1,
@@ -27,6 +28,7 @@ export const NextLaunchQuery = {
         path: "rocket",
         select: {
           name: 1,
+          id: 1,
         },
       },
     ],

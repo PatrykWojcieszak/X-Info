@@ -3,11 +3,10 @@ export const PastLaunchesQuery = {
     upcoming: false,
   },
   options: {
-    // page: 1,
-    // limit: 10,
     pagination: false,
     select: {
       name: 1,
+      id: 1,
       date_local: 1,
       date_utc: 1,
       success: 1,
@@ -30,6 +29,7 @@ export const PastLaunchesQuery = {
         path: "rocket",
         select: {
           name: 1,
+          id: 1,
         },
       },
       {

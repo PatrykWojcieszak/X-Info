@@ -14,7 +14,7 @@ export const Missions = ({ missions }: missionsProps) => {
       <h3 style={{ marginLeft: "1.1rem" }}>{t("missions")}</h3>
       <div className={styles.MissionListWrapper}>
         {missions.map((launch, index) => (
-          <Link key={index} to={`/launch/${launch.flight_number}`}>
+          <Link key={index} to={`/launch/${launch.id}`}>
             <div className={styles.Mission}>
               <h3>{launch.name}</h3>
               <h4>

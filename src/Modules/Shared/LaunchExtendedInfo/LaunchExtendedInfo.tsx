@@ -16,20 +16,19 @@ export const LaunchExtendedInfo = React.memo(
     details,
     launchName,
     date_utc,
-    date_local,
     rocketName,
     launchSiteName,
     flightNumber,
     patchImg,
     success,
     failures,
-    launchId,
     date_precision,
+    id,
   }: LaunchExtendedInfoProps) => {
     return (
       <Link
         style={{ cursor: showMoreDetailsButton ? "pointer" : "default" }}
-        to={showMoreDetailsButton ? `/launch/${flightNumber}` : "#"}>
+        to={showMoreDetailsButton ? `/launch/${id}` : "#"}>
         <div className={styles.LatestLaunch}>
           <div className={styles.LeftContainer}>
             <Patch
@@ -63,13 +62,12 @@ type LaunchExtendedInfoProps = {
   details: string;
   launchName: string;
   date_utc: string;
-  date_local: string;
   rocketName: string;
   launchSiteName: string;
   flightNumber: number;
   patchImg: string;
   success: boolean;
   failures: Failure[];
-  launchId: string;
   date_precision: string;
+  id: string;
 };

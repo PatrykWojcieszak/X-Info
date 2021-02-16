@@ -20,6 +20,7 @@ export const BoostersQuery = {
           name: 1,
           flight_number: 1,
           date_utc: 1,
+          id: 1,
         },
       },
     ],

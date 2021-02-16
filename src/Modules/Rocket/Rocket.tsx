@@ -28,25 +28,25 @@ import { RocketDetails } from "./RocketDetails/RocketDetails";
 import { RocketType } from "../../Types";
 
 const Rocket = () => {
-  const { vehicle } = useParams();
+  const { id } = useParams();
   const rocket = useSelector((root: RootState) => root.rocket);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchRocket(vehicle));
-  }, [dispatch, vehicle]);
+    dispatch(fetchRocket(id));
+  }, [dispatch, id]);
 
   let rocketImg = "";
 
-  if (vehicle === RocketType.f1) {
+  if (id === RocketType.f1) {
     rocketImg = falcon1_img;
-  } else if (vehicle === RocketType.f9) {
+  } else if (id === RocketType.f9) {
     rocketImg = falcon9_img;
-  } else if (vehicle === RocketType.fh) {
+  } else if (id === RocketType.fh) {
     rocketImg = falconheavy_img;
   }
-  if (vehicle === RocketType.starship) {
+  if (id === RocketType.starship) {
     rocketImg = starship_img;
   }
 
@@ -69,7 +69,7 @@ const Rocket = () => {
   return (
     <>
       <SEO
-        title={`${rocketPageTitle} - ${rocket.rocket.docs[0].name}`}
+        title={`${rocketPageTitle} - ${rocket.rocket.docs[0]?.name}`}
         description={rocketPageDescription}
       />
       <motion.div
@@ -78,7 +78,7 @@ const Rocket = () => {
         exit="out"
         variants={pageVariantsAnim}
         className={styles.Rocket}>
-        <HeroImage vehicle={vehicle} />
+        <HeroImage vehicle={id} />
         <div className={styles.Content}>{rocketContainer}</div>
         <div className={styles.GalleryWrapper}>
           {rocket.rocket.docs[0]?.flickr_images.length > 0 ? (

@@ -49,6 +49,7 @@ export const UpcomingLaunches = () => {
                   flightNumber={launch.flight_number}
                   nationality={launch.payloads[0].nationalities[0]}
                   datePrecision={launch.date_precision}
+                  id={launch.id}
                 />
               ))}
       </div>

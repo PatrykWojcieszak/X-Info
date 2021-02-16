@@ -30,6 +30,7 @@ export const UpcomingLaunches = ({
         {launches.map((launch, index) => (
           <LaunchShortInfo
             key={index}
+            id={launch.id}
             launchName={launch?.name}
             launchDateUtc={launch?.date_utc}
             rocketName={launch?.rocket.name}
