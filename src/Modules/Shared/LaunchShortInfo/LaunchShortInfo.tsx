@@ -38,7 +38,7 @@ export const LaunchShortInfo = React.memo(
             launchSiteName={launchSiteName}
             customer={customer}
           />
-          <Flag nationality={nationality} />
+          {nationality && <Flag nationality={nationality} />}
         </div>
       </Link>
     );
