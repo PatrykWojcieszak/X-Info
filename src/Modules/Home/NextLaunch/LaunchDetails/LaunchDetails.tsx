@@ -16,8 +16,12 @@ export const LaunchDetails = React.memo(
     details,
     rocketName,
     launchpadFullName,
+    datePrecision,
   }: launchDetailsProps) => {
     const { t } = useTranslation();
+
+    let datePrec = "key";
+    if (datePrecision === "month") datePrec = "keyMonth";
 
     return (
       <motion.div
@@ -31,7 +35,7 @@ export const LaunchDetails = React.memo(
         {dateLocal && (
           <InfoLine
             title={t("launchDate")}
-            value={t("key", { date: new Date(dateLocal) })}
+            value={t(datePrec, { date: new Date(dateLocal) })}
           />
         )}
         {rocketName && <InfoLine title={t("rocket")} value={rocketName} />}
@@ -53,4 +57,5 @@ type launchDetailsProps = {
   details: string;
   rocketName: string;
   launchpadFullName: string;
+  datePrecision: string;
 };

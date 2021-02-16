@@ -10,6 +10,7 @@ export const NextLaunchQuery = {
       flight_number: 1,
       details: 1,
       links: 1,
+      date_precision: 1,
     },
     sort: {
       flight_number: "asc",

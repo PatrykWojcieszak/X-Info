@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { LaunchDetails } from "./LaunchDetails/LaunchDetails";
 import { Countdown } from "../Countdown/Countdown";
 import { YouTubeFrame } from "../../Shared/YoutubeFrame/YouTubeFrame";
+import { LaunchName } from "./LaunchName/LaunchName";
 
 //MODELS
 import { Time } from "../../../Types";
@@ -74,11 +75,11 @@ export const NextLaunch = ({ elonMuskQuote }: nextLaunchProps) => {
 
   let nextLaunchWrapper = <div className={styles.Top}></div>;
 
-  const isAfterLaunch = (): boolean => {
-    if (new Date() > new Date(nextLaunch.nextLaunch.docs[0]?.date_local))
-      return true;
-    else return false;
-  };
+  // const isAfterLaunch = (): boolean => {
+  //   if (new Date() > new Date(nextLaunch.nextLaunch.docs[0]?.date_local))
+  //     return true;
+  //   else return false;
+  // };
 
   if (
     !nextLaunch.loading &&
@@ -91,14 +92,18 @@ export const NextLaunch = ({ elonMuskQuote }: nextLaunchProps) => {
             animate="show"
             exit="exit"
             className={styles.Top__Content}>
-            <div className={styles.LaunchTitle}>
+            <LaunchName
+              launchName={nextLaunch.nextLaunch.docs[0].name}
+              dateLocal={nextLaunch.nextLaunch.docs[0]?.date_local}
+            />
+            {/* <div className={styles.LaunchTitle}>
               <h2>
                 {isAfterLaunch() ? t("currentLaunch") : t("nextLaunchTitle")}:{" "}
               </h2>
               <h2 className={styles.LaunchName}>
                 {nextLaunch.nextLaunch.docs[0].name}
               </h2>
-            </div>
+            </div> */}
             {timer && (
               <Countdown
                 days={timer.days}
@@ -123,6 +128,7 @@ export const NextLaunch = ({ elonMuskQuote }: nextLaunchProps) => {
                   dateLocal={nextLaunch.nextLaunch.docs[0].date_local}
                   details={nextLaunch.nextLaunch.docs[0].details}
                   rocketName={nextLaunch.nextLaunch.docs[0].rocket.name}
+                  datePrecision={nextLaunch.nextLaunch.docs[0].date_precision}
                   launchpadFullName={
                     nextLaunch.nextLaunch.docs[0].launchpad.full_name
                   }
