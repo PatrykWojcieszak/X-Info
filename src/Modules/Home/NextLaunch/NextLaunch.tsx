@@ -75,12 +75,6 @@ export const NextLaunch = ({ elonMuskQuote }: nextLaunchProps) => {
 
   let nextLaunchWrapper = <div className={styles.Top}></div>;
 
-  // const isAfterLaunch = (): boolean => {
-  //   if (new Date() > new Date(nextLaunch.nextLaunch.docs[0]?.date_local))
-  //     return true;
-  //   else return false;
-  // };
-
   if (
     !nextLaunch.loading &&
     (nextLaunchWrapper = (
@@ -96,14 +90,6 @@ export const NextLaunch = ({ elonMuskQuote }: nextLaunchProps) => {
               launchName={nextLaunch.nextLaunch.docs[0].name}
               dateLocal={nextLaunch.nextLaunch.docs[0]?.date_local}
             />
-            {/* <div className={styles.LaunchTitle}>
-              <h2>
-                {isAfterLaunch() ? t("currentLaunch") : t("nextLaunchTitle")}:{" "}
-              </h2>
-              <h2 className={styles.LaunchName}>
-                {nextLaunch.nextLaunch.docs[0].name}
-              </h2>
-            </div> */}
             {timer && (
               <Countdown
                 days={timer.days}

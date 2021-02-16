@@ -7,7 +7,7 @@ import styles from "./LaunchName.module.scss";
 export const LaunchName = React.memo(
   ({ launchName, dateLocal }: launchNameProps) => {
     const { t } = useTranslation();
-    console.log("render");
+
     const isAfterLaunch = (): boolean => {
       if (new Date() > new Date(dateLocal)) return true;
       else return false;
