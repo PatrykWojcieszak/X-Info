@@ -23,3 +23,4 @@ export type { Engines } from "./Engines";
 export type { FirstStage } from "./FirstStage";
 export type { Length } from "./Length";
 export type { Mass } from "./Mass";
+export type { FilterOptions } from "./FilterOptions";

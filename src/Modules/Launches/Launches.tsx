@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import i18n from "../../i18n";
 
 //COMPONENTS
 import { UpcomingLaunches } from "./UpcomingLaunches/UpcomingLaunches";
@@ -33,25 +34,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Store/rootReducer";
 
 //TYPES
-import { Launch, QueryResult } from "../../Types";
+import { DropdownElement, Launch, QueryResult } from "../../Types";
 import { changeDDElementToTrue } from "../../Utility/Utility";
 import {
-  filterLaunchSite,
-  filterRockets,
-  filterStatus,
-  launchesFilterPast,
-  launchesFilterUpcoming,
+  LaunchSitesDDList,
+  rocketsDDList,
+  LaunchStatusDDList,
+  launchedDDList,
 } from "../../Other/DDLists";
 
 const Launches = () => {
   const [isLaunchesTypeDDOpen, setIsLaunchesTypeDDOpen] = useState(false);
-  const [launchTypeFilter, setLaunchTypeFilter] = useState(
-    launchesFilterUpcoming
-  );
+  const [launchTypeFilter, setLaunchTypeFilter] = useState(launchedDDList);
   const [showFilterModal, setShowFilterModal] = useState(false);
-  const [rocketTypeFilter, setRocketTypeFilter] = useState(filterRockets);
-  const [launchSiteFilter, setLaunchSiteFilter] = useState(filterLaunchSite);
-  const [launchStatusFilter, setLaunchStatusFilter] = useState(filterStatus);
+  const [rocketTypeFilter, setRocketTypeFilter] = useState(rocketsDDList);
+  const [launchSiteFilter, setLaunchSiteFilter] = useState(LaunchSitesDDList);
+  const [launchStatusFilter, setLaunchStatusFilter] = useState(
+    LaunchStatusDDList
+  );
   const [dateFromFilter, setDateFromFilter] = useState(new Date("2006"));
   const [dateToFilter, setDateToFilter] = useState(
     new Date(new Date().setFullYear(new Date().getFullYear() + 1))
@@ -68,6 +68,23 @@ const Launches = () => {
 
   const dispatch = useDispatch();
 
+  const changeDropdownTranslations = () => {
+    const temp = launchedDDList.map((item) => {
+      return {
+        id: item.id,
+        selected: item.selected,
+        key: item.key,
+        title: t(item.key),
+      };
+    });
+
+    setLaunchTypeFilter(temp);
+  };
+
+  i18n.on("languageChanged init", () => {
+    changeDropdownTranslations();
+  });
+
   useEffect(() => {
     if (latestLaunch.latestLaunch.docs.length === 0)
       dispatch(fetchLatestLaunch());
@@ -76,10 +93,22 @@ const Launches = () => {
     if (upcomingLaunches.upcomingLaunches.docs.length === 0)
       dispatch(fetchUpcomingLaunches());
 
+    let newFilter: DropdownElement[] = [];
     if (launchType === "past") {
-      setLaunchTypeFilter(launchesFilterPast);
+      newFilter = changeDDElementToTrue(launchedDDList, 1);
+    } else {
+      newFilter = changeDDElementToTrue(launchedDDList, 0);
     }
+    setLaunchTypeFilter(newFilter);
   }, [dispatch, launchType, latestLaunch, pastLaunches, upcomingLaunches]);
+
+  // const filters = {
+  //   rocket: '',
+  //   dateFrom:new Date(),
+  //   dateTo: new Date(),
+  //   launchSite: '',
+  //   status: Boolean,
+  // }
 
   const filter = (arr: QueryResult<Launch>): Launch[] => {
     let temp = { ...arr };
@@ -92,7 +121,9 @@ const Launches = () => {
 
     if (!rocketTypeFilter[0].selected)
       temp.docs = temp.docs.filter(
-        (x) => x.rocket.name === rocketTypeFilter.find((t) => t.selected)?.title
+        (x) =>
+          x.rocket.name ===
+          rocketTypeFilter.find((t) => t.selected && t.key !== "all")?.title
       );
 
     if (!launchStatusFilter[0].selected) {
