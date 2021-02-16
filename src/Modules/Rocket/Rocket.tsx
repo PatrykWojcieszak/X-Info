@@ -25,6 +25,7 @@ import { RocketSkeleton } from "../Shared/Skeletons/RocketSkeleton";
 import { rocketPageTitle, rocketPageDescription } from "../Shared/SEO/Tags";
 import { HeroImage } from "./HeroImage/HeroImage";
 import { RocketDetails } from "./RocketDetails/RocketDetails";
+import { RocketType } from "../../Types";
 
 const Rocket = () => {
   const { vehicle } = useParams();
@@ -38,14 +39,14 @@ const Rocket = () => {
 
   let rocketImg = "";
 
-  if (vehicle === "Falcon 1") {
+  if (vehicle === RocketType.f1) {
     rocketImg = falcon1_img;
-  } else if (vehicle === "Falcon 9") {
+  } else if (vehicle === RocketType.f9) {
     rocketImg = falcon9_img;
-  } else if (vehicle === "Falcon Heavy") {
+  } else if (vehicle === RocketType.fh) {
     rocketImg = falconheavy_img;
   }
-  if (vehicle === "Starship") {
+  if (vehicle === RocketType.starship) {
     rocketImg = starship_img;
   }
 
@@ -61,14 +62,14 @@ const Rocket = () => {
         <div className={styles.Rocket}>
           <img src={rocketImg} alt="rocket" />
         </div>
-        <RocketDetails rocket={rocket.rocket.docs[0]} rocketName={vehicle} />
+        <RocketDetails rocket={rocket.rocket.docs[0]} />
       </>
     );
 
   return (
     <>
       <SEO
-        title={`${rocketPageTitle} - ${vehicle}`}
+        title={`${rocketPageTitle} - ${rocket.rocket.docs[0].name}`}
         description={rocketPageDescription}
       />
       <motion.div

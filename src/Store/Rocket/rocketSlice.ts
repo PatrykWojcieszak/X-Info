@@ -54,7 +54,7 @@ export const fetchRocket = (vehicle: string): AppThunk => async (dispatch) => {
   try {
     dispatch(getRocketStart());
     const query = RocketQuery;
-    query.query.name = vehicle;
+    query.query._id = vehicle;
     const launches = await getData<Rocket>(ROCKET_QUERY, query);
     dispatch(getRocketSuccess(launches));
   } catch (err) {

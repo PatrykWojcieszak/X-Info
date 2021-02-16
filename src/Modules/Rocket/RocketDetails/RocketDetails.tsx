@@ -13,10 +13,10 @@ import { Overview } from "./Overview/Overview";
 import styles from "./RocketDetails.module.scss";
 
 //TYPES
-import { Rocket } from "../../../Types";
+import { Rocket, RocketType } from "../../../Types";
 import { Header } from "./Header/Header";
 
-export const RocketDetails = ({ rocket, rocketName }: rocketDetailsProps) => {
+export const RocketDetails = ({ rocket }: rocketDetailsProps) => {
   const showRocketDetailsInitial = [
     { name: "overview", isActive: true, isVisible: true },
     { name: "stage1", isActive: false, isVisible: true },
@@ -31,11 +31,11 @@ export const RocketDetails = ({ rocket, rocketName }: rocketDetailsProps) => {
 
   useEffect(() => {
     const temp = [...showRocketDetails];
-    if (rocketName === "Falcon 1") temp[3].isVisible = false;
+    if (rocket.id === RocketType.f1) temp[3].isVisible = false;
     else temp[3].isVisible = true;
 
     setShowRocketDetails(temp);
-  }, [showRocketDetails, rocketName]);
+  }, [showRocketDetails, rocket.id]);
 
   const showDetailsHandler = (id: number) => {
     const temp = [...showRocketDetails];
@@ -107,5 +107,4 @@ export const RocketDetails = ({ rocket, rocketName }: rocketDetailsProps) => {
 
 type rocketDetailsProps = {
   rocket: Rocket;
-  rocketName: string;
 };

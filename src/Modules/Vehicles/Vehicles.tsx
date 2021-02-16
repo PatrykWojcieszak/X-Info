@@ -16,6 +16,7 @@ import falcon9 from "../../resources/images/f9.png";
 import falconHeavy from "../../resources/images/fh2.png";
 import starship from "../../resources/images/st.png";
 import { vehiclesPageTitle, vehiclesPageDescription } from "../Shared/SEO/Tags";
+import { RocketType } from "../../Types";
 
 const Vehicles = () => {
   return (
@@ -28,14 +29,18 @@ const Vehicles = () => {
         variants={pageVariantsAnim}
         className={styles.Vehicles}>
         <Description />
-        <VehicleRocket name="Falcon 1" img={falcon1} link="Falcon 1" />
-        <VehicleRocket name="Falcon 9" img={falcon9} link="Falcon 9" />
+        <VehicleRocket name="Falcon 1" img={falcon1} link={RocketType.f1} />
+        <VehicleRocket name="Falcon 9" img={falcon9} link={RocketType.f9} />
         <VehicleRocket
           name="Falcon Heavy"
           img={falconHeavy}
-          link="Falcon Heavy"
+          link={RocketType.fh}
         />
-        <VehicleRocket name="Starship" img={starship} link="Starship" />
+        <VehicleRocket
+          name="Starship"
+          img={starship}
+          link={RocketType.starship}
+        />
       </motion.div>
     </>
   );
