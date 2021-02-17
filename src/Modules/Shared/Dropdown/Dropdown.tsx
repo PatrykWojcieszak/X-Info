@@ -12,17 +12,17 @@ import { Header } from "./Header/Header";
 import { List } from "./List/List";
 
 export const Dropdown = ({
-  title,
   list,
-  isListOpen,
-  toggleList,
   selectedElement,
   styleType,
 }: dropdownProps) => {
-  const [headerTitle, setHeaderTitle] = useState(title);
+  const [headerTitle, setHeaderTitle] = useState(
+    list.find((x) => x.selected)?.title
+  );
+  const [isListOpen, setIsListOpen] = useState(false);
 
   const closeListHandler = () => {
-    toggleList(false);
+    setIsListOpen(false);
   };
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export const Dropdown = ({
 
   const selectItemHandler = (selectedEl: DropdownElement) => {
     setHeaderTitle(selectedEl.title);
-    toggleList(false);
+    setIsListOpen(false);
     selectedElement(selectedEl.id);
   };
 
@@ -49,7 +49,7 @@ export const Dropdown = ({
         title={headerTitle}
         isListOpen={isListOpen}
         styleType={styleType}
-        toggleList={(open: boolean) => toggleList(open)}
+        toggleList={(open: boolean) => setIsListOpen(open)}
       />
       {isListOpen && (
         <List
@@ -65,10 +65,7 @@ export const Dropdown = ({
 };
 
 type dropdownProps = {
-  title?: string;
   list: DropdownElement[];
-  isListOpen: boolean;
-  toggleList: (isOpen: boolean) => void;
   selectedElement: (id: number) => void;
   styleType: string;
 };

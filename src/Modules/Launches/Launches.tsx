@@ -16,6 +16,7 @@ import {
   SEO,
   LaunchExtendedInfo,
   Button,
+  CustomDatePicker,
 } from "../Shared";
 
 //STYLES
@@ -34,7 +35,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Store/rootReducer";
 
 //TYPES
-import { DropdownElement, Launch, QueryResult } from "../../Types";
+import {
+  DropdownElement,
+  FilterElement,
+  Launch,
+  QueryResult,
+} from "../../Types";
 import { changeDDElementToTrue } from "../../Utility/Utility";
 import {
   LaunchSitesDDList,
@@ -44,7 +50,6 @@ import {
 } from "../../Other/DDLists";
 
 const Launches = () => {
-  const [isLaunchesTypeDDOpen, setIsLaunchesTypeDDOpen] = useState(false);
   const [launchTypeFilter, setLaunchTypeFilter] = useState(launchedDDList);
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [rocketTypeFilter, setRocketTypeFilter] = useState(rocketsDDList);
@@ -134,10 +139,6 @@ const Launches = () => {
     return temp.docs;
   };
 
-  const toggleLaunchTypeHandler = (isOpen: boolean) => {
-    setIsLaunchesTypeDDOpen(isOpen);
-  };
-
   const launchTypeFilterSelectedHandler = (id: number) => {
     const newArr = changeDDElementToTrue(launchTypeFilter, id);
     setLaunchTypeFilter(newArr);
@@ -156,6 +157,67 @@ const Launches = () => {
   const launchStatusFilterHandler = (id: number) => {
     const newArr = changeDDElementToTrue(launchStatusFilter, id);
     setLaunchStatusFilter(newArr);
+  };
+
+  const filters: FilterElement[] = [
+    {
+      name: "rocket",
+      element: (
+        <Dropdown
+          list={rocketTypeFilter}
+          styleType="secondary"
+          selectedElement={(id: number) => rocketTypeFilterHandler(id)}
+        />
+      ),
+    },
+    {
+      name: "dateFrom",
+      element: (
+        <CustomDatePicker
+          date={dateFromFilter}
+          dateChanged={(date) => setDateFromFilter(date)}
+        />
+      ),
+    },
+    {
+      name: "dateTo",
+      element: (
+        <CustomDatePicker
+          date={dateToFilter}
+          dateChanged={(date) => setDateToFilter(date)}
+        />
+      ),
+    },
+    {
+      name: "launchSite",
+      element: (
+        <Dropdown
+          list={launchSiteFilter}
+          styleType="secondary"
+          selectedElement={(id: number) => launchSiteFilterHandler(id)}
+        />
+      ),
+    },
+    {
+      name: "status",
+      element: (
+        <Dropdown
+          list={launchStatusFilter}
+          styleType="secondary"
+          selectedElement={(id: number) => launchStatusFilterHandler(id)}
+        />
+      ),
+    },
+  ];
+
+  const clearFilterHandler = () => {
+    rocketTypeFilterHandler(0);
+    launchSiteFilterHandler(0);
+    launchStatusFilterHandler(0);
+    setDateFromFilter(new Date("2006"));
+    setDateToFilter(
+      new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+    );
   };
 
   return (
@@ -181,11 +243,8 @@ const Launches = () => {
         <div className={styles.Content}>
           <div className={styles.ButtonsWrapper}>
             <Dropdown
-              title={launchTypeFilter.find((x) => x.selected)?.title}
               list={launchTypeFilter}
-              isListOpen={isLaunchesTypeDDOpen}
               styleType="primary"
-              toggleList={(isOpen: boolean) => toggleLaunchTypeHandler(isOpen)}
               selectedElement={(id: number) =>
                 launchTypeFilterSelectedHandler(id)
               }
@@ -204,22 +263,7 @@ const Launches = () => {
               <Modal
                 show={showFilterModal}
                 closeModal={() => setShowFilterModal(false)}>
-                <Filter
-                  rocketsFilterList={rocketTypeFilter}
-                  rocketSelected={(id: number) => rocketTypeFilterHandler(id)}
-                  launchSitesFilterList={launchSiteFilter}
-                  launchSiteSelected={(id: number) =>
-                    launchSiteFilterHandler(id)
-                  }
-                  statusesFilterList={launchStatusFilter}
-                  launchStatusSelected={(id: number) =>
-                    launchStatusFilterHandler(id)
-                  }
-                  dateFrom={dateFromFilter}
-                  setDateFrom={(dateFrom: Date) => setDateFromFilter(dateFrom)}
-                  setDateTo={(dateTo: Date) => setDateToFilter(dateTo)}
-                  dateTo={dateToFilter}
-                />
+                <Filter clearFilter={clearFilterHandler} filters={filters} />
               </Modal>
             )}
           </AnimatePresence>
