@@ -15,8 +15,8 @@ export const Filter = ({ filters, clearFilter }: filterProps) => {
 
   return (
     <div className={styles.Filter}>
-      {filters.map((filter) => (
-        <div className={styles.OptionWrapper}>
+      {filters.map((filter, index) => (
+        <div key={index} className={styles.OptionWrapper}>
           <h3 style={{ textTransform: "uppercase" }}>{t(filter.name)}:</h3>
           {filter.element}
         </div>

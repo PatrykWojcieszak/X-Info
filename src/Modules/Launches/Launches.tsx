@@ -33,6 +33,14 @@ import { fetchPastLaunches } from "../../Store/PastLaunches/pastLaunchesSlice";
 import { fetchUpcomingLaunches } from "../../Store/UpcomingLaunches/upcomingLaunchesSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Store/rootReducer";
+import {
+  clearFilter,
+  setFilterRocket,
+  setFilterDateFrom,
+  setFilterDateTo,
+  setLaunchpadFilter,
+  setLaunchStatusFilter,
+} from "../../Store/LaunchesFilter/LaunchesFilterSlice";
 
 //TYPES
 import {
@@ -42,31 +50,19 @@ import {
   QueryResult,
 } from "../../Types";
 import { changeDDElementToTrue } from "../../Utility/Utility";
-import {
-  LaunchSitesDDList,
-  rocketsDDList,
-  LaunchStatusDDList,
-  launchedDDList,
-} from "../../Other/DDLists";
+import { launchedDDList } from "../../Other/DDLists";
 
 const Launches = () => {
   const [launchTypeFilter, setLaunchTypeFilter] = useState(launchedDDList);
   const [showFilterModal, setShowFilterModal] = useState(false);
-  const [rocketTypeFilter, setRocketTypeFilter] = useState(rocketsDDList);
-  const [launchSiteFilter, setLaunchSiteFilter] = useState(LaunchSitesDDList);
-  const [launchStatusFilter, setLaunchStatusFilter] = useState(
-    LaunchStatusDDList
-  );
-  const [dateFromFilter, setDateFromFilter] = useState(new Date("2006"));
-  const [dateToFilter, setDateToFilter] = useState(
-    new Date(new Date().setFullYear(new Date().getFullYear() + 1))
-  );
 
   const latestLaunch = useSelector((root: RootState) => root.latestLaunch);
   const upcomingLaunches = useSelector(
     (root: RootState) => root.upcomingLaunches
   );
   const pastLaunches = useSelector((root: RootState) => root.pastLaunches);
+
+  const { filters } = useSelector((root: RootState) => root.launchesFilter);
 
   const { t } = useTranslation();
   const { launchType } = useParams();
@@ -112,27 +108,29 @@ const Launches = () => {
 
     temp.docs = temp.docs.filter(
       (x) =>
-        new Date(x.date_utc) >= dateFromFilter &&
-        new Date(x.date_utc) <= dateToFilter
+        new Date(x.date_utc) >= new Date(filters[1].value as number) &&
+        new Date(x.date_utc) <= new Date(filters[2].value as number)
     );
 
-    if (!rocketTypeFilter[0].selected)
+    if (!filters[0].value[0].selected as boolean) {
+      const rocketFilter = filters[0].value as DropdownElement[];
       temp.docs = temp.docs.filter(
-        (x) =>
-          x.rocket.name ===
-          rocketTypeFilter.find((t) => t.selected && t.key !== "all")?.title
-      );
-
-    if (!launchStatusFilter[0].selected) {
-      temp.docs = temp.docs.filter(
-        (x) =>
-          String(x.success) === launchStatusFilter.find((t) => t.selected)?.key
+        (x) => x.rocket.name === rocketFilter.find((t) => t.selected)?.title
       );
     }
 
-    if (!launchSiteFilter[0].selected) {
+    if (!filters[3].value[0].selected as boolean) {
+      const launchStatus = filters[3].value as DropdownElement[];
       temp.docs = temp.docs.filter(
-        (x) => x.launchpad.id === launchSiteFilter.find((t) => t.selected)?.key
+        (x) => x.launchpad.id === launchStatus.find((t) => t.selected)?.key
+      );
+    }
+
+    if (!filters[4].value[0].selected as boolean) {
+      const launchPadFilter = filters[4].value as DropdownElement[];
+      temp.docs = temp.docs.filter(
+        (x) =>
+          String(x.success) === launchPadFilter.find((t) => t.selected)?.key
       );
     }
 
@@ -144,29 +142,14 @@ const Launches = () => {
     setLaunchTypeFilter(newArr);
   };
 
-  const rocketTypeFilterHandler = (id: number) => {
-    const newArr = changeDDElementToTrue(rocketTypeFilter, id);
-    setRocketTypeFilter(newArr);
-  };
-
-  const launchSiteFilterHandler = (id: number) => {
-    const newArr = changeDDElementToTrue(launchSiteFilter, id);
-    setLaunchSiteFilter(newArr);
-  };
-
-  const launchStatusFilterHandler = (id: number) => {
-    const newArr = changeDDElementToTrue(launchStatusFilter, id);
-    setLaunchStatusFilter(newArr);
-  };
-
-  const filters: FilterElement[] = [
+  const filtersArr: FilterElement[] = [
     {
       name: "rocket",
       element: (
         <Dropdown
-          list={rocketTypeFilter}
+          list={filters[0].value as DropdownElement[]}
           styleType="secondary"
-          selectedElement={(id: number) => rocketTypeFilterHandler(id)}
+          selectedElement={(id: number) => dispatch(setFilterRocket({ id }))}
         />
       ),
     },
@@ -174,8 +157,8 @@ const Launches = () => {
       name: "dateFrom",
       element: (
         <CustomDatePicker
-          date={dateFromFilter}
-          dateChanged={(date) => setDateFromFilter(date)}
+          date={new Date(filters[1].value as number)}
+          dateChanged={(date: Date) => dispatch(setFilterDateFrom({ date }))}
         />
       ),
     },
@@ -183,8 +166,8 @@ const Launches = () => {
       name: "dateTo",
       element: (
         <CustomDatePicker
-          date={dateToFilter}
-          dateChanged={(date) => setDateToFilter(date)}
+          date={new Date(filters[2].value as number)}
+          dateChanged={(date: Date) => dispatch(setFilterDateTo({ date }))}
         />
       ),
     },
@@ -192,9 +175,9 @@ const Launches = () => {
       name: "launchSite",
       element: (
         <Dropdown
-          list={launchSiteFilter}
+          list={filters[3].value as DropdownElement[]}
           styleType="secondary"
-          selectedElement={(id: number) => launchSiteFilterHandler(id)}
+          selectedElement={(id: number) => dispatch(setLaunchpadFilter({ id }))}
         />
       ),
     },
@@ -202,23 +185,15 @@ const Launches = () => {
       name: "status",
       element: (
         <Dropdown
-          list={launchStatusFilter}
+          list={filters[4].value as DropdownElement[]}
           styleType="secondary"
-          selectedElement={(id: number) => launchStatusFilterHandler(id)}
+          selectedElement={(id: number) =>
+            dispatch(setLaunchStatusFilter({ id }))
+          }
         />
       ),
     },
   ];
-
-  const clearFilterHandler = () => {
-    rocketTypeFilterHandler(0);
-    launchSiteFilterHandler(0);
-    launchStatusFilterHandler(0);
-    setDateFromFilter(new Date("2006"));
-    setDateToFilter(
-      new Date(new Date().setFullYear(new Date().getFullYear() + 1))
-    );
-  };
 
   return (
     <>
@@ -263,7 +238,10 @@ const Launches = () => {
               <Modal
                 show={showFilterModal}
                 closeModal={() => setShowFilterModal(false)}>
-                <Filter clearFilter={clearFilterHandler} filters={filters} />
+                <Filter
+                  clearFilter={() => dispatch(clearFilter())}
+                  filters={filtersArr}
+                />
               </Modal>
             )}
           </AnimatePresence>
