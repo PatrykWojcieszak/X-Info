@@ -1,54 +1,43 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+//COMPONENTS
+import { MainDetails } from "./MainDetails/MainDetails";
+import { Failures } from "./Failures/Failures";
+import { Patch } from "./Patch/Patch";
+
 //STYLES
 import styles from "./LaunchExtendedInfo.module.scss";
 
 //TYPES
-import { Failure } from "../../../Types";
-import { Patch } from "./Patch/Patch";
-import { Failures } from "./Failures/Failures";
-import { MainDetails } from "./MainDetails/MainDetails";
+import { Launch } from "../../../Types";
 
 export const LaunchExtendedInfo = React.memo(
-  ({
-    showMoreDetailsButton,
-    details,
-    launchName,
-    date_utc,
-    rocketName,
-    launchSiteName,
-    flightNumber,
-    patchImg,
-    success,
-    failures,
-    date_precision,
-    id,
-  }: LaunchExtendedInfoProps) => {
+  ({ showMoreDetailsButton, launch }: LaunchExtendedInfoProps) => {
     return (
       <Link
         style={{ cursor: showMoreDetailsButton ? "pointer" : "default" }}
-        to={showMoreDetailsButton ? `/launch/${id}` : "#"}>
+        to={showMoreDetailsButton ? `/launch/${launch.id}` : "#"}>
         <div className={styles.LatestLaunch}>
           <div className={styles.LeftContainer}>
             <Patch
-              patchImg={patchImg}
+              patchImg={launch.links.patch.small}
               showMoreDetailsButton={showMoreDetailsButton}
             />
           </div>
           <div className={styles.RightContainer}>
             <MainDetails
-              launchName={launchName}
-              details={details}
-              flightNumber={flightNumber}
-              launchSiteName={launchSiteName}
-              rocketName={rocketName}
-              date_precision={date_precision}
-              date_utc={date_utc}
-              success={success}
+              launchName={launch.name}
+              details={launch.details}
+              flightNumber={launch.flight_number}
+              launchSiteName={launch.launchpad.full_name}
+              rocketName={launch.rocket.name}
+              date_precision={launch.date_precision}
+              date_utc={launch.date_utc}
+              success={launch.success}
             />
-            {!success && failures.length > 0 ? (
-              <Failures failures={failures} />
+            {!launch.success && launch.failures.length > 0 ? (
+              <Failures failures={launch.failures} />
             ) : null}
           </div>
         </div>
@@ -59,15 +48,5 @@ export const LaunchExtendedInfo = React.memo(
 
 type LaunchExtendedInfoProps = {
   showMoreDetailsButton: boolean;
-  details: string;
-  launchName: string;
-  date_utc: string;
-  rocketName: string;
-  launchSiteName: string;
-  flightNumber: number;
-  patchImg: string;
-  success: boolean;
-  failures: Failure[];
-  date_precision: string;
-  id: string;
+  launch: Launch;
 };

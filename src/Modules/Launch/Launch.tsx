@@ -65,19 +65,8 @@ const Launch = () => {
         <div className={styles.Launch}>
           <LaunchExtendedInfo
             showMoreDetailsButton={false}
-            details={launch.launch.docs[0].details}
-            launchName={launch.launch.docs[0].name}
-            date_utc={launch.launch.docs[0].date_utc}
-            rocketName={launch.launch.docs[0].rocket.name}
-            launchSiteName={launch.launch.docs[0].launchpad.full_name}
-            flightNumber={launch.launch.docs[0].flight_number}
-            patchImg={launch.launch.docs[0].links.patch.small}
-            success={launch.launch.docs[0].success}
-            failures={launch.launch.docs[0].failures}
-            id={launch.launch.docs[0].id}
-            date_precision={launch.launch.docs[0].date_precision}
+            launch={launch.launch.docs[0]}
           />
-
           <div className={styles.Row}>
             <Link to={`/vehicles/${launch.launch.docs[0]?.rocket.id}`}>
               <div className={styles.Rocket}>

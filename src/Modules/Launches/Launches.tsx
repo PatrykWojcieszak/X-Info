@@ -102,14 +102,6 @@ const Launches = () => {
     setLaunchTypeFilter(newFilter);
   }, [dispatch, launchType, latestLaunch, pastLaunches, upcomingLaunches]);
 
-  // const filters = {
-  //   rocket: '',
-  //   dateFrom:new Date(),
-  //   dateTo: new Date(),
-  //   launchSite: '',
-  //   status: Boolean,
-  // }
-
   const filter = (arr: QueryResult<Launch>): Launch[] => {
     let temp = { ...arr };
 
@@ -182,19 +174,7 @@ const Launches = () => {
           ) : (
             <LaunchExtendedInfo
               showMoreDetailsButton
-              details={latestLaunch.latestLaunch.docs[0].details}
-              launchName={latestLaunch.latestLaunch.docs[0].name}
-              date_utc={latestLaunch.latestLaunch.docs[0].date_utc}
-              rocketName={latestLaunch.latestLaunch.docs[0].rocket.name}
-              launchSiteName={
-                latestLaunch.latestLaunch.docs[0].launchpad.full_name
-              }
-              flightNumber={latestLaunch.latestLaunch.docs[0].flight_number}
-              patchImg={latestLaunch.latestLaunch.docs[0].links.patch.small}
-              success={latestLaunch.latestLaunch.docs[0].success}
-              failures={latestLaunch.latestLaunch.docs[0].failures}
-              id={latestLaunch.latestLaunch.docs[0].id}
-              date_precision={latestLaunch.latestLaunch.docs[0].date_precision}
+              launch={latestLaunch.latestLaunch.docs[0]}
             />
           )}
         </div>
