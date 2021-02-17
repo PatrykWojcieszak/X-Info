@@ -1,5 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from "react-i18next";
 
 //STYLES
 import styles from "./Header.module.scss";
@@ -10,6 +11,8 @@ export const Header = ({
   toggleList,
   styleType,
 }: headerProps) => {
+  const { t } = useTranslation();
+
   const ddStyles = [styles.HeaderWrapper];
 
   if (styleType === "primary") ddStyles.push(styles.Primary);
@@ -17,7 +20,7 @@ export const Header = ({
 
   return (
     <div className={ddStyles.join(" ")} onClick={() => toggleList(!isListOpen)}>
-      <h4>{title}</h4>
+      <h4>{t(title)}</h4>
       {isListOpen ? (
         <FontAwesomeIcon icon="angle-up" />
       ) : (
@@ -28,7 +31,7 @@ export const Header = ({
 };
 
 type headerProps = {
-  title?: string;
+  title: string;
   isListOpen: boolean;
   toggleList: (isListOpen: boolean) => void;
   styleType: string;

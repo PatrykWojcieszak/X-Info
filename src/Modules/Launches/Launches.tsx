@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import i18n from "../../i18n";
 
 //COMPONENTS
 import { UpcomingLaunches } from "./UpcomingLaunches/UpcomingLaunches";
@@ -68,23 +67,6 @@ const Launches = () => {
   const { launchType } = useParams();
 
   const dispatch = useDispatch();
-
-  const changeDropdownTranslations = () => {
-    const temp = launchedDDList.map((item) => {
-      return {
-        id: item.id,
-        selected: item.selected,
-        key: item.key,
-        title: t(item.key),
-      };
-    });
-
-    setLaunchTypeFilter(temp);
-  };
-
-  i18n.on("languageChanged init", () => {
-    changeDropdownTranslations();
-  });
 
   useEffect(() => {
     if (latestLaunch.latestLaunch.docs.length === 0)

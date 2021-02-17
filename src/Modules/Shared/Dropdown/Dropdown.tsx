@@ -46,7 +46,7 @@ export const Dropdown = ({
   return (
     <div className={ddStyles.join(" ")} ref={wrapperRef}>
       <Header
-        title={headerTitle}
+        title={headerTitle ? headerTitle : "-"}
         isListOpen={isListOpen}
         styleType={styleType}
         toggleList={(open: boolean) => setIsListOpen(open)}

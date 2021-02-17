@@ -1,21 +1,19 @@
-import i18n from "../i18n";
-
 export const launchedDDList = [
   {
     id: 0,
-    title: i18n.t("upcomingLaunchesBtn"),
+    title: "upcomingLaunchesBtn",
     selected: true,
     key: "upcomingLaunchesBtn",
   },
   {
     id: 1,
-    title: i18n.t("pastLaunchesBtn"),
+    title: "pastLaunchesBtn",
     selected: false,
     key: "pastLaunchesBtn",
   },
   {
     id: 2,
-    title: i18n.t("boostersBtn"),
+    title: "boostersBtn",
     selected: false,
     key: "boostersBtn",
   },
@@ -24,7 +22,7 @@ export const launchedDDList = [
 export const rocketsDDList = [
   {
     id: 0,
-    title: i18n.t("all"),
+    title: "all",
     selected: true,
     key: "rockets",
   },
@@ -57,7 +55,7 @@ export const rocketsDDList = [
 export const LaunchSitesDDList = [
   {
     id: 0,
-    title: i18n.t("all"),
+    title: "all",
     selected: true,
     key: "launchSite",
   },
@@ -102,19 +100,19 @@ export const LaunchSitesDDList = [
 export const LaunchStatusDDList = [
   {
     id: 0,
-    title: i18n.t("all"),
+    title: "all",
     selected: true,
     key: "status",
   },
   {
     id: 1,
-    title: i18n.t("success"),
+    title: "success",
     selected: false,
     key: "true",
   },
   {
     id: 2,
-    title: i18n.t("failure"),
+    title: "success",
     selected: false,
     key: "false",
   },
