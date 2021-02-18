@@ -17,7 +17,7 @@ export const LaunchShortInfo = React.memo(
     launchDateUtc,
     rocketName,
     launchSiteName,
-    customer,
+    customers,
     flightNumber,
     success,
     nationality,
@@ -37,7 +37,7 @@ export const LaunchShortInfo = React.memo(
           />
           <SecondaryDetails
             launchSiteName={launchSiteName}
-            customer={customer}
+            customers={customers}
           />
           {nationality && <Flag nationality={nationality} />}
         </div>
@@ -51,7 +51,7 @@ type launchShortInfoProps = {
   launchDateUtc: string;
   rocketName: string;
   launchSiteName: string;
-  customer: string;
+  customers: string[];
   flightNumber: number;
   success?: boolean;
   nationality: string;

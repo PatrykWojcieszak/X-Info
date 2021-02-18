@@ -6,7 +6,7 @@ import styles from "./SecondaryDetails.module.scss";
 
 export const SecondaryDetails = ({
   launchSiteName,
-  customer,
+  customers,
 }: secondaryDetailsProps) => {
   const { t } = useTranslation();
 
@@ -16,11 +16,19 @@ export const SecondaryDetails = ({
         {launchSiteName && (
           <h4 className={styles.Title}>{t("launchSite")}: </h4>
         )}
-        {customer && <h4 className={styles.Title}>{t("customer")}: </h4>}
+        {customers?.length > 0 && (
+          <h4 className={styles.Title}>{t("customer")}: </h4>
+        )}
       </div>
       <div className={styles.Element}>
         {launchSiteName && <h4 className={styles.Value}>{launchSiteName}</h4>}
-        {customer && <h4 className={styles.Value}>{customer}</h4>}
+        {customers?.length > 0 && (
+          <h4 className={styles.Value}>
+            {customers.map((customer) => (
+              <span>{customer}, </span>
+            ))}
+          </h4>
+        )}
       </div>
     </div>
   );
@@ -28,5 +36,5 @@ export const SecondaryDetails = ({
 
 type secondaryDetailsProps = {
   launchSiteName: string;
-  customer: string;
+  customers: string[];
 };
