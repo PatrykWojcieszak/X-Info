@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 //STYLES
 import styles from "./List.module.scss";
@@ -7,6 +8,8 @@ import styles from "./List.module.scss";
 import { DropdownElement } from "../../../../Types";
 
 export const List = ({ list, selectedItem, styleType }: listProps) => {
+  const { t } = useTranslation();
+
   const ddStyles = [styles.DropdownListWrapper];
 
   if (styleType === "primary") ddStyles.push(styles.Primary);
@@ -23,7 +26,7 @@ export const List = ({ list, selectedItem, styleType }: listProps) => {
               : styles.ListElement
           }
           key={element.id}>
-          {element.title}
+          {t(element.title)}
         </h4>
       ))}
     </div>
