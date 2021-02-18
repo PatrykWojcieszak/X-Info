@@ -24,8 +24,8 @@ export const SecondaryDetails = ({
         {launchSiteName && <h4 className={styles.Value}>{launchSiteName}</h4>}
         {customers?.length > 0 && (
           <h4 className={styles.Value}>
-            {customers.map((customer) => (
-              <span>{customer}, </span>
+            {customers.map((customer, index) => (
+              <span key={index}>{customer}, </span>
             ))}
           </h4>
         )}
