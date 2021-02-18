@@ -112,7 +112,7 @@ export const LaunchStatusDDList = [
   },
   {
     id: 2,
-    title: "success",
+    title: "failure",
     selected: false,
     key: "false",
   },
