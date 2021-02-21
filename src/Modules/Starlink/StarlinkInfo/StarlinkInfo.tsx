@@ -31,6 +31,7 @@ export const StarlinkInfo = React.memo(({ starlink, close }: starlinkProps) => {
       <MissionDetails
         name={starlink.launch.name}
         dateUtc={starlink.launch.date_utc}
+        id={starlink.launch.id}
         flightNumber={starlink.launch.flight_number}
       />
     </motion.div>

@@ -11,11 +11,11 @@ import styles from "./Launch.module.scss";
 import noImage from "../../../../resources/images/noImage.png";
 
 export const Launch = React.memo(
-  ({ flightNumber, name, patch, date, success }: launchProps) => {
+  ({ name, patch, date, success, id }: launchProps) => {
     const { t } = useTranslation();
 
     return (
-      <Link to={`/launch/${flightNumber}`}>
+      <Link to={`/launch/${id}`}>
         <div className={styles.Launch}>
           <img src={patch ? patch : noImage} alt="patch" loading="lazy" />
           <h3>{name}</h3>
@@ -36,9 +36,9 @@ export const Launch = React.memo(
 );
 
 type launchProps = {
-  flightNumber: number;
   name: string;
   patch: string;
   date: string;
   success: boolean;
+  id: string;
 };

@@ -1,51 +1,28 @@
-import i18n from "../i18n";
-
-export const launchesFilterUpcoming = [
+export const launchedDDList = [
   {
     id: 0,
-    title: i18n.t("upcomingLaunchesBtn"),
+    title: "upcomingLaunchesBtn",
     selected: true,
-    key: "launchesType",
+    key: "upcomingLaunchesBtn",
   },
   {
     id: 1,
-    title: i18n.t("pastLaunchesBtn"),
+    title: "pastLaunchesBtn",
     selected: false,
-    key: "launchesType",
+    key: "pastLaunchesBtn",
   },
   {
     id: 2,
-    title: i18n.t("boostersBtn"),
+    title: "boostersBtn",
     selected: false,
-    key: "launchesType",
+    key: "boostersBtn",
   },
 ];
 
-export const launchesFilterPast = [
+export const rocketsDDList = [
   {
     id: 0,
-    title: i18n.t("upcomingLaunchesBtn"),
-    selected: false,
-    key: "launchesType",
-  },
-  {
-    id: 1,
-    title: i18n.t("pastLaunchesBtn"),
-    selected: true,
-    key: "launchesType",
-  },
-  {
-    id: 2,
-    title: i18n.t("boostersBtn"),
-    selected: false,
-    key: "launchesType",
-  },
-];
-
-export const filterRockets = [
-  {
-    id: 0,
-    title: i18n.t("all"),
+    title: "all",
     selected: true,
     key: "rockets",
   },
@@ -75,10 +52,10 @@ export const filterRockets = [
   },
 ];
 
-export const filterLaunchSite = [
+export const LaunchSitesDDList = [
   {
     id: 0,
-    title: i18n.t("all"),
+    title: "all",
     selected: true,
     key: "launchSite",
   },
@@ -120,22 +97,22 @@ export const filterLaunchSite = [
   },
 ];
 
-export const filterStatus = [
+export const LaunchStatusDDList = [
   {
     id: 0,
-    title: i18n.t("all"),
+    title: "all",
     selected: true,
     key: "status",
   },
   {
     id: 1,
-    title: i18n.t("success"),
+    title: "success",
     selected: false,
     key: "true",
   },
   {
     id: 2,
-    title: i18n.t("failure"),
+    title: "failure",
     selected: false,
     key: "false",
   },

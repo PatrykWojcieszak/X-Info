@@ -23,6 +23,9 @@ i18n
         return value.toString();
       },
     },
+    react: {
+      wait: true,
+    },
   });
 
 export default i18n;

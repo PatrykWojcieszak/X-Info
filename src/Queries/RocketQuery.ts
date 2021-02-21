@@ -1,6 +1,6 @@
 export const RocketQuery = {
   query: {
-    name: "",
+    _id: "",
   },
   options: {},
 };

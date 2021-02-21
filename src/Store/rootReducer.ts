@@ -9,6 +9,7 @@ import upcomingLaunchesReducer from "./UpcomingLaunches/upcomingLaunchesSlice";
 import starlinkReducer from "./Starlink/starlinkSlice";
 import rocketReducer from "./Rocket/rocketSlice";
 import recentLaunchesReducer from "./RecentLaunches/recentLaunchesSlice";
+import launchesFilterReducer from "./LaunchesFilter/LaunchesFilterSlice";
 
 const rootReducer = combineReducers({
   nextLaunch: nextLaunchReducer,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   latestLaunch: latestLaunchReducer,
   starlink: starlinkReducer,
   boosters: boostersReducer,
+  launchesFilter: launchesFilterReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -60,7 +60,7 @@ function App() {
         )}
       />
       <Route
-        path="/launch/:flight_number"
+        path="/launch/:id"
         exact
         render={() => (
           <Suspense fallback={<p>Loading...</p>}>
@@ -78,7 +78,7 @@ function App() {
         )}
       />
       <Route
-        path="/vehicles/:vehicle"
+        path="/vehicles/:id"
         exact
         render={() => (
           <Suspense fallback={<p>Loading...</p>}>

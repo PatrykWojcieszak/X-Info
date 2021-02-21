@@ -7,3 +7,13 @@
   bottom: -15px;
   border-bottom-right-radius: 2rem;
 }
+
+@include mobile {
+  .Flag {
+    width: 40px;
+    position: absolute;
+    right: 0;
+    bottom: -7px;
+    border-bottom-right-radius: 1rem;
+  }
+}

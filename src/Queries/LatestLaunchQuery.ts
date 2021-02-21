@@ -6,6 +6,7 @@ export const LatestLaunchQuery = {
     limit: 1,
     select: {
       name: 1,
+      id: 1,
       date_local: 1,
       date_utc: 1,
       flight_number: 1,
@@ -30,6 +31,7 @@ export const LatestLaunchQuery = {
         path: "rocket",
         select: {
           name: 1,
+          id: 1,
         },
       },
     ],

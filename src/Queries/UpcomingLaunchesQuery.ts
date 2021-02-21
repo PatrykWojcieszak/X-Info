@@ -5,6 +5,7 @@ export const UpcomingLaunchesQuery = {
   options: {
     select: {
       name: 1,
+      id: 1,
       date_local: 1,
       date_utc: 1,
       flight_number: 1,
@@ -25,6 +26,7 @@ export const UpcomingLaunchesQuery = {
         path: "rocket",
         select: {
           name: 1,
+          id: 1,
         },
       },
       {

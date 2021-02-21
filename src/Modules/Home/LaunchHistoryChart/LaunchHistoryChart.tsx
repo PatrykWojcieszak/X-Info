@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 //OTHER
 import { getYear } from "../../../Utility/Utility";
+import { RocketType } from "../../../Types";
 
 export const LaunchHistoryChart = () => {
   const { t } = useTranslation();
@@ -55,7 +56,7 @@ export const LaunchHistoryChart = () => {
               pastLaunches.pastLaunches.docs.filter(
                 (launch) =>
                   getYear(launch) === year &&
-                  launch.rocket.name === "Falcon 1" &&
+                  launch.rocket.id === RocketType.f1 &&
                   launch.success
               ).length
           ),
@@ -68,7 +69,7 @@ export const LaunchHistoryChart = () => {
               pastLaunches.pastLaunches.docs.filter(
                 (launch) =>
                   getYear(launch) === year &&
-                  launch.rocket.name === "Falcon 9" &&
+                  launch.rocket.id === RocketType.f9 &&
                   launch.success &&
                   !launch.cores[0].reused
               ).length
@@ -82,7 +83,7 @@ export const LaunchHistoryChart = () => {
               pastLaunches.pastLaunches.docs.filter(
                 (launch) =>
                   getYear(launch) === year &&
-                  launch.rocket.name === "Falcon 9" &&
+                  launch.rocket.id === RocketType.f9 &&
                   launch.success &&
                   launch.cores[0].reused
               ).length
@@ -96,7 +97,7 @@ export const LaunchHistoryChart = () => {
               pastLaunches.pastLaunches.docs.filter(
                 (launch) =>
                   getYear(launch) === year &&
-                  launch.rocket.name === "Falcon Heavy" &&
+                  launch.rocket.id === RocketType.fh &&
                   launch.success
               ).length
           ),

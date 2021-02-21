@@ -23,8 +23,11 @@ export const PayloadList = ({ payloadList }: payloadListProps) => {
           {payload.name && (
             <InfoLine title={t("name")} value={`${payload.name}`} />
           )}
-          {payload.customers[0] && (
-            <InfoLine title={t("customer")} value={`${payload.customers}`} />
+          {payload.customers?.length > 0 && (
+            <InfoLine
+              title={t("customer")}
+              value={`${[...payload.customers]}, `}
+            />
           )}
           {payload.manufacturers.length !== 0 ? (
             <InfoLine
