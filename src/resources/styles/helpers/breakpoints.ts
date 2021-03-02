@@ -1,8 +1,8 @@
 const size = {
-  mobile: "481",
-  tablet: "768",
-  large: "1024",
-  desktop: "1280",
+  mobile: "481px",
+  tablet: "768px",
+  large: "1024px",
+  desktop: "1280px",
 };
 
 export const device = {
