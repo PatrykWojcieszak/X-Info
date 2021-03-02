@@ -25,7 +25,6 @@ type buttonProps = {
 };
 
 const StyledButton = styled.button<{ styleType: string; selected?: boolean }>`
-  box-sizing: border-box;
   outline: none;
   border-radius: 0.4rem;
   transition: all 0.3s ease-in-out;
