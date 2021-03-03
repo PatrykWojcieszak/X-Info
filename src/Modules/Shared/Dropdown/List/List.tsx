@@ -1,35 +1,26 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-//STYLES
-import styles from "./List.module.scss";
-
 //TYPES
 import { DropdownElement } from "../../../../Types";
+import styled from "styled-components/macro";
+import { device } from "../../../../resources/styles/helpers/breakpoints";
 
 export const List = ({ list, selectedItem, styleType }: listProps) => {
   const { t } = useTranslation();
 
-  const ddStyles = [styles.DropdownListWrapper];
-
-  if (styleType === "primary") ddStyles.push(styles.Primary);
-  if (styleType === "secondary") ddStyles.push(styles.Secondary);
-
   return (
-    <div className={ddStyles.join(" ")}>
+    <StyledDropdownListWrapper styleType={styleType}>
       {list.map((element) => (
-        <h4
+        <StyledListElement
           onClick={() => selectedItem(element)}
-          className={
-            element.selected
-              ? [styles.ListElement, styles.Selected].join(" ")
-              : styles.ListElement
-          }
+          selected={element.selected}
+          styleType={styleType}
           key={element.id}>
           {t(element.title)}
-        </h4>
+        </StyledListElement>
       ))}
-    </div>
+    </StyledDropdownListWrapper>
   );
 };
 
@@ -38,3 +29,51 @@ type listProps = {
   selectedItem: (element: DropdownElement) => void;
   styleType: string;
 };
+
+const StyledDropdownListWrapper = styled.div<{ styleType: string }>`
+  z-index: 900;
+  width: 100%;
+  position: absolute;
+  border-radius: 0.5rem;
+  padding: 0.4rem;
+  margin-top: 65px;
+  left: 0;
+  background-color: ${({ theme, styleType }) =>
+    styleType === "primary" ? theme.colors?.blue : theme.colors?.background};
+`;
+
+const StyledListElement = styled.h4<{ selected: boolean; styleType: string }>`
+  padding: 0.7rem 0.5rem;
+  border-radius: 0.4rem;
+  margin: 0.4rem 0;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: 0.8rem;
+
+  color: ${({ theme, selected, styleType }) =>
+    selected
+      ? styleType === "primary"
+        ? theme.colors?.blue
+        : theme.colors?.background
+      : styleType === "primary"
+      ? theme.colors?.background
+      : theme.colors?.blue};
+
+  background-color: ${({ theme, selected, styleType }) =>
+    selected
+      ? styleType === "primary"
+        ? theme.colors?.background
+        : theme.colors?.blue
+      : styleType === "primary"
+      ? theme.colors?.blue
+      : theme.colors?.background};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors?.foreground};
+    color: ${({ theme }) => theme.colors?.blue};
+  }
+
+  @media ${device.tablet} {
+    font-size: 1rem;
+  }
+`;

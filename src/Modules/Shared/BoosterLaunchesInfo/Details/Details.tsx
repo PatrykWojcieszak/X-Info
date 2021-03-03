@@ -1,9 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-//STYLES
-import styles from "./Details.module.scss";
-
 //TYPES
 import { Launch } from "../../../../Types";
 import { InfoElement } from "./InfoElement/InfoElement";
