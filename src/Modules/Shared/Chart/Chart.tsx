@@ -1,8 +1,7 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
-
-//STYLES
-import styles from "./Chart.module.scss";
+import styled from "styled-components/macro";
+import { device } from "../../../resources/styles/helpers/breakpoints";
 
 export const Chart = ({ name, data }: chartProps) => {
   const options = {
@@ -47,12 +46,10 @@ export const Chart = ({ name, data }: chartProps) => {
   };
 
   return (
-    <div className={styles.ChartContainer}>
-      <div className={styles.Top}>
-        <h2>{name}</h2>
-      </div>
+    <StyledChartContainer>
+      <StyledTitle>{name}</StyledTitle>
       <Bar data={data} options={options} />
-    </div>
+    </StyledChartContainer>
   );
 };
 
@@ -60,3 +57,27 @@ type chartProps = {
   data: {};
   name: string;
 };
+
+const StyledChartContainer = styled.div`
+  width: 100%;
+  margin-bottom: 3rem;
+
+  > div {
+    margin-bottom: 2rem;
+  }
+`;
+
+const StyledTitle = styled.h2`
+  color: ${({ theme }) => theme.colors?.fontPrimary};
+  font-weight: 100;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+
+  @media ${device.tablet} {
+    font-size: 1.5rem;
+  }
+
+  @media ${device.large} {
+    font-size: 2.5rem;
+  }
+`;
