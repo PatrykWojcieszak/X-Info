@@ -1,8 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-
-//STYLES
-import styles from "./SecondaryDetails.module.scss";
+import styled from "styled-components/macro";
+import { device } from "../../../../resources/styles/helpers/breakpoints";
+import { flexColumn } from "../../../../resources/styles/helpers/mixins";
 
 export const SecondaryDetails = ({
   launchSiteName,
@@ -11,26 +11,22 @@ export const SecondaryDetails = ({
   const { t } = useTranslation();
 
   return (
-    <div className={styles.SecondaryDetails}>
-      <div className={styles.Element}>
-        {launchSiteName && (
-          <h4 className={styles.Title}>{t("launchSite")}: </h4>
-        )}
+    <StyledSecondaryDetails>
+      <StyledElement as="div">
+        {launchSiteName && <StyledTitle>{t("launchSite")}: </StyledTitle>}
+        {customers?.length > 0 && <StyledTitle>{t("customer")}: </StyledTitle>}
+      </StyledElement>
+      <StyledElement as="div">
+        {launchSiteName && <StyledValue>{launchSiteName}</StyledValue>}
         {customers?.length > 0 && (
-          <h4 className={styles.Title}>{t("customer")}: </h4>
-        )}
-      </div>
-      <div className={styles.Element}>
-        {launchSiteName && <h4 className={styles.Value}>{launchSiteName}</h4>}
-        {customers?.length > 0 && (
-          <h4 className={styles.Value}>
+          <StyledValue>
             {customers.map((customer, index) => (
               <span key={index}>{customer}, </span>
             ))}
-          </h4>
+          </StyledValue>
         )}
-      </div>
-    </div>
+      </StyledElement>
+    </StyledSecondaryDetails>
   );
 };
 
@@ -38,3 +34,30 @@ type secondaryDetailsProps = {
   launchSiteName: string;
   customers: string[];
 };
+
+const StyledSecondaryDetails = styled.div`
+  display: flex;
+  margin-top: 1rem;
+`;
+
+const StyledElement = styled(flexColumn)`
+  margin-right: 1rem;
+`;
+
+const StyledFont = styled.h4`
+  margin-top: 0.5rem;
+  font-weight: 100;
+  font-size: 0.7rem;
+
+  @media ${device.large} {
+    font-size: 1rem;
+  }
+`;
+
+const StyledTitle = styled(StyledFont)`
+  color: ${({ theme }) => theme.colors?.fontSecondary};
+`;
+
+const StyledValue = styled(StyledFont)`
+  color: ${({ theme }) => theme.colors?.fontPrimary};
+`;
