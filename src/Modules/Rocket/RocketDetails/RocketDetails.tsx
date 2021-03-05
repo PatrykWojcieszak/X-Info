@@ -9,12 +9,15 @@ import { SecondStage } from "./SecondStage/SecondStage";
 import { FirstStage } from "./FirstStage/FirstStage";
 import { Overview } from "./Overview/Overview";
 
-//STYLES
-import styles from "./RocketDetails.module.scss";
-
 //TYPES
 import { Rocket, RocketType } from "../../../Types";
 import { Header } from "./Header/Header";
+import {
+  flexColumn,
+  flexColumnCenter,
+} from "../../../resources/styles/helpers/mixins";
+import styled from "styled-components/macro";
+import { device } from "../../../resources/styles/helpers/breakpoints";
 
 export const RocketDetails = ({ rocket }: rocketDetailsProps) => {
   const showRocketDetailsInitial = [
@@ -47,14 +50,14 @@ export const RocketDetails = ({ rocket }: rocketDetailsProps) => {
   };
 
   return (
-    <div className={styles.RocketDetailsContainer}>
+    <StyledRocketDetailsContainer>
       <Header
         rocketName={rocket.name}
         active={rocket.active}
         description={rocket.description}
       />
-      <div className={styles.RocketDetails}>
-        <div className={styles.BtnContainer}>
+      <StyledRocketDetails>
+        <StyledBtnContainer>
           {showRocketDetails
             .filter((x) => x.isVisible)
             .map((btn, index) => (
@@ -66,8 +69,8 @@ export const RocketDetails = ({ rocket }: rocketDetailsProps) => {
                 selected={showRocketDetails[index].isActive}
               />
             ))}
-        </div>
-        <div className={styles.DetailsContainer}>
+        </StyledBtnContainer>
+        <StyledDetailsContainer>
           <AnimatePresence>
             {showRocketDetails[0].isActive && (
               <Overview
@@ -99,12 +102,58 @@ export const RocketDetails = ({ rocket }: rocketDetailsProps) => {
               <LandingLegs landingLegs={rocket.landing_legs} />
             )}
           </AnimatePresence>
-        </div>
-      </div>
-    </div>
+        </StyledDetailsContainer>
+      </StyledRocketDetails>
+    </StyledRocketDetailsContainer>
   );
 };
 
 type rocketDetailsProps = {
   rocket: Rocket;
 };
+
+const StyledRocketDetailsContainer = styled(flexColumn)`
+  align-items: flex-start;
+  margin-left: 2rem;
+
+  @media ${device.large} {
+    margin-left: 4rem;
+  }
+
+  @media ${device.desktop} {
+    margin-left: 10rem;
+  }
+`;
+
+const StyledRocketDetails = styled(flexColumnCenter)`
+  margin-top: 2rem;
+  width: 100%;
+`;
+
+const StyledBtnContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+
+  > * {
+    margin: 0.5rem 0.5rem;
+  }
+
+  @media ${device.tablet} {
+    > * {
+      margin: 0.8rem 0;
+    }
+  }
+`;
+
+const StyledDetailsContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 550px;
+
+  @media ${device.tablet} {
+    height: auto;
+  }
+`;
