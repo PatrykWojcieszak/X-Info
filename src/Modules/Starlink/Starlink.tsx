@@ -13,13 +13,13 @@ import { fetchStarlinks } from "../../Store/Starlink/starlinkSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 //STYLES
-import styles from "./Starlink.module.scss";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 import { RootState } from "../../Store/rootReducer";
 
 //TYPES
 import { GlobePoint } from "../../Types";
 import { starlinkPageTitle, starlinkPageDescription } from "../Shared/SEO/Tags";
+import styled from "styled-components/macro";
 
 const Starlink = () => {
   const [showStarlinkInfo, setShowStarlinkInfo] = useState(false);
@@ -99,12 +99,11 @@ const Starlink = () => {
   return (
     <>
       <SEO title={starlinkPageTitle} description={starlinkPageDescription} />
-      <motion.div
+      <StyledStarlink
         initial="initial"
         animate="in"
         exit="out"
-        variants={pageVariantsAnim}
-        className={styles.Starlink}>
+        variants={pageVariantsAnim}>
         <Description starlinkOnTheOrbit={starlink.starlinks.docs.length} />
         {globe}
         <AnimatePresence>
@@ -115,9 +114,13 @@ const Starlink = () => {
             />
           )}
         </AnimatePresence>
-      </motion.div>
+      </StyledStarlink>
     </>
   );
 };
 
 export default Starlink;
+
+const StyledStarlink = styled(motion.div)`
+  height: 95vh;
+`;
