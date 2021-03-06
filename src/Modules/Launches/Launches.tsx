@@ -19,7 +19,6 @@ import {
 } from "../Shared";
 
 //STYLES
-import styles from "./Launches.module.scss";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 //OTHER
@@ -50,6 +49,9 @@ import {
 } from "../../Types";
 import { changeDDElementToTrue } from "../../Utility/Utility";
 import { launchedDDList } from "../../Other/DDLists";
+import styled from "styled-components/macro";
+import { device } from "../../resources/styles/helpers/breakpoints";
+import { flexColumnCenter } from "../../resources/styles/helpers/mixins";
 
 const Launches = () => {
   const [launchTypeFilter, setLaunchTypeFilter] = useState(launchedDDList);
@@ -180,13 +182,13 @@ const Launches = () => {
   return (
     <>
       <SEO title={launchesPageTitle} description={launchesPageDescription} />
-      <motion.div
+      <StyledLaunches
+        as={motion.div}
         initial="initial"
         animate="in"
         exit="out"
-        variants={pageVariantsAnim}
-        className={styles.Launches}>
-        <div className={styles.Latest}>
+        variants={pageVariantsAnim}>
+        <StyledLatest>
           <h2>{t("latestLaunchTitle")}</h2>
           {latestLaunch.loading ? (
             <LaunchExtendedInfoSkeleton />
@@ -196,9 +198,9 @@ const Launches = () => {
               launch={latestLaunch.latestLaunch.docs[0]}
             />
           )}
-        </div>
-        <div className={styles.Content}>
-          <div className={styles.ButtonsWrapper}>
+        </StyledLatest>
+        <StyledContent>
+          <StyledButtonsWrapper>
             <Dropdown
               list={launchTypeFilter}
               styleType="primary"
@@ -213,7 +215,7 @@ const Launches = () => {
                 clicked={() => setShowFilterModal(!showFilterModal)}
               />
             )}
-          </div>
+          </StyledButtonsWrapper>
 
           <AnimatePresence>
             {showFilterModal && (
@@ -249,12 +251,66 @@ const Launches = () => {
           <AnimatePresence>
             {launchTypeFilter[2].selected && <Boosters />}
           </AnimatePresence>
-        </div>
+        </StyledContent>
 
         <ScrollToTop />
-      </motion.div>
+      </StyledLaunches>
     </>
   );
 };
 
 export default Launches;
+
+const StyledLaunches = styled(flexColumnCenter)`
+  margin-top: 8rem;
+  padding: 0 1rem;
+
+  @media ${device.tablet} {
+    padding: 0 3rem;
+  }
+
+  @media ${device.large} {
+    padding: 0 7rem;
+  }
+
+  @media ${device.desktop} {
+    padding: 0 14rem;
+  }
+`;
+
+const StyledLatest = styled.div`
+  margin-bottom: 3rem;
+
+  h2 {
+    font-weight: 100;
+    color: ${({ theme }) => theme.colors?.fontPrimary};
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  @media ${device.tablet} {
+    h2 {
+      font-size: 3rem;
+    }
+  }
+`;
+
+const StyledContent = styled(flexColumnCenter)`
+  margin: 7rem 0;
+  width: 100%;
+`;
+
+const StyledButtonsWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  margin-bottom: 2rem;
+  justify-content: space-evenly;
+
+  @media ${device.tablet} {
+    justify-content: flex-start;
+
+    > * {
+      margin-right: 3rem;
+    }
+  }
+`;
