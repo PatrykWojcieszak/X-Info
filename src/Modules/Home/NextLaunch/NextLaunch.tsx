@@ -14,13 +14,19 @@ import { LaunchName } from "./LaunchName/LaunchName";
 import { Time } from "../../../Types";
 
 //STYLES
-import styles from "./NextLaunch.module.scss";
 import { bottomToTopAnim } from "../../../Animations/Animations_motion";
+import backgroundImg from "../../../resources/images/home_bg.jpg";
 
 //REDUX
 import { fetchNextLaunch } from "../../../Store/NextLaunch/nextLaunchSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
+import {
+  flexColumn,
+  flexColumnCenter,
+} from "../../../resources/styles/helpers/mixins";
+import styled from "styled-components/macro";
+import { device } from "../../../resources/styles/helpers/breakpoints";
 
 const initialTime: Time = {
   days: 0,
@@ -73,19 +79,19 @@ export const NextLaunch = ({ elonMuskQuote }: nextLaunchProps) => {
     };
   }, [timer, timeDiff]);
 
-  let nextLaunchWrapper = <div className={styles.Top}></div>;
+  let nextLaunchWrapper = <StyledTop></StyledTop>;
 
   if (
     !nextLaunch.loading &&
     (nextLaunchWrapper = (
       <AnimatePresence>
-        <div className={styles.Top}>
-          <motion.div
+        <StyledTop>
+          <StyledContent
+            as={motion.div}
             variants={bottomToTopAnim}
             initial="hidden"
             animate="show"
-            exit="exit"
-            className={styles.Top__Content}>
+            exit="exit">
             <LaunchName
               launchName={nextLaunch.nextLaunch.docs[0].name}
               dateLocal={nextLaunch.nextLaunch.docs[0]?.date_local}
@@ -99,13 +105,13 @@ export const NextLaunch = ({ elonMuskQuote }: nextLaunchProps) => {
               />
             )}
             {!showLaunchDetails && (
-              <div className={styles.ShowMore}>
+              <StyledShowMore>
                 <FontAwesomeIcon
                   icon="arrow-down"
                   onClick={() => setShowLaunchDetails(!showLaunchDetails)}
                 />
                 <h4>{t("showDetails")}</h4>
-              </div>
+              </StyledShowMore>
             )}
             <AnimatePresence>
               {showLaunchDetails && (
@@ -121,13 +127,13 @@ export const NextLaunch = ({ elonMuskQuote }: nextLaunchProps) => {
                 />
               )}
             </AnimatePresence>
-            <div className={styles.QuoteContainer}>
+            <StyledQuoteContainer>
               <h2>
                 {elonMuskQuote} - <span>Elon Musk</span>
               </h2>
-            </div>
-          </motion.div>
-        </div>
+            </StyledQuoteContainer>
+          </StyledContent>
+        </StyledTop>
       </AnimatePresence>
     ))
   )
@@ -139,8 +145,8 @@ export const NextLaunch = ({ elonMuskQuote }: nextLaunchProps) => {
     )
       nextLaunchWrapper = (
         <AnimatePresence>
-          <motion.div
-            className={styles.YouTubeContainer}
+          <StyledYoutubeContainer
+            as={motion.div}
             variants={bottomToTopAnim}
             initial="hidden"
             animate="show"
@@ -148,13 +154,99 @@ export const NextLaunch = ({ elonMuskQuote }: nextLaunchProps) => {
             <YouTubeFrame
               url={nextLaunch.nextLaunch.docs[0]?.links.youtube_id}
             />
-          </motion.div>
+          </StyledYoutubeContainer>
         </AnimatePresence>
       );
 
-  return <div className={styles.NextLaunch}>{nextLaunchWrapper}</div>;
+  return <StyledNextLaunch>{nextLaunchWrapper}</StyledNextLaunch>;
 };
 
 type nextLaunchProps = {
   elonMuskQuote: string;
 };
+
+const StyledTop = styled(flexColumn)`
+  background: rgba(0, 0, 0, 0.5) url(${backgroundImg});
+  background-blend-mode: darken;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+`;
+
+const StyledContent = styled(flexColumn)`
+  flex: 2;
+  justify-content: center;
+  position: relative;
+  padding: 0 1rem;
+
+  @media ${device.tablet} {
+    padding: 0 3rem;
+  }
+
+  @media ${device.large} {
+    padding: 0 4rem;
+  }
+
+  @media ${device.desktop} {
+    padding: 0 12rem;
+  }
+`;
+
+const StyledQuoteContainer = styled.div`
+  border-radius: 1rem;
+  padding: 0.8rem;
+  text-align: center;
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  margin: auto;
+  font-size: 0.5rem;
+  bottom: 0.2rem;
+
+  h2 {
+    font-weight: 300;
+    color: ${({ theme }) => theme.colors?.fontPrimary};
+
+    span {
+      font-weight: 700;
+      color: ${({ theme }) => theme.colors?.blue};
+    }
+  }
+
+  @media ${device.tablet} {
+    bottom: 1rem;
+    font-size: 0.6rem;
+  }
+`;
+
+const StyledShowMore = styled(flexColumnCenter)`
+  margin-top: 4rem;
+
+  svg {
+    cursor: pointer;
+    color: ${({ theme }) => theme.colors?.blue};
+    font-size: 2.5rem;
+  }
+
+  h4 {
+    color: ${({ theme }) => theme.colors?.fontSecondary};
+    font-weight: 100;
+    margin-top: 0.4rem;
+  }
+`;
+
+const StyledNextLaunch = styled.div`
+  height: 100vh;
+  position: relative;
+`;
+
+const StyledYoutubeContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  margin-top: 90px;
+`;

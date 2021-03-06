@@ -6,8 +6,9 @@ import { useTranslation } from "react-i18next";
 import { InfoLine } from "./InfoLine/InfoLine";
 
 //STYLES
-import styles from "./LaunchDetails.module.scss";
 import { launchDetailsAnim } from "../../../../Animations/Animations_motion";
+import styled from "styled-components/macro";
+import { device } from "../../../../resources/styles/helpers/breakpoints";
 
 export const LaunchDetails = React.memo(
   ({
@@ -24,11 +25,10 @@ export const LaunchDetails = React.memo(
     if (datePrecision === "month") datePrec = "keyMonth";
 
     return (
-      <motion.div
+      <StyledLaunchDetails
         variants={launchDetailsAnim}
         initial="hidden"
-        animate="show"
-        className={styles.LaunchDetails}>
+        animate="show">
         {flightNumber && (
           <InfoLine title={t("flight")} value={flightNumber.toString()} />
         )}
@@ -46,7 +46,7 @@ export const LaunchDetails = React.memo(
           />
         )}
         {details && <InfoLine title={t("details")} value={details} />}
-      </motion.div>
+      </StyledLaunchDetails>
     );
   }
 );
@@ -59,3 +59,14 @@ type launchDetailsProps = {
   launchpadFullName: string;
   datePrecision: string;
 };
+
+const StyledLaunchDetails = styled(motion.div)`
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 0.8rem;
+  border-radius: 0.8rem;
+  margin-top: 1rem;
+
+  @media ${device.tablet} {
+    margin-top: 2rem;
+  }
+`;

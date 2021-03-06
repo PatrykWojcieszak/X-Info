@@ -1,8 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-
-//STYLES
-import styles from "./LaunchName.module.scss";
+import styled from "styled-components/macro";
+import { device } from "../../../../resources/styles/helpers/breakpoints";
 
 export const LaunchName = React.memo(
   ({ launchName, dateLocal }: launchNameProps) => {
@@ -14,10 +13,12 @@ export const LaunchName = React.memo(
     };
 
     return (
-      <div className={styles.LaunchNameWrapper}>
-        <h2>{isAfterLaunch() ? t("currentLaunch") : t("nextLaunchTitle")}: </h2>
-        <h2 className={styles.LaunchName}>{launchName}</h2>
-      </div>
+      <StyledLaunchNameWrapper>
+        <StyledTitle>
+          {isAfterLaunch() ? t("currentLaunch") : t("nextLaunchTitle")}:{" "}
+        </StyledTitle>
+        <StyledLaunchName>{launchName}</StyledLaunchName>
+      </StyledLaunchNameWrapper>
     );
   }
 );
@@ -26,3 +27,32 @@ type launchNameProps = {
   launchName: string;
   dateLocal: string;
 };
+
+const StyledFont = styled.h2`
+  font-size: 2.5rem;
+
+  @media ${device.tablet} {
+    font-size: 3rem;
+  }
+`;
+
+const StyledLaunchName = styled(StyledFont)`
+  color: ${({ theme }) => theme.colors?.blue};
+  font-weight: normal;
+`;
+
+const StyledTitle = styled(StyledFont)`
+  font-weight: 100;
+  color: ${({ theme }) => theme.colors?.fontSecondary};
+  margin-right: 1rem;
+`;
+
+const StyledLaunchNameWrapper = styled.div`
+  display: flex;
+  margin-bottom: 2.5rem;
+  flex-direction: column;
+
+  @media ${device.tablet} {
+    flex-direction: row;
+  }
+`;
