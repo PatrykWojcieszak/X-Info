@@ -39,6 +39,7 @@ const StyledSkeletonWrapper = styled.div`
   overflow: hidden;
   border-radius: 1rem;
   background-color: rgba(9, 9, 9, 0.2);
+  width: 100%;
 `;
 
 const StyledLaunchExtendedInfoSkeleton = styled(flexColumnCenter)`

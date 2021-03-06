@@ -280,6 +280,7 @@ const StyledLaunches = styled(flexColumnCenter)`
 
 const StyledLatest = styled.div`
   margin-bottom: 3rem;
+  width: 100%;
 
   h2 {
     font-weight: 100;
