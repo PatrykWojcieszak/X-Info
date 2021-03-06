@@ -4,7 +4,7 @@ import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import { Nav, Footer, SideBar } from "./Modules/Shared";
 import { useMediaQuery } from "./Hooks/";
 
-import styles from "./App.module.scss";
+import styled from "styled-components/macro";
 
 const Home = React.lazy(() => {
   return import("./Modules/Home/Home");
@@ -53,14 +53,21 @@ function App() {
   );
 
   return (
-    <div className={styles.App}>
+    <StyledApp>
       <Suspense fallback={<p>Loading...</p>}>
         {isMobile ? <SideBar /> : <Nav />}
         {routes}
         <Footer />
       </Suspense>
-    </div>
+    </StyledApp>
   );
 }
 
 export default App;
+
+const StyledApp = styled.div`
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+`;
