@@ -18,7 +18,6 @@ import fhheavy from "../../resources/images/falconHeavy.png";
 import falcon1 from "../../resources/images/f1.png";
 import starship from "../../resources/images/st.png";
 import falcon9 from "../../resources/images/falcon9.png";
-import styles from "./Launch.module.scss";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 //REDUX
@@ -29,6 +28,12 @@ import { RootState } from "../../Store/rootReducer";
 //OTHER
 import { launchPageTitle, launchPageDescription } from "../Shared/SEO/Tags";
 import { RocketType } from "../../Types";
+import styled from "styled-components/macro";
+import { device } from "../../resources/styles/helpers/breakpoints";
+import {
+  flexCenter,
+  flexColumnCenter,
+} from "../../resources/styles/helpers/mixins";
 
 const Launch = () => {
   const { id } = useParams();
@@ -54,35 +59,35 @@ const Launch = () => {
     rocketImg = <img src={starship} alt="Starship" />;
 
   let launchInformation = (
-    <div className={styles.Launch}>
+    <StyledLaunch>
       <LaunchSkeleton />
-    </div>
+    </StyledLaunch>
   );
 
   if (!launch.loading) {
     launchInformation = (
       <>
-        <div className={styles.Launch}>
+        <StyledLaunch>
           <LaunchExtendedInfo
             showMoreDetailsButton={false}
             launch={launch.launch.docs[0]}
           />
-          <div className={styles.Row}>
+          <StyledRow>
             <Link to={`/vehicles/${launch.launch.docs[0]?.rocket.id}`}>
-              <div className={styles.Rocket}>
+              <StyledRocket>
                 <h3>{launch.launch.docs[0]?.rocket.name}</h3>
                 {rocketImg}
-              </div>
+              </StyledRocket>
             </Link>
-            <div className={styles.InfoContainer}>
+            <StyledInfoContainer>
               <PayloadList payloadList={launch.launch.docs[0].payloads} />
               <CoreList coreList={launch.launch.docs[0].cores} />
-            </div>
-          </div>
+            </StyledInfoContainer>
+          </StyledRow>
           <CrewList crewList={launch.launch.docs[0].crew} />
           <ShipList shipList={launch.launch.docs[0].ships} />
           <YouTube youtubeId={launch.launch.docs[0].links.youtube_id} />
-        </div>
+        </StyledLaunch>
         <div style={{ padding: "0 1rem" }}>
           {launch.launch.docs[0]?.links.flickr.original.length > 0 ? (
             <Gallery images={launch.launch.docs[0].links.flickr.original} />
@@ -111,3 +116,61 @@ const Launch = () => {
 };
 
 export default Launch;
+
+const StyledLaunch = styled.div`
+  margin-top: 8rem;
+  padding: 0 1rem;
+
+  @media ${device.large} {
+    padding: 0 4rem;
+  }
+
+  @media ${device.desktop} {
+    padding: 0 20%;
+  }
+`;
+
+const StyledRow = styled(flexCenter)`
+  margin-top: 4rem;
+  align-items: flex-start;
+`;
+
+const StyledRocket = styled(flexColumnCenter)`
+  cursor: pointer;
+  padding: 0 0.6rem 0.6rem 0.6rem;
+  transition: all 0.4s ease-in-out;
+  border: 1px solid transparent;
+  border-radius: 0.8rem;
+  max-width: 163px;
+  min-width: 163px;
+  text-align: center;
+  &:hover {
+    border: 1px solid ${({ theme }) => theme.colors?.fontSecondary};
+  }
+
+  h3 {
+    font-weight: 100;
+    font-size: 1.2rem;
+    color: ${({ theme }) => theme.colors?.fontPrimary};
+    margin-bottom: 1rem;
+  }
+
+  img {
+    height: 400px;
+  }
+
+  @media ${device.tablet} {
+    img {
+      height: 800px;
+    }
+  }
+`;
+
+const StyledInfoContainer = styled(flexColumnCenter)`
+  width: 100%;
+  margin-left: 0;
+
+  @media ${device.tablet} {
+    margin-left: 4rem;
+  }
+`;

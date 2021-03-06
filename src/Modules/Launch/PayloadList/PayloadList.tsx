@@ -4,17 +4,17 @@ import { useTranslation } from "react-i18next";
 //COMPONENTS
 import { InfoLine } from "../../Shared";
 
-//STYLES
-import styles from "./PayloadList.module.scss";
-
 //TYPES
 import { Payload } from "../../../Types";
+import styled from "styled-components/macro";
+import { device } from "../../../resources/styles/helpers/breakpoints";
+import { flexColumn } from "../../../resources/styles/helpers/mixins";
 
 export const PayloadList = ({ payloadList }: payloadListProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className={styles.PayloadList}>
+    <StyledCoreList>
       {payloadList.map((payload, index) => (
         <div key={index}>
           <h2>
@@ -49,10 +49,25 @@ export const PayloadList = ({ payloadList }: payloadListProps) => {
           )}
         </div>
       ))}
-    </div>
+    </StyledCoreList>
   );
 };
 
 type payloadListProps = {
   payloadList: Payload[];
 };
+
+const StyledCoreList = styled(flexColumn)`
+  width: 100%;
+  margin-bottom: 2rem;
+
+  h2 {
+    font-weight: 100;
+    color: ${({ theme }) => theme.colors?.fontPrimary};
+    font-size: 1.5rem;
+  }
+
+  @media ${device.tablet} {
+    font-size: 2rem;
+  }
+`;
