@@ -25,17 +25,17 @@ export const Countdown = ({
           <h2>{("0" + days).slice(-2)}</h2>
           <h4>{t("countdownDays")}</h4>
         </StyledElement>
-        <StyledColon>:</StyledColon>
+        <StyledColon as="h2">:</StyledColon>
         <StyledElement>
           <h2>{("0" + hours).slice(-2)}</h2>
           <h4>{t("countdownHours")}</h4>
         </StyledElement>
-        <StyledColon>:</StyledColon>
+        <StyledColon as="h2">:</StyledColon>
         <StyledElement>
           <h2>{("0" + minutes).slice(-2)}</h2>
           <h4>{t("countdownMinutes")}</h4>
         </StyledElement>
-        <StyledColon>:</StyledColon>
+        <StyledColon as="h2">:</StyledColon>
         <StyledElement>
           <h2>{("0" + seconds).slice(-2)}</h2>
           <h4>{t("countdownSeconds")}</h4>
