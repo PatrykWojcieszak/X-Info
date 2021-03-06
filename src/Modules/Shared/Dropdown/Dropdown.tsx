@@ -3,13 +3,13 @@ import React, { useState, useRef, useEffect } from "react";
 //HOOKS
 import { useClickOutside } from "../../../Hooks";
 
-//STYLES
-import styles from "./Dropdown.module.scss";
-
 //TYPES
 import { DropdownElement } from "../../../Types/";
 import { Header } from "./Header/Header";
 import { List } from "./List/List";
+import styled from "styled-components/macro";
+import { flexColumn } from "../../../resources/styles/helpers/mixins";
+import { device } from "../../../resources/styles/helpers/breakpoints";
 
 export const Dropdown = ({
   list,
@@ -38,13 +38,8 @@ export const Dropdown = ({
     selectedElement(selectedEl.id);
   };
 
-  const ddStyles = [styles.DropdownWrapper];
-
-  if (styleType === "primary") ddStyles.push(styles.Primary);
-  if (styleType === "secondary") ddStyles.push(styles.Secondary);
-
   return (
-    <div className={ddStyles.join(" ")} ref={wrapperRef}>
+    <StyledDropdownContainer as="div" styleType={styleType} ref={wrapperRef}>
       <Header
         title={headerTitle ? headerTitle : "-"}
         isListOpen={isListOpen}
@@ -60,7 +55,7 @@ export const Dropdown = ({
           }
         />
       )}
-    </div>
+    </StyledDropdownContainer>
   );
 };
 
@@ -69,3 +64,21 @@ type dropdownProps = {
   selectedElement: (id: number) => void;
   styleType: string;
 };
+
+const StyledDropdownContainer = styled(flexColumn)<{ styleType: string }>`
+  border-radius: 0.5rem;
+  position: relative;
+  min-width: 200px;
+  background-color: transparent;
+  border: 1px solid
+    ${({ theme, styleType }) =>
+      styleType === "primary" ? theme.colors?.blue : theme.colors?.background};
+
+  @media ${device.tablet} {
+    min-width: 220px;
+  }
+
+  @media ${device.large} {
+    min-width: 280px;
+  }
+`;

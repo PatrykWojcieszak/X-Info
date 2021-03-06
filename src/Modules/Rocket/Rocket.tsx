@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { Gallery, SEO } from "../Shared";
 
 //STYLES
-import styles from "./Rocket.module.scss";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 //IMAGES
@@ -26,6 +25,9 @@ import { rocketPageTitle, rocketPageDescription } from "../Shared/SEO/Tags";
 import { HeroImage } from "./HeroImage/HeroImage";
 import { RocketDetails } from "./RocketDetails/RocketDetails";
 import { RocketType } from "../../Types";
+import styled from "styled-components/macro";
+import { flexCenter } from "../../resources/styles/helpers/mixins";
+import { device } from "../../resources/styles/helpers/breakpoints";
 
 const Rocket = () => {
   const { id } = useParams();
@@ -59,9 +61,9 @@ const Rocket = () => {
   if (!rocket.loading)
     rocketContainer = (
       <>
-        <div className={styles.Rocket}>
+        <StyledRocketImg>
           <img src={rocketImg} alt="rocket" />
-        </div>
+        </StyledRocketImg>
         <RocketDetails rocket={rocket.rocket.docs[0]} />
       </>
     );
@@ -76,18 +78,58 @@ const Rocket = () => {
         initial="initial"
         animate="in"
         exit="out"
-        variants={pageVariantsAnim}
-        className={styles.Rocket}>
+        variants={pageVariantsAnim}>
         <HeroImage vehicle={id} />
-        <div className={styles.Content}>{rocketContainer}</div>
-        <div className={styles.GalleryWrapper}>
+        <StyledRocket>{rocketContainer}</StyledRocket>
+        <GalleryWrapper>
           {rocket.rocket.docs[0]?.flickr_images.length > 0 ? (
             <Gallery images={rocket.rocket.docs[0].flickr_images} />
           ) : null}
-        </div>
+        </GalleryWrapper>
       </motion.div>
     </>
   );
 };
 
 export default Rocket;
+
+const StyledRocket = styled(flexCenter)`
+  margin-top: 2rem;
+  align-items: flex-start;
+  position: relative;
+  padding: 0 10%;
+
+  @media ${device.tablet} {
+    padding: 0 1rem;
+  }
+
+  @media ${device.large} {
+    padding: 0 20%;
+  }
+`;
+
+const StyledRocketImg = styled.div`
+  height: 40%;
+
+  img {
+    height: 450px;
+  }
+
+  @media ${device.tablet} {
+    height: 60%;
+
+    img {
+      height: 700px;
+    }
+  }
+
+  @media ${device.large} {
+    img {
+      height: 900px;
+    }
+  }
+`;
+
+const GalleryWrapper = styled.div`
+  padding: 0 1rem;
+`;

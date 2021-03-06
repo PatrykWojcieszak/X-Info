@@ -7,11 +7,12 @@ import { Button, LaunchShortInfo, NotFoundLaunches } from "../../Shared";
 import { LaunchShortInfoSkeleton } from "../../Shared/Skeletons/LaunchShortInfoSkeleton";
 
 //STYLES
-import styles from "./PastLaunches.module.scss";
 import { showLaunchesList } from "../../../Animations/Animations_motion";
 
 //TYPES
 import { Launch } from "../../../Types";
+import styled from "styled-components/macro";
+import { flexColumnCenter } from "../../../resources/styles/helpers/mixins";
 
 export const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
   const [numberOfLaunches, setNumberOfLaunches] = useState(5);
@@ -67,14 +68,14 @@ export const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
 
   return (
     <>
-      <motion.div
+      <StyledLaunchesWrapper
         variants={showLaunchesList}
         initial="initial"
         animate="in"
         exit="out"
-        className={styles.LaunchesWrapper}>
+        as={motion.div}>
         {pastLaunchesArr}
-      </motion.div>
+      </StyledLaunchesWrapper>
     </>
   );
 };
@@ -83,3 +84,13 @@ type pastLaunchesProps = {
   launches: Launch[];
   loading: boolean;
 };
+
+const StyledLaunchesWrapper = styled(flexColumnCenter)`
+  width: 100%;
+  position: relative;
+
+  > * {
+    margin: 1rem 0;
+    width: 100%;
+  }
+`;

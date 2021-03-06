@@ -6,22 +6,23 @@ import { useTranslation } from "react-i18next";
 import { InfoLine } from "../../../Shared";
 
 //STYLES
-import styles from "./LandingLegs.module.scss";
 import { rightToLeftAnim } from "../../../../Animations/Animations_motion";
 
 //TYPES
 import { LandingLegs as LandingLegsType } from "../../../../Types";
+import styled from "styled-components/macro";
+import { flexColumnCenter } from "../../../../resources/styles/helpers/mixins";
 
 export const LandingLegs = ({ landingLegs }: landingLegsProps) => {
   const { t } = useTranslation();
 
   return (
-    <motion.div
+    <StyledLandingLegs
       variants={rightToLeftAnim}
       initial="hidden"
       animate="show"
       exit="exit"
-      className={styles.LandingLegs}>
+      as={motion.div}>
       {landingLegs.number && (
         <InfoLine title={t("number")} value={`${landingLegs.number}`} />
       )}
@@ -29,10 +30,18 @@ export const LandingLegs = ({ landingLegs }: landingLegsProps) => {
       {landingLegs.material && (
         <InfoLine title={t("material")} value={`${landingLegs.material} `} />
       )}
-    </motion.div>
+    </StyledLandingLegs>
   );
 };
 
 type landingLegsProps = {
   landingLegs: LandingLegsType;
 };
+
+const StyledLandingLegs = styled(flexColumnCenter)`
+  justify-content: flex-start;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;

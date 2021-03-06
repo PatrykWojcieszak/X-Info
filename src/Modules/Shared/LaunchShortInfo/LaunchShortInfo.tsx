@@ -5,11 +5,9 @@ import { Link } from "react-router-dom";
 import { SecondaryDetails } from "./SecondaryDetails/SecondaryDetails";
 import { MainDetails } from "./MainDetails/MainDetails";
 
-//STYLES
-import styles from "./LaunchShortInfo.module.scss";
-
 //OTHER
 import { Flag } from "./Flag/Flag";
+import styled from "styled-components/macro";
 
 export const LaunchShortInfo = React.memo(
   ({
@@ -26,7 +24,7 @@ export const LaunchShortInfo = React.memo(
   }: launchShortInfoProps) => {
     return (
       <Link to={`/launch/${id}`}>
-        <div className={styles.Launch}>
+        <StyledLaunchShortInfo>
           <MainDetails
             launchName={launchName}
             rocketName={rocketName}
@@ -40,7 +38,7 @@ export const LaunchShortInfo = React.memo(
             customers={customers}
           />
           {nationality && <Flag nationality={nationality} />}
-        </div>
+        </StyledLaunchShortInfo>
       </Link>
     );
   }
@@ -58,3 +56,17 @@ type launchShortInfoProps = {
   datePrecision: string;
   id: string;
 };
+
+const StyledLaunchShortInfo = styled.div`
+  background-color: ${({ theme }) => theme.colors?.foreground};
+  border-radius: 0.6rem;
+  width: 100%;
+  padding: 0.5rem;
+  position: relative;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors?.dark};
+  }
+`;

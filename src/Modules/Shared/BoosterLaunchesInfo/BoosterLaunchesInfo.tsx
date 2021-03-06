@@ -1,11 +1,13 @@
 import React from "react";
+import styled from "styled-components/macro";
 
 //COMPONENTS
 import { Missions } from "./Missions/Missions";
 import { Details } from "./Details/Details";
 
-//STYLES
-import styles from "./BoosterLaunchesInfo.module.scss";
+//MIXINS
+import { flexColumn } from "../../../resources/styles/helpers/mixins";
+import { device } from "../../../resources/styles/helpers/breakpoints";
 
 //TYPES
 import { Launch } from "../../../Types";
@@ -18,7 +20,7 @@ export const BoosterLaunchesInfo = ({
   launches,
 }: boostersType) => {
   return (
-    <div className={styles.Booster}>
+    <StyledBoosterLaunchesInfo as="div">
       <Details
         block={block}
         serial={serial}
@@ -27,7 +29,7 @@ export const BoosterLaunchesInfo = ({
         launches={launches}
       />
       <Missions missions={launches} />
-    </div>
+    </StyledBoosterLaunchesInfo>
   );
 };
 
@@ -38,3 +40,13 @@ type boostersType = {
   reuse_count: number;
   launches: Launch[];
 };
+
+const StyledBoosterLaunchesInfo = styled(flexColumn)`
+  display: flex;
+  background-color: ${({ theme }) => theme.colors?.foreground};
+  border-radius: 1rem;
+
+  @media ${device.tablet} {
+    flex-direction: row;
+  }
+`;

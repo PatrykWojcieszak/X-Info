@@ -1,8 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-
-//STYLES
-import styles from "./StarlinkDetails.module.scss";
+import styled from "styled-components/macro";
+import { flexColumn } from "../../../../resources/styles/helpers/mixins";
 
 export const StarlinkDetails = ({
   label,
@@ -13,22 +12,22 @@ export const StarlinkDetails = ({
   const { t } = useTranslation();
 
   return (
-    <div className={styles.StarlinkDetails}>
+    <div>
       <h2>STARLINK</h2>
-      <div className={styles.InfoContainer}>
-        <div className={styles.NameWrapper}>
+      <StyledInfoContainer>
+        <StyledWrapper style={{ marginRight: "0.4rem" }}>
           <h4>{t("name")}</h4>
           <h4>{t("version")}</h4>
           <h4>{t("height")}</h4>
           <h4>{t("velocity")}</h4>
-        </div>
-        <div className={styles.ValuesWrapper}>
+        </StyledWrapper>
+        <StyledWrapper>
           <h4>{label}</h4>
           <h4>{version}</h4>
           <h4>{Number(height).toFixed(2)} km</h4>
           <h4>{Number(velocity).toFixed(2)} kms</h4>
-        </div>
-      </div>
+        </StyledWrapper>
+      </StyledInfoContainer>
     </div>
   );
 };
@@ -39,3 +38,9 @@ type starlinkDetailsProps = {
   height: number;
   velocity: number;
 };
+
+const StyledInfoContainer = styled.div`
+  display: flex;
+`;
+
+const StyledWrapper = styled(flexColumn)``;

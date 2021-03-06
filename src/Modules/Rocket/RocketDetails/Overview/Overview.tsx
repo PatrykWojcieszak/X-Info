@@ -6,11 +6,12 @@ import { useTranslation } from "react-i18next";
 import { InfoLine } from "../../../Shared";
 
 //STYLES
-import styles from "./Overview.module.scss";
 import { rightToLeftAnim } from "../../../../Animations/Animations_motion";
 
 //TYPES
 import { Length, Mass, PayloadWeights } from "../../../../Types";
+import styled from "styled-components/macro";
+import { flexColumnCenter } from "../../../../resources/styles/helpers/mixins";
 
 export const Overview = ({
   height,
@@ -21,12 +22,12 @@ export const Overview = ({
   const { t } = useTranslation();
 
   return (
-    <motion.div
+    <StyledOverview
       variants={rightToLeftAnim}
       initial="hidden"
       animate="show"
       exit="exit"
-      className={styles.Overview}>
+      as={motion.div}>
       {height.meters || height.feet ? (
         <InfoLine
           title={t("height")}
@@ -52,7 +53,7 @@ export const Overview = ({
           value={`${payload.kg} kg | ${payload.lb} lb`}
         />
       ))}
-    </motion.div>
+    </StyledOverview>
   );
 };
 
@@ -62,3 +63,11 @@ type overviewProps = {
   mass: Mass;
   payloads: PayloadWeights[];
 };
+
+const StyledOverview = styled(flexColumnCenter)`
+  justify-content: flex-start;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
