@@ -7,13 +7,13 @@ import { Launch } from "./Launch/Launch";
 import { Button } from "../../Shared";
 import { RecentLaunchSkeleton } from "../../Shared/Skeletons/RecentLaunchSkeleton";
 
-//STYLES
-import styles from "./RecentLaunches.module.scss";
-
 //REDUX
 import { fetchRecentLaunches } from "../../../Store/RecentLaunches/recentLaunchesSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
+import styled from "styled-components/macro";
+import { flexCenter } from "../../../resources/styles/helpers/mixins";
+import { device } from "../../../resources/styles/helpers/breakpoints";
 
 export const RecentLaunches = () => {
   const { t } = useTranslation();
@@ -30,14 +30,14 @@ export const RecentLaunches = () => {
   }, [dispatch, recentLaunches]);
 
   return (
-    <div className={styles.RecentLaunches}>
-      <div className={styles.Top}>
+    <StyledRecentLaunches>
+      <StyledTop>
         <h2>{t("recentLaunchesTitle")}</h2>
         <Link to="/launches/past">
           <Button name={t("showMore")} styleType="primary" />
         </Link>
-      </div>
-      <div className={styles.Content}>
+      </StyledTop>
+      <StyledContent>
         {recentLaunches.loading
           ? [1, 2, 3, 4, 5].map((n) => <RecentLaunchSkeleton key={n} />)
           : recentLaunches.recentLaunches.docs.map((launch, index) => (
@@ -50,7 +50,45 @@ export const RecentLaunches = () => {
                 success={launch.success}
               />
             ))}
-      </div>
-    </div>
+      </StyledContent>
+    </StyledRecentLaunches>
   );
 };
+
+const StyledRecentLaunches = styled.div`
+  margin-top: 1rem;
+  width: 100%;
+`;
+
+const StyledTop = styled(flexCenter)`
+  justify-content: space-between;
+  padding: 0.4rem;
+  margin-bottom: 2rem;
+
+  h2 {
+    color: ${({ theme }) => theme.colors?.fontPrimary};
+    font-weight: 100;
+    font-size: 1.1rem;
+  }
+
+  @media ${device.tablet} {
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media ${device.large} {
+    h2 {
+      font-size: 2.5rem;
+    }
+  }
+`;
+
+const StyledContent = styled(flexCenter)`
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+
+  > * {
+    margin: 1rem 0;
+  }
+`;

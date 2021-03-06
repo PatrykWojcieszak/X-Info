@@ -1,28 +1,27 @@
 import React from "react";
+import styled from "styled-components/macro";
+import { flexColumn } from "../../../resources/styles/helpers/mixins";
 
 //COMPONENTS
 import { Shimmer } from "./Shimmer/Shimmer";
 import { SkeletonElement } from "./SkeletonElement";
 
-//STYLES
-import styles from "./Skeletons.module.scss";
-
 export const RocketSkeleton = () => {
   return (
-    <div className={styles.SkeletonWrapper}>
-      <div className={styles.RocketSkeleton}>
-        <div className={styles.Left}>
+    <StyledSkeletonWrapper>
+      <StyledRocketSkeleton>
+        <StyledLeft>
           <SkeletonElement type="Box" />
-        </div>
-        <div className={styles.Right}>
-          <div className={styles.InfoElement}>
+        </StyledLeft>
+        <StyledRight>
+          <StyledInfoElement>
             <SkeletonElement type="Text" />
             <SkeletonElement type="Text" />
-          </div>
-          <div className={styles.InfoElement}>
+          </StyledInfoElement>
+          <StyledInfoElement>
             <SkeletonElement type="Title" />
-          </div>
-          <div className={styles.InfoElement}>
+          </StyledInfoElement>
+          <StyledInfoElement>
             <SkeletonElement type="Text" />
             <SkeletonElement type="Text" />
             <SkeletonElement type="Text" />
@@ -31,10 +30,35 @@ export const RocketSkeleton = () => {
             <SkeletonElement type="Text" />
             <SkeletonElement type="Text" />
             <SkeletonElement type="Text" />
-          </div>
-        </div>
-      </div>
+          </StyledInfoElement>
+        </StyledRight>
+      </StyledRocketSkeleton>
       <Shimmer />
-    </div>
+    </StyledSkeletonWrapper>
   );
 };
+
+const StyledSkeletonWrapper = styled.div`
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: rgba(9, 9, 9, 0.2);
+`;
+
+const StyledRocketSkeleton = styled.div`
+  display: flex;
+`;
+
+const StyledLeft = styled.div`
+  height: 700px;
+  width: 300px;
+`;
+
+const StyledRight = styled(flexColumn)`
+  width: 100%;
+  margin-left: 5rem;
+`;
+
+const StyledInfoElement = styled.div`
+  margin-bottom: 1.5rem;
+`;

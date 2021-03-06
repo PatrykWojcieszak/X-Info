@@ -6,20 +6,21 @@ import { useTranslation } from "react-i18next";
 import { InfoLine } from "../../../Shared";
 
 //STYLES
-import styles from "./FirstStage.module.scss";
 import { rightToLeftAnim } from "../../../../Animations/Animations_motion";
 import { Engines, FirstStage as FirstStageType } from "../../../../Types";
+import { flexColumnCenter } from "../../../../resources/styles/helpers/mixins";
+import styled from "styled-components/macro";
 
 export const FirstStage = ({ firstStage, engines }: firstStageProps) => {
   const { t } = useTranslation();
 
   return (
-    <motion.div
+    <StyledFirstStage
       variants={rightToLeftAnim}
       initial="hidden"
       animate="show"
       exit="exit"
-      className={styles.Details}>
+      as={motion.div}>
       {firstStage.engines && (
         <InfoLine title={t("engines")} value={`${firstStage.engines}`} />
       )}
@@ -82,7 +83,7 @@ export const FirstStage = ({ firstStage, engines }: firstStageProps) => {
           value={`${engines.propellant_2}`}
         />
       )}
-    </motion.div>
+    </StyledFirstStage>
   );
 };
 
@@ -90,3 +91,11 @@ type firstStageProps = {
   firstStage: FirstStageType;
   engines: Engines;
 };
+
+const StyledFirstStage = styled(flexColumnCenter)`
+  justify-content: flex-start;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;

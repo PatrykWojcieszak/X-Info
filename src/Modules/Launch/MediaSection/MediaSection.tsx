@@ -4,13 +4,14 @@ import { MediaLink } from "./MediaLink/MediaLink";
 import { useTranslation } from "react-i18next";
 
 //STYLES
-import styles from "./MediaSection.module.scss";
+import { flexCenter } from "../../../resources/styles/helpers/mixins";
+import styled from "styled-components/macro";
 
 export const MediaSection = ({ links }: mediaSectionProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className={styles.MediaSection}>
+    <StyledMediaSection>
       {links.reddit.campaign && (
         <MediaLink
           name={t("campaign")}
@@ -64,10 +65,16 @@ export const MediaSection = ({ links }: mediaSectionProps) => {
           link={links.presskit}
         />
       )}
-    </div>
+    </StyledMediaSection>
   );
 };
 
 type mediaSectionProps = {
   links: Links;
 };
+
+const StyledMediaSection = styled(flexCenter)`
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 3rem 0;
+`;

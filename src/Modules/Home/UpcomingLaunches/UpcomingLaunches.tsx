@@ -6,13 +6,16 @@ import { useTranslation } from "react-i18next";
 import { Button, LaunchShortInfo } from "../../Shared";
 import { LaunchShortInfoSkeleton } from "../../Shared/Skeletons/LaunchShortInfoSkeleton";
 
-//STYLES
-import styles from "./UpcomingLaunches.module.scss";
-
 //REDUX
 import { fetchUpcomingLaunches } from "../../../Store/UpcomingLaunches/upcomingLaunchesSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
+import styled from "styled-components/macro";
+import {
+  flexCenter,
+  flexColumn,
+} from "../../../resources/styles/helpers/mixins";
+import { device } from "../../../resources/styles/helpers/breakpoints";
 
 export const UpcomingLaunches = () => {
   const { t } = useTranslation();
@@ -29,11 +32,11 @@ export const UpcomingLaunches = () => {
   }, [dispatch, upcomingLaunches]);
 
   return (
-    <div className={styles.UpcomingLaunches}>
-      <div className={styles.Top}>
+    <StyledUpcomingLaunches>
+      <StyledTop>
         <h2>{t("upcomingLaunchesTitle")}</h2>
-      </div>
-      <div className={styles.Content}>
+      </StyledTop>
+      <StyledContent>
         {upcomingLaunches.loading
           ? [1, 2, 3, 4, 5].map((n) => <LaunchShortInfoSkeleton key={n} />)
           : upcomingLaunches.upcomingLaunches.docs
@@ -52,12 +55,49 @@ export const UpcomingLaunches = () => {
                   id={launch.id}
                 />
               ))}
-      </div>
-      <div className={styles.ButtonWrapper}>
+      </StyledContent>
+      <StyledButtonWrapper>
         <Link to="/launches/upcoming">
           <Button name={t("showAll")} styleType="primary" />
         </Link>
-      </div>
-    </div>
+      </StyledButtonWrapper>
+    </StyledUpcomingLaunches>
   );
 };
+
+const StyledUpcomingLaunches = styled.div`
+  margin: 4rem 0;
+  width: 100%;
+`;
+
+const StyledTop = styled.div`
+  margin-bottom: 2rem;
+
+  h2 {
+    color: ${({ theme }) => theme.colors?.fontPrimary};
+    font-weight: 100;
+    font-size: 1.1rem;
+  }
+
+  @media ${device.tablet} {
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media ${device.large} {
+    h2 {
+      font-size: 2.5rem;
+    }
+  }
+`;
+
+const StyledContent = styled(flexColumn)`
+  > * {
+    margin: 1rem 0;
+  }
+`;
+
+const StyledButtonWrapper = styled(flexCenter)`
+  margin-top: 2rem;
+`;

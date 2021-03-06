@@ -5,12 +5,13 @@ import { LaunchShortInfoSkeleton } from "../../Shared/Skeletons/LaunchShortInfoS
 import { NotFoundLaunches, LaunchShortInfo } from "../../Shared";
 
 //STYLES
-import styles from "./UpcomingLaunches.module.scss";
 import { motion } from "framer-motion";
 import { showLaunchesList } from "../../../Animations/Animations_motion";
 
 //TYPES
 import { Launch } from "../../../Types";
+import { flexColumnCenter } from "../../../resources/styles/helpers/mixins";
+import styled from "styled-components/macro";
 
 export const UpcomingLaunches = ({
   launches,
@@ -49,14 +50,14 @@ export const UpcomingLaunches = ({
 
   return (
     <>
-      <motion.div
+      <StyledLaunchesWrapper
+        as={motion.div}
         variants={showLaunchesList}
         initial="initial"
         animate="in"
-        exit="out"
-        className={styles.LaunchesWrapper}>
+        exit="out">
         {upcomingLaunchesArr}
-      </motion.div>
+      </StyledLaunchesWrapper>
     </>
   );
 };
@@ -65,3 +66,13 @@ type upcomingLaunchesProps = {
   launches: Launch[];
   loading: boolean;
 };
+
+const StyledLaunchesWrapper = styled(flexColumnCenter)`
+  width: 100%;
+  position: relative;
+
+  > * {
+    margin: 1rem 0;
+    width: 100%;
+  }
+`;

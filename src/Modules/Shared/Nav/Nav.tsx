@@ -4,14 +4,13 @@ import { useTranslation } from "react-i18next";
 //COMPONENTS
 import { NavElement } from "./NavElement/NavElement";
 
-//STYLeS
-import styles from "./Nav.module.scss";
+import styled from "styled-components/macro";
 
 export const Nav = () => {
   const { t } = useTranslation();
 
   return (
-    <div className={styles.Nav}>
+    <StyledNav>
       <NavElement name={t("homeNav")} link="/home" exact={true}></NavElement>
       <NavElement
         name={t("launchesNav")}
@@ -26,6 +25,16 @@ export const Nav = () => {
         link="/starlink"
         exact={true}></NavElement>
       <NavElement name={t("aboutNav")} link="/about" exact={true}></NavElement>
-    </div>
+    </StyledNav>
   );
 };
+
+const StyledNav = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  z-index: 999;
+`;

@@ -2,11 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
 
-//STYLES
-import styles from "./LngSelector.module.scss";
-
 //HOOK
 import { useClickOutside, useLocalStorage } from "../../../../Hooks";
+import styled from "styled-components/macro";
 
 export const LngSelector = () => {
   const { i18n } = useTranslation();
@@ -32,30 +30,58 @@ export const LngSelector = () => {
   useClickOutside(wrapperRef, closeShowLngSelectorHandler);
 
   return (
-    <div ref={wrapperRef} className={styles.LanguageSelector}>
+    <StyledLanguageSelector ref={wrapperRef}>
       <div
         style={{ display: "flex", alignItems: "center" }}
         onClick={() => setShowLngSelector(!showLngSelector)}>
         <FontAwesomeIcon icon="globe-americas" />
         {selectedLng}
       </div>
-      <div
-        className={
-          showLngSelector
-            ? [styles.LanguagesWrapper, styles.Show].join(" ")
-            : styles.LanguagesWrapper
-        }>
-        <h4
-          className={selectedLng === "en" ? styles.Selected : ""}
+      <StyledLanguagesWrapper show={showLngSelector}>
+        <StyledLanguageName
+          selected={selectedLng === "en" ? true : false}
           onClick={() => changeLanguageHandler("en")}>
           English - EN
-        </h4>
-        <h4
-          className={selectedLng === "pl" ? styles.Selected : ""}
+        </StyledLanguageName>
+        <StyledLanguageName
+          selected={selectedLng === "en" ? true : false}
           onClick={() => changeLanguageHandler("pl")}>
           Polish - PL
-        </h4>
-      </div>
-    </div>
+        </StyledLanguageName>
+      </StyledLanguagesWrapper>
+    </StyledLanguageSelector>
   );
 };
+
+const StyledLanguageSelector = styled.div`
+  margin-left: 1.5rem;
+  color: ${({ theme }) => theme.colors?.fontPrimary};
+  cursor: pointer;
+  position: relative;
+
+  svg {
+    font-size: 1.4rem;
+    margin-right: 0.6rem;
+  }
+`;
+
+const StyledLanguagesWrapper = styled.div<{ show: boolean }>`
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: -70px;
+  background-color: ${({ theme }) => theme.colors?.foreground};
+  border-radius: 0.5rem;
+  width: 120px;
+
+  visibility: ${({ show }) => (show ? "visible" : "hidden")};
+  opacity: ${({ show }) => (show ? "1" : "0")};
+`;
+
+const StyledLanguageName = styled.h4<{ selected: boolean }>`
+  color: ${({ theme, selected }) =>
+    selected ? theme.colors?.background : theme.colors?.fontPrimary};
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+`;

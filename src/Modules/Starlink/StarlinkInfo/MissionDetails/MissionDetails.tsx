@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 //STYLES
-import styles from "./MissionDetails.module.scss";
+import styled from "styled-components/macro";
+import { device } from "../../../../resources/styles/helpers/breakpoints";
 
 export const MissionDetails = ({
   flightNumber,
@@ -14,17 +15,17 @@ export const MissionDetails = ({
   const { t } = useTranslation();
 
   return (
-    <div className={styles.MissionDetails}>
+    <StyledMissionDetails>
       <h2>{t("launch")}</h2>
       <Link to={`launch/${id}`}>
-        <div className={styles.LaunchInfoWrapper}>
+        <StyledLaunchInfoWrapper>
           <h3>{name}</h3>
           <h4>
             {t("key", { date: new Date(dateUtc) })} | #{flightNumber}
           </h4>
-        </div>
+        </StyledLaunchInfoWrapper>
       </Link>
-    </div>
+    </StyledMissionDetails>
   );
 };
 
@@ -34,3 +35,22 @@ type missionDetailsProps = {
   dateUtc: string;
   id: string;
 };
+
+const StyledMissionDetails = styled.div`
+  margin-top: 2rem;
+  margin-left: 0;
+
+  @media ${device.mobile} {
+    margin-top: 0;
+    margin-left: 4rem;
+  }
+`;
+
+const StyledLaunchInfoWrapper = styled.div`
+  cursor: pointer;
+
+  h3 {
+    color: ${({ theme }) => theme.colors?.blue};
+    font-weight: 300;
+  }
+`;

@@ -4,7 +4,7 @@ import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import { Nav, Footer, SideBar } from "./Modules/Shared";
 import { useMediaQuery } from "./Hooks/";
 
-import styles from "./App.module.scss";
+import styled from "styled-components/macro";
 
 const Home = React.lazy(() => {
   return import("./Modules/Home/Home");
@@ -41,84 +41,33 @@ function App() {
 
   const routes = (
     <Switch location={location} key={location.pathname}>
-      <Route
-        path="/home"
-        exact
-        render={() => (
-          <Suspense fallback={<p>Loading...</p>}>
-            <Home />
-          </Suspense>
-        )}
-      />
-      <Route
-        path="/launches/:launchType"
-        exact
-        render={() => (
-          <Suspense fallback={<p>Loading...</p>}>
-            <Launches />
-          </Suspense>
-        )}
-      />
-      <Route
-        path="/launch/:id"
-        exact
-        render={() => (
-          <Suspense fallback={<p>Loading...</p>}>
-            <Launch />
-          </Suspense>
-        )}
-      />
-      <Route
-        path="/vehicles"
-        exact
-        render={() => (
-          <Suspense fallback={<p>Loading...</p>}>
-            <Vehicles />
-          </Suspense>
-        )}
-      />
-      <Route
-        path="/vehicles/:id"
-        exact
-        render={() => (
-          <Suspense fallback={<p>Loading...</p>}>
-            <Rocket />
-          </Suspense>
-        )}
-      />
-      <Route
-        path="/starlink"
-        exact
-        render={() => (
-          <Suspense fallback={<p>Loading...</p>}>
-            <Starlink />
-          </Suspense>
-        )}
-      />
-      <Route
-        path="/about"
-        exact
-        render={() => (
-          <Suspense fallback={<p>Loading...</p>}>
-            <About />
-          </Suspense>
-        )}
-      />
+      <Route path="/home" exact render={() => <Home />} />
+      <Route path="/launches/:launchType" exact render={() => <Launches />} />
+      <Route path="/launch/:id" exact render={() => <Launch />} />
+      <Route path="/vehicles" exact render={() => <Vehicles />} />
+      <Route path="/vehicles/:id" exact render={() => <Rocket />} />
+      <Route path="/starlink" exact render={() => <Starlink />} />
+      <Route path="/about" exact render={() => <About />} />
       <Redirect to="/home" />
     </Switch>
   );
 
   return (
-    <div className={styles.App}>
+    <StyledApp>
       <Suspense fallback={<p>Loading...</p>}>
         {isMobile ? <SideBar /> : <Nav />}
-      </Suspense>
-      {routes}
-      <Suspense fallback={<p>Loading...</p>}>
+        {routes}
         <Footer />
       </Suspense>
-    </div>
+    </StyledApp>
   );
 }
 
 export default App;
+
+const StyledApp = styled.div`
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+`;

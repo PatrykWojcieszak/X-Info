@@ -4,17 +4,17 @@ import { useTranslation } from "react-i18next";
 //COMPONENTS
 import { InfoLine } from "../../Shared";
 
-//STYLES
-import styles from "./CoreList.module.scss";
-
 //TYPES
 import { Core } from "../../../Types";
+import { flexColumn } from "../../../resources/styles/helpers/mixins";
+import styled from "styled-components/macro";
+import { device } from "../../../resources/styles/helpers/breakpoints";
 
 export const CoreList = ({ coreList }: coreListProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className={styles.CoreList}>
+    <StyledCoreList>
       {coreList.map(
         (core, index) =>
           core.landpad && (
@@ -46,10 +46,25 @@ export const CoreList = ({ coreList }: coreListProps) => {
             </div>
           )
       )}
-    </div>
+    </StyledCoreList>
   );
 };
 
 type coreListProps = {
   coreList: Core[];
 };
+
+const StyledCoreList = styled(flexColumn)`
+  width: 100%;
+  margin-bottom: 2rem;
+
+  h2 {
+    font-weight: 100;
+    color: ${({ theme }) => theme.colors?.fontPrimary};
+    font-size: 1.5rem;
+  }
+
+  @media ${device.tablet} {
+    font-size: 2rem;
+  }
+`;

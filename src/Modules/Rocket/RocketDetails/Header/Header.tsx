@@ -1,8 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-
-//STYLES
-import styles from "./Header.module.scss";
+import styled from "styled-components/macro";
+import { device } from "../../../../resources/styles/helpers/breakpoints";
 
 export const Header = ({ description, active, rocketName }: headerProps) => {
   const { t } = useTranslation();
@@ -16,7 +15,7 @@ export const Header = ({ description, active, rocketName }: headerProps) => {
     rocketStatus = { name: t("statusInDevelopment"), color: "#005288" };
 
   return (
-    <div className={styles.Header}>
+    <StyledHeader>
       <p>{description}</p>
       <h3 style={{ textTransform: "uppercase" }}>
         {t("status")}:{" "}
@@ -27,7 +26,7 @@ export const Header = ({ description, active, rocketName }: headerProps) => {
           {rocketStatus.name}
         </span>
       </h3>
-    </div>
+    </StyledHeader>
   );
 };
 
@@ -36,3 +35,26 @@ type headerProps = {
   active: boolean;
   rocketName: string;
 };
+
+const StyledHeader = styled.div`
+  p,
+  h3 {
+    font-size: 0.8rem;
+  }
+
+  p {
+    color: ${({ theme }) => theme.colors?.fontPrimary};
+    margin-bottom: 1.2rem;
+  }
+
+  h3 {
+    color: ${({ theme }) => theme.colors?.fontSecondary};
+  }
+
+  @media ${device.tablet} {
+    p,
+    h3 {
+      font-size: 1rem;
+    }
+  }
+`;
