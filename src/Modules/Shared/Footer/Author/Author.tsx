@@ -2,9 +2,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components/macro";
 
-//STYLES
-import styles from "./Author.module.scss";
-
 export const Author = () => {
   const { t } = useTranslation();
 

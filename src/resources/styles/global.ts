@@ -7,6 +7,7 @@ body {
   margin: 0;
   font-family: ${({ theme }) => theme.fonts.family};
   overflow-x: hidden;
+  background-color: ${({ theme }) => theme.colors?.background};
 }
 
 a {
