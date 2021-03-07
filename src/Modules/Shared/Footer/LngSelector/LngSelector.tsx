@@ -44,7 +44,7 @@ export const LngSelector = () => {
           English - EN
         </StyledLanguageName>
         <StyledLanguageName
-          selected={selectedLng === "en" ? true : false}
+          selected={selectedLng === "pl" ? true : false}
           onClick={() => changeLanguageHandler("pl")}>
           Polish - PL
         </StyledLanguageName>
@@ -80,7 +80,9 @@ const StyledLanguagesWrapper = styled.div<{ show: boolean }>`
 
 const StyledLanguageName = styled.h4<{ selected: boolean }>`
   color: ${({ theme, selected }) =>
-    selected ? theme.colors?.background : theme.colors?.fontPrimary};
+    selected ? theme.colors?.blue : theme.colors?.fontPrimary};
+  background-color: ${({ theme, selected }) =>
+    selected ? theme.colors?.background : theme.colors?.foreground};
   padding: 0.4rem 0.8rem;
   border-radius: 0.2rem;
   cursor: pointer;
