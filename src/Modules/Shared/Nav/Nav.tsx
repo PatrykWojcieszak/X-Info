@@ -1,31 +1,40 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
 import { NavElement } from "./NavElement/NavElement";
 
 import styled from "styled-components/macro";
+import { AppRoute } from "../../../Routing/AppRoute.enum";
 
 export const Nav = () => {
   const { t } = useTranslation();
 
   return (
-    <StyledNav>
-      <NavElement name={t("homeNav")} link="/home" exact={true}></NavElement>
-      <NavElement
-        name={t("launchesNav")}
-        link="/launches/upcoming"
-        exact={true}></NavElement>
-      <NavElement
-        name={t("vehiclesNav")}
-        link="/vehicles"
-        exact={true}></NavElement>
-      <NavElement
-        name={t("starlinkNav")}
-        link="/starlink"
-        exact={true}></NavElement>
-      <NavElement name={t("aboutNav")} link="/about" exact={true}></NavElement>
-    </StyledNav>
+    <Suspense fallback={<p>Loading...</p>}>
+      <StyledNav>
+        <NavElement
+          name={t("homeNav")}
+          link={AppRoute.home}
+          exact={true}></NavElement>
+        <NavElement
+          name={t("launchesNav")}
+          link={`${AppRoute.launches}/upcoming`}
+          exact={true}></NavElement>
+        <NavElement
+          name={t("vehiclesNav")}
+          link={AppRoute.vehicles}
+          exact={true}></NavElement>
+        <NavElement
+          name={t("starlinkNav")}
+          link={AppRoute.starlink}
+          exact={true}></NavElement>
+        <NavElement
+          name={t("aboutNav")}
+          link={AppRoute.about}
+          exact={true}></NavElement>
+      </StyledNav>
+    </Suspense>
   );
 };
 

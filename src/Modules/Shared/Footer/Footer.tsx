@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 
 //COMPONENTS
 import { Author } from "./Author/Author";
@@ -10,10 +10,12 @@ import { device } from "../../../resources/styles/helpers/breakpoints";
 
 export const Footer = () => {
   return (
-    <StyledFooter>
-      <Author />
-      <LngSelector />
-    </StyledFooter>
+    <Suspense fallback={<p>Loading...</p>}>
+      <StyledFooter>
+        <Author />
+        <LngSelector />
+      </StyledFooter>
+    </Suspense>
   );
 };
 
