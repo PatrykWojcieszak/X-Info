@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, Suspense } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -35,39 +35,37 @@ export const SideBar = () => {
   useClickOutside(wrapperRef, toggleOpenHandler);
 
   return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <StyledBackground
-        as={motion.div}
-        isOpen={isOpen}
-        initial={false}
-        animate={isOpen ? "open" : "closed"}
-        custom={height}
-        ref={containerRef}>
-        <StyledMenu as={motion.div} ref={wrapperRef} variants={sideBarAnim}>
-          <MenuToggle toggle={() => toggleOpen(!isOpen)} />
-          <NavElement
-            name={t("homeNav")}
-            link={AppRoute.home}
-            exact={true}></NavElement>
-          <NavElement
-            name={t("launchesNav")}
-            link={`${AppRoute.launches}/upcoming`}
-            exact={true}></NavElement>
-          <NavElement
-            name={t("vehiclesNav")}
-            link={AppRoute.vehicles}
-            exact={true}></NavElement>
-          <NavElement
-            name={t("starlinkNav")}
-            link={AppRoute.starlink}
-            exact={true}></NavElement>
-          <NavElement
-            name={t("aboutNav")}
-            link={AppRoute.about}
-            exact={true}></NavElement>
-        </StyledMenu>
-      </StyledBackground>
-    </Suspense>
+    <StyledBackground
+      as={motion.div}
+      isOpen={isOpen}
+      initial={false}
+      animate={isOpen ? "open" : "closed"}
+      custom={height}
+      ref={containerRef}>
+      <StyledMenu as={motion.div} ref={wrapperRef} variants={sideBarAnim}>
+        <MenuToggle toggle={() => toggleOpen(!isOpen)} />
+        <NavElement
+          name={t("homeNav")}
+          link={AppRoute.home}
+          exact={true}></NavElement>
+        <NavElement
+          name={t("launchesNav")}
+          link={`${AppRoute.launches}/upcoming`}
+          exact={true}></NavElement>
+        <NavElement
+          name={t("vehiclesNav")}
+          link={AppRoute.vehicles}
+          exact={true}></NavElement>
+        <NavElement
+          name={t("starlinkNav")}
+          link={AppRoute.starlink}
+          exact={true}></NavElement>
+        <NavElement
+          name={t("aboutNav")}
+          link={AppRoute.about}
+          exact={true}></NavElement>
+      </StyledMenu>
+    </StyledBackground>
   );
 };
 

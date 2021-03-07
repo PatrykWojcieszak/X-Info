@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
@@ -11,30 +11,28 @@ export const Nav = () => {
   const { t } = useTranslation();
 
   return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <StyledNav>
-        <NavElement
-          name={t("homeNav")}
-          link={AppRoute.home}
-          exact={true}></NavElement>
-        <NavElement
-          name={t("launchesNav")}
-          link={`${AppRoute.launches}/upcoming`}
-          exact={true}></NavElement>
-        <NavElement
-          name={t("vehiclesNav")}
-          link={AppRoute.vehicles}
-          exact={true}></NavElement>
-        <NavElement
-          name={t("starlinkNav")}
-          link={AppRoute.starlink}
-          exact={true}></NavElement>
-        <NavElement
-          name={t("aboutNav")}
-          link={AppRoute.about}
-          exact={true}></NavElement>
-      </StyledNav>
-    </Suspense>
+    <StyledNav>
+      <NavElement
+        name={t("homeNav")}
+        link={AppRoute.home}
+        exact={true}></NavElement>
+      <NavElement
+        name={t("launchesNav")}
+        link={`${AppRoute.launches}/upcoming`}
+        exact={true}></NavElement>
+      <NavElement
+        name={t("vehiclesNav")}
+        link={AppRoute.vehicles}
+        exact={true}></NavElement>
+      <NavElement
+        name={t("starlinkNav")}
+        link={AppRoute.starlink}
+        exact={true}></NavElement>
+      <NavElement
+        name={t("aboutNav")}
+        link={AppRoute.about}
+        exact={true}></NavElement>
+    </StyledNav>
   );
 };
 

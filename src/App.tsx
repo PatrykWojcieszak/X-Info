@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 
 import { Nav, Footer, SideBar } from "./Modules/Shared";
 import { useMediaQuery } from "./Hooks/";
@@ -11,9 +11,11 @@ function App() {
 
   return (
     <StyledApp>
-      {isMobile ? <SideBar /> : <Nav />}
-      <AppRoutes />
-      <Footer />
+      <Suspense fallback={<p>Loading...</p>}>
+        {isMobile ? <SideBar /> : <Nav />}
+        <AppRoutes />
+        <Footer />
+      </Suspense>
     </StyledApp>
   );
 }
