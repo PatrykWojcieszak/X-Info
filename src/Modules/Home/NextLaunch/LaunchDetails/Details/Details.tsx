@@ -20,7 +20,7 @@ export const Details = React.memo(
     datePrecision,
   }: launchDetailsProps) => {
     const { t } = useTranslation();
-    console.log(details);
+
     let datePrec = "key";
     if (datePrecision === "month") datePrec = "keyMonth";
 

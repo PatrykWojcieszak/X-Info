@@ -13,8 +13,9 @@ import { device } from "../../../resources/styles/helpers/breakpoints";
 import { Quote } from "./Quote/Quote";
 import { LaunchDetails } from "./LaunchDetails/LaunchDetails";
 import { LaunchName } from "./LaunchName/LaunchName";
+import { randomQuote } from "../../../Other/ElonMuskQuotes";
 
-export const NextLaunch = ({ elonMuskQuote }: nextLaunchProps) => {
+export const NextLaunch = () => {
   const nextLaunch = useSelector((state: RootState) => state.nextLaunch);
 
   const dispatch = useDispatch();
@@ -39,16 +40,12 @@ export const NextLaunch = ({ elonMuskQuote }: nextLaunchProps) => {
             />
             <Countdown date={nextLaunch.nextLaunch.docs[0]?.date_local} />
             <LaunchDetails launch={nextLaunch.nextLaunch.docs[0]} />
-            <Quote quote={elonMuskQuote} />
+            <Quote quote={randomQuote()} />
           </StyledContent>
         )}
       </StyledBackground>
     </StyledNextLaunch>
   );
-};
-
-type nextLaunchProps = {
-  elonMuskQuote: string;
 };
 
 const StyledBackground = styled(flexColumn)`

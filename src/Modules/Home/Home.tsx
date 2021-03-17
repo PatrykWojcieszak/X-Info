@@ -13,7 +13,6 @@ import { LaunchHistoryChart } from "./LaunchHistoryChart/LaunchHistoryChart";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
 //OTHER
-import { randomQuote } from "../../Other/ElonMuskQuotes";
 import { homePageTitle, homePageDescription } from "../Shared/SEO/Tags";
 import styled from "styled-components/macro";
 import { device } from "../../resources/styles/helpers/breakpoints";
@@ -27,7 +26,7 @@ const Home = () => {
         animate="in"
         exit="out"
         variants={pageVariantsAnim}>
-        <NextLaunch elonMuskQuote={randomQuote()} />
+        <NextLaunch />
         <StyledContent>
           <RecentLaunches />
           <UpcomingLaunches />
