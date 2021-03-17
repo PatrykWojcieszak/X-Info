@@ -1,3 +1,3 @@
-export type QuoteTypes = {
+export type QuoteProps = {
   quote: string;
 };

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { device } from "../../../../resources/styles/helpers/breakpoints";
-import { QuoteTypes } from "./Quote.types";
+import { QuoteProps } from "./Quote.types";
 
-export const Quote = ({ quote }: QuoteTypes) => {
+export const Quote = ({ quote }: QuoteProps) => {
   return (
     <StyledQuoteContainer>
       <StyledQuote>
