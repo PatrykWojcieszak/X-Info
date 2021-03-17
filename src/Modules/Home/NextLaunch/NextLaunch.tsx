@@ -1,19 +1,22 @@
 import "moment-precise-range-plugin";
 import React, { useEffect } from "react";
-import { motion } from "framer-motion";
-import { Countdown } from "./Countdown/Countdown";
-import { bottomToTopAnim } from "../../../Animations/Animations_motion";
-import backgroundImg from "../../../resources/images/home_bg.jpg";
-import { fetchNextLaunch } from "../../../Store/NextLaunch/nextLaunchSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../Store/rootReducer";
-import { flexColumn } from "../../../resources/styles/helpers/mixins";
 import styled from "styled-components/macro";
-import { device } from "../../../resources/styles/helpers/breakpoints";
-import { Quote } from "./Quote/Quote";
+import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+
+import { Countdown } from "./Countdown/Countdown";
 import { LaunchDetails } from "./LaunchDetails/LaunchDetails";
 import { LaunchName } from "./LaunchName/LaunchName";
+import { Quote } from "./Quote/Quote";
+
+import { fetchNextLaunch } from "../../../Store/NextLaunch/nextLaunchSlice";
+import { RootState } from "../../../Store/rootReducer";
+
+import backgroundImg from "../../../resources/images/home_bg.jpg";
+import { bottomToTopAnim } from "../../../Animations/Animations_motion";
+import { flexColumn } from "../../../resources/styles/helpers/mixins";
 import { randomQuote } from "../../../Other/ElonMuskQuotes";
+import { device } from "../../../resources/styles/helpers/breakpoints";
 
 export const NextLaunch = () => {
   const nextLaunch = useSelector((state: RootState) => state.nextLaunch);

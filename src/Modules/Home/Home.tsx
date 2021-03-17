@@ -1,20 +1,16 @@
-import React from "react";
-import { motion } from "framer-motion";
 import "moment-precise-range-plugin";
+import React from "react";
+import styled from "styled-components/macro";
+import { motion } from "framer-motion";
 
-//COMPONENTS
 import { RecentLaunches } from "./RecentLaunches/RecentLaunches";
 import { UpcomingLaunches } from "./UpcomingLaunches/UpcomingLaunches";
 import { NextLaunch } from "./NextLaunch/NextLaunch";
-import { SEO } from "../Shared";
 import { LaunchHistoryChart } from "./LaunchHistoryChart/LaunchHistoryChart";
+import { SEO } from "../Shared";
 
-//STYLES
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
-
-//OTHER
 import { homePageTitle, homePageDescription } from "../Shared/SEO/Tags";
-import styled from "styled-components/macro";
 import { device } from "../../resources/styles/helpers/breakpoints";
 
 const Home = () => {

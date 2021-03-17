@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
+
 import { device } from "../../../../../../resources/styles/helpers/breakpoints";
 
 export const InfoLine = React.memo(({ title, value }: infoLineProps) => {

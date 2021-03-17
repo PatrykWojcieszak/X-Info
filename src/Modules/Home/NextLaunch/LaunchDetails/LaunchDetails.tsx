@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components";
-import { flexColumnCenter } from "../../../../resources/styles/helpers/mixins";
+
 import { Details } from "./Details/Details";
+
+import { flexColumnCenter } from "../../../../resources/styles/helpers/mixins";
 import { LaunchDetailsProps } from "./LaunchDetails.types";
 
 export const LaunchDetails = ({ launch }: LaunchDetailsProps) => {

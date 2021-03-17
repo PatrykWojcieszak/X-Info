@@ -1,16 +1,15 @@
-import React, { useEffect, useCallback, useState } from "react";
 import "moment-precise-range-plugin";
+import React, { useEffect, useCallback, useState } from "react";
+import styled from "styled-components/macro";
 import { useTranslation } from "react-i18next";
 
-//STYLES
-import styled from "styled-components/macro";
-import { device } from "../../../../resources/styles/helpers/breakpoints";
 import {
   flexCenter,
   flexColumnCenter,
 } from "../../../../resources/styles/helpers/mixins";
 import { CountdownProps } from "./Countdown.types";
 import { Time } from "../../../../Types";
+import { device } from "../../../../resources/styles/helpers/breakpoints";
 
 const initialTime: Time = {
   days: 0,

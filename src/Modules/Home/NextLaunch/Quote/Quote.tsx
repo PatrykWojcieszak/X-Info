@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+
 import { device } from "../../../../resources/styles/helpers/breakpoints";
 import { QuoteProps } from "./Quote.types";
 

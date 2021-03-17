@@ -1,12 +1,10 @@
 import React from "react";
+import styled from "styled-components/macro";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
-//COMPONENTS
 import { InfoLine } from "./InfoLine/InfoLine";
 
-//STYLES
-import styled from "styled-components/macro";
 import { launchDetailsAnim } from "../../../../../Animations/Animations_motion";
 import { device } from "../../../../../resources/styles/helpers/breakpoints";
 
