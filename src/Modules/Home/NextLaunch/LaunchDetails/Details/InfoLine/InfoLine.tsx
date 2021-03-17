@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { device } from "../../../../../resources/styles/helpers/breakpoints";
+import { device } from "../../../../../../resources/styles/helpers/breakpoints";
 
 export const InfoLine = React.memo(({ title, value }: infoLineProps) => {
   return (
     <StyledInfoWrapper>
       <StyledTitlesWrapper>
-        <h3>{title}:</h3>
+        <StyledText>{title}:</StyledText>
       </StyledTitlesWrapper>
       <StyledValuesWrapper>
-        <h3>{value}</h3>
+        <StyledText>{value}</StyledText>
       </StyledValuesWrapper>
     </StyledInfoWrapper>
   );
@@ -22,25 +22,23 @@ type infoLineProps = {
 
 const StyledInfoWrapper = styled.div`
   display: flex;
+`;
 
-  h3 {
-    font-weight: 100;
-    color: ${({ theme }) => theme.colors?.fontSecondary};
-    margin-top: 0.8rem;
-    font-size: 0.8rem;
-  }
+const StyledText = styled.h3`
+  font-weight: 300;
+  color: ${({ theme }) => theme.colors?.fontSecondary};
+  margin-top: 0.8rem;
+  font-size: 0.825rem;
 
   @media ${device.tablet} {
-    h3 {
-      margin-top: 1rem;
-      font-size: 1.2rem;
-    }
+    margin-top: 1rem;
+    font-size: 1.2rem;
   }
 `;
 
 const StyledTitlesWrapper = styled.div`
-  min-width: 110px;
-  max-width: 110px;
+  min-width: 90px;
+  max-width: 90px;
   margin-right: 1rem;
 
   @media ${device.tablet} {
