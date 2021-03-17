@@ -29,7 +29,7 @@ type launchNameProps = {
 };
 
 const StyledFont = styled.h2`
-  font-size: 2.5rem;
+  font-size: 2.25rem;
 
   @media ${device.tablet} {
     font-size: 3rem;
@@ -44,13 +44,19 @@ const StyledLaunchName = styled(StyledFont)`
 const StyledTitle = styled(StyledFont)`
   font-weight: 100;
   color: ${({ theme }) => theme.colors?.fontSecondary};
-  margin-right: 1rem;
+  margin-bottom: 1.2rem;
+
+  @media ${device.tablet} {
+    margin-bottom: 0;
+    margin-right: 1rem;
+  }
 `;
 
 const StyledLaunchNameWrapper = styled.div`
   display: flex;
   margin-bottom: 2.5rem;
   flex-direction: column;
+  align-items: center;
 
   @media ${device.tablet} {
     flex-direction: row;
