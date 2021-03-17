@@ -69,6 +69,10 @@ const StyledContent = styled(flexColumn)`
   position: relative;
   padding: 0 1rem;
 
+  @media ${device.mobile} {
+    padding: 0 3rem;
+  }
+
   @media ${device.tablet} {
     padding: 0 3rem;
   }
@@ -78,7 +82,7 @@ const StyledContent = styled(flexColumn)`
   }
 
   @media ${device.desktop} {
-    padding: 0 12rem;
+    padding: 0 14rem;
   }
 `;
 

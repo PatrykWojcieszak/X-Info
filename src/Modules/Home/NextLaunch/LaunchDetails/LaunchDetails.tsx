@@ -51,7 +51,7 @@ const StyledShowMore = styled(flexColumnCenter)`
   }
 
   h4 {
-    color: ${({ theme }) => theme.colors?.fontSecondary};
+    color: ${({ theme }) => theme.colors?.fontPrimary};
     font-weight: 100;
     margin-top: 0.6rem;
   }

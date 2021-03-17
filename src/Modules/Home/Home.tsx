@@ -39,10 +39,10 @@ const StyledContent = styled.div`
   padding: 0 1rem;
 
   @media ${device.tablet} {
+    padding: 0 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 2rem;
   }
 
   @media ${device.large} {

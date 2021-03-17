@@ -101,12 +101,12 @@ const StyledNumber = styled.h2`
   }
 
   @media ${device.desktop} {
-    font-size: 10rem;
+    font-size: 9rem;
   }
 `;
 
 const StyledNumberTitle = styled.h4`
-  color: ${({ theme }) => theme.colors?.fontPrimary};
+  color: ${({ theme }) => theme.colors?.fontSecondary};
   font-weight: 300;
   font-size: 0.625rem;
 
@@ -115,10 +115,6 @@ const StyledNumberTitle = styled.h4`
   }
 
   @media ${device.large} {
-    font-size: 1rem;
-  }
-
-  @media ${device.desktop} {
     font-size: 1rem;
   }
 `;
