@@ -80,13 +80,14 @@ export const NextLaunch = ({ quote }: NextLaunchProps) => {
             initial="hidden"
             animate="show"
             exit="exit">
-            {isTwoMinutesBeforeStart && (
-              <StyledLivestreamBtn
-                name="SHOW LIVESTREAM"
-                styleType="primary"
-                clicked={toggleLivestreamHandler}
-              />
-            )}
+            {isTwoMinutesBeforeStart &&
+              nextLaunch.nextLaunch.docs[0]?.links.youtube_id && (
+                <StyledLivestreamBtn
+                  name="SHOW LIVESTREAM"
+                  styleType="primary"
+                  clicked={toggleLivestreamHandler}
+                />
+              )}
 
             <LaunchName
               launchName={nextLaunch.nextLaunch.docs[0].name}
