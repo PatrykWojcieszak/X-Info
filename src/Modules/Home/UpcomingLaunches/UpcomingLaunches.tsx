@@ -48,9 +48,9 @@ export const UpcomingLaunches = () => {
                   launchDateUtc={launch.date_utc}
                   rocketName={launch.rocket.name}
                   launchSiteName={launch.launchpad.full_name}
-                  customers={launch.payloads[0].customers}
+                  customers={launch.payloads[0]?.customers}
                   flightNumber={launch.flight_number}
-                  nationality={launch.payloads[0].nationalities[0]}
+                  nationality={launch.payloads[0]?.nationalities[0]}
                   datePrecision={launch.date_precision}
                   id={launch.id}
                 />

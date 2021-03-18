@@ -1,72 +1,58 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
-//COMPONENTS
-import { InfoLine } from "./InfoLine/InfoLine";
+import { Details } from "./Details/Details";
 
-//STYLES
-import { launchDetailsAnim } from "../../../../Animations/Animations_motion";
-import styled from "styled-components/macro";
-import { device } from "../../../../resources/styles/helpers/breakpoints";
+import { flexColumnCenter } from "../../../../resources/styles/helpers/mixins";
+import { LaunchDetailsProps } from "./LaunchDetails.types";
 
-export const LaunchDetails = React.memo(
-  ({
-    flightNumber,
-    dateLocal,
-    details,
-    rocketName,
-    launchpadFullName,
-    datePrecision,
-  }: launchDetailsProps) => {
-    const { t } = useTranslation();
+export const LaunchDetails = ({ launch }: LaunchDetailsProps) => {
+  const { t } = useTranslation();
 
-    let datePrec = "key";
-    if (datePrecision === "month") datePrec = "keyMonth";
+  const [showLaunchDetails, setShowLaunchDetails] = useState(false);
 
-    return (
-      <StyledLaunchDetails
-        variants={launchDetailsAnim}
-        initial="hidden"
-        animate="show">
-        {flightNumber && (
-          <InfoLine title={t("flight")} value={flightNumber.toString()} />
-        )}
-        {dateLocal && (
-          <InfoLine
-            title={t("launchDate")}
-            value={t(datePrec, { date: new Date(dateLocal) })}
+  return (
+    <>
+      {!showLaunchDetails && (
+        <StyledShowMore>
+          <FontAwesomeIcon
+            icon="arrow-down"
+            onClick={() => setShowLaunchDetails(!showLaunchDetails)}
+          />
+          <h4>{t("showDetails")}</h4>
+        </StyledShowMore>
+      )}
+      <AnimatePresence>
+        {showLaunchDetails && (
+          <Details
+            flightNumber={launch.flight_number}
+            dateLocal={launch.date_local}
+            details={launch.details}
+            rocketName={launch.rocket.name}
+            datePrecision={launch.date_precision}
+            launchpadFullName={launch.launchpad.full_name}
           />
         )}
-        {rocketName && <InfoLine title={t("rocket")} value={rocketName} />}
-        {launchpadFullName && (
-          <InfoLine
-            title={t("launchSite")}
-            value={launchpadFullName.toString()}
-          />
-        )}
-        {details && <InfoLine title={t("details")} value={details} />}
-      </StyledLaunchDetails>
-    );
-  }
-);
-
-type launchDetailsProps = {
-  flightNumber: Number;
-  dateLocal: string;
-  details: string;
-  rocketName: string;
-  launchpadFullName: string;
-  datePrecision: string;
+      </AnimatePresence>
+    </>
+  );
 };
 
-const StyledLaunchDetails = styled(motion.div)`
-  background-color: rgba(0, 0, 0, 0.75);
-  padding: 0.8rem;
-  border-radius: 0.8rem;
-  margin-top: 1rem;
+const StyledShowMore = styled(flexColumnCenter)`
+  margin-top: 3rem;
 
-  @media ${device.tablet} {
-    margin-top: 2rem;
+  svg {
+    cursor: pointer;
+    color: ${({ theme }) => theme.colors?.blue};
+    font-size: 2rem;
+  }
+
+  h4 {
+    color: ${({ theme }) => theme.colors?.fontPrimary};
+    font-weight: 100;
+    margin-top: 0.6rem;
   }
 `;
