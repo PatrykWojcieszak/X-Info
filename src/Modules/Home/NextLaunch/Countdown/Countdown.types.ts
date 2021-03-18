@@ -1,3 +1,6 @@
 export type CountdownProps = {
-  date: string;
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
 };
