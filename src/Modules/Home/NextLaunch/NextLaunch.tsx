@@ -1,5 +1,5 @@
 import "moment-precise-range-plugin";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/macro";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,15 +17,22 @@ import { bottomToTopAnim } from "../../../Animations/Animations_motion";
 import { flexColumn } from "../../../resources/styles/helpers/mixins";
 import { randomQuote } from "../../../Other/ElonMuskQuotes";
 import { device } from "../../../resources/styles/helpers/breakpoints";
+import { Livestream } from "./Livestream/Livestream";
+import { Button } from "../../Shared";
 
 export const NextLaunch = () => {
   const nextLaunch = useSelector((state: RootState) => state.nextLaunch);
+  const [showLivestream, setShowlivestream] = useState(false);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (nextLaunch.nextLaunch.docs.length === 0) dispatch(fetchNextLaunch());
   }, [dispatch, nextLaunch]);
+
+  const toggleLivestreamHandler = () => {
+    setShowlivestream(!showLivestream);
+  };
 
   return (
     <StyledNextLaunch>
@@ -37,6 +44,11 @@ export const NextLaunch = () => {
             initial="hidden"
             animate="show"
             exit="exit">
+            <StyledLivestreamBtn
+              name="SHOW LIVESTREAM"
+              styleType="primary"
+              clicked={toggleLivestreamHandler}
+            />
             <LaunchName
               launchName={nextLaunch.nextLaunch.docs[0].name}
               dateLocal={nextLaunch.nextLaunch.docs[0]?.date_local}
@@ -44,6 +56,9 @@ export const NextLaunch = () => {
             <Countdown date={nextLaunch.nextLaunch.docs[0]?.date_local} />
             <LaunchDetails launch={nextLaunch.nextLaunch.docs[0]} />
             <Quote quote={randomQuote()} />
+            {showLivestream && (
+              <Livestream showHandler={toggleLivestreamHandler} />
+            )}
           </StyledContent>
         )}
       </StyledBackground>
@@ -89,4 +104,12 @@ const StyledContent = styled(flexColumn)`
 const StyledNextLaunch = styled.div`
   height: 100vh;
   position: relative;
+`;
+
+const StyledLivestreamBtn = styled(Button)`
+  margin-bottom: 2.5rem;
+
+  @media ${device.mobile} {
+    width: 250px;
+  }
 `;

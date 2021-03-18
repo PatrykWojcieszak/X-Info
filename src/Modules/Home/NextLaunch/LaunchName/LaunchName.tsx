@@ -47,7 +47,7 @@ const StyledTitle = styled(StyledFont)`
   color: ${({ theme }) => theme.colors?.fontSecondary};
   margin-bottom: 1.2rem;
 
-  @media ${device.tablet} {
+  @media ${device.mobile} {
     margin-bottom: 0;
     margin-right: 1rem;
   }
@@ -59,7 +59,7 @@ const StyledLaunchNameWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 
-  @media ${device.tablet} {
+  @media ${device.mobile} {
     flex-direction: row;
   }
 `;

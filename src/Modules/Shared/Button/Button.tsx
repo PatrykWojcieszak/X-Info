@@ -3,12 +3,20 @@ import styled from "styled-components/macro";
 import { device } from "../../../resources/styles/helpers/breakpoints";
 
 export const Button = React.memo(
-  ({ name, selected, clicked, disabled, styleType }: buttonProps) => {
+  ({
+    name,
+    selected,
+    clicked,
+    disabled,
+    styleType,
+    className,
+  }: buttonProps) => {
     return (
       <StyledButton
         styleType={styleType}
         selected={selected}
         disabled={disabled}
+        className={className}
         onClick={clicked}>
         {name}
       </StyledButton>
@@ -22,16 +30,17 @@ type buttonProps = {
   clicked?: () => void;
   disabled?: boolean;
   styleType: string;
+  className?: string;
 };
 
 const StyledButton = styled.button<{ styleType: string; selected?: boolean }>`
   outline: none;
-  border-radius: 0.4rem;
+  border-radius: 0.5rem;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 0.6rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+  padding: 1rem 0.6rem;
   background: ${({ theme, selected }) =>
     selected ? theme.colors?.blue : "transparent"};
 
@@ -54,10 +63,10 @@ const StyledButton = styled.button<{ styleType: string; selected?: boolean }>`
       styleType === "primary" ? theme.colors?.background : theme.colors?.blue};
   }
 
-  @media ${device.tablet} {
+  /* @media ${device.tablet} {
     font-size: 1rem;
     font-weight: 300;
-  }
+  } */
 
   @media ${device.large} {
     font-size: 1.3rem;
