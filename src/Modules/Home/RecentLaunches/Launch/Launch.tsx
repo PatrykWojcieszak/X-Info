@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import { Button } from "../../../Shared";
+import { Button, Tooltip } from "../../../Shared";
 
 //STYLES
 import noImage from "../../../../resources/images/noImage.png";
@@ -32,15 +32,21 @@ export const Launch = React.memo(
           <StyledMissionName>{name}</StyledMissionName>
           <StyledDate>{t("key", { date: new Date(date) })}</StyledDate>
           <StyledIcons>
-            <FontAwesomeIcon
-              style={{
-                color: success ? "#4BB543" : "#FA113D",
-                fontSize: "1.5rem",
-              }}
-              icon={success ? "check-circle" : "times-circle"}
-            />
-            <Icon name={IconEnum.drone} width={54} height={31} />
-            <Icon name={IconEnum.fairing} width={46} height={32} />
+            <Tooltip content="Mission successful">
+              <FontAwesomeIcon
+                style={{
+                  color: success ? "#4BB543" : "#FA113D",
+                  fontSize: "1.8rem",
+                }}
+                icon={success ? "check-circle" : "times-circle"}
+              />
+            </Tooltip>
+            <Tooltip content="Booster landed">
+              <Icon name={IconEnum.drone} width={54} height={31} />
+            </Tooltip>
+            <Tooltip content="Fairings recovered">
+              <Icon name={IconEnum.fairing} width={46} height={32} />
+            </Tooltip>
           </StyledIcons>
           <StyledButton name={t("showDetails")} styleType="primary" />
         </StyledLaunch>

@@ -18,3 +18,4 @@ export { NotFoundLaunches } from "./NotFoundLaunches/NotFoundLaunches";
 export { LaunchExtendedInfo } from "./LaunchExtendedInfo/LaunchExtendedInfo";
 export { Chart } from "./Chart/Chart";
 export { Icon } from "./Icon/Icon";
+export { Tooltip } from "./Tooltip/Tooltip";
