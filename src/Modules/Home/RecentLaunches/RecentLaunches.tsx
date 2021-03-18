@@ -64,7 +64,7 @@ const StyledRecentLaunches = styled.div`
 `;
 
 const StyledTop = styled(flexColumnCenter)`
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 
   h2 {
     color: ${({ theme }) => theme.colors?.fontPrimary};
