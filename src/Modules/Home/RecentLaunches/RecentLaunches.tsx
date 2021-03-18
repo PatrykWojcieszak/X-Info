@@ -43,15 +43,8 @@ export const RecentLaunches = () => {
       <StyledContent>
         {recentLaunches.loading
           ? [1, 2, 3, 4, 5].map((n) => <RecentLaunchSkeleton key={n} />)
-          : recentLaunches.recentLaunches.docs.map((launch, index) => (
-              <Launch
-                id={launch.id}
-                key={index}
-                name={launch.name}
-                patch={launch.links.patch.small}
-                date={launch.date_local}
-                success={launch.success}
-              />
+          : recentLaunches.recentLaunches.docs.map((launch) => (
+              <Launch mission={launch} key={launch.id} />
             ))}
       </StyledContent>
     </StyledRecentLaunches>

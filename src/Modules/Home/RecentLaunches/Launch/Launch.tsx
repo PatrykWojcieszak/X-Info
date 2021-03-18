@@ -8,59 +8,57 @@ import { Button, Tooltip } from "../../../Shared";
 
 //STYLES
 import noImage from "../../../../resources/images/noImage.png";
-import {
-  flexCenter,
-  flexColumnCenter,
-} from "../../../../resources/styles/helpers/mixins";
+import { flexColumnCenter } from "../../../../resources/styles/helpers/mixins";
 import styled from "styled-components/macro";
-import { device } from "../../../../resources/styles/helpers/breakpoints";
 import { IconEnum } from "../../../Shared/Icon/Icon.enum";
 import { Icon } from "../../../Shared";
+import { Launch as LaunchType } from "../../../../Types";
 
-export const Launch = React.memo(
-  ({ name, patch, date, success, id }: launchProps) => {
-    const { t } = useTranslation();
+export const Launch = React.memo(({ mission }: launchProps) => {
+  const { t } = useTranslation();
 
-    return (
-      <Link to={`/launch/${id}`}>
-        <StyledLaunch>
-          <StyledImage
-            src={patch ? patch : noImage}
-            alt="patch"
-            loading="lazy"
-          />
-          <StyledMissionName>{name}</StyledMissionName>
-          <StyledDate>{t("key", { date: new Date(date) })}</StyledDate>
-          <StyledIcons>
-            <Tooltip content="Mission successful">
-              <FontAwesomeIcon
-                style={{
-                  color: success ? "#4BB543" : "#FA113D",
-                  fontSize: "1.8rem",
-                }}
-                icon={success ? "check-circle" : "times-circle"}
-              />
-            </Tooltip>
+  return (
+    <Link to={`/launch/${mission.id}`}>
+      <StyledLaunch>
+        <StyledImage
+          src={mission.links.patch.small ? mission.links.patch.small : noImage}
+          alt="patch"
+          loading="lazy"
+        />
+        <StyledMissionName>{mission.name}</StyledMissionName>
+        <StyledDate>
+          {t("key", { date: new Date(mission.date_utc) })}
+        </StyledDate>
+        <StyledIcons>
+          <Tooltip
+            content={mission.success ? "Mission successful" : "Mission failed"}>
+            <FontAwesomeIcon
+              style={{
+                color: mission.success ? "#4BB543" : "#FA113D",
+                fontSize: "1.8rem",
+              }}
+              icon={mission.success ? "check-circle" : "times-circle"}
+            />
+          </Tooltip>
+          {mission.cores[0].landing_success && (
             <Tooltip content="Booster landed">
               <Icon name={IconEnum.drone} width={54} height={31} />
             </Tooltip>
+          )}
+          {mission.fairings.recovered && (
             <Tooltip content="Fairings recovered">
               <Icon name={IconEnum.fairing} width={46} height={32} />
             </Tooltip>
-          </StyledIcons>
-          <StyledButton name={t("showDetails")} styleType="primary" />
-        </StyledLaunch>
-      </Link>
-    );
-  }
-);
+          )}
+        </StyledIcons>
+        <StyledButton name={t("showDetails")} styleType="primary" />
+      </StyledLaunch>
+    </Link>
+  );
+});
 
 type launchProps = {
-  name: string;
-  patch: string;
-  date: string;
-  success: boolean;
-  id: string;
+  mission: LaunchType;
 };
 
 const StyledLaunch = styled(flexColumnCenter)`
@@ -98,7 +96,7 @@ const StyledIcons = styled.div`
   margin: 1.5rem 0;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
 `;
 
