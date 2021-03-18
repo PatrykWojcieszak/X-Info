@@ -12,7 +12,10 @@ import { fetchRecentLaunches } from "../../../Store/RecentLaunches/recentLaunche
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
 import styled from "styled-components/macro";
-import { flexCenter } from "../../../resources/styles/helpers/mixins";
+import {
+  flexCenter,
+  flexColumnCenter,
+} from "../../../resources/styles/helpers/mixins";
 import { device } from "../../../resources/styles/helpers/breakpoints";
 
 export const RecentLaunches = () => {
@@ -60,20 +63,34 @@ const StyledRecentLaunches = styled.div`
   width: 100%;
 `;
 
-const StyledTop = styled(flexCenter)`
-  justify-content: space-between;
-  padding: 0.4rem;
+const StyledTop = styled(flexColumnCenter)`
   margin-bottom: 2rem;
 
   h2 {
     color: ${({ theme }) => theme.colors?.fontPrimary};
     font-weight: 100;
-    font-size: 1.1rem;
+    font-size: 2rem;
+    margin-bottom: 1rem;
   }
 
-  @media ${device.tablet} {
+  a {
+    width: 100%;
+
+    > button {
+      width: 100%;
+    }
+  }
+
+  @media ${device.mobile} {
+    flex-direction: row;
+    justify-content: space-between;
+
+    a {
+      width: auto;
+    }
+
     h2 {
-      font-size: 1.5rem;
+      margin-bottom: 0;
     }
   }
 

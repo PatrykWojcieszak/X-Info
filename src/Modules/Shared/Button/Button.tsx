@@ -41,6 +41,7 @@ const StyledButton = styled.button<{ styleType: string; selected?: boolean }>`
   font-size: 1.2rem;
   font-weight: 300;
   padding: 1rem 0.6rem;
+
   background: ${({ theme, selected }) =>
     selected ? theme.colors?.blue : "transparent"};
 
