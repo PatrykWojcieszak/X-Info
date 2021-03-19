@@ -64,30 +64,28 @@ const StyledTop = styled(flexColumnCenter)`
     font-weight: 100;
     font-size: 2rem;
     margin-bottom: 1rem;
+    text-align: center;
   }
 
-  a {
+  * {
     width: 100%;
-
-    > button {
-      width: 100%;
-    }
   }
 
   @media ${device.mobile} {
     flex-direction: row;
     justify-content: space-between;
 
-    a {
+    * {
       width: auto;
     }
 
     h2 {
+      text-align: left;
       margin-bottom: 0;
     }
   }
 
-  @media ${device.large} {
+  @media ${device.tablet} {
     h2 {
       font-size: 2.5rem;
     }
