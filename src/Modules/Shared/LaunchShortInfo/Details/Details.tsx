@@ -24,8 +24,17 @@ export const Details = ({
       <StyledTextValues>{rocketName}</StyledTextValues>
       <StyledText>{t("launchSite")}:</StyledText>
       <StyledTextValues>{launchSiteName}</StyledTextValues>
-      <StyledText>{t("customer")}:</StyledText>
-      <StyledTextValues>{customers ? customers[0] : ""}</StyledTextValues>
+      {customers && (
+        <>
+          <StyledText>{t("customer")}:</StyledText>
+          <StyledTextValues>
+            {customers.map((x, index) => (
+              <span key={index}>{x}, </span>
+            ))}
+          </StyledTextValues>
+        </>
+      )}
+
       {!upcoming && (
         <>
           <StyledText>LAUNCH STATUS:</StyledText>
