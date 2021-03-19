@@ -39,19 +39,8 @@ export const UpcomingLaunches = () => {
           ? [1, 2, 3, 4, 5].map((n) => <LaunchShortInfoSkeleton key={n} />)
           : upcomingLaunches.upcomingLaunches.docs
               .slice(0, 5)
-              .map((launch, index) => (
-                <LaunchShortInfo
-                  key={index}
-                  launchName={launch.name}
-                  launchDateUtc={launch.date_utc}
-                  rocketName={launch.rocket.name}
-                  launchSiteName={launch.launchpad.full_name}
-                  customers={launch.payloads[0]?.customers}
-                  flightNumber={launch.flight_number}
-                  nationality={launch.payloads[0]?.nationalities[0]}
-                  datePrecision={launch.date_precision}
-                  id={launch.id}
-                />
+              .map((launch) => (
+                <LaunchShortInfo key={launch.id} launch={launch} />
               ))}
       </StyledContent>
       <StyledButtonWrapper>

@@ -6,59 +6,41 @@ import styled from "styled-components/macro";
 import { useTranslation } from "react-i18next";
 import { device } from "../../../resources/styles/helpers/breakpoints";
 import { Details } from "./Details/Details";
+import { LaunchShortInfoProps } from "./LaunchShortInfo.types";
 
 export const LaunchShortInfo = React.memo(
-  ({
-    launchName,
-    launchDateUtc,
-    rocketName,
-    launchSiteName,
-    customers,
-    flightNumber,
-    success,
-    nationality,
-    datePrecision,
-    id,
-  }: launchShortInfoProps) => {
+  ({ launch }: LaunchShortInfoProps) => {
     const { t } = useTranslation();
     let datePrec = "key";
-    if (datePrecision === "month") datePrec = "keyMonth";
+    if (launch.date_precision === "month") datePrec = "keyMonth";
 
     return (
-      <Link to={`/launch/${id}`}>
+      <Link to={`/launch/${launch.id}`}>
         <StyledLaunchShortInfo>
-          <StyledMissionName>{launchName}</StyledMissionName>
+          <StyledMissionName>{launch.name}</StyledMissionName>
           <StyledRow>
             <StyledDate>
-              {t(datePrec, { date: new Date(launchDateUtc) })}
+              {t(datePrec, { date: new Date(launch.date_utc) })}
             </StyledDate>
-            <StyledLaunchNumber>#{flightNumber}</StyledLaunchNumber>
+            <StyledLaunchNumber>#{launch.flight_number}</StyledLaunchNumber>
           </StyledRow>
           <Details
-            customers={customers}
-            success={success}
-            rocketName={rocketName}
-            launchSiteName={launchSiteName}
+            customers={launch.payloads[0]?.customers}
+            success={launch.success}
+            rocketName={launch.rocket.name}
+            launchSiteName={launch.launchpad.full_name}
+            upcoming={launch.upcoming}
+            boosterLanded={launch.cores[0]?.landing_success}
+            fairingRecovered={launch.fairings.recovered}
           />
-          {nationality && <Flag nationality={nationality} />}
+          {launch.payloads[0]?.nationalities[0] && (
+            <Flag nationality={launch.payloads[0]?.nationalities[0]} />
+          )}
         </StyledLaunchShortInfo>
       </Link>
     );
   }
 );
-
-type launchShortInfoProps = {
-  launchName: string;
-  launchDateUtc: string;
-  rocketName: string;
-  launchSiteName: string;
-  customers: string[];
-  flightNumber: number;
-  success?: boolean;
-  nationality: string;
-  datePrecision: string;
-  id: string;
-};
 
 const StyledMissionName = styled.h2`
   font-size: 1.7rem;

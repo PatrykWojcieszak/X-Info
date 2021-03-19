@@ -12,6 +12,9 @@ export const Details = ({
   launchSiteName,
   customers,
   success,
+  upcoming,
+  boosterLanded,
+  fairingRecovered,
 }: DetailsProps) => {
   const { t } = useTranslation();
 
@@ -23,24 +26,33 @@ export const Details = ({
       <StyledTextValues>{launchSiteName}</StyledTextValues>
       <StyledText>{t("customer")}:</StyledText>
       <StyledTextValues>{customers ? customers[0] : ""}</StyledTextValues>
-      <StyledText>LAUNCH STATUS:</StyledText>
-      <StyledIcons>
-        <Tooltip content={"Mission failed"}>
-          <FontAwesomeIcon
-            style={{
-              color: success ? "#4BB543" : "#FA113D",
-              fontSize: "1.6rem",
-            }}
-            icon={success ? "check-circle" : "times-circle"}
-          />
-        </Tooltip>
-        <Tooltip content="Booster landed">
-          <Icon name={IconEnum.drone} width={40} height={23} />
-        </Tooltip>
-        <Tooltip content="Fairings recovered">
-          <Icon name={IconEnum.fairing} width={34} height={24} />
-        </Tooltip>
-      </StyledIcons>
+      {!upcoming && (
+        <>
+          <StyledText>LAUNCH STATUS:</StyledText>
+          <StyledIcons>
+            <Tooltip
+              content={success ? "Mission successful" : "Mission failed"}>
+              <FontAwesomeIcon
+                style={{
+                  color: success ? "#4BB543" : "#FA113D",
+                  fontSize: "1.6rem",
+                }}
+                icon={success ? "check-circle" : "times-circle"}
+              />
+            </Tooltip>
+            {boosterLanded && (
+              <Tooltip content="Booster landed">
+                <Icon name={IconEnum.drone} width={40} height={23} />
+              </Tooltip>
+            )}
+            {fairingRecovered && (
+              <Tooltip content="Fairings recovered">
+                <Icon name={IconEnum.fairing} width={34} height={24} />
+              </Tooltip>
+            )}
+          </StyledIcons>
+        </>
+      )}
     </StyledGridContainer>
   );
 };

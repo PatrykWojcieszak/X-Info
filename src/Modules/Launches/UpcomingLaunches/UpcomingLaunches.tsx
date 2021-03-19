@@ -28,19 +28,8 @@ export const UpcomingLaunches = ({
   if (!loading) {
     upcomingLaunchesArr = (
       <>
-        {launches.map((launch, index) => (
-          <LaunchShortInfo
-            key={index}
-            id={launch.id}
-            launchName={launch?.name}
-            launchDateUtc={launch?.date_utc}
-            rocketName={launch?.rocket.name}
-            launchSiteName={launch?.launchpad.full_name}
-            customers={launch.payloads[0]?.customers}
-            flightNumber={launch?.flight_number}
-            nationality={launch.payloads[0]?.nationalities[0]}
-            datePrecision={launch.date_precision}
-          />
+        {launches.map((launch) => (
+          <LaunchShortInfo key={launch.id} launch={launch} />
         ))}
       </>
     );
