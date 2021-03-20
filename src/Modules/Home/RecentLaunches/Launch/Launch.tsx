@@ -69,7 +69,7 @@ const StyledLaunch = styled(flexColumnCenter)`
   max-width: 270px;
 
   &:hover {
-    background-color: #040404;
+    background-color: ${({ theme }) => theme.colors?.foreground};
   }
 `;
 

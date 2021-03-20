@@ -81,6 +81,6 @@ const StyledLaunchShortInfo = styled.div`
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors?.dark};
+    filter: brightness(125%);
   }
 `;
