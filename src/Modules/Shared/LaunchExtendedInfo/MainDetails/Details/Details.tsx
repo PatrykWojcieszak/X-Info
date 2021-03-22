@@ -12,8 +12,13 @@ export const Details = ({
   fairingsRecovered,
   boosterLanded,
   missionSuccessful,
+  missionBeforeLaunch,
 }: DetailsProps) => {
   const { t } = useTranslation();
+
+  console.log(!missionBeforeLaunch);
+  console.log(boosterLanded);
+  console.log(fairingsRecovered);
 
   return (
     <StyledDetails>
@@ -21,29 +26,37 @@ export const Details = ({
       <StyledTextValues>{rocketName}</StyledTextValues>
       <StyledText>{t("launchSite")}:</StyledText>
       <StyledTextValues>{launchSiteName}</StyledTextValues>
-      <StyledText>LAUNCH STATUS:</StyledText>
-      <StyledIcons>
-        <Tooltip
-          content={missionSuccessful ? "Mission successful" : "Mission failed"}>
-          <FontAwesomeIcon
-            style={{
-              color: missionSuccessful ? "#4BB543" : "#FA113D",
-              fontSize: "1.6rem",
-            }}
-            icon={missionSuccessful ? "check-circle" : "times-circle"}
-          />
-        </Tooltip>
-        {boosterLanded && (
-          <Tooltip content="Booster landed">
-            <Icon name={IconEnum.drone} width={40} height={23} />
-          </Tooltip>
-        )}
-        {fairingsRecovered && (
-          <Tooltip content="Fairings recovered">
-            <Icon name={IconEnum.fairing} width={34} height={24} />
-          </Tooltip>
-        )}
-      </StyledIcons>
+      {!missionBeforeLaunch || boosterLanded || fairingsRecovered ? (
+        <>
+          <StyledText>LAUNCH STATUS:</StyledText>
+          <StyledIcons>
+            {!missionBeforeLaunch && (
+              <Tooltip
+                content={
+                  missionSuccessful ? "Mission successful" : "Mission failed"
+                }>
+                <FontAwesomeIcon
+                  style={{
+                    color: missionSuccessful ? "#4BB543" : "#FA113D",
+                    fontSize: "1.6rem",
+                  }}
+                  icon={missionSuccessful ? "check-circle" : "times-circle"}
+                />
+              </Tooltip>
+            )}
+            {boosterLanded && (
+              <Tooltip content="Booster landed">
+                <Icon name={IconEnum.drone} width={40} height={23} />
+              </Tooltip>
+            )}
+            {fairingsRecovered && (
+              <Tooltip content="Fairings recovered">
+                <Icon name={IconEnum.fairing} width={34} height={24} />
+              </Tooltip>
+            )}
+          </StyledIcons>
+        </>
+      ) : null}
     </StyledDetails>
   );
 };

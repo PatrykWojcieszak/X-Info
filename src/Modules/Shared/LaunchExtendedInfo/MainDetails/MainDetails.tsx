@@ -8,15 +8,12 @@ import { MainDetailsProps } from "./MainDetails.types";
 export const MainDetails = ({ launch }: MainDetailsProps) => {
   const { t } = useTranslation();
 
-  let launchStatus = launch.success
-    ? t("launchSuccessful")
-    : t("launchFailure");
-
+  let missionBeforeLaunch = false;
   if (
     new Date(launch.date_utc) > new Date() ||
     ["quarter", "half", "year", "month"].includes(launch.date_precision)
   )
-    launchStatus = t("launchNotLaunchedYet");
+    missionBeforeLaunch = true;
 
   let datePrec = "key";
   if (launch.date_precision === "month") datePrec = "keyMonth";
@@ -34,9 +31,10 @@ export const MainDetails = ({ launch }: MainDetailsProps) => {
       <Details
         rocketName={launch.rocket.name}
         launchSiteName={launch.launchpad.full_name}
-        fairingsRecovered={launch.fairings.recovered}
-        boosterLanded={launch.cores[0].landing_success}
+        fairingsRecovered={launch.fairings?.recovered}
+        boosterLanded={launch.cores[0]?.landing_success}
         missionSuccessful={launch.success}
+        missionBeforeLaunch={missionBeforeLaunch}
       />
     </StyledMainDetailsContainer>
   );
@@ -55,6 +53,10 @@ const StyledMissionName = styled.h2`
   font-weight: 300;
   text-align: left;
   margin-bottom: 0.5rem;
+
+  @media ${device.tablet} {
+    font-size: 2.5rem;
+  }
 `;
 
 const StyledRow = styled.div`
@@ -86,6 +88,6 @@ const StyledMissionDescription = styled.p`
 
   @media ${device.tablet} {
     max-width: 80%;
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 `;

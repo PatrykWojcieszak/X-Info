@@ -4,4 +4,5 @@ export type DetailsProps = {
   fairingsRecovered: boolean;
   boosterLanded: boolean;
   missionSuccessful: boolean;
+  missionBeforeLaunch: boolean;
 };
