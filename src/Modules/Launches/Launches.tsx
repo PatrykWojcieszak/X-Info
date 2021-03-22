@@ -189,7 +189,7 @@ const Launches = () => {
         exit="out"
         variants={pageVariantsAnim}>
         <StyledLatest>
-          <h2>{t("latestLaunchTitle")}</h2>
+          <StyledTitle>{t("latestLaunchTitle")}</StyledTitle>
           {latestLaunch.loading ? (
             <LaunchExtendedInfoSkeleton />
           ) : (
@@ -281,20 +281,18 @@ const StyledLaunches = styled(flexColumnCenter)`
 const StyledLatest = styled.div`
   margin-bottom: 3rem;
   width: 100%;
+`;
 
-  h2 {
-    font-weight: 100;
-    color: ${({ theme }) => theme.colors?.fontPrimary};
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 2rem;
-  }
+const StyledTitle = styled.h2`
+  font-weight: 100;
+  color: ${({ theme }) => theme.colors?.fontPrimary};
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
 
   @media ${device.tablet} {
-    h2 {
-      text-align: left;
-      font-size: 2.5rem;
-    }
+    text-align: left;
+    font-size: 2.5rem;
   }
 `;
 

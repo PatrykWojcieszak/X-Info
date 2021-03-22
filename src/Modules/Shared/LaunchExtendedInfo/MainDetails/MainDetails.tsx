@@ -2,64 +2,44 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components/macro";
 import { device } from "../../../../resources/styles/helpers/breakpoints";
+import { Details } from "./Details/Details";
+import { MainDetailsProps } from "./MainDetails.types";
 
-export const MainDetails = ({
-  launchName,
-  details,
-  flightNumber,
-  launchSiteName,
-  rocketName,
-  date_utc,
-  success,
-  date_precision,
-}: mainDetailsProps) => {
+export const MainDetails = ({ launch }: MainDetailsProps) => {
   const { t } = useTranslation();
 
-  let launch = success ? t("launchSuccessful") : t("launchFailure");
+  let launchStatus = launch.success
+    ? t("launchSuccessful")
+    : t("launchFailure");
 
   if (
-    new Date(date_utc) > new Date() ||
-    ["quarter", "half", "year", "month"].includes(date_precision)
+    new Date(launch.date_utc) > new Date() ||
+    ["quarter", "half", "year", "month"].includes(launch.date_precision)
   )
-    launch = t("launchNotLaunchedYet");
+    launchStatus = t("launchNotLaunchedYet");
 
   let datePrec = "key";
-  if (date_precision === "month") datePrec = "keyMonth";
+  if (launch.date_precision === "month") datePrec = "keyMonth";
 
   return (
     <StyledMainDetailsContainer>
-      <h2>{launchName}</h2>
-      <p>{details} </p>
-      <StyledLaunchNumber>#{flightNumber}</StyledLaunchNumber>
-      <StyledDetailsWrapper>
-        <StyledTitlesContainer>
-          {launchSiteName && <h4>{t("launchSite")}:</h4>}
-          {rocketName && <h4>{t("rocket")}:</h4>}
-          {date_utc && <h4>{t("date")}:</h4>}
-          {success !== null && <h4>{t("launch")}:</h4>}
-        </StyledTitlesContainer>
-        <StyledValuesContainer>
-          {launchSiteName && <h4>{launchSiteName}</h4>}
-          {rocketName && <h4>{rocketName}</h4>}
-          {date_utc && <h4>{t(datePrec, { date: new Date(date_utc) })}</h4>}
-          {success !== null && (
-            <h4 style={{ color: success ? "#4BB543" : "#FA113D" }}>{launch}</h4>
-          )}
-        </StyledValuesContainer>
-      </StyledDetailsWrapper>
+      <StyledMissionName>{launch.name}</StyledMissionName>
+      <StyledRow>
+        <StyledDate>
+          {t(datePrec, { date: new Date(launch.date_utc) })}
+        </StyledDate>
+        <StyledLaunchNumber>#{launch.flight_number}</StyledLaunchNumber>
+      </StyledRow>
+      <StyledMissionDescription>{launch.details} </StyledMissionDescription>
+      <Details
+        rocketName={launch.rocket.name}
+        launchSiteName={launch.launchpad.full_name}
+        fairingsRecovered={launch.fairings.recovered}
+        boosterLanded={launch.cores[0].landing_success}
+        missionSuccessful={launch.success}
+      />
     </StyledMainDetailsContainer>
   );
-};
-
-type mainDetailsProps = {
-  launchName: string;
-  details: string;
-  flightNumber: number;
-  launchSiteName: string;
-  rocketName: string;
-  date_utc: string;
-  success: boolean;
-  date_precision: string;
 };
 
 const StyledMainDetailsContainer = styled.div`
@@ -67,82 +47,45 @@ const StyledMainDetailsContainer = styled.div`
   border-radius: 0.8rem;
   padding: 1rem;
   position: relative;
-
-  h2,
-  h4,
-  p {
-    font-weight: 100;
-  }
-
-  p {
-    max-width: 90%;
-    font-size: 0.8rem;
-    color: ${({ theme }) => theme.colors?.fontSecondary};
-  }
-
-  h2 {
-    color: ${({ theme }) => theme.colors?.blue};
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  @media ${device.tablet} {
-    h2 {
-      font-size: 3rem;
-    }
-
-    p {
-      max-width: 80%;
-      font-size: 1.1rem;
-    }
-  }
 `;
 
-const StyledLaunchNumber = styled.h4`
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
+const StyledMissionName = styled.h2`
+  color: ${({ theme }) => theme.colors?.blue};
+  font-size: 1.75rem;
+  font-weight: 300;
+  text-align: left;
+  margin-bottom: 0.5rem;
+`;
+
+const StyledRow = styled.div`
   color: ${({ theme }) => theme.colors?.fontSecondary};
-  font-weight: 100;
-  font-size: 1.2rem;
-
-  @media ${device.tablet} {
-    font-size: 2rem;
-  }
-`;
-
-const StyledDetailsWrapper = styled.div`
   display: flex;
-  margin-top: 1rem;
+  justify-content: space-between;
 `;
 
-const StyledTitlesContainer = styled.div`
-  margin-right: 1rem;
+const StyledText = styled.h4`
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: ${({ theme }) => theme.colors?.fontSecondary};
+`;
 
-  h4 {
-    color: ${({ theme }) => theme.colors?.fontSecondary};
-    margin-top: 0.5rem;
-    font-size: 0.8rem;
-  }
+const StyledDate = styled(StyledText)``;
 
-  @media ${device.tablet} {
-    h4 {
-      font-size: 1rem;
-    }
+const StyledLaunchNumber = styled(StyledText)`
+  @media ${device.mobile} {
+    font-size: 1.7rem;
+    position: absolute;
+    top: 15px;
+    right: 15px;
   }
 `;
 
-const StyledValuesContainer = styled.div`
-  h4 {
-    color: ${({ theme }) => theme.colors?.fontPrimary};
-    font-weight: 300;
-    margin-top: 0.5rem;
-    font-size: 0.8rem;
-  }
+const StyledMissionDescription = styled.p`
+  font-size: 0.8rem;
+  color: ${({ theme }) => theme.colors?.fontSecondary};
 
   @media ${device.tablet} {
-    h4 {
-      font-size: 1rem;
-    }
+    max-width: 80%;
+    font-size: 1.1rem;
   }
 `;

@@ -24,16 +24,7 @@ export const LaunchExtendedInfo = React.memo(
             showMoreDetailsButton={showMoreDetailsButton}
           />
           <StyledRightContainer>
-            <MainDetails
-              launchName={launch.name}
-              details={launch.details}
-              flightNumber={launch.flight_number}
-              launchSiteName={launch.launchpad.full_name}
-              rocketName={launch.rocket.name}
-              date_precision={launch.date_precision}
-              date_utc={launch.date_utc}
-              success={launch.success}
-            />
+            <MainDetails launch={launch} />
             {!launch.success && launch.failures.length > 0 ? (
               <Failures failures={launch.failures} />
             ) : null}
