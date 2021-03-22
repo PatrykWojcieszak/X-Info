@@ -19,12 +19,10 @@ export const LaunchExtendedInfo = React.memo(
         style={{ cursor: showMoreDetailsButton ? "pointer" : "default" }}
         to={showMoreDetailsButton ? `/launch/${launch.id}` : "#"}>
         <StyledLatestLaunch>
-          <StyledLeftContainer>
-            <Patch
-              patchImg={launch.links.patch.small}
-              showMoreDetailsButton={showMoreDetailsButton}
-            />
-          </StyledLeftContainer>
+          <Patch
+            patchImg={launch.links.patch.small}
+            showMoreDetailsButton={showMoreDetailsButton}
+          />
           <StyledRightContainer>
             <MainDetails
               launchName={launch.name}
@@ -51,28 +49,13 @@ type LaunchExtendedInfoProps = {
   launch: Launch;
 };
 
-const StyledLatestLaunch = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
+const StyledLatestLaunch = styled(flexColumnCenter)`
   @media ${device.tablet} {
+    align-items: flex-start;
     flex-direction: row;
   }
 `;
 
-const StyledLeftContainer = styled(flexColumnCenter)`
-  margin-right: 1.5rem;
-  margin-bottom: 2rem;
-
-  @media ${device.tablet} {
-    margin-bottom: 0;
-    justify-content: flex-start;
-  }
-`;
-
 const StyledRightContainer = styled.div`
-  box-sizing: border-box;
   width: 100%;
 `;

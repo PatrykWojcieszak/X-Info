@@ -285,13 +285,15 @@ const StyledLatest = styled.div`
   h2 {
     font-weight: 100;
     color: ${({ theme }) => theme.colors?.fontPrimary};
-    font-size: 2.5rem;
+    font-size: 2rem;
+    text-align: center;
     margin-bottom: 2rem;
   }
 
   @media ${device.tablet} {
     h2 {
-      font-size: 3rem;
+      text-align: left;
+      font-size: 2.5rem;
     }
   }
 `;
