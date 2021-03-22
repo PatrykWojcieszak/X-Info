@@ -53,7 +53,8 @@
   "status": "Status",
   "missions": "Missions",
   "crew": "CREW",
-
+  "missionStatus": "MISSION STATUS",
+  
   "statusInDevelopment": "IN DEVELOPMENT",
   "statusInactive": "INACTIVE",
   "statusActive": "ACTIVE",

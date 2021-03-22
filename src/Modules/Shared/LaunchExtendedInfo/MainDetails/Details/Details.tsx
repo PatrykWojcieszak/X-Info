@@ -28,7 +28,7 @@ export const Details = ({
       <StyledTextValues>{launchSiteName}</StyledTextValues>
       {!missionBeforeLaunch || boosterLanded || fairingsRecovered ? (
         <>
-          <StyledText>LAUNCH STATUS:</StyledText>
+          <StyledText>{t("missionStatus")}:</StyledText>
           <StyledIcons>
             {!missionBeforeLaunch && (
               <Tooltip
