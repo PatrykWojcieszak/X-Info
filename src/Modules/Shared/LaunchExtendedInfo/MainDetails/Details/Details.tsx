@@ -16,10 +16,6 @@ export const Details = ({
 }: DetailsProps) => {
   const { t } = useTranslation();
 
-  console.log(!missionBeforeLaunch);
-  console.log(boosterLanded);
-  console.log(fairingsRecovered);
-
   return (
     <StyledDetails>
       <StyledText>{t("rocket")}:</StyledText>
