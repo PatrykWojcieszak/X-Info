@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import { Button } from "../";
+import { Button } from "../Button/Button";
 
 //TYPES
 import { FilterElement } from "../../../Types";
