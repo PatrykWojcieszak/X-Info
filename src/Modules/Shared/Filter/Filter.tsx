@@ -8,10 +8,7 @@ import { Button } from "../";
 import { FilterElement } from "../../../Types";
 import styled from "styled-components/macro";
 import { device } from "../../../resources/styles/helpers/breakpoints";
-import {
-  flexColumn,
-  flexCenter,
-} from "../../../resources/styles/helpers/mixins";
+import { flexColumn } from "../../../resources/styles/helpers/mixins";
 
 export const Filter = ({ filters, clearFilter }: filterProps) => {
   const { t } = useTranslation();
@@ -45,28 +42,34 @@ const StyledFilterContainer = styled(flexColumn)`
   border-radius: 0.5rem;
   z-index: 900;
   padding: 0.7rem;
+  width: 100%;
+
+  @media ${device.mobile} {
+    min-width: 450px;
+  }
 `;
 
-const StyledOptionWrapper = styled(flexCenter)`
+const StyledOptionWrapper = styled(flexColumn)`
   justify-content: space-between;
   margin: 1rem 0;
+
+  @media ${device.mobile} {
+    flex-direction: row;
+    align-items: center;
+  }
 `;
 
 const StyledOptionTitle = styled.h3`
   color: ${({ theme }) => theme.colors?.background};
   font-weight: 400;
-  min-width: 100px;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
   text-transform: uppercase;
+  min-width: 125px;
 
-  @media ${device.tablet} {
-    min-width: 120px;
-    font-size: 1rem;
-  }
-
-  @media ${device.large} {
-    min-width: 160px;
-    font-size: 1.4rem;
+  @media ${device.mobile} {
+    margin-bottom: 0;
+    margin-right: 1.5rem;
   }
 `;
 

@@ -9,7 +9,6 @@ import { Header } from "./Header/Header";
 import { List } from "./List/List";
 import styled from "styled-components/macro";
 import { flexColumn } from "../../../resources/styles/helpers/mixins";
-import { device } from "../../../resources/styles/helpers/breakpoints";
 
 export const Dropdown = ({
   list,
@@ -68,17 +67,9 @@ type dropdownProps = {
 const StyledDropdownContainer = styled(flexColumn)<{ styleType: string }>`
   border-radius: 0.5rem;
   position: relative;
-  min-width: 200px;
+  min-width: 260px;
   background-color: transparent;
   border: 1px solid
     ${({ theme, styleType }) =>
       styleType === "primary" ? theme.colors?.blue : theme.colors?.background};
-
-  @media ${device.tablet} {
-    min-width: 220px;
-  }
-
-  @media ${device.large} {
-    min-width: 280px;
-  }
 `;
