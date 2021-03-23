@@ -305,7 +305,7 @@ const StyledButtonsWrapper = styled.div`
     margin-bottom: 1.5rem;
   }
 
-  @media ${device.tablet} {
+  @media ${device.mobile} {
     flex-direction: row;
     justify-content: flex-start;
 

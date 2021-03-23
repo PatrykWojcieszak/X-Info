@@ -63,15 +63,4 @@ const StyledButton = styled.button<{ styleType: string; selected?: boolean }>`
     color: ${({ theme, styleType }) =>
       styleType === "primary" ? theme.colors?.background : theme.colors?.blue};
   }
-
-  /* @media ${device.tablet} {
-    font-size: 1rem;
-    font-weight: 300;
-  } */
-
-  @media ${device.large} {
-    font-size: 1.3rem;
-    font-weight: 100;
-    padding: 1rem;
-  }
 `;

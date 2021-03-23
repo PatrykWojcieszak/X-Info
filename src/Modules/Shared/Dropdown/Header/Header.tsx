@@ -41,11 +41,11 @@ const StyledHeaderWrapper = styled(flexCenter)<{ styleType: string }>`
   width: 100%;
   height: 100%;
   cursor: pointer;
-  padding: 0.6rem;
+  padding: 1rem 0.6rem;
 
   svg,
   h4 {
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     font-weight: 400;
     color: ${({ styleType, theme }) =>
       styleType === "primary" ? theme.colors?.blue : theme.colors?.background};
@@ -53,19 +53,5 @@ const StyledHeaderWrapper = styled(flexCenter)<{ styleType: string }>`
 
   svg {
     margin-left: 1rem;
-  }
-
-  @media ${device.tablet} {
-    svg,
-    h4 {
-      font-size: 1rem;
-    }
-  }
-
-  @media ${device.large} {
-    svg,
-    h4 {
-      font-size: 1.3rem;
-    }
   }
 `;
