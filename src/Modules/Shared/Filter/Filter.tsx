@@ -26,13 +26,11 @@ export const Filter = ({ filters, clearFilter }: filterProps) => {
           {filter.element}
         </StyledOptionWrapper>
       ))}
-      <StyledBtnWrapper as="div">
-        <Button
-          clicked={clearFilter}
-          name={t("clearFilter")}
-          styleType="secondary"
-        />
-      </StyledBtnWrapper>
+      <StyledBtn
+        clicked={clearFilter}
+        name={t("clearFilter")}
+        styleType="secondary"
+      />
     </StyledFilterContainer>
   );
 };
@@ -72,6 +70,11 @@ const StyledOptionTitle = styled.h3`
   }
 `;
 
-const StyledBtnWrapper = styled(flexCenter)`
+const StyledBtn = styled(Button)`
   margin-top: 2rem;
+
+  @media ${device.mobile} {
+    margin: 0 auto;
+    margin-top: 2rem;
+  }
 `;

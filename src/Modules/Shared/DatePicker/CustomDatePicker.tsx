@@ -35,19 +35,14 @@ const StyledDatePicker = styled(DatePicker)`
   width: 100%;
   outline: none;
   min-width: 200px;
-  padding: 0.5rem;
-  font-size: 0.8rem;
+  padding: 1rem 0.6rem;
+  font-size: 1.2rem;
 
   @media ${device.tablet} {
-    min-width: 220px;
-    padding: 0.8rem;
-
-    font-size: 1rem;
+    max-width: 220px;
   }
 
   @media ${device.large} {
     min-width: 280px;
-    padding: 1rem;
-    font-size: 1.2rem;
   }
 `;
