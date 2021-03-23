@@ -32,6 +32,7 @@ const StyledPatchContainer = styled.div`
   align-items: center;
   margin-bottom: 2rem;
   width: 100%;
+  max-height: 305px;
 
   @media ${device.mobile} {
     justify-content: space-evenly;
@@ -50,7 +51,7 @@ const StyledPatch = styled.img`
   width: 200px;
 
   @media ${device.tablet} {
-    width: 250px;
+    width: 210px;
     margin-bottom: 2rem;
   }
 `;

@@ -23,12 +23,10 @@ export const LaunchExtendedInfo = React.memo(
             patchImg={launch.links.patch.small}
             showMoreDetailsButton={showMoreDetailsButton}
           />
-          <StyledRightContainer>
-            <MainDetails launch={launch} />
-            {!launch.success && launch.failures.length > 0 ? (
-              <Failures failures={launch.failures} />
-            ) : null}
-          </StyledRightContainer>
+          <MainDetails launch={launch} />
+          {!launch.success && launch.failures.length > 0 ? (
+            <Failures failures={launch.failures} />
+          ) : null}
         </StyledLatestLaunch>
       </Link>
     );
@@ -45,8 +43,4 @@ const StyledLatestLaunch = styled(flexColumnCenter)`
     align-items: flex-start;
     flex-direction: row;
   }
-`;
-
-const StyledRightContainer = styled.div`
-  width: 100%;
 `;
