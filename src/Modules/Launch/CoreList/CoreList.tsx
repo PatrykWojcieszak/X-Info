@@ -59,12 +59,14 @@ const StyledCoreList = styled(flexColumn)`
   margin-bottom: 2rem;
 
   h2 {
-    font-weight: 100;
+    font-weight: 300;
     color: ${({ theme }) => theme.colors?.fontPrimary};
     font-size: 1.5rem;
   }
 
   @media ${device.tablet} {
-    font-size: 2rem;
+    h2 {
+      font-size: 2rem;
+    }
   }
 `;
