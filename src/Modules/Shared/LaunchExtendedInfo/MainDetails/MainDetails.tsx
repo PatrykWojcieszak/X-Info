@@ -8,13 +8,6 @@ import { MainDetailsProps } from "./MainDetails.types";
 export const MainDetails = ({ launch }: MainDetailsProps) => {
   const { t } = useTranslation();
 
-  let missionBeforeLaunch = false;
-  if (
-    new Date(launch.date_utc) > new Date() ||
-    ["quarter", "half", "year", "month"].includes(launch.date_precision)
-  )
-    missionBeforeLaunch = true;
-
   let datePrec = "key";
   if (launch.date_precision === "month") datePrec = "keyMonth";
 
@@ -34,7 +27,7 @@ export const MainDetails = ({ launch }: MainDetailsProps) => {
         fairingsRecovered={launch.fairings?.recovered}
         boosterLanded={launch.cores[0]?.landing_success}
         missionSuccessful={launch.success}
-        missionBeforeLaunch={missionBeforeLaunch}
+        missionBeforeLaunch={launch.upcoming}
       />
     </StyledMainDetailsContainer>
   );

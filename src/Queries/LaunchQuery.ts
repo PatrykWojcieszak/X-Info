@@ -15,6 +15,7 @@ export const LaunchQuery = {
       success: 1,
       failures: 1,
       date_precision: 1,
+      upcoming: 1,
     },
     populate: [
       {
