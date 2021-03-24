@@ -54,7 +54,7 @@ const StyledCrewList = styled(flexColumn)`
     align-items: flex-start;
 
     h2 {
-      font-size: 3rem;
+      font-size: 2.5rem;
     }
   }
 `;

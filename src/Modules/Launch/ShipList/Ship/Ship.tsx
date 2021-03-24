@@ -22,7 +22,7 @@ type shipProps = {
 
 const StyledShip = styled.div`
   background-color: ${({ theme }) => theme.colors?.foreground};
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   width: 350px;
 
   img {
@@ -30,7 +30,7 @@ const StyledShip = styled.div`
     min-height: 180px;
     max-height: 180px;
     object-fit: cover;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
   }
 `;
 
