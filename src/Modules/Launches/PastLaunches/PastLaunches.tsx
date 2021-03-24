@@ -13,6 +13,7 @@ import { showLaunchesList } from "../../../Animations/Animations_motion";
 import { Launch } from "../../../Types";
 import styled from "styled-components/macro";
 import { flexColumnCenter } from "../../../resources/styles/helpers/mixins";
+import { device } from "../../../resources/styles/helpers/breakpoints";
 
 export const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
   const [numberOfLaunches, setNumberOfLaunches] = useState(5);
@@ -40,7 +41,7 @@ export const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
               display: "flex",
               justifyContent: "center",
             }}>
-            <Button
+            <StyledBtn
               disabled={loading}
               name={t("loadMore")}
               styleType="primary"
@@ -80,5 +81,13 @@ const StyledLaunchesWrapper = styled(flexColumnCenter)`
   > * {
     margin: 1rem 0;
     width: 100%;
+  }
+`;
+
+const StyledBtn = styled(Button)`
+  width: 100%;
+
+  @media ${device.mobile} {
+    width: auto;
   }
 `;
