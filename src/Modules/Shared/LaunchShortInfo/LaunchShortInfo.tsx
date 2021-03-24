@@ -31,7 +31,7 @@ export const LaunchShortInfo = React.memo(
             launchSiteName={launch.launchpad.full_name}
             upcoming={launch.upcoming}
             boosterLanded={launch.cores[0]?.landing_success}
-            fairingRecovered={launch.fairings.recovered}
+            fairingRecovered={launch.fairings?.recovered}
           />
           {launch.payloads[0]?.nationalities[0] && (
             <Flag nationality={launch.payloads[0]?.nationalities[0]} />
