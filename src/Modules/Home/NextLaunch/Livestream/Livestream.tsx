@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { LivestreamProps } from "./Livestream.types";
 import { device } from "../../../../resources/styles/helpers/breakpoints";
 
-export const Livestream = ({ showHandler }: LivestreamProps) => {
+export const Livestream = ({ showHandler, url }: LivestreamProps) => {
   return (
     <StyledLivestream>
       <StyledPlayerWrapper>
@@ -14,7 +14,7 @@ export const Livestream = ({ showHandler }: LivestreamProps) => {
           controls
           width="100%"
           height="100%"
-          url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
+          url={`https://www.youtube.com/watch?v=${url}`}
         />
       </StyledPlayerWrapper>
     </StyledLivestream>

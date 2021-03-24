@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
-
-//COMPONENTS
-import { YouTubeFrame } from "../../Shared/YoutubeFrame/YouTubeFrame";
+import ReactPlayer from "react-player/youtube";
 
 export const YouTube = ({ youtubeId }: youTubeProps) => {
   let yt = <></>;
@@ -10,7 +8,12 @@ export const YouTube = ({ youtubeId }: youTubeProps) => {
   if (youtubeId)
     yt = (
       <StyledYoutubeContainer>
-        <YouTubeFrame url={youtubeId} />
+        <StyledReactPlayer
+          controls
+          width="100%"
+          height="100%"
+          url={`https://www.youtube.com/watch?v=${youtubeId}`}
+        />
       </StyledYoutubeContainer>
     );
 
@@ -22,11 +25,12 @@ type youTubeProps = {
 };
 
 const StyledYoutubeContainer = styled.div`
-  margin-top: 4rem;
+  position: relative;
+  padding-top: 56.25%;
+`;
 
-  iframe {
-    width: 100%;
-    height: 800px;
-    border-radius: 1rem;
-  }
+const StyledReactPlayer = styled(ReactPlayer)`
+  position: absolute;
+  top: 0;
+  left: 0;
 `;

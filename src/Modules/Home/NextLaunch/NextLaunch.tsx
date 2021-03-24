@@ -102,7 +102,10 @@ export const NextLaunch = ({ quote }: NextLaunchProps) => {
             <LaunchDetails launch={nextLaunch.nextLaunch.docs[0]} />
             <Quote quote={quote} />
             {showLivestream && (
-              <Livestream showHandler={toggleLivestreamHandler} />
+              <Livestream
+                url={nextLaunch.nextLaunch.docs[0].links.youtube_id}
+                showHandler={toggleLivestreamHandler}
+              />
             )}
           </StyledContent>
         )}
