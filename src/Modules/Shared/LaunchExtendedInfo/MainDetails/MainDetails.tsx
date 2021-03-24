@@ -37,6 +37,7 @@ const StyledMainDetailsContainer = styled.div`
   background-color: ${({ theme }) => theme.colors?.foreground};
   border-radius: 0.8rem;
   padding: 1rem;
+  width: 100%;
   position: relative;
 `;
 
