@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-
+import ImageGallery from "react-image-gallery";
 //COMPONENTS
-import { Gallery, SEO, LaunchExtendedInfo } from "../Shared";
+import { SEO, LaunchExtendedInfo } from "../Shared";
 import { LaunchSkeleton } from "../Shared/Skeletons/LaunchSkeleton";
 import { MediaSection } from "./MediaSection/MediaSection";
 import { CrewList } from "./CrewList/CrewList";
@@ -24,7 +24,7 @@ import { pageVariantsAnim } from "../../Animations/Animations_motion";
 import { fetchLaunch } from "../../Store/Launch/launchSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Store/rootReducer";
-
+import "react-image-gallery/styles/css/image-gallery.css";
 //OTHER
 import { launchPageTitle, launchPageDescription } from "../Shared/SEO/Tags";
 import { RocketType } from "../../Types";
@@ -86,13 +86,19 @@ const Launch = () => {
           <CrewList crewList={launch.launch.docs[0].crew} />
           <ShipList shipList={launch.launch.docs[0].ships} />
           <YouTube youtubeId={launch.launch.docs[0].links.youtube_id} />
-        </StyledLaunch>
-        <div style={{ padding: "0 1rem" }}>
           {launch.launch.docs[0]?.links.flickr.original.length > 0 ? (
-            <Gallery images={launch.launch.docs[0].links.flickr.original} />
+            <StyledGallery
+              infinite
+              showPlayButton={false}
+              showThumbnails={false}
+              showBullets
+              items={launch.launch.docs[0].links.flickr.original.map((img) => ({
+                original: img,
+              }))}
+            />
           ) : null}
           <MediaSection links={launch.launch.docs[0]?.links} />
-        </div>
+        </StyledLaunch>
       </>
     );
   }
@@ -168,4 +174,8 @@ const StyledInfoContainer = styled(flexColumnCenter)`
   @media ${device.tablet} {
     margin-left: 4rem;
   }
+`;
+
+const StyledGallery = styled(ImageGallery)`
+  margin-top: 4rem;
 `;
