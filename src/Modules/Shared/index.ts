@@ -4,7 +4,6 @@ export { CustomDatePicker } from "./DatePicker/CustomDatePicker";
 export { Dropdown } from "./Dropdown/Dropdown";
 export { Filter } from "./Filter/Filter";
 export { Footer } from "./Footer/Footer";
-export { Gallery } from "./Gallery/Gallery";
 export { Modal } from "./Modal/Modal";
 export { Nav } from "./Nav/Nav";
 export { SideBar } from "./Nav/SideBar/SideBar";
