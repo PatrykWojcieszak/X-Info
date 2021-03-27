@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-
-//COMPONENTS
-import { Gallery, SEO } from "../Shared";
+import ImageGallery from "react-image-gallery";
 
 //STYLES
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
@@ -28,6 +26,8 @@ import { RocketType } from "../../Types";
 import styled from "styled-components/macro";
 import { flexCenter } from "../../resources/styles/helpers/mixins";
 import { device } from "../../resources/styles/helpers/breakpoints";
+import "react-image-gallery/styles/css/image-gallery.css";
+import { SEO } from "../Shared";
 
 const Rocket = () => {
   const { id } = useParams();
@@ -60,12 +60,12 @@ const Rocket = () => {
 
   if (!rocket.loading)
     rocketContainer = (
-      <>
+      <StyledRocketWrapper>
         <StyledRocketImg>
           <img src={rocketImg} alt="rocket" />
         </StyledRocketImg>
         <RocketDetails rocket={rocket.rocket.docs[0]} />
-      </>
+      </StyledRocketWrapper>
     );
 
   return (
@@ -80,12 +80,20 @@ const Rocket = () => {
         exit="out"
         variants={pageVariantsAnim}>
         <HeroImage vehicle={id} />
-        <StyledRocket>{rocketContainer}</StyledRocket>
-        <GalleryWrapper>
+        <StyledContainer>
+          {rocketContainer}
           {rocket.rocket.docs[0]?.flickr_images.length > 0 ? (
-            <Gallery images={rocket.rocket.docs[0].flickr_images} />
+            <ImageGallery
+              infinite
+              showPlayButton={false}
+              showThumbnails={false}
+              showBullets
+              items={rocket.rocket.docs[0]?.flickr_images.map((img) => ({
+                original: img,
+              }))}
+            />
           ) : null}
-        </GalleryWrapper>
+        </StyledContainer>
       </motion.div>
     </>
   );
@@ -93,10 +101,8 @@ const Rocket = () => {
 
 export default Rocket;
 
-const StyledRocket = styled(flexCenter)`
-  margin-top: 2rem;
-  align-items: flex-start;
-  position: relative;
+const StyledContainer = styled.div`
+  margin: 2rem 0 4rem 0;
   padding: 0 10%;
 
   @media ${device.tablet} {
@@ -106,6 +112,12 @@ const StyledRocket = styled(flexCenter)`
   @media ${device.large} {
     padding: 0 20%;
   }
+`;
+
+const StyledRocketWrapper = styled(flexCenter)`
+  align-items: flex-start;
+  position: relative;
+  margin-bottom: 4rem;
 `;
 
 const StyledRocketImg = styled.div`
@@ -128,8 +140,4 @@ const StyledRocketImg = styled.div`
       height: 900px;
     }
   }
-`;
-
-const GalleryWrapper = styled.div`
-  padding: 0 1rem;
 `;
