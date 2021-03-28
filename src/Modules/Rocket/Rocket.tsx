@@ -6,11 +6,11 @@ import ImageGallery from "react-image-gallery";
 //STYLES
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 
-//IMAGES
-import falconheavy_img from "../../resources/images/falconHeavy.png";
-import falcon1_img from "../../resources/images/falcon1.png";
-import starship_img from "../../resources/images/st.png";
-import falcon9_img from "../../resources/images/falcon9.png";
+// //IMAGES
+// import falconheavy_img from "../../resources/images/falconHeavy.png";
+// import falcon1_img from "../../resources/images/falcon1.png";
+// import starship_img from "../../resources/images/st.png";
+// import falcon9_img from "../../resources/images/falcon9.png";
 
 //REDUX
 import { fetchRocket } from "../../Store/Rocket/rocketSlice";
@@ -39,18 +39,18 @@ const Rocket = () => {
     dispatch(fetchRocket(id));
   }, [dispatch, id]);
 
-  let rocketImg = "";
+  // let rocketImg = "";
 
-  if (id === RocketType.f1) {
-    rocketImg = falcon1_img;
-  } else if (id === RocketType.f9) {
-    rocketImg = falcon9_img;
-  } else if (id === RocketType.fh) {
-    rocketImg = falconheavy_img;
-  }
-  if (id === RocketType.starship) {
-    rocketImg = starship_img;
-  }
+  // if (id === RocketType.f1) {
+  //   rocketImg = falcon1_img;
+  // } else if (id === RocketType.f9) {
+  //   rocketImg = falcon9_img;
+  // } else if (id === RocketType.fh) {
+  //   rocketImg = falconheavy_img;
+  // }
+  // if (id === RocketType.starship) {
+  //   rocketImg = starship_img;
+  // }
 
   let rocketContainer = (
     <div style={{ width: "100%" }}>
@@ -59,14 +59,7 @@ const Rocket = () => {
   );
 
   if (!rocket.loading)
-    rocketContainer = (
-      <StyledRocketWrapper>
-        <StyledRocketImg>
-          <img src={rocketImg} alt="rocket" />
-        </StyledRocketImg>
-        <RocketDetails rocket={rocket.rocket.docs[0]} />
-      </StyledRocketWrapper>
-    );
+    rocketContainer = <RocketDetails rocket={rocket.rocket.docs[0]} />;
 
   return (
     <>
@@ -114,30 +107,42 @@ const StyledContainer = styled.div`
   }
 `;
 
-const StyledRocketWrapper = styled(flexCenter)`
-  align-items: flex-start;
-  position: relative;
-  margin-bottom: 4rem;
-`;
+// const StyledRocketWrapper = styled(flexCenter)`
+//   align-items: flex-start;
+//   position: relative;
+//   margin-bottom: 4rem;
+// `;
 
-const StyledRocketImg = styled.div`
-  height: 40%;
+// const StyledRocketImg = styled.img`
+//     height: 450px;
 
-  img {
-    height: 450px;
-  }
+//   @media ${device.tablet} {
+//       height: 700px;
+//   }
 
-  @media ${device.tablet} {
-    height: 60%;
+//   @media ${device.large} {
+//       height: 900px;
+//   }
+// `;
 
-    img {
-      height: 700px;
-    }
-  }
+// const StyledRocketContainer = styled.div`
+//   display: grid;
+//   grid-template-columns: 1fr 1fr;
+//   grid-template-rows: 1fr 1fr;
+//   gap: 10px 10px;
+// `;
 
-  @media ${device.large} {
-    img {
-      height: 900px;
-    }
-  }
-`;
+// const StyledDetails = styled.div`
+//   grid-row: span 1 / 3;
+//   grid-column: span 2;
+
+//   @media ${device.mobile} {
+//     grid-column: span 1/3;
+//   }
+// `;
+
+// const StyledRocketWrapperImg = styled.div`
+//   @media ${device.mobile} {
+//     grid-rows: span 2;
+//   }
+// `;
