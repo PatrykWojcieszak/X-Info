@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 
 import styled from "styled-components/macro";
 import { flexCenter } from "../../../../resources/styles/helpers/mixins";
-import { device } from "../../../../resources/styles/helpers/breakpoints";
 
 export const Header = ({
   title,

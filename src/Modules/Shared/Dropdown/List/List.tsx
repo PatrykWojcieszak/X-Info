@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 //TYPES
 import { DropdownElement } from "../../../../Types";
 import styled from "styled-components/macro";
-import { device } from "../../../../resources/styles/helpers/breakpoints";
 
 export const List = ({ list, selectedItem, styleType }: listProps) => {
   const { t } = useTranslation();
