@@ -6,12 +6,15 @@ import { NavElement } from "./NavElement/NavElement";
 
 import styled from "styled-components/macro";
 import { AppRoute } from "../../../Routing/AppRoute.enum";
+import { useMediaQuery } from "../../../Hooks";
+import { SideBar } from "./SideBar/SideBar";
 
 export const Nav = () => {
   const { t } = useTranslation();
+  const isMobile = useMediaQuery("(max-width: 500px)");
 
-  return (
-    <StyledNav>
+  const navLinks = (
+    <>
       <NavElement
         name={t("homeNav")}
         link={AppRoute.home}
@@ -32,16 +35,26 @@ export const Nav = () => {
         name={t("aboutNav")}
         link={AppRoute.about}
         exact={true}></NavElement>
-    </StyledNav>
+    </>
+  );
+
+  return (
+    <>
+      {isMobile ? (
+        <SideBar>{navLinks}</SideBar>
+      ) : (
+        <StyledNav>{navLinks}</StyledNav>
+      )}
+    </>
   );
 };
 
 const StyledNav = styled.div`
-  position: absolute;
-  top: 0;
+  z-index: 999;
   right: 0;
+  top: 0;
+  position: absolute;
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  z-index: 999;
 `;

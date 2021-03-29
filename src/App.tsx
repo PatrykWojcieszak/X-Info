@@ -1,18 +1,15 @@
 import React, { Suspense } from "react";
 
-import { Nav, Footer, SideBar } from "./Modules/Shared";
-import { useMediaQuery } from "./Hooks/";
+import { Nav, Footer } from "./Modules/Shared";
 
 import styled from "styled-components/macro";
 import { AppRoutes } from "./Routing/AppRoutes";
 
 function App() {
-  const isMobile = useMediaQuery("(max-width: 500px)");
-
   return (
     <StyledApp>
       <Suspense fallback={<p>Loading...</p>}>
-        {isMobile ? <SideBar /> : <Nav />}
+        <Nav />
         <AppRoutes />
         <Footer />
       </Suspense>

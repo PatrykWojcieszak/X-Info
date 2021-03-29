@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, ReactNode } from "react";
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -14,8 +14,9 @@ import { useClickOutside } from "../../../../Hooks";
 import { sideBarAnim } from "../../../../Animations/Animations_motion";
 import styled from "styled-components/macro";
 import { AppRoute } from "../../../../Routing/AppRoute.enum";
+import { SideBarProps } from "./SideBar.types";
 
-export const SideBar = () => {
+export const SideBar = ({ children }: SideBarProps) => {
   const { t } = useTranslation();
   let location = useLocation();
 
@@ -44,26 +45,7 @@ export const SideBar = () => {
       ref={containerRef}>
       <StyledMenu as={motion.div} ref={wrapperRef} variants={sideBarAnim}>
         <MenuToggle toggle={() => toggleOpen(!isOpen)} />
-        <NavElement
-          name={t("homeNav")}
-          link={AppRoute.home}
-          exact={true}></NavElement>
-        <NavElement
-          name={t("launchesNav")}
-          link={`${AppRoute.launches}/upcoming`}
-          exact={true}></NavElement>
-        <NavElement
-          name={t("vehiclesNav")}
-          link={AppRoute.vehicles}
-          exact={true}></NavElement>
-        <NavElement
-          name={t("starlinkNav")}
-          link={AppRoute.starlink}
-          exact={true}></NavElement>
-        <NavElement
-          name={t("aboutNav")}
-          link={AppRoute.about}
-          exact={true}></NavElement>
+        {children}
       </StyledMenu>
     </StyledBackground>
   );
