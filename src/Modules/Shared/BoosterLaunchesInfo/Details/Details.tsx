@@ -18,7 +18,7 @@ export const Details = ({
 
   return (
     <StyledDetails>
-      <InfoElement title={t("block")} value={block.toString()} />
+      <InfoElement title={t("block")} value={block ? block.toString() : "-"} />
       <InfoElement title={t("serialNumber")} value={serial} />
       <InfoElement
         title={t("launches")}
