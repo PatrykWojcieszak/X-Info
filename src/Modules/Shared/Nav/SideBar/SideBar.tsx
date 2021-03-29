@@ -1,10 +1,8 @@
-import React, { useRef, useEffect, useState, ReactNode } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import { NavElement } from "../NavElement/NavElement";
 import { MenuToggle } from "./MenuToggle/MenuToggle";
 
 //HOOKS
@@ -13,11 +11,9 @@ import { useClickOutside } from "../../../../Hooks";
 
 import { sideBarAnim } from "../../../../Animations/Animations_motion";
 import styled from "styled-components/macro";
-import { AppRoute } from "../../../../Routing/AppRoute.enum";
 import { SideBarProps } from "./SideBar.types";
 
 export const SideBar = ({ children }: SideBarProps) => {
-  const { t } = useTranslation();
   let location = useLocation();
 
   const [isOpen, toggleOpen] = useState(false);
