@@ -29,7 +29,9 @@ export const Details = ({
             {!missionBeforeLaunch && (
               <Tooltip
                 content={
-                  missionSuccessful ? "Mission successful" : "Mission failed"
+                  missionSuccessful
+                    ? t("missionSuccessful")
+                    : t("missionFailed")
                 }>
                 <FontAwesomeIcon
                   style={{
@@ -41,12 +43,12 @@ export const Details = ({
               </Tooltip>
             )}
             {boosterLanded && (
-              <Tooltip content="Booster landed">
+              <Tooltip content={t("boosterLanded")}>
                 <Icon name={IconEnum.drone} width={40} height={23} />
               </Tooltip>
             )}
             {fairingsRecovered && (
-              <Tooltip content="Fairings recovered">
+              <Tooltip content={t("fairingsRecovered")}>
                 <Icon name={IconEnum.fairing} width={34} height={24} />
               </Tooltip>
             )}

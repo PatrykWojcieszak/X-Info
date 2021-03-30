@@ -40,7 +40,7 @@ export const Details = ({
           <StyledText>LAUNCH STATUS:</StyledText>
           <StyledIcons>
             <Tooltip
-              content={success ? "Mission successful" : "Mission failed"}>
+              content={success ? t("missionSuccessful") : t("missionFailed")}>
               <FontAwesomeIcon
                 style={{
                   color: success ? "#4BB543" : "#FA113D",
@@ -50,12 +50,12 @@ export const Details = ({
               />
             </Tooltip>
             {boosterLanded && (
-              <Tooltip content="Booster landed">
+              <Tooltip content={t("boosterLanded")}>
                 <Icon name={IconEnum.drone} width={40} height={23} />
               </Tooltip>
             )}
             {fairingRecovered && (
-              <Tooltip content="Fairings recovered">
+              <Tooltip content={t("fairingsRecovered")}>
                 <Icon name={IconEnum.fairing} width={34} height={24} />
               </Tooltip>
             )}

@@ -31,7 +31,9 @@ export const Launch = React.memo(({ mission }: launchProps) => {
         </StyledDate>
         <StyledIcons>
           <Tooltip
-            content={mission.success ? "Mission successful" : "Mission failed"}>
+            content={
+              mission.success ? t("missionSuccessful") : t("missionFailed")
+            }>
             <FontAwesomeIcon
               style={{
                 color: mission.success ? "#4BB543" : "#FA113D",
@@ -41,12 +43,12 @@ export const Launch = React.memo(({ mission }: launchProps) => {
             />
           </Tooltip>
           {mission.cores[0].landing_success && (
-            <Tooltip content="Booster landed">
+            <Tooltip content={t("boosterLanded")}>
               <Icon name={IconEnum.drone} width={54} height={31} />
             </Tooltip>
           )}
           {mission.fairings.recovered && (
-            <Tooltip content="Fairings recovered">
+            <Tooltip content={t("fairingsRecovered")}>
               <Icon name={IconEnum.fairing} width={46} height={32} />
             </Tooltip>
           )}

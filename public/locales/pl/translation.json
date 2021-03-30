@@ -20,6 +20,10 @@
   "failure": "Niepowodzenie",
   "used": "Używany",
   "new": "Nowy",
+  "missionSuccessful": "Misja zakończona sukcesem",
+  "missionFailed": "Misja zakończona niepowodzeniem",
+  "boosterLanded": "Pierwszy stopień wylądował",
+  "fairingsRecovered": "Owiewki odzyskane",
 
   "latestLaunchTitle": "OSTATNI LOT",
   "launchesNotFound": "Nie znaleziono lotów!",
