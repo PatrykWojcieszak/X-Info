@@ -76,5 +76,5 @@ type mediaSectionProps = {
 const StyledMediaSection = styled(flexCenter)`
   flex-wrap: wrap;
   justify-content: space-evenly;
-  margin: 3rem 0;
+  margin: 4rem 0;
 `;

@@ -53,7 +53,8 @@
   "status": "Status",
   "missions": "Missions",
   "crew": "CREW",
-
+  "missionStatus": "MISSION STATUS",
+  
   "statusInDevelopment": "IN DEVELOPMENT",
   "statusInactive": "INACTIVE",
   "statusActive": "ACTIVE",
@@ -107,6 +108,10 @@
   "dateTo": "DATE TO",
   "clearFilter": "CLEAR FILTER",
   "success": "Success",
+  "missionSuccessful": "Mission successful",
+  "missionFailed": "Mission failed",
+  "boosterLanded": "Booster landed",
+  "fairingsRecovered": "Fairings recovered",
 
   "key": "{{date, LLL}}",
   "keyMonth": "{{date, MMMM, YYYY}}",

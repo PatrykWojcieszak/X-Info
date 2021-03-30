@@ -188,17 +188,15 @@ const Launches = () => {
         animate="in"
         exit="out"
         variants={pageVariantsAnim}>
-        <StyledLatest>
-          <h2>{t("latestLaunchTitle")}</h2>
-          {latestLaunch.loading ? (
-            <LaunchExtendedInfoSkeleton />
-          ) : (
-            <LaunchExtendedInfo
-              showMoreDetailsButton
-              launch={latestLaunch.latestLaunch.docs[0]}
-            />
-          )}
-        </StyledLatest>
+        <StyledTitle>{t("latestLaunchTitle")}</StyledTitle>
+        {latestLaunch.loading ? (
+          <LaunchExtendedInfoSkeleton />
+        ) : (
+          <LaunchExtendedInfo
+            showMoreDetailsButton
+            launch={latestLaunch.latestLaunch.docs[0]}
+          />
+        )}
         <StyledContent>
           <StyledButtonsWrapper>
             <Dropdown
@@ -278,39 +276,41 @@ const StyledLaunches = styled(flexColumnCenter)`
   }
 `;
 
-const StyledLatest = styled.div`
-  margin-bottom: 3rem;
+const StyledTitle = styled.h2`
+  font-weight: 100;
+  color: ${({ theme }) => theme.colors?.fontPrimary};
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
   width: 100%;
 
-  h2 {
-    font-weight: 100;
-    color: ${({ theme }) => theme.colors?.fontPrimary};
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-  }
-
   @media ${device.tablet} {
-    h2 {
-      font-size: 3rem;
-    }
+    text-align: left;
+    font-size: 2.5rem;
   }
 `;
 
 const StyledContent = styled(flexColumnCenter)`
-  margin: 7rem 0;
+  margin: 4rem 0;
   width: 100%;
 `;
 
 const StyledButtonsWrapper = styled.div`
-  width: 100%;
   display: flex;
-  margin-bottom: 2rem;
-  justify-content: space-evenly;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 1rem;
 
-  @media ${device.tablet} {
+  > * {
+    margin-bottom: 1.5rem;
+  }
+
+  @media ${device.mobile} {
+    flex-direction: row;
     justify-content: flex-start;
 
     > * {
+      margin-bottom: 0;
       margin-right: 3rem;
     }
   }

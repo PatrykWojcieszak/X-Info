@@ -36,15 +36,14 @@ const StyledLinkBtn = styled(flexColumnCenter)`
   padding: 0.6rem;
   box-sizing: border-box;
   border-radius: 0.7rem;
-  min-width: 150px;
 
   svg {
     color: ${({ theme }) => theme.colors?.blue};
-    font-size: 3rem;
+    font-size: 2rem;
   }
 
   h4 {
-    margin-top: 1.2rem;
+    margin-top: 1rem;
     font-weight: 100;
     color: ${({ theme }) => theme.colors?.fontSecondary};
   }

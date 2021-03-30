@@ -19,27 +19,14 @@ export const LaunchExtendedInfo = React.memo(
         style={{ cursor: showMoreDetailsButton ? "pointer" : "default" }}
         to={showMoreDetailsButton ? `/launch/${launch.id}` : "#"}>
         <StyledLatestLaunch>
-          <StyledLeftContainer>
-            <Patch
-              patchImg={launch.links.patch.small}
-              showMoreDetailsButton={showMoreDetailsButton}
-            />
-          </StyledLeftContainer>
-          <StyledRightContainer>
-            <MainDetails
-              launchName={launch.name}
-              details={launch.details}
-              flightNumber={launch.flight_number}
-              launchSiteName={launch.launchpad.full_name}
-              rocketName={launch.rocket.name}
-              date_precision={launch.date_precision}
-              date_utc={launch.date_utc}
-              success={launch.success}
-            />
-            {!launch.success && launch.failures.length > 0 ? (
-              <Failures failures={launch.failures} />
-            ) : null}
-          </StyledRightContainer>
+          <Patch
+            patchImg={launch.links.patch.small}
+            showMoreDetailsButton={showMoreDetailsButton}
+          />
+          <MainDetails launch={launch} />
+          {!launch.success && launch.failures.length > 0 ? (
+            <Failures failures={launch.failures} />
+          ) : null}
         </StyledLatestLaunch>
       </Link>
     );
@@ -51,28 +38,9 @@ type LaunchExtendedInfoProps = {
   launch: Launch;
 };
 
-const StyledLatestLaunch = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
+const StyledLatestLaunch = styled(flexColumnCenter)`
   @media ${device.tablet} {
+    align-items: flex-start;
     flex-direction: row;
   }
-`;
-
-const StyledLeftContainer = styled(flexColumnCenter)`
-  margin-right: 1.5rem;
-  margin-bottom: 2rem;
-
-  @media ${device.tablet} {
-    margin-bottom: 0;
-    justify-content: flex-start;
-  }
-`;
-
-const StyledRightContainer = styled.div`
-  box-sizing: border-box;
-  width: 100%;
 `;

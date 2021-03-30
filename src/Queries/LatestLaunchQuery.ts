@@ -34,6 +34,18 @@ export const LatestLaunchQuery = {
           id: 1,
         },
       },
+      {
+        path: "fairings",
+        select: {
+          recovered: 1,
+        },
+      },
+      {
+        path: "cores",
+        select: {
+          landing_success: 1,
+        },
+      },
     ],
   },
 };

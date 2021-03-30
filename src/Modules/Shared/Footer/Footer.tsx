@@ -22,7 +22,7 @@ export const Footer = () => {
 const StyledFooter = styled(flexCenter)`
   margin-bottom: 1rem;
   z-index: 1000;
-  font-size: 0.5rem;
+  font-size: 0.6rem;
 
   @media ${device.tablet} {
     font-size: 0.8rem;

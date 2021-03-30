@@ -24,22 +24,26 @@ const StyledInfoLine = styled.div`
   padding: 0.5rem 0;
   box-sizing: border-box;
   border-bottom: 1px solid ${({ theme }) => theme.colors?.fontPrimary};
-  font-size: 0.8rem;
+
+  @media ${device.large} {
+    font-size: 1.5rem;
+  }
+`;
+
+const StyledFont = styled.h3`
+  font-size: 0.875rem;
+  font-weight: 300;
 
   @media ${device.large} {
     font-size: 1rem;
   }
 `;
 
-const FontWeight = styled.h3`
-  font-weight: 100;
-`;
-
-const StyledTitle = styled(FontWeight)`
+const StyledTitle = styled(StyledFont)`
   color: ${({ theme }) => theme.colors?.fontPrimary} !important;
   text-transform: uppercase;
 `;
 
-const StyledValue = styled(FontWeight)`
+const StyledValue = styled(StyledFont)`
   color: ${({ theme }) => theme.colors?.fontSecondary};
 `;

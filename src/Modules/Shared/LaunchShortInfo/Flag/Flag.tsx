@@ -30,8 +30,8 @@ const StyledFlag = styled.img`
   border-bottom-right-radius: 1rem;
 
   @media ${device.tablet} {
-    width: 80px;
-    bottom: -15px;
+    width: 60px;
+    bottom: -11px;
     border-bottom-right-radius: 2rem;
   }
 `;

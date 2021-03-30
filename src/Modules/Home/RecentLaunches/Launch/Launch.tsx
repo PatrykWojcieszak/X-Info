@@ -4,109 +4,104 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import { Button } from "../../../Shared";
+import { Button, Tooltip } from "../../../Shared";
 
 //STYLES
 import noImage from "../../../../resources/images/noImage.png";
-import {
-  flexCenter,
-  flexColumnCenter,
-} from "../../../../resources/styles/helpers/mixins";
+import { flexColumnCenter } from "../../../../resources/styles/helpers/mixins";
 import styled from "styled-components/macro";
-import { device } from "../../../../resources/styles/helpers/breakpoints";
+import { IconEnum } from "../../../Shared/Icon/Icon.enum";
+import { Icon } from "../../../Shared";
+import { Launch as LaunchType } from "../../../../Types";
 
-export const Launch = React.memo(
-  ({ name, patch, date, success, id }: launchProps) => {
-    const { t } = useTranslation();
+export const Launch = React.memo(({ mission }: launchProps) => {
+  const { t } = useTranslation();
 
-    return (
-      <Link to={`/launch/${id}`}>
-        <StyledLaunch>
-          <img src={patch ? patch : noImage} alt="patch" loading="lazy" />
-          <h3>{name}</h3>
-          <StyledColumn>
-            <h4>{t("key", { date: new Date(date) })}</h4>
-            {success != null ? (
-              <FontAwesomeIcon
-                style={{ color: success ? "#4BB543" : "#FA113D" }}
-                icon={success ? "check-circle" : "times-circle"}
-              />
-            ) : null}
-          </StyledColumn>
-          <Button name={t("showDetails")} styleType="primary" />
-        </StyledLaunch>
-      </Link>
-    );
-  }
-);
+  return (
+    <Link to={`/launch/${mission.id}`}>
+      <StyledLaunch>
+        <StyledImage
+          src={mission.links.patch.small ? mission.links.patch.small : noImage}
+          alt="patch"
+          loading="lazy"
+        />
+        <StyledMissionName>{mission.name}</StyledMissionName>
+        <StyledDate>
+          {t("key", { date: new Date(mission.date_utc) })}
+        </StyledDate>
+        <StyledIcons>
+          <Tooltip
+            content={
+              mission.success ? t("missionSuccessful") : t("missionFailed")
+            }>
+            <FontAwesomeIcon
+              style={{
+                color: mission.success ? "#4BB543" : "#FA113D",
+                fontSize: "1.8rem",
+              }}
+              icon={mission.success ? "check-circle" : "times-circle"}
+            />
+          </Tooltip>
+          {mission.cores[0].landing_success && (
+            <Tooltip content={t("boosterLanded")}>
+              <Icon name={IconEnum.drone} width={54} height={31} />
+            </Tooltip>
+          )}
+          {mission.fairings.recovered && (
+            <Tooltip content={t("fairingsRecovered")}>
+              <Icon name={IconEnum.fairing} width={46} height={32} />
+            </Tooltip>
+          )}
+        </StyledIcons>
+        <StyledButton name={t("showDetails")} styleType="primary" />
+      </StyledLaunch>
+    </Link>
+  );
+});
 
 type launchProps = {
-  name: string;
-  patch: string;
-  date: string;
-  success: boolean;
-  id: string;
+  mission: LaunchType;
 };
 
 const StyledLaunch = styled(flexColumnCenter)`
-  width: 220px;
-  padding: 1.5rem;
+  padding: 1rem;
   flex-wrap: wrap;
-  transition: all 0.4s ease-in-out;
-  border-radius: 1rem;
-
-  img {
-    width: 80%;
-    max-height: 155px;
-  }
-
-  h3 {
-    text-align: center;
-    margin: 1rem 0 0.5rem 0;
-    color: ${({ theme }) => theme.colors?.blue};
-    font-weight: 100;
-    font-size: 1.3rem;
-    min-height: 40px;
-  }
+  transition: all 0.3s ease-in-out;
+  border-radius: 0.625rem;
+  max-width: 270px;
 
   &:hover {
-    background-color: #040404;
-  }
-
-  @media ${device.large} {
-    width: 240px;
-
-    h3 {
-      font-size: 1.7rem;
-
-      min-height: 65px;
-    }
+    background-color: ${({ theme }) => theme.colors?.foreground};
   }
 `;
 
-const StyledColumn = styled(flexCenter)`
-  margin-bottom: 1.2rem;
+const StyledImage = styled.img`
+  width: 90%;
+`;
 
-  svg {
-    font-size: 1rem;
-    margin-left: 0.8rem;
-  }
+const StyledMissionName = styled.h3`
+  text-align: center;
+  color: ${({ theme }) => theme.colors?.blue};
+  font-weight: 300;
+  font-size: 1.7rem;
+  margin-top: 0.3rem;
+`;
 
-  h4 {
-    color: ${({ theme }) => theme.colors?.fontSecondary};
-    font-weight: 100;
-    text-align: left;
-    font-size: 0.7rem;
-  }
+const StyledDate = styled.h4`
+  color: ${({ theme }) => theme.colors?.fontSecondary};
+  font-weight: 300;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+`;
 
-  @media ${device.large} {
-    svg {
-      font-size: 1.3rem;
-      margin-left: 0.8rem;
-    }
+const StyledIcons = styled.div`
+  margin: 1.5rem 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
 
-    h4 {
-      font-size: 1rem;
-    }
-  }
+const StyledButton = styled(Button)`
+  width: 100%;
 `;

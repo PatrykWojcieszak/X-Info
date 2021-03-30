@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 //TYPES
 import { DropdownElement } from "../../../../Types";
 import styled from "styled-components/macro";
-import { device } from "../../../../resources/styles/helpers/breakpoints";
 
 export const List = ({ list, selectedItem, styleType }: listProps) => {
   const { t } = useTranslation();
@@ -47,8 +46,9 @@ const StyledListElement = styled.h4<{ selected: boolean; styleType: string }>`
   border-radius: 0.4rem;
   margin: 0.4rem 0;
   cursor: pointer;
+  font-weight: 400;
   transition: all 0.2s ease-in-out;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
 
   color: ${({ theme, selected, styleType }) =>
     selected
@@ -71,9 +71,5 @@ const StyledListElement = styled.h4<{ selected: boolean; styleType: string }>`
   &:hover {
     background-color: ${({ theme }) => theme.colors?.foreground};
     color: ${({ theme }) => theme.colors?.blue};
-  }
-
-  @media ${device.tablet} {
-    font-size: 1rem;
   }
 `;

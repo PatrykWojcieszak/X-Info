@@ -15,6 +15,7 @@ export const LaunchQuery = {
       success: 1,
       failures: 1,
       date_precision: 1,
+      upcoming: 1,
     },
     populate: [
       {
@@ -46,6 +47,12 @@ export const LaunchQuery = {
           image: 1,
         },
       },
+      {
+        path: "fairings",
+        select: {
+          recovered: 1,
+        },
+      },
       "payloads",
       {
         path: "cores",
@@ -55,6 +62,7 @@ export const LaunchQuery = {
             select: {
               name: 1,
               full_name: 1,
+              landing_success: 1,
             },
           },
         ],

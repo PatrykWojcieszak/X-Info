@@ -10,6 +10,7 @@ export const UpcomingLaunchesQuery = {
       date_utc: 1,
       flight_number: 1,
       date_precision: 1,
+      upcoming: 1,
     },
     sort: {
       flight_number: "asc",
@@ -27,6 +28,18 @@ export const UpcomingLaunchesQuery = {
         select: {
           name: 1,
           id: 1,
+        },
+      },
+      {
+        path: "fairings",
+        select: {
+          recovered: 1,
+        },
+      },
+      {
+        path: "cores",
+        select: {
+          landing_success: 1,
         },
       },
       {

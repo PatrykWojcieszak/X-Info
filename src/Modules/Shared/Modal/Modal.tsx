@@ -8,6 +8,7 @@ import { Backdrop } from "../";
 
 //STYLES
 import { modalAnim } from "../../../Animations/Animations_motion";
+import { device } from "../../../resources/styles/helpers/breakpoints";
 
 export const Modal = ({ closeModal, show, children }: modalProps) => {
   return (
@@ -44,14 +45,19 @@ const StyledModal = styled(motion.div)`
   border-radius: 1rem;
   padding: 0.8rem;
   z-index: 999;
+  width: 100%;
+
+  @media ${device.mobile} {
+    width: auto;
+  }
 `;
 
 const StyledCloseBtn = styled(FontAwesomeIcon)`
   position: absolute;
   top: -35px;
   cursor: pointer;
-  right: 0;
+  left: 10px;
   font-size: 2rem;
   z-index: 999;
-  color: $red;
+  color: ${({ theme }) => theme.colors?.red};
 `;

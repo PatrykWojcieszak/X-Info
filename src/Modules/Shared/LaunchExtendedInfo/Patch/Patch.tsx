@@ -12,12 +12,12 @@ export const Patch = ({ patchImg, showMoreDetailsButton }: patchProps) => {
   const { t } = useTranslation();
 
   return (
-    <>
+    <StyledPatchContainer>
       <StyledPatch src={patchImg ? patchImg : noImage} alt="mission patch" />
       {showMoreDetailsButton && (
-        <Button styleType="primary" name={t("moreDetails")} />
+        <StyledBtn styleType="primary" name={t("moreDetails")} />
       )}
-    </>
+    </StyledPatchContainer>
   );
 };
 
@@ -26,11 +26,38 @@ type patchProps = {
   showMoreDetailsButton: boolean;
 };
 
-const StyledPatch = styled.img`
-  margin-bottom: 1.5rem;
-  width: 140px;
+const StyledPatchContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-height: 305px;
+
+  @media ${device.mobile} {
+    justify-content: space-evenly;
+  }
 
   @media ${device.tablet} {
-    width: 200px;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-right: 2rem;
+    margin-bottom: 0;
+    width: 350px;
+  }
+`;
+
+const StyledPatch = styled.img`
+  width: 200px;
+
+  @media ${device.tablet} {
+    width: 210px;
+    margin-bottom: 2rem;
+  }
+`;
+
+const StyledBtn = styled(Button)`
+  @media ${device.tablet} {
+    width: 100%;
   }
 `;

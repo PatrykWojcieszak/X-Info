@@ -12,7 +12,10 @@ import { fetchRecentLaunches } from "../../../Store/RecentLaunches/recentLaunche
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
 import styled from "styled-components/macro";
-import { flexCenter } from "../../../resources/styles/helpers/mixins";
+import {
+  flexCenter,
+  flexColumnCenter,
+} from "../../../resources/styles/helpers/mixins";
 import { device } from "../../../resources/styles/helpers/breakpoints";
 
 export const RecentLaunches = () => {
@@ -40,15 +43,8 @@ export const RecentLaunches = () => {
       <StyledContent>
         {recentLaunches.loading
           ? [1, 2, 3, 4, 5].map((n) => <RecentLaunchSkeleton key={n} />)
-          : recentLaunches.recentLaunches.docs.map((launch, index) => (
-              <Launch
-                id={launch.id}
-                key={index}
-                name={launch.name}
-                patch={launch.links.patch.small}
-                date={launch.date_local}
-                success={launch.success}
-              />
+          : recentLaunches.recentLaunches.docs.map((launch) => (
+              <Launch mission={launch} key={launch.id} />
             ))}
       </StyledContent>
     </StyledRecentLaunches>
@@ -60,24 +56,36 @@ const StyledRecentLaunches = styled.div`
   width: 100%;
 `;
 
-const StyledTop = styled(flexCenter)`
-  justify-content: space-between;
-  padding: 0.4rem;
-  margin-bottom: 2rem;
+const StyledTop = styled(flexColumnCenter)`
+  margin-bottom: 1rem;
 
   h2 {
     color: ${({ theme }) => theme.colors?.fontPrimary};
     font-weight: 100;
-    font-size: 1.1rem;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
   }
 
-  @media ${device.tablet} {
+  * {
+    width: 100%;
+  }
+
+  @media ${device.mobile} {
+    flex-direction: row;
+    justify-content: space-between;
+
+    * {
+      width: auto;
+    }
+
     h2 {
-      font-size: 1.5rem;
+      text-align: left;
+      margin-bottom: 0;
     }
   }
 
-  @media ${device.large} {
+  @media ${device.tablet} {
     h2 {
       font-size: 2.5rem;
     }

@@ -13,6 +13,7 @@ import { showLaunchesList } from "../../../Animations/Animations_motion";
 import { Launch } from "../../../Types";
 import styled from "styled-components/macro";
 import { flexColumnCenter } from "../../../resources/styles/helpers/mixins";
+import { device } from "../../../resources/styles/helpers/breakpoints";
 
 export const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
   const [numberOfLaunches, setNumberOfLaunches] = useState(5);
@@ -29,20 +30,8 @@ export const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
   if (!loading) {
     pastLaunchesArr = (
       <>
-        {launches.slice(0, numberOfLaunches).map((launch, index) => (
-          <LaunchShortInfo
-            key={index}
-            id={launch.id}
-            launchName={launch.name}
-            launchDateUtc={launch.date_utc}
-            rocketName={launch.rocket.name}
-            launchSiteName={launch.launchpad.full_name}
-            customers={launch.payloads[0].customers}
-            flightNumber={launch.flight_number}
-            success={launch.success}
-            nationality={launch.payloads[0].nationalities[0]}
-            datePrecision={launch.date_precision}
-          />
+        {launches.slice(0, numberOfLaunches).map((launch) => (
+          <LaunchShortInfo key={launch.id} launch={launch} />
         ))}
         {launches.length >= numberOfLaunches && (
           <div
@@ -52,7 +41,7 @@ export const PastLaunches = ({ launches, loading }: pastLaunchesProps) => {
               display: "flex",
               justifyContent: "center",
             }}>
-            <Button
+            <StyledBtn
               disabled={loading}
               name={t("loadMore")}
               styleType="primary"
@@ -92,5 +81,13 @@ const StyledLaunchesWrapper = styled(flexColumnCenter)`
   > * {
     margin: 1rem 0;
     width: 100%;
+  }
+`;
+
+const StyledBtn = styled(Button)`
+  width: 100%;
+
+  @media ${device.mobile} {
+    width: auto;
   }
 `;

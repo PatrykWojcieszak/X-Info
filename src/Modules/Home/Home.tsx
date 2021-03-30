@@ -12,6 +12,7 @@ import { SEO } from "../Shared";
 import { pageVariantsAnim } from "../../Animations/Animations_motion";
 import { homePageTitle, homePageDescription } from "../Shared/SEO/Tags";
 import { device } from "../../resources/styles/helpers/breakpoints";
+import { randomQuote } from "../../Other/ElonMuskQuotes";
 
 const Home = () => {
   return (
@@ -22,7 +23,7 @@ const Home = () => {
         animate="in"
         exit="out"
         variants={pageVariantsAnim}>
-        <NextLaunch />
+        <NextLaunch quote={randomQuote()} />
         <StyledContent>
           <RecentLaunches />
           <UpcomingLaunches />

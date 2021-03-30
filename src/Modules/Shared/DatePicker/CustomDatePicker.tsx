@@ -3,9 +3,7 @@ import DatePicker from "react-datepicker";
 import moment from "moment";
 import styled from "styled-components/macro";
 
-//STYLES
 import "react-datepicker/dist/react-datepicker.css";
-import { device } from "../../../resources/styles/helpers/breakpoints";
 
 export const CustomDatePicker = ({ date, dateChanged }: datePickerProps) => {
   const validation = (date: any) => {
@@ -34,20 +32,7 @@ const StyledDatePicker = styled(DatePicker)`
   background: transparent;
   width: 100%;
   outline: none;
-  min-width: 200px;
-  padding: 0.5rem;
-  font-size: 0.8rem;
-
-  @media ${device.tablet} {
-    min-width: 220px;
-    padding: 0.8rem;
-
-    font-size: 1rem;
-  }
-
-  @media ${device.large} {
-    min-width: 280px;
-    padding: 1rem;
-    font-size: 1.2rem;
-  }
+  min-width: 260px;
+  padding: 1rem 0.6rem;
+  font-size: 1.2rem;
 `;

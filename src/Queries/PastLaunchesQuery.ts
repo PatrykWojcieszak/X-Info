@@ -13,6 +13,7 @@ export const PastLaunchesQuery = {
       links: 1,
       flight_number: 1,
       date_precision: 1,
+      upcoming: 1,
     },
     sort: {
       flight_number: "desc",
@@ -33,6 +34,12 @@ export const PastLaunchesQuery = {
         },
       },
       {
+        path: "fairings",
+        select: {
+          recovered: 1,
+        },
+      },
+      {
         path: "payloads",
         select: {
           customers: 1,
@@ -43,6 +50,7 @@ export const PastLaunchesQuery = {
         path: "cores",
         select: {
           reused: 1,
+          landing_success: 1,
         },
       },
     ],

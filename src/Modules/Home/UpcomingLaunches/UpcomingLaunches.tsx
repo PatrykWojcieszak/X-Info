@@ -33,27 +33,14 @@ export const UpcomingLaunches = () => {
 
   return (
     <StyledUpcomingLaunches>
-      <StyledTop>
-        <h2>{t("upcomingLaunchesTitle")}</h2>
-      </StyledTop>
+      <StyledTitle>{t("upcomingLaunchesTitle")}</StyledTitle>
       <StyledContent>
         {upcomingLaunches.loading
           ? [1, 2, 3, 4, 5].map((n) => <LaunchShortInfoSkeleton key={n} />)
           : upcomingLaunches.upcomingLaunches.docs
               .slice(0, 5)
-              .map((launch, index) => (
-                <LaunchShortInfo
-                  key={index}
-                  launchName={launch.name}
-                  launchDateUtc={launch.date_utc}
-                  rocketName={launch.rocket.name}
-                  launchSiteName={launch.launchpad.full_name}
-                  customers={launch.payloads[0]?.customers}
-                  flightNumber={launch.flight_number}
-                  nationality={launch.payloads[0]?.nationalities[0]}
-                  datePrecision={launch.date_precision}
-                  id={launch.id}
-                />
+              .map((launch) => (
+                <LaunchShortInfo key={launch.id} launch={launch} />
               ))}
       </StyledContent>
       <StyledButtonWrapper>
@@ -70,25 +57,19 @@ const StyledUpcomingLaunches = styled.div`
   width: 100%;
 `;
 
-const StyledTop = styled.div`
+const StyledTitle = styled.div`
   margin-bottom: 2rem;
+  color: ${({ theme }) => theme.colors?.fontPrimary};
+  font-weight: 100;
+  font-size: 2rem;
+  text-align: center;
 
-  h2 {
-    color: ${({ theme }) => theme.colors?.fontPrimary};
-    font-weight: 100;
-    font-size: 1.1rem;
+  @media ${device.mobile} {
+    text-align: left;
   }
 
   @media ${device.tablet} {
-    h2 {
-      font-size: 1.5rem;
-    }
-  }
-
-  @media ${device.large} {
-    h2 {
-      font-size: 2.5rem;
-    }
+    font-size: 2.5rem;
   }
 `;
 
@@ -100,4 +81,19 @@ const StyledContent = styled(flexColumn)`
 
 const StyledButtonWrapper = styled(flexCenter)`
   margin-top: 2rem;
+  width: 100%;
+  display: flex;
+
+  * {
+    width: 100%;
+  }
+
+  @media ${device.mobile} {
+    justify-content: center;
+    width: auto;
+
+    * {
+      width: 250px;
+    }
+  }
 `;

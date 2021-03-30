@@ -56,7 +56,6 @@ export const fetchLaunch = (id: string): AppThunk => async (dispatch) => {
     dispatch(getLaunchStart());
     const query = LaunchQuery;
     query.query._id = id;
-    console.log(id);
     const launches = await getData<Launch>(LAUNCHES_QUERY, query);
     dispatch(getLaunchSuccess(launches));
   } catch (err) {

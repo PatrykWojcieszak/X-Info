@@ -4,25 +4,22 @@ import { useTranslation } from "react-i18next";
 
 import { device } from "../../../../resources/styles/helpers/breakpoints";
 
-export const LaunchName = React.memo(
-  ({ launchName, dateLocal }: launchNameProps) => {
-    const { t } = useTranslation();
+export const LaunchName = ({ launchName, dateLocal }: launchNameProps) => {
+  const { t } = useTranslation();
+  const isAfterLaunch = (): boolean => {
+    if (new Date() > new Date(dateLocal)) return true;
+    else return false;
+  };
 
-    const isAfterLaunch = (): boolean => {
-      if (new Date() > new Date(dateLocal)) return true;
-      else return false;
-    };
-
-    return (
-      <StyledLaunchNameWrapper>
-        <StyledTitle>
-          {isAfterLaunch() ? t("currentLaunch") : t("nextLaunchTitle")}:{" "}
-        </StyledTitle>
-        <StyledLaunchName>{launchName}</StyledLaunchName>
-      </StyledLaunchNameWrapper>
-    );
-  }
-);
+  return (
+    <StyledLaunchNameWrapper>
+      <StyledTitle>
+        {isAfterLaunch() ? t("currentLaunch") : t("nextLaunchTitle")}:{" "}
+      </StyledTitle>
+      <StyledLaunchName>{launchName}</StyledLaunchName>
+    </StyledLaunchNameWrapper>
+  );
+};
 
 type launchNameProps = {
   launchName: string;
@@ -47,7 +44,7 @@ const StyledTitle = styled(StyledFont)`
   color: ${({ theme }) => theme.colors?.fontSecondary};
   margin-bottom: 1.2rem;
 
-  @media ${device.tablet} {
+  @media ${device.mobile} {
     margin-bottom: 0;
     margin-right: 1rem;
   }
@@ -59,7 +56,7 @@ const StyledLaunchNameWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 
-  @media ${device.tablet} {
+  @media ${device.mobile} {
     flex-direction: row;
   }
 `;

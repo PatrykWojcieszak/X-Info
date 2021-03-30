@@ -1,5 +1,5 @@
 import "moment-precise-range-plugin";
-import React, { useEffect, useCallback, useState } from "react";
+import React from "react";
 import styled from "styled-components/macro";
 import { useTranslation } from "react-i18next";
 
@@ -8,70 +8,36 @@ import {
   flexColumnCenter,
 } from "../../../../resources/styles/helpers/mixins";
 import { CountdownProps } from "./Countdown.types";
-import { Time } from "../../../../Types";
 import { device } from "../../../../resources/styles/helpers/breakpoints";
 
-const initialTime: Time = {
-  days: 0,
-  firstDateWasLater: true,
-  hours: 4,
-  minutes: 20,
-  months: 0,
-  seconds: 69,
-  years: 0,
-};
-
-export const Countdown = ({ date }: CountdownProps) => {
+export const Countdown = ({
+  days,
+  hours,
+  minutes,
+  seconds,
+}: CountdownProps) => {
   const { t } = useTranslation();
-  const [timer, setTimer] = useState<Time>(initialTime);
-
-  const moment = require("moment");
-
-  const timeDiff = useCallback(() => {
-    const launchDate = new Date(date);
-    const currentDate = new Date();
-    const diff = moment().preciseDiff(launchDate, currentDate, true);
-
-    return diff;
-  }, [date, moment]);
-
-  useEffect(() => {
-    const timeDifference = timeDiff;
-    const interval = setInterval(() => setTimer(timeDifference), 1000);
-
-    if (
-      timer.days === 0 &&
-      timer.hours === 0 &&
-      timer.minutes === 0 &&
-      timer.seconds === 0
-    )
-      clearInterval(interval);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [timer, timeDiff]);
 
   return (
     <>
       <StyledCountdown>
         <StyledElement>
-          <StyledNumber>{("0" + timer.days).slice(-2)}</StyledNumber>
+          <StyledNumber>{("0" + days).slice(-2)}</StyledNumber>
           <StyledNumberTitle>{t("countdownDays")}</StyledNumberTitle>
         </StyledElement>
         <StyledColon as="h2">:</StyledColon>
         <StyledElement>
-          <StyledNumber>{("0" + timer.hours).slice(-2)}</StyledNumber>
+          <StyledNumber>{("0" + hours).slice(-2)}</StyledNumber>
           <StyledNumberTitle>{t("countdownHours")}</StyledNumberTitle>
         </StyledElement>
         <StyledColon as="h2">:</StyledColon>
         <StyledElement>
-          <StyledNumber>{("0" + timer.minutes).slice(-2)}</StyledNumber>
+          <StyledNumber>{("0" + minutes).slice(-2)}</StyledNumber>
           <StyledNumberTitle>{t("countdownMinutes")}</StyledNumberTitle>
         </StyledElement>
         <StyledColon as="h2">:</StyledColon>
         <StyledElement>
-          <StyledNumber>{("0" + timer.seconds).slice(-2)}</StyledNumber>
+          <StyledNumber>{("0" + seconds).slice(-2)}</StyledNumber>
           <StyledNumberTitle>{t("countdownSeconds")}</StyledNumberTitle>
         </StyledElement>
       </StyledCountdown>

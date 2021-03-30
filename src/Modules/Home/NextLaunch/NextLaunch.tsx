@@ -1,5 +1,5 @@
 import "moment-precise-range-plugin";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components/macro";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,17 +15,60 @@ import { RootState } from "../../../Store/rootReducer";
 import backgroundImg from "../../../resources/images/home_bg.jpg";
 import { bottomToTopAnim } from "../../../Animations/Animations_motion";
 import { flexColumn } from "../../../resources/styles/helpers/mixins";
-import { randomQuote } from "../../../Other/ElonMuskQuotes";
 import { device } from "../../../resources/styles/helpers/breakpoints";
+import { Livestream } from "./Livestream/Livestream";
+import { Button } from "../../Shared";
+import { Time } from "../../../Types";
+import { NextLaunchProps } from "./Quote/NextLaunch.types";
 
-export const NextLaunch = () => {
+const initialTime: Time = {
+  days: 0,
+  firstDateWasLater: true,
+  hours: 4,
+  minutes: 20,
+  months: 0,
+  seconds: 69,
+  years: 0,
+};
+
+export const NextLaunch = ({ quote }: NextLaunchProps) => {
   const nextLaunch = useSelector((state: RootState) => state.nextLaunch);
+  const [showLivestream, setShowlivestream] = useState(false);
+  const [isTwoMinutesBeforeStart, setIsTwoMinutesBeforeStart] = useState(false);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (nextLaunch.nextLaunch.docs.length === 0) dispatch(fetchNextLaunch());
   }, [dispatch, nextLaunch]);
+
+  const toggleLivestreamHandler = () => {
+    setShowlivestream(!showLivestream);
+  };
+
+  const [timer, setTimer] = useState<Time>(initialTime);
+  const moment = require("moment");
+  const dateLocal = nextLaunch.nextLaunch.docs[0]?.date_local;
+
+  const timeDiff = useCallback(() => {
+    const launchDate = new Date(dateLocal);
+    const currentDate = new Date();
+    const diff = moment().preciseDiff(launchDate, currentDate, true);
+
+    return diff;
+  }, [moment, dateLocal]);
+
+  useEffect(() => {
+    const timeDifference = timeDiff;
+    const interval = setInterval(() => setTimer(timeDifference), 1000);
+
+    if (timer.days === 0 && timer.hours === 0 && timer.minutes < 2)
+      setIsTwoMinutesBeforeStart(true);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [timer, timeDiff]);
 
   return (
     <StyledNextLaunch>
@@ -37,13 +80,33 @@ export const NextLaunch = () => {
             initial="hidden"
             animate="show"
             exit="exit">
+            {isTwoMinutesBeforeStart &&
+              nextLaunch.nextLaunch.docs[0]?.links.youtube_id && (
+                <StyledLivestreamBtn
+                  name="SHOW LIVESTREAM"
+                  styleType="primary"
+                  clicked={toggleLivestreamHandler}
+                />
+              )}
+
             <LaunchName
               launchName={nextLaunch.nextLaunch.docs[0].name}
               dateLocal={nextLaunch.nextLaunch.docs[0]?.date_local}
             />
-            <Countdown date={nextLaunch.nextLaunch.docs[0]?.date_local} />
+            <Countdown
+              days={timer.days}
+              hours={timer.hours}
+              minutes={timer.minutes}
+              seconds={timer.seconds}
+            />
             <LaunchDetails launch={nextLaunch.nextLaunch.docs[0]} />
-            <Quote quote={randomQuote()} />
+            <Quote quote={quote} />
+            {showLivestream && (
+              <Livestream
+                url={nextLaunch.nextLaunch.docs[0].links.youtube_id}
+                showHandler={toggleLivestreamHandler}
+              />
+            )}
           </StyledContent>
         )}
       </StyledBackground>
@@ -89,4 +152,12 @@ const StyledContent = styled(flexColumn)`
 const StyledNextLaunch = styled.div`
   height: 100vh;
   position: relative;
+`;
+
+const StyledLivestreamBtn = styled(Button)`
+  margin-bottom: 2.5rem;
+
+  @media ${device.mobile} {
+    width: 250px;
+  }
 `;

@@ -3,7 +3,7 @@ export const RecentLaunchesQuery = {
     date_utc: {
       $lte: new Date(),
     },
-    success: 1,
+    upcoming: 0,
   },
   options: {
     limit: 5,
@@ -16,6 +16,20 @@ export const RecentLaunchesQuery = {
       links: 1,
       flight_number: 1,
     },
+    populate: [
+      {
+        path: "fairings",
+        select: {
+          recovered: 1,
+        },
+      },
+      {
+        path: "cores",
+        select: {
+          landing_success: 1,
+        },
+      },
+    ],
     sort: {
       flight_number: "desc",
     },
