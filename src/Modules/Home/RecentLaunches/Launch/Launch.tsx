@@ -47,7 +47,7 @@ export const Launch = React.memo(({ mission }: launchProps) => {
               <Icon name={IconEnum.drone} width={54} height={31} />
             </Tooltip>
           )}
-          {mission.fairings.recovered && (
+          {mission.fairings?.recovered && (
             <Tooltip content={t("fairingsRecovered")}>
               <Icon name={IconEnum.fairing} width={46} height={32} />
             </Tooltip>
