@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
+import ReactDOM from "react-dom";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -11,7 +12,18 @@ import { modalAnim } from "../../../Animations/Animations_motion";
 import { device } from "../../../resources/styles/helpers/breakpoints";
 
 export const Modal = ({ closeModal, show, children }: modalProps) => {
-  return (
+  const [container] = React.useState(document.createElement("div"));
+  const appRoot = document.getElementById("root") as HTMLElement;
+
+  React.useEffect(() => {
+    appRoot.appendChild(container);
+
+    return () => {
+      appRoot.removeChild(container);
+    };
+  }, [appRoot, container]);
+
+  return ReactDOM.createPortal(
     <>
       <Backdrop clicked={closeModal} show={show} />
       <StyledModal
@@ -23,7 +35,8 @@ export const Modal = ({ closeModal, show, children }: modalProps) => {
         <StyledCloseBtn icon="times" onClick={closeModal} />
         {children}
       </StyledModal>
-    </>
+    </>,
+    container
   );
 };
 
