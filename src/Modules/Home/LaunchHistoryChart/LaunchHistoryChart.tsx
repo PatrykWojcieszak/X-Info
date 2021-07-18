@@ -34,9 +34,8 @@ export const LaunchHistoryChart = () => {
   let data = {};
 
   if (!upcomingLaunches.loading && !pastLaunches.loading) {
-    const upcomingLaunchesYears: number[] = upcomingLaunches.upcomingLaunches.docs.map(
-      (launch) => getYear(launch)
-    );
+    const upcomingLaunchesYears: number[] =
+      upcomingLaunches.upcomingLaunches.docs.map((launch) => getYear(launch));
     upcomingLaunchesYears.sort();
 
     const launchesStartEnd: number | undefined = last(upcomingLaunchesYears);

@@ -90,7 +90,7 @@ export const NextLaunch = ({ quote }: NextLaunchProps) => {
               )}
 
             <LaunchName
-              launchName={nextLaunch.nextLaunch.docs[0].name}
+              launchName={nextLaunch.nextLaunch.docs[0]?.name}
               dateLocal={nextLaunch.nextLaunch.docs[0]?.date_local}
             />
             <Countdown

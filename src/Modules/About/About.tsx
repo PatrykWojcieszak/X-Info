@@ -126,6 +126,11 @@ const AboutDetailsWrapper = styled.div`
   p > a {
     color: ${({ theme }) => theme.colors?.blue};
     cursor: pointer;
+
+    :visited {
+      color: red;
+      background-color: red;
+    }
   }
 
   @media ${device.tablet} {
