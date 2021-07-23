@@ -51,7 +51,7 @@ const About = () => {
               rel="noopener noreferrer">
               Patryk Wojcieszak
             </a>
-            {t("aboutDescription5")}
+            {t("aboutDescription5")}{" "}
             <a
               href="https://github.com/r-spacex/SpaceX-API"
               target="_blank"
@@ -128,8 +128,7 @@ const AboutDetailsWrapper = styled.div`
     cursor: pointer;
 
     :visited {
-      color: red;
-      background-color: red;
+      color: ${({ theme }) => theme.colors?.blue};
     }
   }
 
