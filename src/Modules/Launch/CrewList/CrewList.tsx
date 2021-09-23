@@ -23,9 +23,9 @@ export const CrewList = ({ crewList }: crewListProps) => {
           {crewList.map((crew: any, index) => (
             <CrewPerson
               key={index}
-              name={crew.crew.name}
-              img={crew.crew.image}
-              agency={crew.crew.agency}
+              name={crew?.crew?.name}
+              img={crew?.crew?.image}
+              agency={crew?.crew?.agency}
             />
           ))}
         </StyledContent>
