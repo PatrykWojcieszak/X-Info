@@ -10,7 +10,7 @@ export const Flag = ({ nationality }: flagProps) => {
 
   return (
     <StyledFlag
-      src={`https://www.countryflags.io/${countryCode}/flat/64.png`}
+      src={`https://flagcdn.com/w80/${countryCode?.toLowerCase()}.png`}
       alt="flag"
       loading="lazy"
     />
@@ -31,7 +31,7 @@ const StyledFlag = styled.img`
 
   @media ${device.tablet} {
     width: 60px;
-    bottom: -11px;
-    border-bottom-right-radius: 2rem;
+    bottom: 1px;
+    border-bottom-right-radius: 1rem;
   }
 `;
